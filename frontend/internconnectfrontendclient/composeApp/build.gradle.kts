@@ -1,13 +1,19 @@
+import com.google.devtools.ksp.gradle.KspExtension
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
+    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlinMultiplatform)
+
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -18,61 +24,105 @@ kotlin {
     }
 
     listOf(
+        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            linkerOpts.add("-lsqlite3")
         }
     }
 
-    jvm()
-
-    js {
-        browser()
-        binaries.executable()
+    sourceSets.commonMain{
+        kotlin.srcDir("build/generated/ksp/main/kotlin")
     }
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
-
     sourceSets {
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-        }
         commonMain.dependencies {
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            implementation(libs.androidxLifecycleViewModelSavedState)
+            implementation(libs.androidxLifecycleViewmodelCompose)
+            implementation(libs.androidxLifecycleRuntimeCompose)
+            implementation(libs.androidxNavigationCompose)
+
+            implementation(libs.kotlinxSerializationJson)
+            implementation(libs.kotlinxCoroutinesCore)
+
+            implementation(libs.ktorClientCore)
+            api(libs.koinCore)
+            implementation(libs.koinCompose)
+            implementation(libs.koinComposeViewModel)
+
+            implementation(libs.coil)
+            implementation(libs.coilCompose)
+            implementation(libs.coilNetworkKtor)
+
+            implementation(libs.roomRuntime)
+            implementation(libs.sqliteBundled)
+
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        androidMain.dependencies {
+            implementation(compose.preview)
+
+            implementation(libs.androidxActivityCompose)
+
+            implementation(libs.kotlinxCoroutinesAndroid)
+
+            implementation(libs.ktorClientOkHttp)
+            implementation(libs.koinAndroid)
+            implementation(libs.koinAndroidXCompose)
+
+            implementation(libs.sqliteWrapper)
+            implementation(libs.roomRuntimeAndroid)
+
+
+            implementation(libs.coilAndroid)
+            implementation(libs.coilComposeAndroid)
+            implementation(libs.coilNetworkKtorAndroid)
         }
-        jvmMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutinesSwing)
+        iosMain.dependencies {
+            implementation(libs.ktorClientDarwin)
+        }
+        iosX64Main.dependencies {
+            implementation(libs.koinCoreIosX64)
+            implementation(libs.roomRuntimeIosX64)
+            implementation(libs.coilComposeIosX64)
+            implementation(libs.coilNetworkKtorIosX64)
+            implementation(libs.kotlinxCoroutinesCoreIosX64)
+        }
+        iosArm64Main.dependencies {
+            implementation(libs.koinCoreIosArm64)
+            implementation(libs.roomRuntimeIosArm64)
+            implementation(libs.coilComposeIosArm64)
+            implementation(libs.coilNetworkKtorIosArm64)
+            implementation(libs.kotlinxCoroutinesCoreIosArm64)
+        }
+        iosSimulatorArm64Main.dependencies {
+            implementation(libs.koinCoreIosSimulatorArm64)
+            implementation(libs.roomRuntimeIosSimulatorArm64)
+            implementation(libs.coilComposeIosSimulatorArm64)
+            implementation(libs.coilNetworkKtorIosSimulatorArm64)
+            implementation(libs.kotlinxCoroutinesCoreIosSimulatorArm64)
         }
     }
 }
 
 android {
     namespace = "com.lazar.internconnectfrontendclient"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.lazar.internconnectfrontendclient"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk = libs.versions.androidMinSdk.get().toInt()
+        targetSdk = libs.versions.androidTargetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -92,18 +142,15 @@ android {
     }
 }
 
-dependencies {
-    debugImplementation(compose.uiTooling)
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
-compose.desktop {
-    application {
-        mainClass = "com.lazar.internconnectfrontendclient.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.lazar.internconnectfrontendclient"
-            packageVersion = "1.0.0"
-        }
-    }
+dependencies {
+    add("kspCommonMainMetadata", libs.roomCompiler)
+    add("kspAndroid", libs.roomCompiler)
+    add("kspIosArm64", libs.roomCompiler)
+    add("kspIosX64", libs.roomCompiler)
+    add("kspIosSimulatorArm64", libs.roomCompiler)
+    debugImplementation(compose.uiTooling)
 }
