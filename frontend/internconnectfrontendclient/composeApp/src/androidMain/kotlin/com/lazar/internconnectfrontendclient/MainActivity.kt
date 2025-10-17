@@ -18,30 +18,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lazar.internconnectfrontendclient.android.ui.AppTheme
+import com.lazar.internconnectfrontendclient.ui.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
-                Article(Modifier.fillMaxSize())
-            }
-        }
-
-    }
-    @Composable
-    fun Article(modifier: Modifier){
-        Column(modifier = modifier) {
-            val articleImage = painterResource(R.drawable.bg_compose_background)
-            Image(painter = articleImage, contentDescription = "")
-            val articleTitle = stringResource(R.string.articleTitle)
-            val articleDescription = stringResource(R.string.articleDescription)
-            val articleContent = stringResource(R.string.articleContent)
-            Text(text = articleTitle, modifier = Modifier.padding(16.dp), fontSize = 24.sp)
-            Text(text = articleDescription, modifier = Modifier.padding(16.dp), textAlign = TextAlign.Justify)
-            Text(text = articleContent, modifier = Modifier.padding(16.dp), textAlign = TextAlign.Justify)
+            App()
         }
     }
-
 }
