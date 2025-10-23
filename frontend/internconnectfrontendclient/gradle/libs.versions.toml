@@ -1,0 +1,91 @@
+[versions]
+#libraries
+agp = "8.12.3"
+androidCompileSdk = "36"
+androidMinSdk = "24"
+androidTargetSdk = "36"
+androidxActivity = "1.11.0"
+androidxAppcompat = "1.7.1"
+androidxCore = "1.17.0"
+androidxLifecycle = "2.10.0-alpha02"
+androidxNavigation = "2.9.0"
+
+kotlinxSerializationJson = "1.9.0"
+kotlinxCoroutines = "1.10.2"
+ktor = "3.3.1"
+koin = "4.1.2-Beta1"
+
+#plugins
+kotlin = "2.2.20"
+composeMultiplatform = "1.9.1"
+composeHotReload = "1.0.0-rc02"
+
+kotlinSerialization = "2.2.20"
+ksp = "2.2.20-2.0.4"
+room = "2.8.2"
+sqlite = "2.6.1"
+coil = "3.3.0"
+
+[libraries]
+androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidxAppcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
+androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
+
+androidxLifecycleViewModelSavedState = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidxLifecycle" }
+androidxLifecycleViewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+
+androidxNavigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
+
+kotlinxSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinxCoroutinesAndroid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinxCoroutinesCoreIosX64 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-iosx64", version.ref = "kotlinxCoroutines" }
+kotlinxCoroutinesCoreIosArm64 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-iosarm64", version.ref = "kotlinxCoroutines" }
+kotlinxCoroutinesCoreIosSimulatorArm64 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-iossimulatorarm64", version.ref = "kotlinxCoroutines" }
+
+ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+koinAndroid = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koinAndroidXCompose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koinCoreIosX64 = { module = "io.insert-koin:koin-core-iosx64", version.ref = "koin" }
+koinCoreIosArm64 = { module = "io.insert-koin:koin-core-iosarm64", version.ref = "koin" }
+koinCoreIosSimulatorArm64 = { module = "io.insert-koin:koin-core-iossimulatorarm64", version.ref = "koin" }
+koinCompose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koinComposeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomCommon = { module = "androidx.room:room-common", version.ref = "room" }
+roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
+roomRuntimeAndroid = { module = "androidx.room:room-runtime-android", version.ref = "room" }
+roomRuntimeIosX64 = { module = "androidx.room:room-runtime-iosx64", version.ref = "room" }
+roomRuntimeIosArm64 = { module = "androidx.room:room-runtime-iosarm64", version.ref = "room" }
+roomRuntimeIosSimulatorArm64 = { module = "androidx.room:room-runtime-iossimulatorarm64", version.ref = "room" }
+sqliteBundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+sqliteWrapper = { module = "androidx.room:room-sqlite-wrapper", version.ref = "room" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coilAndroid = { module = "io.coil-kt.coil3:coil-android", version.ref = "coil" }
+coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coilComposeIosX64 = { module = "io.coil-kt.coil3:coil-compose-iosx64", version.ref = "coil" }
+coilComposeIosArm64 = { module = "io.coil-kt.coil3:coil-compose-iosarm64", version.ref = "coil" }
+coilComposeIosSimulatorArm64 = { module = "io.coil-kt.coil3:coil-compose-iossimulatorarm64", version.ref = "coil" }
+coilComposeAndroid = { module = "io.coil-kt.coil3:coil-compose-android", version.ref = "coil" }
+coilNetworkOkHttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+coilNetworkKtor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
+coilNetworkKtorAndroid = { module = "io.coil-kt.coil3:coil-network-ktor3-android", version.ref = "coil" }
+coilNetworkKtorIosX64 = { module = "io.coil-kt.coil3:coil-network-ktor3-iosx64", version.ref = "coil" }
+coilNetworkKtorIosArm64 = { module = "io.coil-kt.coil3:coil-network-ktor3-iosarm64", version.ref = "coil" }
+coilNetworkKtorIosSimulatorArm64 = { module = "io.coil-kt.coil3:coil-network-ktor3-iossimulatorarm64", version.ref = "coil" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
