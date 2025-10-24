@@ -1,13 +1,13 @@
 package com.internconnect.service.implementation
 
+import com.auth0.jwt.JWTVerifier
 import com.internconnect.model.user.User
 import com.internconnect.repository.implementation.UserRepository
 import com.internconnect.service.specification.IAuthService
-import io.ktor.server.application.Application
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
-import java.util.UUID
-import kotlin.time.Clock
-import kotlin.time.Duration
+import java.time.Clock
+import java.util.*
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 import kotlin.time.toJavaInstant
@@ -22,19 +22,19 @@ class AuthService (
 	val secret = "test"
 	val algorithm = com.auth0.jwt.algorithms.Algorithm.HMAC256(secret)
 
-	override suspend fun register(user: User): User? {
+	override fun register(user: User): User? {
 		TODO("Not yet implemented")
 	}
 
-	override suspend fun login(user: User): User? {
+	override fun login(user: User): User? {
 		TODO("Not yet implemented")
 	}
 
-	override suspend fun logout(user: User) {
+	override fun logout(user: User) {
 		TODO("Not yet implemented")
 	}
 
-	override suspend fun issueAccess(
+	override fun issueAccess(
 		userId: UUID,
 		email: String,
 		role: String,
@@ -54,11 +54,12 @@ class AuthService (
 	}
 
 	@OptIn(ExperimentalTime::class)
-	override suspend fun issueRefresh(
+	override fun issueRefresh(
 		sessionId: UUID,
 		userId: UUID
-	): Pair<String, LocalDateTime> {
-		val exp = Clock.System.now()
+	): Pair<String, Date> {
+
+		val expires = Date(System.currentTimeMillis() + 1000_00 * 60_000)
 
 		val token = com.auth0.jwt.JWT.create()
 			.withIssuer(issuer)
@@ -66,10 +67,17 @@ class AuthService (
 			.withSubject(userId.toString())
 			.withClaim("sid", sessionId.toString())
 			.withClaim("typ", "refresh")
-			.withExpiresAt(exp.toJavaInstant().let { java.util.Date.from(it) })
+			.withExpiresAt(expires)
 			.sign(algorithm)
 
-		return null
+		return token to expires
+	}
+
+	override fun verifier(): JWTVerifier {
+		return com.auth0.jwt.JWT.require(algorithm)
+			.withIssuer(issuer)
+			.withAudience(audience)
+			.build()
 	}
 
 }
