@@ -1,4 +1,4 @@
-package com.lazar.internconnectfrontendclient.ui
+package com.lazar.internconnectfrontendclient.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

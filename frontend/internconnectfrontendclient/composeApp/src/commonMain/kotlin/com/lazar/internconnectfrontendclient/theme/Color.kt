@@ -1,4 +1,4 @@
-package com.lazar.internconnectfrontendclient.ui
+package com.lazar.internconnectfrontendclient.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF7C5800)

@@ -7,8 +7,8 @@ androidTargetSdk = "36"
 androidxActivity = "1.11.0"
 androidxAppcompat = "1.7.1"
 androidxCore = "1.17.0"
-androidxLifecycle = "2.10.0-alpha02"
-androidxNavigation = "2.9.0"
+androidxLifecycle = "2.10.0-alpha03"
+androidxNavigation = "2.9.1"
 
 kotlinxSerializationJson = "1.9.0"
 kotlinxCoroutines = "1.10.2"
@@ -16,13 +16,13 @@ ktor = "3.3.1"
 koin = "4.1.2-Beta1"
 
 #plugins
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 composeMultiplatform = "1.9.1"
 composeHotReload = "1.0.0-rc02"
 
-kotlinSerialization = "2.2.20"
+kotlinSerialization = "2.2.21"
 ksp = "2.2.20-2.0.4"
-room = "2.8.2"
+room = "2.8.3"
 sqlite = "2.6.1"
 coil = "3.3.0"
 
@@ -56,6 +56,7 @@ koinCoreIosSimulatorArm64 = { module = "io.insert-koin:koin-core-iossimulatorarm
 koinCompose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koinComposeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomKtx = {module = "androidx.room:room-ktx", version.ref = "room"}
 roomCommon = { module = "androidx.room:room-common", version.ref = "room" }
 roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
 roomRuntimeAndroid = { module = "androidx.room:room-runtime-android", version.ref = "room" }

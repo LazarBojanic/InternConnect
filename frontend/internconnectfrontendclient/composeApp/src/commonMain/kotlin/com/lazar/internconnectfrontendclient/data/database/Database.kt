@@ -2,17 +2,17 @@ package com.lazar.internconnectfrontendclient.data.database
 
 import androidx.room.*
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.lazar.internconnectfrontendclient.data.dao.CompanyDao
-import com.lazar.internconnectfrontendclient.data.dao.StudentDao
-import com.lazar.internconnectfrontendclient.data.model.NoteEntity
+import com.lazar.internconnectfrontendclient.data.dao.OrganizationDao
+import com.lazar.internconnectfrontendclient.data.model.Organization
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-@Database(entities = [NoteEntity::class], version = 1)
+@Database(entities =
+	[Organization::class],
+	version = 1)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getStudentDao(): StudentDao
-    abstract fun getCompanyDao(): CompanyDao
+    abstract fun getOrganizationDao(): OrganizationDao
 
 }
 

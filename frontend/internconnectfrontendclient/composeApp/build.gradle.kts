@@ -40,7 +40,8 @@ kotlin {
     }
     sourceSets {
         commonMain.dependencies {
-
+			implementation(libs.androidxCoreKtx)
+			implementation(libs.androidxAppcompat)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -65,7 +66,8 @@ kotlin {
             implementation(libs.coilCompose)
             implementation(libs.coilNetworkKtor)
 
-            implementation(libs.roomRuntime)
+	        implementation(libs.roomKtx)
+	        implementation(libs.roomRuntime)
             implementation(libs.sqliteBundled)
 
         }
