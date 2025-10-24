@@ -28,5 +28,4 @@ data class Organization (
 	val createdAt: String,
 	@ColumnInfo(name = "updated_at")
 	val updatedAt: String,
-
 )

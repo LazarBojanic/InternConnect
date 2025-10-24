@@ -28,6 +28,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger")
     implementation("io.ktor:ktor-server-auth")
     implementation("io.ktor:ktor-server-auth-jwt")
+	implementation("com.auth0:java-jwt:4.5.0")
     implementation("io.ktor:ktor-client-core")
 	implementation("io.ktor:ktor-server-netty")
 	implementation("io.ktor:ktor-client-apache")

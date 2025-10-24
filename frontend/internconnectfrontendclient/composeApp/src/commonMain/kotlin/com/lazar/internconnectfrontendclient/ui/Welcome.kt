@@ -39,13 +39,14 @@ fun Welcome(
 			Image(
 				painter = logo,
 				contentDescription = "InternConnect logo",
-				modifier = Modifier.size(400.dp)
+				modifier = Modifier.size(500.dp)
 			)
+
 
 			Spacer(Modifier.height(20.dp))
 
 			Text(
-				text = "Dubai Intern Connect",
+				text = "InternConnect",
 				color = MaterialTheme.colorScheme.surface,
 				textAlign = TextAlign.Center,
 				lineHeight = 34.sp,

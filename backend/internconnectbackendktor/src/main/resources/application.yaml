@@ -8,7 +8,10 @@ ktor:
 jwt:
   domain: "https://jwt-provider-domain/"
   audience: "jwt-audience"
-  realm: "ktor sample app"
+  realm: "${JWT_REALM:}"
+  secret: "${JWT_SECRET:}"
+  expires_at: "${JWT_SECRET:}"
+  refreshed_at: "${JWT_SECRET:}"
 database:
   username: "${DATABASE_USERNAME:postgres}"
   password: "${DATABASE_PASSWORD:postgres}"
