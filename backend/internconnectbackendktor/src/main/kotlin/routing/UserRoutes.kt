@@ -8,8 +8,8 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
-fun Route.authRoutes() {
-	val authService by inject<AuthService>()
+fun Route.userRoutes() {
+	val userService by inject<UserService>()
 	route("/auth") {
 		get {
 

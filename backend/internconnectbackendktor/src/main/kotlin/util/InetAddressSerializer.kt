@@ -12,7 +12,7 @@ import java.util.UUID
 object InetAddressSerializer : KSerializer<InetAddress> {
 	override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("InetAddress", PrimitiveKind.STRING)
 
-	override fun serialize(encoder: Encoder, value: InetAddress) = encoder.encodeString(value.toString())
+	override fun serialize(encoder: Encoder, value: InetAddress) = encoder.encodeString(value.hostAddress)
 
 	override fun deserialize(decoder: Decoder): InetAddress = InetAddress.getByName(decoder.decodeString())
 }

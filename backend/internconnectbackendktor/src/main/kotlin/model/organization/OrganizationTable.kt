@@ -1,8 +1,8 @@
 package com.internconnect.model.organization
 
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
-import org.jetbrains.exposed.v1.datetime.CurrentDateTime
-import org.jetbrains.exposed.v1.datetime.datetime
+import org.jetbrains.exposed.v1.javatime.timestamp
+import java.time.Instant
 
 object OrganizationTable : UUIDTable(name = "organization") {
 	val name = varchar("name", length = 255)
@@ -12,7 +12,7 @@ object OrganizationTable : UUIDTable(name = "organization") {
 	val hqCountry = varchar("hq_country", length = 255).nullable()
 	val city = varchar("city", length = 255).nullable()
 	val about = varchar("about", length = 255).nullable()
-	val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
-	val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
+	val createdAt = timestamp("created_at").default(Instant.now())
+	val updatedAt = timestamp("updated_at").default(Instant.now())
 }
 

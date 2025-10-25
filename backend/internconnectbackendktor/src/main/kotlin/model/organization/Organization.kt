@@ -1,8 +1,10 @@
 package com.internconnect.model.organization
 
+import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
+import java.time.Instant
 import java.util.UUID
 @Serializable
 data class Organization(
@@ -15,6 +17,8 @@ data class Organization(
 	val hqCountry: String?,
 	val city: String?,
 	val about: String?,
-	val createdAt: LocalDateTime,
-	val updatedAt: LocalDateTime,
+	@Serializable(with = InstantSerializer::class)
+	val createdAt: Instant,
+	@Serializable(with = InstantSerializer::class)
+	val updatedAt: Instant
 )

@@ -32,6 +32,7 @@ fun Application.module() {
 	configureFrameworks()
 	configureRouting()
 	transaction {
+		SchemaUtils.drop(AuditLogTable, EmailVerificationTable, OAuthAccountTable, OrganizationInvitationTable, OrganizationMemberTable, OrganizationTable, PasswordResetTable, RefreshTokenTable, UserTable)
 		SchemaUtils.create(AuditLogTable)
 		SchemaUtils.create(EmailVerificationTable)
 		SchemaUtils.create(OAuthAccountTable)

@@ -1,10 +1,12 @@
 package com.internconnect.model.user
 
 
+import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
+import java.time.Instant
 import java.util.UUID
 
 @Serializable
@@ -16,9 +18,10 @@ data class User(
 	val role: Role,
 	val isEmailVerified: Boolean,
 	val status: Status,
-	val createdAt: LocalDateTime,
-	val updatedAt: LocalDateTime
-
+	@Serializable(with = InstantSerializer::class)
+	val createdAt: Instant,
+	@Serializable(with = InstantSerializer::class)
+	val updatedAt: Instant
 )
 enum class Role {
 	student, organization, admin

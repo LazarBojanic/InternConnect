@@ -1,8 +1,10 @@
 package com.internconnect.model.passwordreset
 
+import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
+import java.time.Instant
 import java.util.UUID
 @Serializable
 data class PasswordReset(
@@ -11,8 +13,12 @@ data class PasswordReset(
 	@Serializable(with = UUIDSerializer::class)
 	val userID: UUID,
 	val codeHash: String,
-	val expiresAt: LocalDateTime,
-	val consumedAt: LocalDateTime?,
-	val createdAt: LocalDateTime,
-	val updatedAt: LocalDateTime,
+	@Serializable(with = InstantSerializer::class)
+	val expiresAt: Instant,
+	@Serializable(with = InstantSerializer::class)
+	val consumedAt: Instant?,
+	@Serializable(with = InstantSerializer::class)
+	val createdAt: Instant,
+	@Serializable(with = InstantSerializer::class)
+	val updatedAt: Instant
 )

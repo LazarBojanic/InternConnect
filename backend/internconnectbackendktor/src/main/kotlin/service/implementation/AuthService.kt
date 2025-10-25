@@ -1,16 +1,11 @@
 package com.internconnect.service.implementation
 
-import com.auth0.jwt.JWTVerifier
+import com.auth0.jwt.*
+import com.auth0.jwt.algorithms.Algorithm
 import com.internconnect.model.user.User
 import com.internconnect.repository.implementation.UserRepository
 import com.internconnect.service.specification.IAuthService
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDateTime
-import java.time.Clock
 import java.util.*
-import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
-import kotlin.time.toJavaInstant
 
 
 class AuthService (
@@ -20,7 +15,7 @@ class AuthService (
 	val audience = "test"
 	val verifier = "test"
 	val secret = "test"
-	val algorithm = com.auth0.jwt.algorithms.Algorithm.HMAC256(secret)
+	val algorithm = Algorithm.HMAC256(secret)
 
 	override fun register(user: User): User? {
 		TODO("Not yet implemented")
@@ -41,7 +36,7 @@ class AuthService (
 		orgId: UUID?
 	) : String{
 
-		return com.auth0.jwt.JWT.create()
+		return JWT.create()
 			.withIssuer(issuer)
 			.withAudience(audience)
 			.withSubject(userId.toString())
@@ -53,15 +48,13 @@ class AuthService (
 			.sign(algorithm)
 	}
 
-	@OptIn(ExperimentalTime::class)
 	override fun issueRefresh(
 		sessionId: UUID,
 		userId: UUID
 	): Pair<String, Date> {
-
 		val expires = Date(System.currentTimeMillis() + 1000_00 * 60_000)
 
-		val token = com.auth0.jwt.JWT.create()
+		val token = JWT.create()
 			.withIssuer(issuer)
 			.withAudience(audience)
 			.withSubject(userId.toString())
@@ -74,7 +67,7 @@ class AuthService (
 	}
 
 	override fun verifier(): JWTVerifier {
-		return com.auth0.jwt.JWT.require(algorithm)
+		return JWT.require(algorithm)
 			.withIssuer(issuer)
 			.withAudience(audience)
 			.build()

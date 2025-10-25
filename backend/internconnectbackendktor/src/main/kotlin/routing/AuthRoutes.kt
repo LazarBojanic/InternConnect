@@ -10,12 +10,12 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
-fun Route.userRoutes() {
+fun Route.authRoutes() {
 	val authService by inject<AuthService>()
 	authenticate("auth-jwt"){
 		route("/login") {
 			post {
-				authService.login()
+
 			}
 		}
 		route("/login-google") {

@@ -1,8 +1,10 @@
 package com.internconnect.model.organizationmember
 
+import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
+import java.time.Instant
 import java.util.UUID
 @Serializable
 data class OrganizationMember(
@@ -12,6 +14,8 @@ data class OrganizationMember(
 	val organizationID: UUID,
 	@Serializable(with = UUIDSerializer::class)
 	val userID: UUID,
-	val createdAt: LocalDateTime,
-	val updatedAt: LocalDateTime,
+	@Serializable(with = InstantSerializer::class)
+	val createdAt: Instant,
+	@Serializable(with = InstantSerializer::class)
+	val updatedAt: Instant
 )

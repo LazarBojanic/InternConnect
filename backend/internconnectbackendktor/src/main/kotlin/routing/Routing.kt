@@ -10,6 +10,15 @@ import org.koin.ktor.ext.inject
 fun Application.configureRouting() {
 	install(Resources)
 	routing {
+		auditLogRoutes()
+		authRoutes()
+		emailVerificationRoutes()
+		oAuthAccountRoutes()
+		organizationInvitationRoutes()
+		organizationMemberRoutes()
+		organizationRoutes()
+		passwordResetRoutes()
+		refreshTokenRoutes()
 		userRoutes()
 	}
 }

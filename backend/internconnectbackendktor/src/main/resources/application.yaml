@@ -1,23 +1,21 @@
 ktor:
-  application:
-    modules:
-      - com.internconnect.ApplicationKt.module
-  deployment:
-    port: 8800
-  development: false
+    application:
+        modules:
+            - com.internconnect.ApplicationKt.module
+    deployment:
+        port: 8800
+    development: false
 jwt:
-  domain: "https://jwt-provider-domain/"
-  audience: "jwt-audience"
-  realm: "${JWT_REALM:}"
-  secret: "${JWT_SECRET:}"
-  expires_at: "${JWT_SECRET:}"
-  refreshed_at: "${JWT_SECRET:}"
+    alg: "${JWT_ALG:HS256}"
+    iss: "${JWT_ISS:}"
+    aud: "${JWT_AUD:}"
+    secret: "${JWT_SECRET:secret}"
 database:
-  username: "${DATABASE_USERNAME:postgres}"
-  password: "${DATABASE_PASSWORD:postgres}"
-  ip: "${DATABASE_IP:127.0.0.1}"
-  port: "${DATABASE_PORT:5432}"
-  name: "${DATABASE_NAME:internconnect}"
-  properties: "${DATABASE_PROPERTIES:}"
-  dialect: "${DATABASE_DIALECT:postgresql}"
-  driver: "${DATABASE_DRIVER:org.postgresql.Driver}"
+    username: "${DATABASE_USERNAME:postgres}"
+    password: "${DATABASE_PASSWORD:postgres}"
+    ip: "${DATABASE_IP:127.0.0.1}"
+    port: "${DATABASE_PORT:5432}"
+    name: "${DATABASE_NAME:internconnect}"
+    properties: "${DATABASE_PROPERTIES:}"
+    dialect: "${DATABASE_DIALECT:postgresql}"
+    driver: "${DATABASE_DRIVER:org.postgresql.Driver}"
