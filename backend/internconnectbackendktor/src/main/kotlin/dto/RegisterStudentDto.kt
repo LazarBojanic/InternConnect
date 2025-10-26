@@ -1,4 +1,4 @@
-package com.internconnect.model.dto
+package com.internconnect.dto
 
 import kotlinx.serialization.Serializable
 

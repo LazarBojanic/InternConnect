@@ -4,7 +4,7 @@ ktor:
             - com.internconnect.ApplicationKt.module
     deployment:
         port: 8800
-    development: false
+    development: true
 jwt:
     alg: "${JWT_ALG:HS256}"
     iss: "${JWT_ISS:}"

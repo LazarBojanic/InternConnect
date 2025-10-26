@@ -8,7 +8,7 @@ fun Application.configureRouting() {
 	install(Resources)
 	routing {
 		auditLogRoutes()
-		authRoutes()
+		userRoutes()
 		emailVerificationRoutes()
 		oAuthAccountRoutes()
 		companyInvitationRoutes()
@@ -16,6 +16,6 @@ fun Application.configureRouting() {
 		companyRoutes()
 		passwordResetRoutes()
 		refreshTokenRoutes()
-		userRoutes()
+		authRoutes()
 	}
 }

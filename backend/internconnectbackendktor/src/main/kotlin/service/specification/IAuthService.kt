@@ -3,8 +3,8 @@ package com.internconnect.service.specification
 import com.auth0.jwt.JWTVerifier
 import com.internconnect.dto.LoginUserDto
 import com.internconnect.dto.Token
-import com.internconnect.model.dto.RegisterCompanyDto
-import com.internconnect.model.dto.RegisterStudentDto
+import com.internconnect.dto.RegisterCompanyDto
+import com.internconnect.dto.RegisterStudentDto
 import com.internconnect.model.user.User
 import java.util.*
 
