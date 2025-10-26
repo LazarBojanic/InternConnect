@@ -1,6 +1,6 @@
 package com.internconnect.service.implementation
 
-import com.internconnect.model.studentprofile.Student
+import com.internconnect.model.student.Student
 import com.internconnect.repository.specification.IStudentRepository
 import com.internconnect.service.specification.IStudentService
 import java.util.*
@@ -9,15 +9,15 @@ class StudentService (
 	private val studentRepository: IStudentRepository,
 ) : IStudentService {
 	override suspend fun getAll(): List<Student> {
-		TODO("Not yet implemented")
+		return studentRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): Student? {
-		TODO("Not yet implemented")
+		return studentRepository.findById(id)
 	}
 
 	override suspend fun create(student: Student): Student? {
-		TODO("Not yet implemented")
+		return studentRepository.create(student)
 	}
 
 	override suspend fun update(student: Student): Student? {
@@ -25,6 +25,6 @@ class StudentService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return studentRepository.delete(id)
 	}
 }

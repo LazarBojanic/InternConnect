@@ -9,14 +9,14 @@ class UserService (
 	private val userRepository: IUserRepository,
 ) : IUserService {
 	override suspend fun getAll(): List<User> {
-		TODO("Not yet implemented")
+		return userRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): User? {
-		TODO("Not yet implemented")
+		return userRepository.findById(id)
 	}
 	override suspend fun getByEmail(email: String): User? {
-		TODO("Not yet implemented")
+		return userRepository.findByEmail(email)
 	}
 
 	override suspend fun create(user: User): User? {
@@ -24,10 +24,9 @@ class UserService (
 	}
 
 	override suspend fun update(user: User): User? {
-		TODO("Not yet implemented")
-	}
+		TODO("Not yet implemented")	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return userRepository.delete(id)
 	}
 }

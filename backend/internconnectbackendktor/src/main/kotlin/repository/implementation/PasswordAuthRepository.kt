@@ -13,6 +13,10 @@ class PasswordAuthRepository : IPasswordAuthRepository {
 		TODO("Not yet implemented")
 	}
 
+	override suspend fun findByUserId(userId: UUID): PasswordAuth? {
+		TODO("Not yet implemented")
+	}
+
 	override suspend fun create(passwordAuth: PasswordAuth): PasswordAuth? {
 		TODO("Not yet implemented")
 	}

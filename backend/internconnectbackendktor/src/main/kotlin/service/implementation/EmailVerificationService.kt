@@ -9,15 +9,15 @@ class EmailVerificationService (
 	private val emailVerificationRepository: IEmailVerificationRepository,
 ) : IEmailVerificationService {
 	override suspend fun getAll(): List<EmailVerification> {
-		TODO("Not yet implemented")
+		return emailVerificationRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): EmailVerification? {
-		TODO("Not yet implemented")
+		return emailVerificationRepository.findById(id)
 	}
 
 	override suspend fun create(user: EmailVerification): EmailVerification? {
-		TODO("Not yet implemented")
+		return emailVerificationRepository.create(user)
 	}
 
 	override suspend fun update(user: EmailVerification): EmailVerification? {
@@ -25,6 +25,6 @@ class EmailVerificationService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return emailVerificationRepository.delete(id)
 	}
 }

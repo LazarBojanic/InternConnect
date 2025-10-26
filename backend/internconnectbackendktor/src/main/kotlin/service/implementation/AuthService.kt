@@ -9,7 +9,7 @@ import com.internconnect.model.dto.RegisterCompanyDto
 import com.internconnect.model.dto.RegisterStudentDto
 import com.internconnect.model.passwordauth.PasswordAuth
 import com.internconnect.model.refreshtoken.RefreshToken
-import com.internconnect.model.studentprofile.Student
+import com.internconnect.model.student.Student
 import com.internconnect.model.user.User
 import com.internconnect.model.user.UserRole
 import com.internconnect.service.specification.*
@@ -105,7 +105,7 @@ class AuthService(
 								)
 								val createdRefreshToken = refreshTokenService.create(refreshTokenToCreate)
 								if(createdRefreshToken != null){
-									return Token(user.id, sessionId, refresh, access)
+									return Token(refresh, access)
 								}
 							}
 						}

@@ -1,6 +1,6 @@
 package com.internconnect.repository.implementation
 
-import com.internconnect.model.studentprofile.Student
+import com.internconnect.model.student.Student
 import com.internconnect.repository.specification.IStudentRepository
 import java.util.*
 

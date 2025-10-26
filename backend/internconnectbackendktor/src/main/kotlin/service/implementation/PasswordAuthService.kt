@@ -9,11 +9,11 @@ class PasswordAuthService (
 	private val passwordAuthRepository: IPasswordAuthRepository,
 ) : IPasswordAuthService {
 	override suspend fun getAll(): List<PasswordAuth> {
-		TODO("Not yet implemented")
+		return passwordAuthRepository.findAll()
 	}
 
 	override suspend fun getByUserId(userId: UUID): PasswordAuth? {
-		TODO("Not yet implemented")
+		val existing = passwordAuthRepository
 	}
 
 	override suspend fun create(passwordAuth: PasswordAuth): PasswordAuth? {
@@ -21,10 +21,10 @@ class PasswordAuthService (
 	}
 
 	override suspend fun update(passwordAuth: PasswordAuth): PasswordAuth? {
-		TODO("Not yet implemented")
+		return passwordAuthRepository.update(passwordAuth)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return passwordAuthRepository.delete(id)
 	}
 }

@@ -9,15 +9,15 @@ class AuditLogService (
 	private val auditLogRepository: IAuditLogRepository,
 ): IAuditLogService {
 	override suspend fun getAll(): List<AuditLog> {
-		TODO("Not yet implemented")
+		return auditLogRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): AuditLog? {
-		TODO("Not yet implemented")
+		return auditLogRepository.findById(id)
 	}
 
 	override suspend fun create(user: AuditLog): AuditLog? {
-		TODO("Not yet implemented")
+		return auditLogRepository.create(user)
 	}
 
 	override suspend fun update(user: AuditLog): AuditLog? {
@@ -25,6 +25,6 @@ class AuditLogService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return auditLogRepository.delete(id)
 	}
 }

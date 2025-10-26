@@ -24,8 +24,7 @@ data class RefreshToken(
 	@Serializable(with = InstantSerializer::class)
 	val revokedAt: Instant?,
 	val userAgent: String?,
-	@Serializable(with = InetAddressSerializer::class)
-	val ip: InetAddress?,
+	val ip: String?,
 	@Serializable(with = InstantSerializer::class)
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
@@ -40,7 +39,7 @@ data class RefreshToken(
 			expiresAt: Instant,
 			revokedAt: Instant?,
 			userAgent: String?,
-			ip: InetAddress?,
+			ip: String?,
 		): RefreshToken {
 			return RefreshToken(
 				id = UUID.randomUUID(),

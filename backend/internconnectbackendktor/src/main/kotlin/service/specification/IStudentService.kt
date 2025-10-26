@@ -1,6 +1,6 @@
 package com.internconnect.service.specification
 
-import com.internconnect.model.studentprofile.Student
+import com.internconnect.model.student.Student
 import java.util.*
 
 interface IStudentService {

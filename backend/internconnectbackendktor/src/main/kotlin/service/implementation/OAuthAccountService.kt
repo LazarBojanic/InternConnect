@@ -9,15 +9,15 @@ class OAuthAccountService (
 	private val oAuthAccountRepository: IOAuthAccountRepository,
 ): IOAuthAccountService {
 	override suspend fun getAll(): List<OAuthAccount> {
-		TODO("Not yet implemented")
+		return oAuthAccountRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): OAuthAccount? {
-		TODO("Not yet implemented")
+		return oAuthAccountRepository.findById(id)
 	}
 
 	override suspend fun create(user: OAuthAccount): OAuthAccount? {
-		TODO("Not yet implemented")
+		return oAuthAccountRepository.create(user)
 	}
 
 	override suspend fun update(user: OAuthAccount): OAuthAccount? {
@@ -25,6 +25,6 @@ class OAuthAccountService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return oAuthAccountRepository.delete(id)
 	}
 }

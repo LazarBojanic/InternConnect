@@ -1,6 +1,5 @@
-package com.internconnect.model.studentprofile
+package com.internconnect.model.student
 
-import com.internconnect.model.student.StudentTable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.UUIDEntity
 import org.jetbrains.exposed.v1.dao.UUIDEntityClass

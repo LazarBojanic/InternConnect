@@ -9,15 +9,15 @@ class CompanyService (
 	private val companyRepository: ICompanyRepository,
 ) : ICompanyService {
 	override suspend fun getAll(): List<Company> {
-		TODO("Not yet implemented")
+		return companyRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): Company? {
-		TODO("Not yet implemented")
+		return companyRepository.findById(id)
 	}
 
 	override suspend fun create(company: Company): Company? {
-		TODO("Not yet implemented")
+		return companyRepository.create(company)
 	}
 
 	override suspend fun update(company: Company): Company? {
@@ -25,6 +25,6 @@ class CompanyService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return companyRepository.delete(id)
 	}
 }

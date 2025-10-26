@@ -8,7 +8,7 @@ import java.util.*
 class RefreshTokenEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<RefreshTokenEntity>(RefreshTokenTable)
 	var userId by RefreshTokenTable.userId
-	val sessionId by RefreshTokenTable.sessionId
+	var sessionId by RefreshTokenTable.sessionId
 	var hash by RefreshTokenTable.hash
 	var issuedAt by RefreshTokenTable.issuedAt
 	var expiresAt by RefreshTokenTable.expiresAt

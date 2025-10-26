@@ -10,7 +10,7 @@ class PasswordAuthEntity(userId: EntityID<UUID>) : UUIDEntity(userId) {
 	var encryptedPassword by PasswordAuthTable.encryptedPassword
 	var encryptionAlgorithm by PasswordAuthTable.encryptionAlgorithm
 	var passwordSetAt by PasswordAuthTable.passwordSetAt
-	val createdAt by PasswordAuthTable.createdAt
-	val updatedAt by PasswordAuthTable.updatedAt
+	var createdAt by PasswordAuthTable.createdAt
+	var updatedAt by PasswordAuthTable.updatedAt
 
 }

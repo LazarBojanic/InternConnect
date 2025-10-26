@@ -9,6 +9,9 @@ import java.time.Instant
 object CompanyMemberTable : UUIDTable(name = "company_member") {
 	val companyID = reference("company_id", CompanyTable.id)
 	val userId = reference("user_id", UserTable.id)
+	val companyMemberRole = varchar("company_member_role", length = 20)
+	val companyMemberStatus = varchar("company_member_status", length = 20)
+	val joinedAt = timestamp("joined_at")
 	val createdAt = timestamp("created_at").default(Instant.now())
 	val updatedAt = timestamp("updated_at").default(Instant.now())
 }

@@ -19,7 +19,7 @@ data class OAuthAccount(
 	val encryptedAccessToken: String?,
 	val encryptedRefreshToken: String?,
 	@Serializable(with = InstantSerializer::class)
-	val tokenExpiresAt: Instant?,
+	val tokenExpiresAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)

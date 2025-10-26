@@ -9,15 +9,15 @@ class RefreshTokenService (
 	private val refreshTokenRepository: IRefreshTokenRepository,
 ) : IRefreshTokenService{
 	override suspend fun getAll(): List<RefreshToken> {
-		TODO("Not yet implemented")
+		return refreshTokenRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): RefreshToken? {
-		TODO("Not yet implemented")
+		return refreshTokenRepository.findById(id)
 	}
 
 	override suspend fun create(user: RefreshToken): RefreshToken? {
-		TODO("Not yet implemented")
+		return refreshTokenRepository.create(user)
 	}
 
 	override suspend fun update(user: RefreshToken): RefreshToken? {
@@ -25,6 +25,6 @@ class RefreshTokenService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return refreshTokenRepository.delete(id)
 	}
 }

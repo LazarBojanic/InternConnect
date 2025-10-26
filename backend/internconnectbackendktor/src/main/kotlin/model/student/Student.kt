@@ -1,4 +1,4 @@
-package com.internconnect.model.studentprofile
+package com.internconnect.model.student
 
 import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer

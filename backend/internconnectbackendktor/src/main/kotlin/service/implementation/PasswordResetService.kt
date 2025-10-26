@@ -9,15 +9,15 @@ class PasswordResetService (
 	private val passwordResetRepository: IPasswordResetRepository,
 ) : IPasswordResetService {
 	override suspend fun getAll(): List<PasswordReset> {
-		TODO("Not yet implemented")
+		return passwordResetRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): PasswordReset? {
-		TODO("Not yet implemented")
+		return passwordResetRepository.findById(id)
 	}
 
 	override suspend fun create(user: PasswordReset): PasswordReset? {
-		TODO("Not yet implemented")
+		return passwordResetRepository.create(user)
 	}
 
 	override suspend fun update(user: PasswordReset): PasswordReset? {
@@ -25,6 +25,6 @@ class PasswordResetService (
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return passwordResetRepository.delete(id)
 	}
 }

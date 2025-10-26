@@ -15,7 +15,8 @@ data class CompanyInvitation(
 	val companyID: UUID,
 	val email: String,
 	val codeHash: String,
-	val expiresAt: LocalDateTime,
+	@Serializable(with = InstantSerializer::class)
+	val expiresAt: Instant,
 	@Serializable(with = UUIDSerializer::class)
 	val invitedBy: UUID,
 	@Serializable(with = UUIDSerializer::class)

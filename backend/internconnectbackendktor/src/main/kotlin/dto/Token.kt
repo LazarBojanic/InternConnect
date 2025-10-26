@@ -6,10 +6,6 @@ import java.util.*
 
 @Serializable
 data class Token(
-	@Serializable(with = UUIDSerializer::class)
-	val userId: UUID,
-	@Serializable(with = UUIDSerializer::class)
-	val sessionId: UUID,
 	val access: String,
 	val refresh: String
 )

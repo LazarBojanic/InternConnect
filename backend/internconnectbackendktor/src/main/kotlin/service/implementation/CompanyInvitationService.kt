@@ -9,22 +9,22 @@ class CompanyInvitationService (
 	private val companyInvitationRepository: ICompanyInvitationRepository,
 ) : ICompanyInvitationService {
 	override suspend fun getAll(): List<CompanyInvitation> {
-		TODO("Not yet implemented")
+		return companyInvitationRepository.findAll()
 	}
 
 	override suspend fun getById(id: UUID): CompanyInvitation? {
-		TODO("Not yet implemented")
+		return companyInvitationRepository.findById(id)
 	}
 
 	override suspend fun create(companyInvitation: CompanyInvitation): CompanyInvitation? {
-		TODO("Not yet implemented")
+		return companyInvitationRepository.create(companyInvitation)
 	}
 
 	override suspend fun update(companyInvitation: CompanyInvitation): CompanyInvitation? {
-		TODO("Not yet implemented")
+		return companyInvitationRepository.update(companyInvitation)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		TODO("Not yet implemented")
+		return companyInvitationRepository.delete(id)
 	}
 }
