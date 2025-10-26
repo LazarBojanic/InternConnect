@@ -5,7 +5,7 @@ import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.serialization.Serializable
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 @Serializable
 data class User(

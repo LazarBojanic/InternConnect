@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.refreshtoken.RefreshToken
-import java.util.UUID
+import java.util.*
 
 interface IRefreshTokenService {
 	suspend fun getAll(): List<RefreshToken>

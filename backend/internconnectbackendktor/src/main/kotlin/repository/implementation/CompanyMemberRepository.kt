@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.companymember.CompanyMember
 import com.internconnect.repository.specification.ICompanyMemberRepository
-import java.util.UUID
+import java.util.*
 
 class CompanyMemberRepository : ICompanyMemberRepository {
 	override suspend fun findAll(): List<CompanyMember> {

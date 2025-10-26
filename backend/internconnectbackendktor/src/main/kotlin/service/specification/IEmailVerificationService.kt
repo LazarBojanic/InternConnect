@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.emailverification.EmailVerification
-import java.util.UUID
+import java.util.*
 
 interface IEmailVerificationService {
 	suspend fun getAll(): List<EmailVerification>

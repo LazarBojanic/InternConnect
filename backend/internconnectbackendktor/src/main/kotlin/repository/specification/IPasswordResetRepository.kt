@@ -1,8 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.passwordreset.PasswordReset
-import com.internconnect.model.user.User
-import java.util.UUID
+import java.util.*
 
 interface IPasswordResetRepository {
 	suspend fun findAll(): List<PasswordReset>

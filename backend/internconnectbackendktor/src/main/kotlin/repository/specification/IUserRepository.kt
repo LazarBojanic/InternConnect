@@ -1,8 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.user.User
-import kotlinx.coroutines.flow.Flow
-import java.util.UUID
+import java.util.*
 
 interface IUserRepository {
 	suspend fun findAll(): List<User>

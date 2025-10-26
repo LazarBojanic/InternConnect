@@ -1,14 +1,12 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.user.User
-import com.internconnect.repository.implementation.AuditLogRepository
-import com.internconnect.repository.implementation.UserRepository
 import com.internconnect.repository.specification.IUserRepository
 import com.internconnect.service.specification.IUserService
-import java.util.UUID
+import java.util.*
 
 class UserService (
-	private val userRepository: UserRepository,
+	private val userRepository: IUserRepository,
 ) : IUserService {
 	override suspend fun getAll(): List<User> {
 		TODO("Not yet implemented")
@@ -22,7 +20,7 @@ class UserService (
 	}
 
 	override suspend fun create(user: User): User? {
-		userRepository.create(user)
+		return userRepository.create(user)
 	}
 
 	override suspend fun update(user: User): User? {

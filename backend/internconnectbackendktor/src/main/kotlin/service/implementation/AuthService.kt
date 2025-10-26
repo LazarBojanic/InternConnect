@@ -1,6 +1,7 @@
 package com.internconnect.service.implementation
 
-import com.auth0.jwt.*
+import com.auth0.jwt.JWT
+import com.auth0.jwt.JWTVerifier
 import com.internconnect.auth.JwtConfig
 import com.internconnect.dto.LoginUserDto
 import com.internconnect.dto.Token

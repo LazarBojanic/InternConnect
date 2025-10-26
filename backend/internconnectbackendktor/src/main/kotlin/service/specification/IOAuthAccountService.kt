@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.oauthaccount.OAuthAccount
-import java.util.UUID
+import java.util.*
 
 interface IOAuthAccountService {
 	suspend fun getAll(): List<OAuthAccount>

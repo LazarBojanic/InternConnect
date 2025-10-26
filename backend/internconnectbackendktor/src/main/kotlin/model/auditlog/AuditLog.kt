@@ -4,11 +4,10 @@ import com.internconnect.model.Metadata
 import com.internconnect.util.InetAddressSerializer
 import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
-import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 import java.net.InetAddress
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 @Serializable
 data class AuditLog(

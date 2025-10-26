@@ -1,7 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.emailverification.EmailVerification
-import java.util.UUID
+import java.util.*
 
 interface IEmailVerificationRepository {
 	suspend fun findAll(): List<EmailVerification>

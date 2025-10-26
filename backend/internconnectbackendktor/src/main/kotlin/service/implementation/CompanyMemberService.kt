@@ -1,12 +1,12 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.companymember.CompanyMember
-import com.internconnect.repository.implementation.CompanyMemberRepository
+import com.internconnect.repository.specification.ICompanyMemberRepository
 import com.internconnect.service.specification.ICompanyMemberService
-import java.util.UUID
+import java.util.*
 
 class CompanyMemberService (
-	private val companyMemberRepository: CompanyMemberRepository,
+	private val companyMemberRepository: ICompanyMemberRepository,
 ) : ICompanyMemberService {
 	override suspend fun getAll(): List<CompanyMember> {
 		TODO("Not yet implemented")

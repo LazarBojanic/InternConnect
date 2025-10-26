@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.auditlog.AuditLog
-import java.util.UUID
+import java.util.*
 
 interface IAuditLogService {
 	suspend fun getAll(): List<AuditLog>

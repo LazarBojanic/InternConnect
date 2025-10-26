@@ -1,13 +1,9 @@
 package com.internconnect.model.student
 
 import com.internconnect.model.user.UserTable
-import com.internconnect.util.InstantSerializer
-import com.internconnect.util.UUIDSerializer
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
-import java.util.UUID
 
 object StudentTable : UUIDTable(name = "student") {
 	val userId = reference("user_id", UserTable.id)

@@ -1,15 +1,10 @@
 package com.internconnect.model.studentprofile
 
 import com.internconnect.model.student.StudentTable
-import com.internconnect.model.user.UserTable
-import com.internconnect.util.InstantSerializer
-import com.internconnect.util.UUIDSerializer
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.UUIDEntity
 import org.jetbrains.exposed.v1.dao.UUIDEntityClass
-import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 class StudentEntity(userId: EntityID<UUID>) : UUIDEntity(userId) {
 	companion object : UUIDEntityClass<StudentEntity>(StudentTable)

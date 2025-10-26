@@ -1,8 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.passwordauth.PasswordAuth
-import com.internconnect.model.passwordreset.PasswordReset
-import java.util.UUID
+import java.util.*
 
 interface IPasswordAuthService {
 	suspend fun getAll(): List<PasswordAuth>

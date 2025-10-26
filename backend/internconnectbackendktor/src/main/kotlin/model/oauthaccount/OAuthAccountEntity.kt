@@ -1,13 +1,9 @@
 package com.internconnect.model.oauthaccount
 
-import com.internconnect.model.emailverification.EmailVerificationTable
-import com.internconnect.util.UUIDSerializer
-import kotlinx.datetime.LocalDateTime
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.UUIDEntity
 import org.jetbrains.exposed.v1.dao.UUIDEntityClass
-import java.util.UUID
+import java.util.*
 
 class OAuthAccountEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<OAuthAccountEntity>(OAuthAccountTable)

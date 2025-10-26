@@ -5,7 +5,8 @@ import com.internconnect.util.UUIDSerializer
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 import java.time.Instant
-import java.util.UUID
+import java.util.*
+
 @Serializable
 data class CompanyInvitation(
 	@Serializable(with = UUIDSerializer::class)

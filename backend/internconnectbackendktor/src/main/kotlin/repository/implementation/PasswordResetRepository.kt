@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.passwordreset.PasswordReset
 import com.internconnect.repository.specification.IPasswordResetRepository
-import java.util.UUID
+import java.util.*
 
 class PasswordResetRepository : IPasswordResetRepository {
 	override suspend fun findAll(): List<PasswordReset> {

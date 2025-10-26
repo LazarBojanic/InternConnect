@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.emailverification.EmailVerification
 import com.internconnect.repository.specification.IEmailVerificationRepository
-import java.util.UUID
+import java.util.*
 
 class EmailVerificationRepository : IEmailVerificationRepository {
 	override suspend fun findAll(): List<EmailVerification> {

@@ -1,7 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.company.Company
-import java.util.UUID
+import java.util.*
 
 interface ICompanyRepository {
 	suspend fun findAll(): List<Company>

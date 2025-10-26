@@ -1,9 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.auditlog.AuditLog
-import com.internconnect.model.emailverification.EmailVerification
-import com.internconnect.model.user.User
-import java.util.UUID
+import java.util.*
 
 interface IAuditLogRepository {
 	suspend fun findAll(): List<AuditLog>

@@ -3,7 +3,7 @@ package com.internconnect.model.passwordauth
 import com.internconnect.util.InstantSerializer
 import kotlinx.serialization.Serializable
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 data class PasswordAuth(
 	val userId: UUID,

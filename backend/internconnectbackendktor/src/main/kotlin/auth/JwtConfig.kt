@@ -1,7 +1,7 @@
 package com.internconnect.auth
 
 import com.auth0.jwt.algorithms.Algorithm
-import io.ktor.server.config.ApplicationConfig
+import io.ktor.server.config.*
 import java.time.Duration
 
 

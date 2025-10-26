@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.oauthaccount.OAuthAccount
 import com.internconnect.repository.specification.IOAuthAccountRepository
-import java.util.UUID
+import java.util.*
 
 class OAuthAccountRepository : IOAuthAccountRepository {
 	override suspend fun findAll(): List<OAuthAccount> {

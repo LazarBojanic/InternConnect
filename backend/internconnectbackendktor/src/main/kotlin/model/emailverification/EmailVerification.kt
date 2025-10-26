@@ -2,10 +2,10 @@ package com.internconnect.model.emailverification
 
 import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
-import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 import java.time.Instant
-import java.util.UUID
+import java.util.*
+
 @Serializable
 data class EmailVerification(
 	@Serializable(with = UUIDSerializer::class)

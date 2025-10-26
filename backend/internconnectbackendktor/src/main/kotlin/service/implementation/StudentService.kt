@@ -1,12 +1,9 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.studentprofile.Student
-import com.internconnect.model.user.User
-import com.internconnect.repository.implementation.UserRepository
 import com.internconnect.repository.specification.IStudentRepository
 import com.internconnect.service.specification.IStudentService
-import com.internconnect.service.specification.IUserService
-import java.util.UUID
+import java.util.*
 
 class StudentService (
 	private val studentRepository: IStudentRepository,

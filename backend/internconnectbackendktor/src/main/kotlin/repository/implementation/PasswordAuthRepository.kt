@@ -1,10 +1,8 @@
 package com.internconnect.repository.implementation
 
 import com.internconnect.model.passwordauth.PasswordAuth
-import com.internconnect.model.passwordreset.PasswordReset
 import com.internconnect.repository.specification.IPasswordAuthRepository
-import com.internconnect.repository.specification.IPasswordResetRepository
-import java.util.UUID
+import java.util.*
 
 class PasswordAuthRepository : IPasswordAuthRepository {
 	override suspend fun findAll(): List<PasswordAuth> {

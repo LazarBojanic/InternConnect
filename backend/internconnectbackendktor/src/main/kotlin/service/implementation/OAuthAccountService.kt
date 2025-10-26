@@ -1,14 +1,12 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.oauthaccount.OAuthAccount
-import com.internconnect.repository.implementation.AuditLogRepository
-import com.internconnect.repository.implementation.OAuthAccountRepository
 import com.internconnect.repository.specification.IOAuthAccountRepository
 import com.internconnect.service.specification.IOAuthAccountService
-import java.util.UUID
+import java.util.*
 
 class OAuthAccountService (
-	private val oAuthAccountRepository: OAuthAccountRepository,
+	private val oAuthAccountRepository: IOAuthAccountRepository,
 ): IOAuthAccountService {
 	override suspend fun getAll(): List<OAuthAccount> {
 		TODO("Not yet implemented")

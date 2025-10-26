@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.auditlog.AuditLog
 import com.internconnect.repository.specification.IAuditLogRepository
-import java.util.UUID
+import java.util.*
 
 class AuditLogRepository : IAuditLogRepository {
 	override suspend fun findAll(): List<AuditLog> {

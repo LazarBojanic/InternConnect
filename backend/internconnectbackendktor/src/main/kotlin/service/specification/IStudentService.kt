@@ -1,8 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.studentprofile.Student
-import com.internconnect.model.user.User
-import java.util.UUID
+import java.util.*
 
 interface IStudentService {
 	suspend fun getAll(): List<Student>

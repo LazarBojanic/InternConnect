@@ -2,7 +2,7 @@ package com.internconnect.repository.implementation
 
 import com.internconnect.model.refreshtoken.RefreshToken
 import com.internconnect.repository.specification.IRefreshTokenRepository
-import java.util.UUID
+import java.util.*
 
 class RefreshTokenRepository : IRefreshTokenRepository {
 	override suspend fun findAll(): List<RefreshToken> {

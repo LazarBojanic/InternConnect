@@ -3,7 +3,7 @@ package com.internconnect.model.companyinvitation
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.UUIDEntity
 import org.jetbrains.exposed.v1.dao.UUIDEntityClass
-import java.util.UUID
+import java.util.*
 
 class CompanyInvitationEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<CompanyInvitationEntity>(CompanyInvitationTable)

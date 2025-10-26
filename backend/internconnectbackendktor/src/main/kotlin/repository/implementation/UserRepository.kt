@@ -1,11 +1,8 @@
 package com.internconnect.repository.implementation
 
 import com.internconnect.model.user.User
-import com.internconnect.model.user.UserEntity
-import com.internconnect.model.user.UserTable
 import com.internconnect.repository.specification.IUserRepository
-import org.jetbrains.exposed.v1.core.eq
-import java.util.UUID
+import java.util.*
 
 class UserRepository : IUserRepository {
 	override suspend fun findAll(): List<User> {
@@ -17,14 +14,11 @@ class UserRepository : IUserRepository {
 	}
 
 	override suspend fun findByEmail(email: String): User? {
-		UserEntity.find { UserTable.email eq email }.firstOrNull()?.let {
-
-		}
-		return null
+		TODO("Not yet implemented")
 	}
 
 	override suspend fun create(user: User): User? {
-
+		TODO("Not yet implemented")
 	}
 
 	override suspend fun update(user: User): User? {

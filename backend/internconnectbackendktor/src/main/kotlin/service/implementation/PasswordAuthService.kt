@@ -1,13 +1,9 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.passwordauth.PasswordAuth
-import com.internconnect.model.passwordreset.PasswordReset
-import com.internconnect.repository.implementation.PasswordAuthRepository
-import com.internconnect.repository.implementation.PasswordResetRepository
 import com.internconnect.repository.specification.IPasswordAuthRepository
 import com.internconnect.service.specification.IPasswordAuthService
-import com.internconnect.service.specification.IPasswordResetService
-import java.util.UUID
+import java.util.*
 
 class PasswordAuthService (
 	private val passwordAuthRepository: IPasswordAuthRepository,

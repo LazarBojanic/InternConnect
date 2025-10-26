@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.company.Company
-import java.util.UUID
+import java.util.*
 
 interface ICompanyService {
 	suspend fun getAll(): List<Company>

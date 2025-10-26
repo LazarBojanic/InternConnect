@@ -1,8 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.studentprofile.Student
-import com.internconnect.model.user.User
-import java.util.UUID
+import java.util.*
 
 interface IStudentRepository {
 	suspend fun findAll(): List<Student>

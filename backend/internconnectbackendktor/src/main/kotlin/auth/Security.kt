@@ -1,16 +1,12 @@
 package com.internconnect.auth
 
-import com.internconnect.service.implementation.AuthService
-import com.internconnect.service.implementation.UserService
 import com.internconnect.service.specification.IAuthService
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.auth.Authentication
-import io.ktor.server.auth.jwt.JWTPrincipal
-import io.ktor.server.auth.jwt.jwt
-import io.ktor.server.response.respond
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.response.*
 import org.koin.ktor.ext.inject
-import kotlin.getValue
 
 fun Application.configureSecurity() {
 	val authService by inject<IAuthService>()

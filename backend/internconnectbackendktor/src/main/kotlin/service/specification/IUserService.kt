@@ -1,7 +1,7 @@
 package com.internconnect.service.specification
 
 import com.internconnect.model.user.User
-import java.util.UUID
+import java.util.*
 
 interface IUserService {
 	suspend fun getAll(): List<User>

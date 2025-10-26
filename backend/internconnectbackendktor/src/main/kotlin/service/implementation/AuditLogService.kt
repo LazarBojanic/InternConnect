@@ -1,13 +1,12 @@
 package com.internconnect.service.implementation
 
 import com.internconnect.model.auditlog.AuditLog
-import com.internconnect.repository.implementation.AuditLogRepository
 import com.internconnect.repository.specification.IAuditLogRepository
 import com.internconnect.service.specification.IAuditLogService
-import java.util.UUID
+import java.util.*
 
 class AuditLogService (
-	private val auditLogRepository: AuditLogRepository,
+	private val auditLogRepository: IAuditLogRepository,
 ): IAuditLogService {
 	override suspend fun getAll(): List<AuditLog> {
 		TODO("Not yet implemented")
