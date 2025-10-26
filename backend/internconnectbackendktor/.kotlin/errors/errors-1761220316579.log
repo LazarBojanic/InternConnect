@@ -1,5 +1,5 @@
 kotlin version: 2.2.20
-error message: org.jetbrains.kotlin.util.FileAnalysisException: Somewhere in file C:/dev/Mobile/InternConnect/backend/internconnectbackendktor/src/main/kotlin/model/organizationinvitation/OrganizationInvitationEntity.kt: java.lang.IllegalStateException: Plugin generated companion object for class org.jetbrains.kotlin.fir.declarations.impl.FirRegularClassImpl@69fea3f4, but it is already present in class
+error message: org.jetbrains.kotlin.util.FileAnalysisException: Somewhere in file C:/dev/Mobile/InternConnect/backend/internconnectbackendktor/src/main/kotlin/model/companyinvitation/CompanyInvitationEntity.kt: java.lang.IllegalStateException: Plugin generated companion object for class org.jetbrains.kotlin.fir.declarations.impl.FirRegularClassImpl@69fea3f4, but it is already present in class
 	at org.jetbrains.kotlin.util.AnalysisExceptionsKt.wrapIntoFileAnalysisExceptionIfNeeded(AnalysisExceptions.kt:62)
 	at org.jetbrains.kotlin.fir.FirCliExceptionHandler.handleExceptionOnFileAnalysis(Utils.kt:267)
 	at org.jetbrains.kotlin.fir.resolve.transformers.plugin.FirCompanionGenerationTransformer.transformFile(FirCompanionGenerationProcessor.kt:100)

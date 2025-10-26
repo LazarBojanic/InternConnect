@@ -17,9 +17,12 @@ class UserService (
 	override suspend fun getById(id: UUID): User? {
 		TODO("Not yet implemented")
 	}
+	override suspend fun getByEmail(email: String): User? {
+		TODO("Not yet implemented")
+	}
 
 	override suspend fun create(user: User): User? {
-		TODO("Not yet implemented")
+		userRepository.create(user)
 	}
 
 	override suspend fun update(user: User): User? {

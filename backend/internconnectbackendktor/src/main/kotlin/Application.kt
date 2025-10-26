@@ -8,9 +8,9 @@ import com.internconnect.routing.configureRouting
 import com.internconnect.model.auditlog.AuditLogTable
 import com.internconnect.model.emailverification.EmailVerificationTable
 import com.internconnect.model.oauthaccount.OAuthAccountTable
-import com.internconnect.model.organization.OrganizationTable
-import com.internconnect.model.organizationinvitation.OrganizationInvitationTable
-import com.internconnect.model.organizationmember.OrganizationMemberTable
+import com.internconnect.model.company.CompanyTable
+import com.internconnect.model.companyinvitation.CompanyInvitationTable
+import com.internconnect.model.companymember.CompanyMemberTable
 import com.internconnect.model.passwordreset.PasswordResetTable
 import com.internconnect.model.refreshtoken.RefreshTokenTable
 import com.internconnect.model.user.UserTable
@@ -32,13 +32,13 @@ fun Application.module() {
 	configureFrameworks()
 	configureRouting()
 	transaction {
-		SchemaUtils.drop(AuditLogTable, EmailVerificationTable, OAuthAccountTable, OrganizationInvitationTable, OrganizationMemberTable, OrganizationTable, PasswordResetTable, RefreshTokenTable, UserTable)
+		SchemaUtils.drop(AuditLogTable, EmailVerificationTable, OAuthAccountTable, CompanyInvitationTable, CompanyMemberTable, CompanyTable, PasswordResetTable, RefreshTokenTable, UserTable)
 		SchemaUtils.create(AuditLogTable)
 		SchemaUtils.create(EmailVerificationTable)
 		SchemaUtils.create(OAuthAccountTable)
-		SchemaUtils.create(OrganizationInvitationTable)
-		SchemaUtils.create(OrganizationMemberTable)
-		SchemaUtils.create(OrganizationTable)
+		SchemaUtils.create(CompanyInvitationTable)
+		SchemaUtils.create(CompanyMemberTable)
+		SchemaUtils.create(CompanyTable)
 		SchemaUtils.create(PasswordResetTable)
 		SchemaUtils.create(RefreshTokenTable)
 		SchemaUtils.create(UserTable)

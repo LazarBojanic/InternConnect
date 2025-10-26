@@ -1,7 +1,7 @@
 package com.internconnect.repository.specification
 
 import com.internconnect.model.oauthaccount.OAuthAccount
-import com.internconnect.model.organizationinvitation.OrganizationInvitation
+import com.internconnect.model.companyinvitation.CompanyInvitation
 import com.internconnect.model.user.User
 import java.util.UUID
 

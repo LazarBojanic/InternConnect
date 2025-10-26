@@ -1,10 +1,10 @@
 package com.internconnect.routing
 
-import com.internconnect.model.organizationinvitation.OrganizationInvitationTable
+import com.internconnect.model.companyinvitation.CompanyInvitationTable
 import com.internconnect.service.implementation.OAuthAccountService
-import com.internconnect.service.implementation.OrganizationInvitationService
-import com.internconnect.service.implementation.OrganizationMemberService
-import com.internconnect.service.implementation.OrganizationService
+import com.internconnect.service.implementation.CompanyInvitationService
+import com.internconnect.service.implementation.CompanyMemberService
+import com.internconnect.service.implementation.CompanyService
 import com.internconnect.service.implementation.PasswordResetService
 import com.internconnect.service.implementation.UserService
 import io.ktor.server.response.respond

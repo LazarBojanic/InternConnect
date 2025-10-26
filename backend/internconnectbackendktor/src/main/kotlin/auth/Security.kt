@@ -12,17 +12,11 @@ import org.koin.ktor.ext.inject
 import kotlin.getValue
 
 fun Application.configureSecurity() {
-	val jwtAlg = environment.config.property("jwt.alg").getString()
-	val jwtSecret = environment.config.property("jwt.secret").getString()
-	val jwtIss = environment.config.property("jwt.iss").getString()
-	val jwtAud = environment.config.property("jwt.aud").getString()
 	val authService by inject<AuthService>()
 	install(Authentication) {
 		jwt("auth-jwt") {
-			//TODO env variable
 			verifier(authService.verifier())
 			validate { cred ->
-				//TODO sub variable
 				val sub = cred.payload.subject ?: return@validate null
 				JWTPrincipal(cred.payload)
 			}
@@ -30,4 +24,6 @@ fun Application.configureSecurity() {
 		}
 	}
 }
+
+
 
