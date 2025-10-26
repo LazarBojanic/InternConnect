@@ -1,11 +1,8 @@
 package com.internconnect.model.companymember
 
-import com.internconnect.util.InstantSerializer
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.UUIDEntity
 import org.jetbrains.exposed.v1.dao.UUIDEntityClass
-import java.time.Instant
 import java.util.*
 
 class CompanyMemberEntity(id: EntityID<UUID>) : UUIDEntity(id) {

@@ -21,7 +21,7 @@ class CompanyService (
 	}
 
 	override suspend fun update(company: Company): Company? {
-		TODO("Not yet implemented")
+		return companyRepository.update(company)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

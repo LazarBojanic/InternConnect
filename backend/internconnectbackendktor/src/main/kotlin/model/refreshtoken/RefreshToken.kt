@@ -1,10 +1,8 @@
 package com.internconnect.model.refreshtoken
 
-import com.internconnect.util.InetAddressSerializer
 import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.serialization.Serializable
-import java.net.InetAddress
 import java.time.Instant
 import java.util.*
 

@@ -16,12 +16,12 @@ class PasswordResetService (
 		return passwordResetRepository.findById(id)
 	}
 
-	override suspend fun create(user: PasswordReset): PasswordReset? {
-		return passwordResetRepository.create(user)
+	override suspend fun create(passwordReset: PasswordReset): PasswordReset? {
+		return passwordResetRepository.create(passwordReset)
 	}
 
-	override suspend fun update(user: PasswordReset): PasswordReset? {
-		TODO("Not yet implemented")
+	override suspend fun update(passwordReset: PasswordReset): PasswordReset? {
+		return passwordResetRepository.update(passwordReset)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

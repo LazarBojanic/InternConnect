@@ -21,7 +21,7 @@ class StudentService (
 	}
 
 	override suspend fun update(student: Student): Student? {
-		TODO("Not yet implemented")
+		return studentRepository.update(student)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

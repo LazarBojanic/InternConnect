@@ -15,6 +15,7 @@ fun Application.configureSecurity() {
 			verifier(authService.verifier())
 			validate { cred ->
 				val sub = cred.payload.subject ?: return@validate null
+				if (cred.payload.getClaim("typ").asString() == "refresh") return@validate null
 				JWTPrincipal(cred.payload)
 			}
 			challenge { _, _ -> call.respond(HttpStatusCode.Unauthorized, mapOf("error" to "unauthorized")) }

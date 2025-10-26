@@ -21,7 +21,7 @@ class CompanyMemberService (
 	}
 
 	override suspend fun update(companyMember: CompanyMember): CompanyMember? {
-		TODO("Not yet implemented")
+		return companyMemberRepository.update(companyMember)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

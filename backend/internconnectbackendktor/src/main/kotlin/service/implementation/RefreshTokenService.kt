@@ -16,12 +16,12 @@ class RefreshTokenService (
 		return refreshTokenRepository.findById(id)
 	}
 
-	override suspend fun create(user: RefreshToken): RefreshToken? {
-		return refreshTokenRepository.create(user)
+	override suspend fun create(refreshToken: RefreshToken): RefreshToken? {
+		return refreshTokenRepository.create(refreshToken)
 	}
 
-	override suspend fun update(user: RefreshToken): RefreshToken? {
-		TODO("Not yet implemented")
+	override suspend fun update(refreshToken: RefreshToken): RefreshToken? {
+		return refreshTokenRepository.update(refreshToken)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

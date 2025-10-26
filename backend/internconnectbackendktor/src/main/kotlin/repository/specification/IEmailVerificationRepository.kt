@@ -6,7 +6,7 @@ import java.util.*
 interface IEmailVerificationRepository {
 	suspend fun findAll(): List<EmailVerification>
 	suspend fun findById(id: UUID): EmailVerification?
-	suspend fun create(user: EmailVerification): EmailVerification?
-	suspend fun update(user: EmailVerification): EmailVerification?
+	suspend fun create(emailVerification: EmailVerification): EmailVerification?
+	suspend fun update(emailVerification: EmailVerification): EmailVerification?
 	suspend fun delete(id: UUID): Boolean
 }

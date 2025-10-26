@@ -14,7 +14,6 @@ import com.internconnect.model.user.User
 import com.internconnect.model.user.UserRole
 import com.internconnect.service.specification.*
 import org.mindrot.jbcrypt.BCrypt
-import java.net.InetAddress
 import java.security.MessageDigest
 import java.time.Instant
 import java.util.*
@@ -101,7 +100,7 @@ class AuthService(
 									expiresAt = parsedRefresh.expiresAt.toInstant(),
 									revokedAt = null,
 									userAgent = loginUserDto.userAgent,
-									ip = InetAddress.getByName(loginUserDto.ip)
+									ip = loginUserDto.ip
 								)
 								val createdRefreshToken = refreshTokenService.create(refreshTokenToCreate)
 								if(createdRefreshToken != null){
@@ -165,6 +164,7 @@ class AuthService(
 		return JWT.require(jwtConfig.alg)
 			.withIssuer(jwtConfig.iss)
 			.withAudience(jwtConfig.aud)
+			.acceptLeeway(2)
 			.build()
 	}
 	override fun sha256(input: String): String? {

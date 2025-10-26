@@ -13,11 +13,11 @@ class PasswordAuthService (
 	}
 
 	override suspend fun getByUserId(userId: UUID): PasswordAuth? {
-		val existing = passwordAuthRepository
+		return passwordAuthRepository.findByUserId(userId)
 	}
 
 	override suspend fun create(passwordAuth: PasswordAuth): PasswordAuth? {
-		TODO("Not yet implemented")
+		return passwordAuthRepository.create(passwordAuth)
 	}
 
 	override suspend fun update(passwordAuth: PasswordAuth): PasswordAuth? {

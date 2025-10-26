@@ -6,7 +6,7 @@ import java.util.*
 interface IAuditLogService {
 	suspend fun getAll(): List<AuditLog>
 	suspend fun getById(id: UUID): AuditLog?
-	suspend fun create(user: AuditLog): AuditLog?
-	suspend fun update(user: AuditLog): AuditLog?
+	suspend fun create(auditLog: AuditLog): AuditLog?
+	suspend fun update(auditLog: AuditLog): AuditLog?
 	suspend fun delete(id: UUID): Boolean
 }

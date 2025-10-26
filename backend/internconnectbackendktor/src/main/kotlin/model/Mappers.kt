@@ -1,16 +1,29 @@
 package com.internconnect.model
 
 
-import com.internconnect.model.auditlog.*
-import com.internconnect.model.company.*
-import com.internconnect.model.companyinvitation.*
-import com.internconnect.model.companymember.*
-import com.internconnect.model.emailverification.*
-import com.internconnect.model.oauthaccount.*
-import com.internconnect.model.passwordauth.*
-import com.internconnect.model.passwordreset.*
-import com.internconnect.model.refreshtoken.*
-import com.internconnect.model.student.*
+import com.internconnect.model.auditlog.AuditLog
+import com.internconnect.model.auditlog.AuditLogEntity
+import com.internconnect.model.company.Company
+import com.internconnect.model.company.CompanyEntity
+import com.internconnect.model.company.CompanyTable
+import com.internconnect.model.companyinvitation.CompanyInvitation
+import com.internconnect.model.companyinvitation.CompanyInvitationEntity
+import com.internconnect.model.companymember.CompanyMember
+import com.internconnect.model.companymember.CompanyMemberEntity
+import com.internconnect.model.companymember.CompanyMemberRole
+import com.internconnect.model.companymember.CompanyMemberStatus
+import com.internconnect.model.emailverification.EmailVerification
+import com.internconnect.model.emailverification.EmailVerificationEntity
+import com.internconnect.model.oauthaccount.OAuthAccount
+import com.internconnect.model.oauthaccount.OAuthAccountEntity
+import com.internconnect.model.passwordauth.PasswordAuth
+import com.internconnect.model.passwordauth.PasswordAuthEntity
+import com.internconnect.model.passwordreset.PasswordReset
+import com.internconnect.model.passwordreset.PasswordResetEntity
+import com.internconnect.model.refreshtoken.RefreshToken
+import com.internconnect.model.refreshtoken.RefreshTokenEntity
+import com.internconnect.model.student.Student
+import com.internconnect.model.student.StudentEntity
 import com.internconnect.model.user.*
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 

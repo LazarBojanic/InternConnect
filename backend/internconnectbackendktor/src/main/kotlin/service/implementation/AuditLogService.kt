@@ -16,12 +16,12 @@ class AuditLogService (
 		return auditLogRepository.findById(id)
 	}
 
-	override suspend fun create(user: AuditLog): AuditLog? {
-		return auditLogRepository.create(user)
+	override suspend fun create(auditLog: AuditLog): AuditLog? {
+		return auditLogRepository.create(auditLog)
 	}
 
-	override suspend fun update(user: AuditLog): AuditLog? {
-		TODO("Not yet implemented")
+	override suspend fun update(auditLog: AuditLog): AuditLog? {
+		return auditLogRepository.update(auditLog)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

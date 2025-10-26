@@ -1,7 +1,6 @@
 package com.internconnect.model.user
 
 
-import com.internconnect.model.auditlog.AuditLogEntity.Companion.new
 import com.internconnect.util.InstantSerializer
 import com.internconnect.util.UUIDSerializer
 import kotlinx.serialization.Serializable

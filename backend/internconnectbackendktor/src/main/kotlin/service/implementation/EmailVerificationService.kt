@@ -16,12 +16,12 @@ class EmailVerificationService (
 		return emailVerificationRepository.findById(id)
 	}
 
-	override suspend fun create(user: EmailVerification): EmailVerification? {
-		return emailVerificationRepository.create(user)
+	override suspend fun create(emailVerification: EmailVerification): EmailVerification? {
+		return emailVerificationRepository.create(emailVerification)
 	}
 
-	override suspend fun update(user: EmailVerification): EmailVerification? {
-		TODO("Not yet implemented")
+	override suspend fun update(emailVerification: EmailVerification): EmailVerification? {
+		return emailVerificationRepository.update(emailVerification)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {

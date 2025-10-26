@@ -24,7 +24,8 @@ class UserService (
 	}
 
 	override suspend fun update(user: User): User? {
-		TODO("Not yet implemented")	}
+		return userRepository.update(user)
+	}
 
 	override suspend fun delete(id: UUID): Boolean {
 		return userRepository.delete(id)

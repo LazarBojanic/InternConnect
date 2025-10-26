@@ -16,12 +16,12 @@ class OAuthAccountService (
 		return oAuthAccountRepository.findById(id)
 	}
 
-	override suspend fun create(user: OAuthAccount): OAuthAccount? {
-		return oAuthAccountRepository.create(user)
+	override suspend fun create(oAuthAccount: OAuthAccount): OAuthAccount? {
+		return oAuthAccountRepository.create(oAuthAccount)
 	}
 
-	override suspend fun update(user: OAuthAccount): OAuthAccount? {
-		TODO("Not yet implemented")
+	override suspend fun update(oAuthAccount: OAuthAccount): OAuthAccount? {
+		return oAuthAccountRepository.update(oAuthAccount)
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
