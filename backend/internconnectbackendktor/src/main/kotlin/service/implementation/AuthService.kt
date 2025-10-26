@@ -45,7 +45,7 @@ class AuthService(
 			val passwordAuthToCreate = PasswordAuth.createNew(
 				userId = createdUser.id,
 				encryptedPassword = encryptedPassword,
-				encryptionAlgorithm = jwtConfig.alg.name
+				encryptionAlgorithm = "bcrypt"
 			)
 			val createdPasswordAuth = passwordAuthService.create(passwordAuthToCreate)
 			if(createdPasswordAuth != null){
@@ -94,7 +94,8 @@ class AuthService(
 								val parsedRefresh = JWT.decode(refresh)
 								val refreshTokenToCreate = RefreshToken.createNew(
 									userId = user.id,
-									tokenHash = refreshHash,
+									sessionId = sessionId,
+									hash = refreshHash,
 									issuedAt = parsedRefresh.issuedAt.toInstant(),
 									expiresAt = parsedRefresh.expiresAt.toInstant(),
 									revokedAt = null,
@@ -118,7 +119,7 @@ class AuthService(
 		TODO("Not yet implemented")
 	}
 
-	override suspend fun issueAccess(
+	override fun issueAccess(
 		userId: UUID,
 		email: String,
 		userRole: String,
@@ -141,7 +142,7 @@ class AuthService(
 			.sign(jwtConfig.alg)
 	}
 
-	override suspend fun issueRefresh(
+	override fun issueRefresh(
 		userId: UUID,
 		sessionId: UUID
 	): String? {
@@ -159,13 +160,13 @@ class AuthService(
 
 	}
 
-	override suspend fun verifier(): JWTVerifier? {
+	override fun verifier(): JWTVerifier {
 		return JWT.require(jwtConfig.alg)
 			.withIssuer(jwtConfig.iss)
 			.withAudience(jwtConfig.aud)
 			.build()
 	}
-	override suspend fun sha256(input: String): String? {
+	override fun sha256(input: String): String? {
 		return MessageDigest.getInstance("SHA-256")
 			.digest(input.toByteArray())
 			.fold("") { str, byte -> str + "%02x".format(byte) }

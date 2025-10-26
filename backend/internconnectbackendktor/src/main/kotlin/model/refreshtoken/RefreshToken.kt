@@ -14,16 +14,18 @@ data class RefreshToken(
 	val id: UUID,
 	@Serializable(with = UUIDSerializer::class)
 	val userId: UUID,
-	val tokenHash: String,
+	@Serializable(with = UUIDSerializer::class)
+	val sessionId: UUID,
+	val hash: String,
 	@Serializable(with = InstantSerializer::class)
 	val issuedAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val expiresAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val revokedAt: Instant?,
-	val userAgent: String,
+	val userAgent: String?,
 	@Serializable(with = InetAddressSerializer::class)
-	val ip: InetAddress,
+	val ip: InetAddress?,
 	@Serializable(with = InstantSerializer::class)
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
@@ -32,17 +34,19 @@ data class RefreshToken(
 	companion object {
 		fun createNew(
 			userId: UUID,
-			tokenHash: String,
+			sessionId: UUID,
+			hash: String,
 			issuedAt: Instant,
 			expiresAt: Instant,
 			revokedAt: Instant?,
-			userAgent: String,
-			ip: InetAddress,
+			userAgent: String?,
+			ip: InetAddress?,
 		): RefreshToken {
 			return RefreshToken(
 				id = UUID.randomUUID(),
 				userId = userId,
-				tokenHash = tokenHash,
+				sessionId = sessionId,
+				hash = hash,
 				issuedAt = issuedAt,
 				expiresAt = expiresAt,
 				revokedAt = revokedAt,

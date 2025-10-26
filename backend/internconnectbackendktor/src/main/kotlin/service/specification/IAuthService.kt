@@ -13,8 +13,8 @@ interface IAuthService {
 	suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User?
 	suspend fun login(loginUserDto: LoginUserDto): Token?
 	suspend fun logout(user: User)
-	suspend fun issueAccess(userId: UUID, email: String, userRole: String, companyId: UUID?, sessionId: UUID?): String?
-	suspend fun issueRefresh(userId: UUID, sessionId: UUID): String?
-	suspend fun verifier(): JWTVerifier?
-	suspend fun sha256(input: String): String?
+	fun issueAccess(userId: UUID, email: String, userRole: String, companyId: UUID?, sessionId: UUID?): String?
+	fun issueRefresh(userId: UUID, sessionId: UUID): String?
+	fun verifier(): JWTVerifier
+	fun sha256(input: String): String?
 }

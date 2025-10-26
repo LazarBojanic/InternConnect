@@ -2,6 +2,7 @@ package com.internconnect.auth
 
 import com.internconnect.service.implementation.AuthService
 import com.internconnect.service.implementation.UserService
+import com.internconnect.service.specification.IAuthService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.auth.Authentication
@@ -12,7 +13,7 @@ import org.koin.ktor.ext.inject
 import kotlin.getValue
 
 fun Application.configureSecurity() {
-	val authService by inject<AuthService>()
+	val authService by inject<IAuthService>()
 	install(Authentication) {
 		jwt("auth-jwt") {
 			verifier(authService.verifier())
