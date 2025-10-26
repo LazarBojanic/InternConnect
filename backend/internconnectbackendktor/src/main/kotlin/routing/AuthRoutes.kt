@@ -13,33 +13,31 @@ import org.koin.ktor.ext.inject
 
 fun Route.authRoutes() {
 	val authService by inject<IAuthService>()
-	authenticate("auth-jwt"){
-		route("/login") {
-			post {
-				val loginUserDto = call.receive<LoginUserDto>()
-				val token = authService.login(loginUserDto)
-				if(token != null){
-					call.respond(token)
-				}
-				else{
-					call.respond("Invalid credentials")
-				}
+	route("/login") {
+		post {
+			val loginUserDto = call.receive<LoginUserDto>()
+			val token = authService.login(loginUserDto)
+			if(token != null){
+				call.respond(token)
+			}
+			else{
+				call.respond("Invalid credentials")
 			}
 		}
-		route("/login-google") {
-			post {
+	}
+	route("/login-google") {
+		post {
 
-			}
 		}
-		route("/logout") {
-			post {
+	}
+	route("/logout") {
+		post {
 
-			}
 		}
-		route("/logout") {
-			post {
+	}
+	route("/logout") {
+		post {
 
-			}
 		}
 	}
 	route("/register-student") {
