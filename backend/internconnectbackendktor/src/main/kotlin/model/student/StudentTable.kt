@@ -10,7 +10,7 @@ import java.time.Instant
 import java.util.UUID
 
 object StudentTable : UUIDTable(name = "student") {
-	val userID = reference("user_id", UserTable.id)
+	val userId = reference("user_id", UserTable.id)
 	val firstName = varchar("first_name", length = 255)
 	val lastName = varchar("last_name", length = 255)
 	val schoolName = varchar("school_name", length = 255)

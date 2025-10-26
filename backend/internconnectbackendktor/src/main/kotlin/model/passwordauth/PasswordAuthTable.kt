@@ -6,7 +6,7 @@ import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
 
 object PasswordAuthTable : UUIDTable(name = "password_auth") {
-	val userID = reference("user_id", UserTable.id)
+	val userId = reference("user_id", UserTable.id)
 	val encryptedPassword = varchar("encrypted_password", length = 255)
 	val encryptionAlgorithm = varchar("encryption_algorithm", length = 20)
 	val passwordSetAt = timestamp("password_set_at")

@@ -16,7 +16,7 @@ class PasswordAuthService (
 		TODO("Not yet implemented")
 	}
 
-	override suspend fun getById(id: UUID): PasswordAuth? {
+	override suspend fun getByUserId(userId: UUID): PasswordAuth? {
 		TODO("Not yet implemented")
 	}
 

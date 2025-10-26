@@ -11,7 +11,7 @@ data class OAuthAccount(
 	@Serializable(with = UUIDSerializer::class)
 	val id: UUID,
 	@Serializable(with = UUIDSerializer::class)
-	val userID: UUID,
+	val userId: UUID,
 	val provider: String = "google",
 	@Serializable(with = UUIDSerializer::class)
 	val providerUserID: UUID,

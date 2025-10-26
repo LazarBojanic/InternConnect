@@ -6,7 +6,7 @@ import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
 
 object RefreshTokenTable : UUIDTable(name = "refresh_token") {
-	val userID = reference("user_id", UserTable.id)
+	val userId = reference("user_id", UserTable.id)
 	val tokenHash = varchar("token_hash", length = 255)
 	val issuedAt = timestamp("issued_at")
 	val expiresAt = timestamp("expires_at")

@@ -11,7 +11,7 @@ data class PasswordReset(
 	@Serializable(with = UUIDSerializer::class)
 	val id: UUID,
 	@Serializable(with = UUIDSerializer::class)
-	val userID: UUID,
+	val userId: UUID,
 	val codeHash: String,
 	@Serializable(with = InstantSerializer::class)
 	val expiresAt: Instant,

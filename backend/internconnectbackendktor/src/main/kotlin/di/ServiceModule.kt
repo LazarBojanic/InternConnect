@@ -16,5 +16,5 @@ val serviceModule = module{
 	single<ICompanyInvitationService>{ CompanyInvitationService(get()) }
 	single<IOAuthAccountService>{ OAuthAccountService(get()) }
 	single<IAuditLogService>{ AuditLogService(get()) }
-	single<IAuthService>{ AuthService(get(), get(), get(), get(), get()) }
+	single<IAuthService>{ AuthService(get(), get(), get(), get(), get(), get()) }
 }

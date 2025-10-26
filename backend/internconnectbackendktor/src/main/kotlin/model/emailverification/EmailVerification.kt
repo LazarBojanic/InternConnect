@@ -11,7 +11,7 @@ data class EmailVerification(
 	@Serializable(with = UUIDSerializer::class)
 	val id: UUID,
 	@Serializable(with = UUIDSerializer::class)
-	val userID: UUID,
+	val userId: UUID,
 	val codeHash: String,
 	val sentToEmail: String,
 	@Serializable(with = InstantSerializer::class)

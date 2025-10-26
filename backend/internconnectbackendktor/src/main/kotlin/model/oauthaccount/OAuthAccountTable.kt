@@ -7,7 +7,7 @@ import java.time.Instant
 
 
 object OAuthAccountTable : UUIDTable(name = "oauth_account") {
-	val userID = reference("user_id", UserTable.id)
+	val userId = reference("user_id", UserTable.id)
 	val provider = varchar("provider", length = 255).nullable()
 	val providerUserID = reference("provider_user_id", UserTable.id)
 	val providerEmail = varchar("provider_email", length = 255).nullable()

@@ -6,7 +6,7 @@ import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
 
 object EmailVerificationTable : UUIDTable(name = "email_verification") {
-	val userID = reference("user_id", UserTable.id)
+	val userId = reference("user_id", UserTable.id)
 	val codeHash = varchar("code_hash", length = 255).nullable()
 	val sentToEmail = varchar("sent_to_email", length = 10)
 	val expiresAt = timestamp("expires_at")

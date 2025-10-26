@@ -7,7 +7,7 @@ import java.util.*
 
 class AuditLogEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<AuditLogEntity>(AuditLogTable)
-	var userID by AuditLogTable.userID
+	var userId by AuditLogTable.userId
 	var action by AuditLogTable.action
 	var metadata by AuditLogTable.metadata
 	var ip by AuditLogTable.ip

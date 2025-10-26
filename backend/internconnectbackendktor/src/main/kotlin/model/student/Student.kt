@@ -21,4 +21,30 @@ data class Student (
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-)
+){
+	companion object {
+		fun createNew(
+			userId: UUID,
+			firstName: String,
+			lastName: String,
+			schoolName: String,
+			grade: Int,
+			bio: String?,
+			interests: String?,
+			avatarUrl: String?
+		): Student{
+			return Student(
+				userId = userId,
+				firstName = firstName,
+				lastName = lastName,
+				schoolName = schoolName,
+				grade = grade,
+				bio = bio,
+				interests = interests,
+				avatarUrl = avatarUrl,
+				createdAt = Instant.now(),
+				updatedAt = Instant.now()
+			)
+		}
+	}
+}

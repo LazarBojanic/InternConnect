@@ -13,7 +13,7 @@ data class CompanyMember(
 	@Serializable(with = UUIDSerializer::class)
 	val companyID: UUID,
 	@Serializable(with = UUIDSerializer::class)
-	val userID: UUID,
+	val userId: UUID,
 	val companyMemberRole: CompanyMemberRole,
 	val companyMemberStatus: CompanyMemberStatus,
 	@Serializable(with = InstantSerializer::class)

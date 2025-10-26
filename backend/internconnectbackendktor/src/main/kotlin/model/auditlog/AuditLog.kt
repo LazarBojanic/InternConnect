@@ -15,7 +15,7 @@ data class AuditLog(
 	@Serializable(with = UUIDSerializer::class)
 	val id: UUID,
 	@Serializable(with = UUIDSerializer::class)
-	val userID: UUID,
+	val userId: UUID,
 	val action: String,
 	val metadata: Metadata,
 	@Serializable(with = InetAddressSerializer::class)
