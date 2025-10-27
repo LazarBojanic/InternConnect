@@ -7,11 +7,12 @@ val exposed_kotlin_datetime_version: String by project
 val java_jwt_version: String by project
 val commons_email_version: String by project
 val jbcrypt_version: String by project
+val ktor_plugin_version: String by project
 
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.3.0-Beta1"
     id("io.ktor.plugin") version "3.3.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta1"
 }
 
 group = "com.internconnect"
@@ -23,7 +24,6 @@ application {
 }
 
 dependencies {
-    implementation("org.openfolder:kotlin-asyncapi-ktor:3.1.2")
     implementation("io.ktor:ktor-server-cors")
     implementation("io.ktor:ktor-server-default-headers")
     implementation("io.ktor:ktor-server-core")
