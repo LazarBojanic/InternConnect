@@ -1,25 +1,48 @@
 package com.lazar.internconnectfrontendclient
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.lazar.internconnectfrontendclient.theme.AppTheme
-import com.lazar.internconnectfrontendclient.ui.Welcome
-import internconnectfrontendclient.composeapp.generated.resources.*
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
+import com.lazar.internconnectfrontendclient.ui.screen.Home
+import com.lazar.internconnectfrontendclient.ui.screen.Login
+import com.lazar.internconnectfrontendclient.ui.screen.Register
+import com.lazar.internconnectfrontendclient.ui.screen.Welcome
 
 
 @Composable
 fun App() {
-    AppTheme {
-	    Welcome()
-    }
+	val navController = rememberNavController()
+	AppTheme {
+		NavHost(navController = navController, startDestination = "welcome") {
+			composable("welcome") {
+				Welcome(
+					onRegister = { navController.navigate("register") },
+					onLogin = { navController.navigate("login") }
+				)
+			}
+			composable("login") {
+				Login(
+					onLogin = {
+						navController.navigate("home") {
+							popUpTo("welcome") { inclusive = true }
+						}
+					}
+				)
+			}
+			composable("register") {
+				Register(
+					onRegister = {
+						navController.navigate("home") {
+							popUpTo("welcome") { inclusive = true }
+						}
+					}
+				)
+			}
+			composable("home") {
+				Home()
+			}
+		}
+	}
 }

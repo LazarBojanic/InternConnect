@@ -49,10 +49,10 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.androidxLifecycleViewModelSavedState)
-            implementation(libs.androidxLifecycleViewmodelCompose)
-            implementation(libs.androidxLifecycleRuntimeCompose)
-            implementation(libs.androidxNavigationCompose)
+	        implementation(libs.androidxLifecycleViewModelSavedState)
+	        implementation(libs.androidxLifecycleViewmodelCompose)
+	        implementation(libs.androidxLifecycleRuntimeCompose)
+	        implementation(libs.androidxNavigationCompose)
 
             implementation(libs.kotlinxSerializationJson)
             implementation(libs.kotlinxCoroutinesCore)

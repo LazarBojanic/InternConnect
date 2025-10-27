@@ -1,4 +1,4 @@
-package com.lazar.internconnectfrontendclient.ui
+package com.lazar.internconnectfrontendclient.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -21,8 +20,8 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Welcome(
-	onCreateAccount: () -> Unit = {},
-	onSignIn: () -> Unit = {},
+	onRegister: () -> Unit = {},
+	onLogin: () -> Unit = {},
 	modifier: Modifier = Modifier,
 ) {
 	val logo = painterResource(Res.drawable.internconnect_logo)
@@ -42,7 +41,6 @@ fun Welcome(
 				modifier = Modifier.size(500.dp)
 			)
 
-
 			Spacer(Modifier.height(20.dp))
 
 			Text(
@@ -59,14 +57,14 @@ fun Welcome(
 
 			PrimaryButton(
 				text = "Create account",
-				onClick = onCreateAccount,
+				onClick = onRegister,
 			)
 
 			Spacer(Modifier.height(12.dp))
 
 			SecondaryButton(
 				text = "Sign in",
-				onClick = onSignIn,
+				onClick = onLogin,
 			)
 
 			Spacer(Modifier.height(32.dp))
