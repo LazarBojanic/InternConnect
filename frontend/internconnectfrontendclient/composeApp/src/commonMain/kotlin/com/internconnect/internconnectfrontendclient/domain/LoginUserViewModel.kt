@@ -1,5 +1,6 @@
 package com.internconnect.internconnectfrontendclient.domain
 
+import com.internconnect.internconnectfrontendclient.data.store.ITokenStore
 import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
 import com.internconnect.internconnectfrontendclient.dto.Token
 import com.internconnect.internconnectfrontendclient.http.IAppApi
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginUserViewModel(
-	private val appApi: IAppApi
+	private val appApi: IAppApi,
+	private val tokenStore: ITokenStore
 ) {
 	sealed interface UIState {
 		object Idle : UIState
@@ -31,6 +33,9 @@ class LoginUserViewModel(
 			try {
 				val token = appApi.login(dto)
 				if (token != null) {
+					tokenStore.setToken(
+						token = token,
+					)
 					_uiState.value = UIState.LoggedIn(token)
 				} else {
 					_uiState.value = UIState.Error("Invalid credentials or server error")
