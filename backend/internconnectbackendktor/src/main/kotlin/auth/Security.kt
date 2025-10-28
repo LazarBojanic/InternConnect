@@ -65,3 +65,25 @@ fun Route.authorize(vararg roles: UserRole, build: Route.() -> Unit): Route {
 	authorizedRoute.build()
 	return authorizedRoute
 }
+
+/*fun Route.authorize(vararg allow: UserRole, build: Route.() -> Unit): Route {
+
+	val authorized = createChild(AttributeKey<Unit>("Authorized${allow.joinToString()}"))
+
+	authorized.intercept(ApplicationCallPipeline.Plugins) {
+
+		val p = call.principal<AppPrincipal>() ?: return@intercept call.respond(HttpStatusCode.Unauthorized)
+
+		if (allow.contains(p.role).not()) {
+
+			return@intercept call.respond(HttpStatusCode.Forbidden, mapOf("error" to "insufficient_role"))
+
+		}
+
+	}
+
+	authorized.build()
+
+	return authorized
+
+}*/

@@ -3,6 +3,7 @@ package com.internconnect.service.implementation
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.internconnect.auth.JwtConfig
+import com.internconnect.database.dbQuery
 import com.internconnect.dto.LoginUserDto
 import com.internconnect.dto.Token
 import com.internconnect.dto.RegisterCompanyDto
@@ -28,46 +29,50 @@ class AuthService(
 	private val jwtConfig: JwtConfig
 ) : IAuthService {
 
-	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): User? {
+	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): User = dbQuery {
 		require(registerStudentDto.email.isNotBlank())
 		require(registerStudentDto.password.length >= 8)
+
 		val existing = userService.getByEmail(registerStudentDto.email)
 		require(existing == null) { "email_taken" }
+
 		val encryptedPassword = BCrypt.hashpw(registerStudentDto.password, BCrypt.gensalt())
+
 		val userToCreate = User.createNew(
 			email = registerStudentDto.email,
 			firstName = registerStudentDto.firstName,
 			lastName = registerStudentDto.lastName,
 			userRole = UserRole.student
 		)
-		val createdUser = userService.create(userToCreate)
-		if(createdUser != null){
-			val passwordAuthToCreate = PasswordAuth.createNew(
-				userId = createdUser.id,
-				encryptedPassword = encryptedPassword,
-				encryptionAlgorithm = "bcrypt"
-			)
-			val createdPasswordAuth = passwordAuthService.create(passwordAuthToCreate)
-			if(createdPasswordAuth != null){
-				val studentToCreate = Student.createNew(
-					userId = createdUser.id,
-					firstName = registerStudentDto.firstName,
-					lastName = registerStudentDto.lastName,
-					grade = registerStudentDto.grade,
-					schoolName = registerStudentDto.schoolName,
-					bio = null,
-					interests = null,
-					avatarUrl = null
-				)
-				val createdStudent = studentService.create(studentToCreate)
-				if(createdStudent != null){
-					return createdUser
-				}
-			}
-		}
-		throw Exception("failed_to_register")
-	}
 
+		val createdUser = userService.create(userToCreate)
+			?: throw Exception("failed_to_register")
+
+		val passwordAuthToCreate = PasswordAuth.createNew(
+			userId = createdUser.id,
+			encryptedPassword = encryptedPassword,
+			encryptionAlgorithm = "bcrypt"
+		)
+
+		passwordAuthService.create(passwordAuthToCreate)
+			?: throw Exception("failed_to_register")
+
+		val studentToCreate = Student.createNew(
+			userId = createdUser.id,
+			firstName = registerStudentDto.firstName,
+			lastName = registerStudentDto.lastName,
+			grade = registerStudentDto.grade,
+			schoolName = registerStudentDto.schoolName,
+			bio = null,
+			interests = null,
+			avatarUrl = null
+		)
+
+		studentService.create(studentToCreate)
+			?: throw Exception("failed_to_register")
+
+		createdUser
+	}
 	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User? {
 		TODO("Not yet implemented")
 	}

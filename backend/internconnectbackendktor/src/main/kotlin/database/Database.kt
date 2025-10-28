@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.v1.jdbc.Database
+import org.jetbrains.exposed.v1.jdbc.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 fun Application.configureDatabase() {
@@ -22,7 +23,7 @@ fun Application.configureDatabase() {
 		driver = databaseDriver,
 		password = databasePassword
 	)
-
-	suspend fun <T> dbQuery(block: () -> T): T =
-		withContext(Dispatchers.IO) { transaction { block() } }
 }
+
+suspend fun <T> dbQuery(block: suspend () -> T): T =
+	newSuspendedTransaction(Dispatchers.IO) { block() }
