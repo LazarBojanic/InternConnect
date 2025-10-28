@@ -1,8 +1,4 @@
-import com.google.devtools.ksp.gradle.KspExtension
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -54,6 +50,7 @@ kotlin {
 	        implementation(libs.androidxLifecycleRuntimeCompose)
 	        implementation(libs.androidxNavigationCompose)
 
+	        implementation(libs.ktorSerializationKotlinxJson)
             implementation(libs.kotlinxSerializationJson)
             implementation(libs.kotlinxCoroutinesCore)
 
@@ -69,6 +66,9 @@ kotlin {
 	        implementation(libs.roomKtx)
 	        implementation(libs.roomRuntime)
             implementation(libs.sqliteBundled)
+
+	        implementation(libs.ktorClientContentNegotiation)
+	        implementation(libs.ktorClientLogging)
 
         }
         androidMain.dependencies {
@@ -118,11 +118,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.lazar.internconnectfrontendclient"
+    namespace = "com.internconnect.internconnectfrontendclient"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.lazar.internconnectfrontendclient"
+        applicationId = "com.internconnect.internconnectfrontendclient"
         minSdk = libs.versions.androidMinSdk.get().toInt()
         targetSdk = libs.versions.androidTargetSdk.get().toInt()
         versionCode = 1
