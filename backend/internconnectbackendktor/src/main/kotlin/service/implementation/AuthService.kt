@@ -73,51 +73,100 @@ class AuthService(
 
 		createdUser
 	}
-	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User? {
-		TODO("Not yet implemented")
-	}
+	override suspend fun login(loginUserDto: LoginUserDto): Token? = dbQuery {
+		require(loginUserDto.email.isNotBlank())
+		require(loginUserDto.password.isNotBlank())
 
-	override suspend fun login(loginUserDto: LoginUserDto): Token? {
 		val user = userService.getByEmail(loginUserDto.email)
-		if(user != null){
-			val passwordAuth = passwordAuthService.getByUserId(user.id)
-			if(passwordAuth != null){
-				if(BCrypt.checkpw(loginUserDto.password, passwordAuth.encryptedPassword)){
-					val sessionId = UUID.randomUUID()
-					val access = issueAccess(
-						userId = user.id,
-						email = user.email,
-						userRole = user.userRole.name,
-						companyId = null,
-						sessionId
-					)
-					if(access != null){
-						val refresh = issueRefresh(user.id, sessionId)
-						if(refresh != null){
-							val refreshHash = sha256(refresh)
-							if(refreshHash != null){
-								val parsedRefresh = JWT.decode(refresh)
-								val refreshTokenToCreate = RefreshToken.createNew(
-									userId = user.id,
-									sessionId = sessionId,
-									hash = refreshHash,
-									issuedAt = parsedRefresh.issuedAt.toInstant(),
-									expiresAt = parsedRefresh.expiresAt.toInstant(),
-									revokedAt = null,
-									userAgent = loginUserDto.userAgent,
-									ip = loginUserDto.ip
-								)
-								val createdRefreshToken = refreshTokenService.create(refreshTokenToCreate)
-								if(createdRefreshToken != null){
-									return Token(refresh, access)
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		throw Exception("invalid_credentials")
+			?: throw Exception("invalid_credentials")
+
+		val passwordAuth = passwordAuthService.getByUserId(user.id)
+			?: throw Exception("invalid_credentials")
+
+		require(BCrypt.checkpw(loginUserDto.password, passwordAuth.encryptedPassword)) { "invalid_credentials" }
+
+		val sessionId = UUID.randomUUID()
+
+		val access = issueAccess(
+			userId = user.id,
+			email = user.email,
+			userRole = user.userRole.name,
+			companyId = null, // Set a real companyId here if/when you have that relation
+			sessionId = sessionId
+		) ?: throw Exception("failed_to_login")
+
+		val refresh = issueRefresh(user.id, sessionId)
+			?: throw Exception("failed_to_login")
+
+		val refreshHash = sha256(refresh) ?: throw Exception("failed_to_login")
+
+		val parsedRefresh = JWT.decode(refresh)
+
+		val refreshTokenToCreate = RefreshToken.createNew(
+			userId = user.id,
+			sessionId = sessionId,
+			hash = refreshHash,
+			issuedAt = parsedRefresh.issuedAt.toInstant(),
+			expiresAt = parsedRefresh.expiresAt.toInstant(),
+			revokedAt = null,
+			userAgent = loginUserDto.userAgent,
+			ip = loginUserDto.ip
+		)
+
+		val createdRefreshToken = refreshTokenService.create(refreshTokenToCreate)
+			?: throw Exception("failed_to_login")
+
+		Token(refresh, access)
+	}
+	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User? = dbQuery {
+		require(registerCompanyDto.email.isNotBlank())
+		require(registerCompanyDto.password.length >= 8)
+		require(registerCompanyDto.password == registerCompanyDto.confirmPassword) { "password_mismatch" }
+		require(registerCompanyDto.name.isNotBlank())
+		require(registerCompanyDto.industry.isNotBlank())
+
+		val existing = userService.getByEmail(registerCompanyDto.email)
+		require(existing == null) { "email_taken" }
+
+		val encryptedPassword = BCrypt.hashpw(registerCompanyDto.password, BCrypt.gensalt())
+
+		val userToCreate = User.createNew(
+			email = registerCompanyDto.email,
+			firstName = registerCompanyDto.name,
+			lastName = "",
+			userRole = UserRole.company
+		)
+
+		val createdUser = userService.create(userToCreate)
+			?: throw Exception("failed_to_register")
+
+		val passwordAuthToCreate = PasswordAuth.createNew(
+			userId = createdUser.id,
+			encryptedPassword = encryptedPassword,
+			encryptionAlgorithm = "bcrypt"
+		)
+
+		passwordAuthService.create(passwordAuthToCreate)
+			?: throw Exception("failed_to_register")
+
+		val now = Instant.now()
+		val companyToCreate = com.internconnect.model.company.Company(
+			id = UUID.randomUUID(),
+			name = registerCompanyDto.name,
+			industry = registerCompanyDto.industry,
+			website = null,
+			logoUrl = null,
+			hqCountry = null,
+			city = null,
+			about = null,
+			createdAt = now,
+			updatedAt = now
+		)
+
+		companyService.create(companyToCreate)
+			?: throw Exception("failed_to_register")
+
+		createdUser
 	}
 
 	override suspend fun logout(user: User) {
