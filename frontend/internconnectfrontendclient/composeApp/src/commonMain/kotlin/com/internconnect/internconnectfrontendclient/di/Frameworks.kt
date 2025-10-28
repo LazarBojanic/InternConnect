@@ -17,7 +17,7 @@ expect fun platformEngine(): HttpClientEngineFactory<*>
 
 fun commonModule(baseUrl: String) = module {
 	single<ITokenStore> { InMemoryTokenStore() }
-	single { AppHttpClient(baseUrl, platformEngine()) }
+	single { AppHttpClient(baseUrl, platformEngine(), get()) }
 	single<IAppApi> { AppApi(get()) }
 	single { LoginUserViewModel(get(), get()) }
 	single { RegisterStudentViewModel(get()) }

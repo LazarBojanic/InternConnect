@@ -32,7 +32,7 @@ fun LoginScreen(
 			LoginUserDto(
 				email = email.trim(),
 				password = password,
-				userAgent = "ComposeApp", // replace if you capture real UA/IP
+				userAgent = "ComposeApp",
 				ip = "0.0.0.0"
 			)
 		)

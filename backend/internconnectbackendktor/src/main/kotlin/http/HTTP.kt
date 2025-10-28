@@ -21,7 +21,7 @@ fun Application.configureHTTP() {
 		anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
 	}
 	install(DefaultHeaders) {
-		header("X-Engine", "Ktor") // will send this header with each response
+		header("X-Engine", "Ktor")
 	}
 	routing {
 		openAPI(path = "openapi")

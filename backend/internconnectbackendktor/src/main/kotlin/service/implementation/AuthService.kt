@@ -91,7 +91,7 @@ class AuthService(
 			userId = user.id,
 			email = user.email,
 			userRole = user.userRole.name,
-			companyId = null, // Set a real companyId here if/when you have that relation
+			companyId = null,
 			sessionId = sessionId
 		) ?: throw Exception("failed_to_login")
 

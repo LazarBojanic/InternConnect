@@ -19,21 +19,21 @@ class AppApi (
 ) : IAppApi{
 	private val client get() = appHttpClient.client
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String? {
-		val resp: HttpResponse = client.post("/auth/register/student") {
+		val resp: HttpResponse = client.post("/register-student") {
 			setBody(registerStudentDto)
 		}
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): String? {
-		val resp: HttpResponse = client.post("/auth/register/company") {
+		val resp: HttpResponse = client.post("/register-company") {
 			setBody(registerCompanyDto)
 		}
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun login(loginUserDto: LoginUserDto): Token? {
-		val resp: HttpResponse = client.post("/auth/login") {
+		val resp: HttpResponse = client.post("/login") {
 			setBody(loginUserDto)
 		}
 		return when (resp.status) {
@@ -43,14 +43,14 @@ class AppApi (
 	}
 
 	override suspend fun forgotPassword(email: String): String? {
-		val resp: HttpResponse = client.post("/auth/forgot-password") {
+		val resp: HttpResponse = client.post("/TODO") {
 			url { parameters.append("email", email) }
 		}
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun logout() {
-		client.post("/auth/logout")
+		client.post("/auth/logout/TODO")
 	}
 
 	override suspend fun refreshToken(): String? {

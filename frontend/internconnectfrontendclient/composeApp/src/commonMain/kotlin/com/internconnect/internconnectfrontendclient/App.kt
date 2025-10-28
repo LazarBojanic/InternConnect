@@ -8,6 +8,7 @@ import com.internconnect.internconnectfrontendclient.theme.AppTheme
 import com.internconnect.internconnectfrontendclient.ui.screen.HomeScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.Welcome
 
 
 @Composable
@@ -16,7 +17,7 @@ fun App() {
 	AppTheme {
 		NavHost(navController = navController, startDestination = "welcome") {
 			composable("welcome") {
-				com.internconnect.internconnectfrontendclient.ui.screen.Welcome(
+				Welcome(
 					onRegister = { navController.navigate("register") },
 					onLogin = { navController.navigate("login") }
 				)
