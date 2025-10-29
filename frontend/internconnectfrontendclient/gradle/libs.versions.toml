@@ -10,6 +10,7 @@ androidxCore = "1.17.0"
 androidxLifecycle = "2.10.0-alpha03"
 androidxNavigation = "2.9.1"
 
+
 kotlinxSerializationJson = "1.9.0"
 kotlinxCoroutines = "1.10.2"
 ktor = "3.3.1"
@@ -26,10 +27,12 @@ room = "2.8.3"
 sqlite = "2.6.1"
 coil = "3.3.0"
 
+
 [libraries]
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidxAppcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
+
 
 androidxLifecycleViewModelSavedState = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidxLifecycle" }
 androidxLifecycleViewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }

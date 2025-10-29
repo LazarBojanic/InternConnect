@@ -46,8 +46,8 @@ class AppHttpClient(
 			accept(ContentType.Application.Json)
 
 			val token = tokenStore.token.value
-			if (!token?.access.isNullOrBlank()) {
-				headers.append(HttpHeaders.Authorization, "Bearer $token")
+			token?.access?.takeIf { it.isNotBlank() }?.let { access ->
+				headers.append(HttpHeaders.Authorization, "Bearer $access")
 			}
 		}
 	}

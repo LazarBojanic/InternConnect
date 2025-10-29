@@ -1,6 +1,7 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -38,11 +39,11 @@ fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	}
 
 	Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-		OutlinedTextField(email, { email = it }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(password, { password = it }, label = { Text("Password") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(confirmPassword, { confirmPassword = it }, label = { Text("Confirm Password") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(name, { name = it }, label = { Text("Name") }, modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(industry, { industry = it }, label = { Text("Industry") }, modifier = Modifier.fillMaxWidth())
+		AppTextField(email, { email = it }, label = "Email", modifier = Modifier.fillMaxWidth())
+		PasswordTextField(password, {password = it}, label = "Password", modifier = Modifier.fillMaxWidth())
+		PasswordTextField(confirmPassword, {confirmPassword = it}, label = "Confirm Password", modifier = Modifier.fillMaxWidth())
+		AppTextField(name, { name = it }, label = "Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(industry, { industry = it }, label = "Industry", modifier = Modifier.fillMaxWidth())
 		Spacer(Modifier.height(12.dp))
 
 

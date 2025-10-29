@@ -36,7 +36,7 @@ val RoleAuthorizationPlugin = createRouteScopedPlugin(
 	val allowedRoles = pluginConfig.allowedRoles.map { it.name }.toSet()
 	onCall { call ->
 		val principal = call.principal<JWTPrincipal>()
-		val role = principal?.payload?.getClaim("role")?.asString()
+		val role = principal?.payload?.getClaim("userRole")?.asString()
 		if (role == null || role !in allowedRoles) {
 			call.respond(
 				HttpStatusCode.Forbidden,

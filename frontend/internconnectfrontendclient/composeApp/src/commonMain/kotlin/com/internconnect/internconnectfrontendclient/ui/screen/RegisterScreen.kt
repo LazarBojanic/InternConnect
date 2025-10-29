@@ -20,7 +20,7 @@ fun RegisterScreen(
 		Text(text = "Register", style = MaterialTheme.typography.headlineSmall)
 		Spacer(Modifier.height(8.dp))
 
-		TabRow(selectedTabIndex = tabIndex) {
+		PrimaryTabRow(selectedTabIndex = tabIndex) {
 			tabs.forEachIndexed { index, title ->
 				Tab(
 					selected = tabIndex == index,

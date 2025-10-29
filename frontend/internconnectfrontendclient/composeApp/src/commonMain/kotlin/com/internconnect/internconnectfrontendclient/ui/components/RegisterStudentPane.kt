@@ -1,6 +1,7 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -43,12 +44,12 @@ fun RegisterStudentPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	}
 
 	Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-		OutlinedTextField(email, { email = it }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(password, { password = it }, label = { Text("Password") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(confirmPassword, { confirmPassword = it }, label = { Text("Confirm Password") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(firstName, { firstName = it }, label = { Text("First Name") }, modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(lastName, { lastName = it }, label = { Text("Last Name") }, modifier = Modifier.fillMaxWidth())
-		OutlinedTextField(schoolName, { schoolName = it }, label = { Text("School Name") }, modifier = Modifier.fillMaxWidth())
+		AppTextField(email, { email = it }, label = "Email", modifier = Modifier.fillMaxWidth())
+		PasswordTextField(password, {password = it}, label = "Password", modifier = Modifier.fillMaxWidth())
+		PasswordTextField(confirmPassword, {confirmPassword = it}, label = "Confirm Password", modifier = Modifier.fillMaxWidth())
+		AppTextField(firstName, { firstName = it }, label = "First Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(lastName, { lastName = it }, label = "Last Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(schoolName, { schoolName = it }, label = "School Name", modifier = Modifier.fillMaxWidth())
 		Slider(value = grade.toFloat(), onValueChange = { grade = it.toInt() }, valueRange = 1f..12f, steps = 11, modifier = Modifier.fillMaxWidth())
 		Spacer(Modifier.height(12.dp))
 

@@ -5,6 +5,7 @@ import com.internconnect.dto.RegisterCompanyDto
 import com.internconnect.dto.RegisterStudentDto
 import com.internconnect.service.implementation.AuthService
 import com.internconnect.service.specification.IAuthService
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.*
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -15,13 +16,13 @@ fun Route.authRoutes() {
 	val authService by inject<IAuthService>()
 	route("/login") {
 		post {
-			val loginUserDto = call.receive<LoginUserDto>()
-			val token = authService.login(loginUserDto)
-			if(token != null){
-				call.respond(token)
+			val dto = call.receive<LoginUserDto>()
+			val token = authService.login(dto)
+			if (token != null) {
+				call.respond(HttpStatusCode.OK, token)
 			}
-			else{
-				call.respond("Invalid credentials")
+			else {
+				call.respond(HttpStatusCode.Unauthorized, mapOf("error" to "invalid_credentials"))
 			}
 		}
 	}
@@ -44,14 +45,14 @@ fun Route.authRoutes() {
 		post {
 			val registerStudentDto = call.receive<RegisterStudentDto>()
 			authService.registerStudent(registerStudentDto)
-			call.respond("Registration successful")
+			call.respond(HttpStatusCode.OK, "Registration successful")
 		}
 	}
 	route("/register-company") {
 		post {
 			val registerCompanyDto = call.receive<RegisterCompanyDto>()
 			authService.registerCompany(registerCompanyDto)
-			call.respond("Registration successful")
+			call.respond(HttpStatusCode.OK, "Registration successful")
 		}
 	}
 
