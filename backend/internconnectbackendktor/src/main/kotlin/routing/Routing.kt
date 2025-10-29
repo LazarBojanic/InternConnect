@@ -7,6 +7,7 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
 	install(Resources)
+
 	routing {
 		route("/"){
 			get {

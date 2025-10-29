@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier
 import com.internconnect.auth.JwtConfig
 import com.internconnect.database.dbQuery
 import com.internconnect.dto.LoginUserDto
+import com.internconnect.dto.RefreshDto
 import com.internconnect.dto.Token
 import com.internconnect.dto.RegisterCompanyDto
 import com.internconnect.dto.RegisterStudentDto
@@ -14,6 +15,7 @@ import com.internconnect.model.student.Student
 import com.internconnect.model.user.User
 import com.internconnect.model.user.UserRole
 import com.internconnect.service.specification.*
+import io.ktor.server.auth.jwt.JWTPrincipal
 import org.mindrot.jbcrypt.BCrypt
 import java.security.MessageDigest
 import java.time.Instant
@@ -32,6 +34,7 @@ class AuthService(
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): User = dbQuery {
 		require(registerStudentDto.email.isNotBlank())
 		require(registerStudentDto.password.length >= 8)
+		require(registerStudentDto.password == registerStudentDto.confirmPassword) { "password_mismatch" }
 
 		val existing = userService.getByEmail(registerStudentDto.email)
 		require(existing == null) { "email_taken" }
@@ -116,7 +119,7 @@ class AuthService(
 		val createdRefreshToken = refreshTokenService.create(refreshTokenToCreate)
 			?: throw Exception("failed_to_login")
 
-		Token(refresh, access)
+		Token(access, refresh)
 	}
 	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User? = dbQuery {
 		require(registerCompanyDto.email.isNotBlank())
@@ -169,8 +172,16 @@ class AuthService(
 		createdUser
 	}
 
-	override suspend fun logout(user: User) {
-		TODO("Not yet implemented")
+	override suspend fun logoutCurrentSession(principal: JWTPrincipal) : Boolean {
+		val sid = principal.payload.getClaim("sid").asString()
+		if(!sid.isNullOrBlank()) {
+			refreshTokenService.revokeBySessionId(UUID.fromString(sid))
+			return true
+		}
+		return false
+	}
+	override suspend fun logoutAllSessions(userId: UUID) : Boolean{
+		return refreshTokenService.revokeAllForUser(userId) > 0
 	}
 
 	override fun issueAccess(
@@ -225,5 +236,44 @@ class AuthService(
 		return MessageDigest.getInstance("SHA-256")
 			.digest(input.toByteArray())
 			.fold("") { str, byte -> str + "%02x".format(byte) }
+	}
+
+	override suspend fun refresh(refreshDto: RefreshDto): Token? {
+		return dbQuery {
+			val decoded = JWT.decode(refreshDto.refresh)
+			require(decoded.getClaim("typ").asString() == "refresh") { "invalid_token_type" }
+
+			val refreshHash = sha256(refreshDto.refresh) ?: throw Exception("invalid_refresh")
+			val stored = refreshTokenService.findActiveByHash(refreshHash) ?: throw Exception("invalid_refresh")
+
+			require(decoded.subject == stored.userId.toString()) { "invalid_refresh" }
+			require(decoded.getClaim("sid").asString() == stored.sessionId.toString()) { "invalid_refresh" }
+
+			refreshTokenService.revokeById(stored.id)
+
+			val access = issueAccess(UUID.fromString(decoded.subject), decoded.getClaim("email").asString() ?: "", decoded.getClaim("userRole").asString() ?: "student", null, UUID.fromString(decoded.getClaim("sid").asString()))
+				?: throw Exception("failed_to_refresh")
+
+			val newRefresh = issueRefresh(UUID.fromString(decoded.subject), UUID.fromString(decoded.getClaim("sid").asString()))
+				?: throw Exception("failed_to_refresh")
+
+			val newParsed = JWT.decode(newRefresh)
+			val newHash = sha256(newRefresh) ?: throw Exception("failed_to_refresh")
+
+			refreshTokenService.create(
+				RefreshToken.createNew(
+					userId = UUID.fromString(decoded.subject),
+					sessionId = UUID.fromString(decoded.getClaim("sid").asString()),
+					hash = newHash,
+					issuedAt = newParsed.issuedAt.toInstant(),
+					expiresAt = newParsed.expiresAt.toInstant(),
+					revokedAt = null,
+					userAgent = refreshDto.userAgent,
+					ip = refreshDto.ip
+				)
+			) ?: throw Exception("failed_to_refresh")
+
+			Token(access, newRefresh)
+		}
 	}
 }
