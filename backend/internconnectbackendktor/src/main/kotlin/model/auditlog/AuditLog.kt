@@ -25,16 +25,21 @@ data class AuditLog(
 			userId: UUID,
 			action: String,
 			metadata: Metadata?,
-			ip: String?
+			ip: String?,
+			createdAt: Instant? = null,
+			updatedAt: Instant? = null
 		): AuditLog {
+			val now = Instant.now()
+			val createdAt = createdAt ?: now
+			val updatedAt = updatedAt ?: now
 			return AuditLog(
 				id = UUID.randomUUID(),
 				userId = userId,
 				action = action,
 				metadata = metadata,
 				ip = ip,
-				createdAt = Instant.now(),
-				updatedAt = Instant.now()
+				createdAt = createdAt,
+				updatedAt = updatedAt
 			)
 		}
 	}

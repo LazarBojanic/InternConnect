@@ -26,18 +26,22 @@ data class User(
 			email: String,
 			firstName: String,
 			lastName: String,
-			userRole: UserRole
+			userRole: UserRole,
+			createdAt: Instant? = null,
+			updatedAt: Instant? = null
 		): User {
 			val now = Instant.now()
+			val createdAt = createdAt ?: now
+			val updatedAt = updatedAt ?: now
 			return User(
 				id = UUID.randomUUID(),
 				email = email,
 				fullName = "$firstName $lastName",
 				userRole = userRole,
 				isEmailVerified = false,
-				userStatus = UserStatus.active,
-				createdAt = now,
-				updatedAt = now
+				userStatus = UserStatus.ACTIVE,
+				createdAt = createdAt,
+				updatedAt = updatedAt
 			)
 		}
 	}
@@ -45,9 +49,9 @@ data class User(
 
 
 enum class UserRole {
-	student, company, admin
+	STUDENT, COMPANY_MEMBER, ADMIN
 }
 
 enum class UserStatus {
-	active, suspended, deleted
+	ACTIVE, SUSPENDED, DELETED
 }

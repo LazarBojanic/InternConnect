@@ -20,14 +20,20 @@ data class PasswordAuth(
 			userId: UUID,
 			encryptedPassword: String,
 			encryptionAlgorithm: String,
+			passwordSetAt: Instant = Instant.now(),
+			createdAt: Instant? = null,
+			updatedAt: Instant? = null
 		): PasswordAuth {
+			val now = Instant.now()
+			val createdAt = createdAt ?: now
+			val updatedAt = updatedAt ?: now
 			return PasswordAuth(
 				userId = userId,
 				encryptedPassword = encryptedPassword,
 				encryptionAlgorithm = encryptionAlgorithm,
-				passwordSetAt = Instant.now(),
-				createdAt = Instant.now(),
-				updatedAt = Instant.now()
+				passwordSetAt = passwordSetAt,
+				createdAt = createdAt,
+				updatedAt = updatedAt
 			)
 		}
 	}

@@ -31,8 +31,13 @@ data class Student (
 			grade: Int,
 			bio: String?,
 			interests: String?,
-			avatarUrl: String?
+			avatarUrl: String?,
+			createdAt: Instant? = null,
+			updatedAt: Instant? = null
 		): Student{
+			val now = Instant.now()
+			val createdAt = createdAt ?: now
+			val updatedAt = updatedAt ?: now
 			return Student(
 				userId = userId,
 				firstName = firstName,
@@ -42,8 +47,8 @@ data class Student (
 				bio = bio,
 				interests = interests,
 				avatarUrl = avatarUrl,
-				createdAt = Instant.now(),
-				updatedAt = Instant.now()
+				createdAt = createdAt,
+				updatedAt = updatedAt
 			)
 		}
 	}

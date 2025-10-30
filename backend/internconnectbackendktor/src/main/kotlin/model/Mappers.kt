@@ -53,9 +53,9 @@ fun UserEntity.toDomain(): User = User(
 	id = this.id.value,
 	email = this.email,
 	fullName = this.fullName ?: "",
-	userRole = runCatching { UserRole.valueOf(this.role) }.getOrDefault(UserRole.student),
+	userRole = runCatching { UserRole.valueOf(this.role) }.getOrDefault(UserRole.STUDENT),
 	isEmailVerified = this.isEmailVerified,
-	userStatus = runCatching { this.status?.let { UserStatus.valueOf(it) } }.getOrNull() ?: UserStatus.active,
+	userStatus = runCatching { this.status?.let { UserStatus.valueOf(it) } }.getOrNull() ?: UserStatus.ACTIVE,
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt,
 )
@@ -128,7 +128,7 @@ fun CompanyInvitationEntity.setFrom(d: CompanyInvitation, mode: MapMode) {
 
 fun CompanyMemberEntity.toDomain(): CompanyMember = CompanyMember(
 	id = this.id.value,
-	companyID = this.companyID.value,
+	companyId = this.companyID.value,
 	userId = this.userId.value,
 	companyMemberRole = runCatching { CompanyMemberRole.valueOf(this.companyMemberRole) }
 		.getOrDefault(CompanyMemberRole.viewer),
@@ -140,7 +140,7 @@ fun CompanyMemberEntity.toDomain(): CompanyMember = CompanyMember(
 )
 
 fun CompanyMemberEntity.setFrom(d: CompanyMember, mode: MapMode) {
-	companyID = EntityID(d.companyID, CompanyTable)
+	companyID = EntityID(d.companyId, CompanyTable)
 	userId = EntityID(d.userId, UserTable)
 	companyMemberRole = d.companyMemberRole.name
 	companyMemberStatus = d.companyMemberStatus.name

@@ -12,7 +12,7 @@ import java.util.*
 
 interface IAuthService {
 	suspend fun registerStudent(registerStudentDto: RegisterStudentDto): User?
-	suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): User?
+	suspend fun registerCompanyMember(registerCompanyDto: RegisterCompanyDto): User?
 	suspend fun login(loginUserDto: LoginUserDto): Token?
 	suspend fun logoutCurrentSession(principal: JWTPrincipal): Boolean
 	suspend fun logoutAllSessions(userId: UUID): Boolean

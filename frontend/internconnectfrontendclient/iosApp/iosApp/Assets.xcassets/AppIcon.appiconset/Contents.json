@@ -1,10 +1,10 @@
 {
   "images": [
     {
-      "filename": "app-icon-1024.png",
+      "filename": "internconnect_logo.png",
       "idiom": "universal",
       "platform": "ios",
-      "size": "1024x1024"
+      "size": "512x512"
     },
     {
       "appearances": [
@@ -15,7 +15,7 @@
       ],
       "idiom": "universal",
       "platform": "ios",
-      "size": "1024x1024"
+      "size": "512x512"
     },
     {
       "appearances": [
@@ -26,11 +26,11 @@
       ],
       "idiom": "universal",
       "platform": "ios",
-      "size": "1024x1024"
+      "size": "512x512"
     }
   ],
   "info": {
-    "author": "xcode",
+    "author": "internconnect",
     "version": 1
   }
 }

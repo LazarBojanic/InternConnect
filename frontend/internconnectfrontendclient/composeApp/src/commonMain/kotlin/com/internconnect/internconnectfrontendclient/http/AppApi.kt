@@ -1,5 +1,6 @@
 package com.internconnect.internconnectfrontendclient.http
 
+import com.internconnect.internconnectfrontendclient.data.dto.StudentProfileDto
 import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
 import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyDto
 import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
@@ -19,21 +20,21 @@ class AppApi (
 ) : IAppApi{
 	private val client get() = appHttpClient.client
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String? {
-		val resp: HttpResponse = client.post("/register-student") {
+		val resp: HttpResponse = client.post("/auth/register-student") {
 			setBody(registerStudentDto)
 		}
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): String? {
-		val resp: HttpResponse = client.post("/register-company") {
+		val resp: HttpResponse = client.post("/auth/register-company") {
 			setBody(registerCompanyDto)
 		}
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun login(loginUserDto: LoginUserDto): Token? {
-		val resp: HttpResponse = client.post("/login") {
+		val resp: HttpResponse = client.post("/auth/login") {
 			setBody(loginUserDto)
 		}
 		return when (resp.status) {
@@ -58,9 +59,13 @@ class AppApi (
 		return resp.bodyOrNullAsText()
 	}
 
-	override suspend fun getUser(): String? {
-		val resp: HttpResponse = client.get("/users/me")
-		return resp.bodyOrNullAsText()
+	override suspend fun fetchStudent(userId: String): StudentProfileDto? {
+		val resp: HttpResponse = client.get("/users/student/$userId")
+		return when (resp.status) {
+			HttpStatusCode.OK -> resp.body<StudentProfileDto>()
+			else -> null
+		}
+
 	}
 
 	override suspend fun deleteUser(): String? {

@@ -37,10 +37,13 @@ class LoginUserViewModel(
 						token = token,
 					)
 					_uiState.value = UIState.LoggedIn(token)
-				} else {
+					appApi.fetchStudent()
+				}
+				else {
 					_uiState.value = UIState.Error("Invalid credentials or server error")
 				}
-			} catch (t: Throwable) {
+			}
+			catch (t: Throwable) {
 				_uiState.value = UIState.Error(t.message ?: "Login failed")
 			}
 		}

@@ -16,6 +16,10 @@ class CompanyService (
 		return companyRepository.findById(id)
 	}
 
+	override suspend fun getByName(name: String): Company? {
+		return companyRepository.findByName(name)
+	}
+
 	override suspend fun create(company: Company): Company? {
 		return companyRepository.create(company)
 	}

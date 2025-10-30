@@ -38,7 +38,12 @@ data class RefreshToken(
 			revokedAt: Instant?,
 			userAgent: String?,
 			ip: String?,
+			createdAt: Instant? = null,
+			updatedAt: Instant? = null
 		): RefreshToken {
+			val now = Instant.now()
+			val createdAt = createdAt ?: now
+			val updatedAt = updatedAt ?: now
 			return RefreshToken(
 				id = UUID.randomUUID(),
 				userId = userId,
@@ -49,8 +54,8 @@ data class RefreshToken(
 				revokedAt = revokedAt,
 				userAgent = userAgent,
 				ip = ip,
-				createdAt = Instant.now(),
-				updatedAt = Instant.now()
+				createdAt = createdAt,
+				updatedAt = updatedAt
 			)
 		}
 	}

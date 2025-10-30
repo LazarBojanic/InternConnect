@@ -2,17 +2,18 @@ package com.internconnect.internconnectfrontendclient.data.database
 
 import androidx.room.*
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.internconnect.internconnectfrontendclient.data.dao.OrganizationDao
-import com.internconnect.internconnectfrontendclient.data.model.Organization
+import com.internconnect.internconnectfrontendclient.data.dao.StudentDao
+import com.internconnect.internconnectfrontendclient.data.model.Company
+import com.internconnect.internconnectfrontendclient.data.model.Student
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 @Database(entities =
-	[Organization::class],
+	[Student::class, Company::class],
 	version = 1)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getOrganizationDao(): OrganizationDao
+    abstract fun getOrganizationDao(): StudentDao
 
 }
 

@@ -13,7 +13,8 @@ fun Application.configureDatabase() {
 	val databasePassword = environment.config.property("database.password").getString()
 	val databaseIP = environment.config.property("database.ip").getString()
 	val databasePort = environment.config.property("database.port").getString().toInt()
-	val databaseProperties = environment.config.property("database.properties").getString()
+	var databaseProperties = environment.config.property("database.properties").getString()
+	databaseProperties = ""
 	val databaseDialect = environment.config.property("database.dialect").getString()
 	val databaseDriver = environment.config.property("database.driver").getString()
 	val databaseUrl = String.format("jdbc:%s://%s/%s%s", databaseDialect, databaseIP, databaseName, databaseProperties)
