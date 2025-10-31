@@ -45,7 +45,9 @@ fun LoginScreen(
 
 	Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 		Column(
-			modifier = Modifier.padding(24.dp).fillMaxWidth(),
+			modifier = Modifier
+				/*.padding(24.dp)*/
+				.fillMaxWidth(),
 			verticalArrangement = Arrangement.spacedBy(12.dp)
 		) {
 			Text(text = "Login", style = MaterialTheme.typography.headlineSmall)

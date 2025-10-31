@@ -31,7 +31,7 @@ fun SecondaryButton(
 		modifier = Modifier
 			.fillMaxWidth()
 			.defaultMinSize(minHeight = 48.dp)
-			.padding(horizontal = 16.dp)
+			/*.padding(horizontal = 16.dp)*/
 			.then(modifier),
 	) {
 		Text(text)

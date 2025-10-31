@@ -32,8 +32,8 @@ fun HomeScreen(onOpenProfile: () -> Unit) {
 			modifier = Modifier
 				.fillMaxSize()
 				.background(colorScheme.secondaryContainer)
-				.padding(padding)
-				.padding(horizontal = 20.dp, vertical = 16.dp),
+				.padding(WindowInsets.safeDrawing.asPaddingValues())
+				/*.padding(horizontal = 20.dp, vertical = 16.dp)*/,
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
 			Surface(
