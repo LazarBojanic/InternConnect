@@ -3,7 +3,7 @@ ktor:
         modules:
             - com.internconnect.ApplicationKt.module
     deployment:
-        host: $KTOR_DEPLOYMENT_HOST:72.61.23.122
+        host: $KTOR_DEPLOYMENT_HOST:127.0.0.1
         port: $KTOR_DEPLOYMENT_PORT:8080
         rootPath: $KTOR_DEPLOYMENT_ROOT_PATH:/api
     development: true
