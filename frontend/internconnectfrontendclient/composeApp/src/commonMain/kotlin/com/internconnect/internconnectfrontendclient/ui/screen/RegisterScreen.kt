@@ -16,9 +16,7 @@ fun RegisterScreen(
 	var tabIndex by remember { mutableStateOf(0) }
 	val tabs = listOf("Student", "Company Member")
 
-	Column(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues())
-		/*.padding(16.dp)*/
-	) {
+	Column(Modifier.fillMaxSize().padding(16.dp)) {
 		Text(text = "Register", style = MaterialTheme.typography.headlineSmall)
 		Spacer(Modifier.height(8.dp))
 

@@ -1,11 +1,8 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -27,8 +24,7 @@ fun PrimaryButton(
 		modifier = Modifier
 			.fillMaxWidth()
 			.defaultMinSize(minHeight = 48.dp)
-			.padding(WindowInsets.safeDrawing.asPaddingValues())
-			/*.padding(horizontal = 16.dp)*/
+			.padding(horizontal = 16.dp)
 			.then(modifier),
 		colors = ButtonDefaults.buttonColors(
 			containerColor = MaterialTheme.colorScheme.primary,

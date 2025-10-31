@@ -77,11 +77,9 @@ fun ProfileScreen(onNavigateBack: () -> Unit) {
 		}
 	) { padding ->
 		when {
-			state.loading -> Box(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues())) { CircularProgressIndicator(Modifier.padding(WindowInsets.safeDrawing.asPaddingValues()).padding(24.dp)) }
-			state.error != null -> Box(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues()).padding(padding)) { Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error) }
-			else -> Box(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues()).padding(padding)
-				/*.padding(16.dp)*/
-			) {
+			state.loading -> Box(Modifier.fillMaxSize().padding(padding)) { CircularProgressIndicator(Modifier.padding(24.dp)) }
+			state.error != null -> Box(Modifier.fillMaxSize().padding(padding)) { Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error) }
+			else -> Box(Modifier.fillMaxSize().padding(padding).padding(16.dp)) {
 				when (state.role) {
 					"STUDENT" -> StudentProfileContent(state = state as ProfileUiState.StudentState)
 					"COMPANY_MEMBER" -> CompanyMemberProfileContent(state = state as ProfileUiState.CompanyMemberState)

@@ -43,8 +43,7 @@ fun Welcome(
 		Column(
 			modifier = Modifier
 				.fillMaxSize()
-				.padding(WindowInsets.safeDrawing.asPaddingValues())
-				/*.padding(horizontal = 24.dp)*/,
+				.padding(horizontal = 24.dp),
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
 			Spacer(Modifier.height(80.dp))
@@ -52,7 +51,7 @@ fun Welcome(
 			Image(
 				painter = logo,
 				contentDescription = "InternConnect logo",
-				modifier = Modifier.size(250.dp)
+				modifier = Modifier.size(500.dp)
 			)
 
 			Spacer(Modifier.height(20.dp))
