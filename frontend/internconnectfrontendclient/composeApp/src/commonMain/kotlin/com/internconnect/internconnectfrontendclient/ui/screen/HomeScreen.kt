@@ -19,64 +19,55 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.internconnect.internconnectfrontendclient.ui.components.ActionCard
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(onOpenProfile: () -> Unit) {
-
-	Scaffold(
-		topBar = {
-			CenterAlignedTopAppBar(title = { Text("InternConnect") })
-		}
-	) { padding ->
-		Column(
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.background(colorScheme.secondaryContainer)
+			.padding(horizontal = 20.dp, vertical = 16.dp),
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Surface(
 			modifier = Modifier
-				.fillMaxSize()
-				.background(colorScheme.secondaryContainer)
-				.padding(padding)
-				.padding(horizontal = 20.dp, vertical = 16.dp),
-			horizontalAlignment = Alignment.CenterHorizontally
+				.fillMaxWidth()
+				.height(180.dp)
+				.clip(RoundedCornerShape(24.dp)),
+			color = Color.White.copy(alpha = 0.12f)
 		) {
-			Surface(
-				modifier = Modifier
-					.fillMaxWidth()
-					.height(180.dp)
-					.clip(RoundedCornerShape(24.dp)),
-				color = Color.White.copy(alpha = 0.12f)
-			) {
-				Box(Modifier.fillMaxSize()) {
+			Box(Modifier.fillMaxSize()) {
 
-					Text(
-						text = "Welcome to InternConnect",
-						modifier = Modifier.align(Alignment.Center),
-						color = Color.White,
-						fontSize = 22.sp,
-						fontWeight = FontWeight.SemiBold,
-						textAlign = TextAlign.Center
-					)
-				}
-			}
-
-			Spacer(Modifier.height(24.dp))
-
-			Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-				ActionCard(
-					title = "Profile",
-					description = "View your profile information",
-					onClick = onOpenProfile
-				)
-
-				ActionCard(
-					title = "Browse",
-					description = "Explore internships and companies",
-					onClick = { /* TODO (future) */ }
-				)
-
-				ActionCard(
-					title = "Messages",
-					description = "Connect and chat",
-					onClick = { /* TODO (future) */ }
+				Text(
+					text = "Welcome to InternConnect",
+					modifier = Modifier.align(Alignment.Center),
+					color = Color.White,
+					fontSize = 22.sp,
+					fontWeight = FontWeight.SemiBold,
+					textAlign = TextAlign.Center
 				)
 			}
+		}
+
+		Spacer(Modifier.height(24.dp))
+
+		Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+			ActionCard(
+				title = "Profile",
+				description = "View your profile information",
+				onClick = onOpenProfile
+			)
+
+			ActionCard(
+				title = "Browse",
+				description = "Explore internships and companies",
+				onClick = { /* TODO (future) */ }
+			)
+
+			ActionCard(
+				title = "Messages",
+				description = "Connect and chat",
+				onClick = { /* TODO (future) */ }
+			)
 		}
 	}
 }
