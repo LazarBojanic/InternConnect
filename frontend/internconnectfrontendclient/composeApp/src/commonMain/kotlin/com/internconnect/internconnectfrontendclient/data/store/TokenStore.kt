@@ -4,7 +4,7 @@ import com.internconnect.internconnectfrontendclient.dto.Token
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class InMemoryTokenStore : ITokenStore {
+class TokenStore : ITokenStore {
 	private val _token = MutableStateFlow<Token?>(null)
 	override val token: StateFlow<Token?> = _token
 

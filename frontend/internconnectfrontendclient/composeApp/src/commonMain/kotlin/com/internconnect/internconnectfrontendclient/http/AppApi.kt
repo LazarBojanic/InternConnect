@@ -1,11 +1,11 @@
 package com.internconnect.internconnectfrontendclient.http
 
+import com.internconnect.internconnectfrontendclient.data.dto.CompanyMemberProfileDto
 import com.internconnect.internconnectfrontendclient.data.dto.StudentProfileDto
 import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
-import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyDto
+import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyMemberDto
 import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
 import com.internconnect.internconnectfrontendclient.dto.Token
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -13,7 +13,6 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.parameters
 
 class AppApi (
 	private val appHttpClient: AppHttpClient,
@@ -26,9 +25,9 @@ class AppApi (
 		return resp.bodyOrNullAsText()
 	}
 
-	override suspend fun registerCompany(registerCompanyDto: RegisterCompanyDto): String? {
-		val resp: HttpResponse = client.post("/auth/register-company") {
-			setBody(registerCompanyDto)
+	override suspend fun registerCompanyMember(registerCompanyMemberDto: RegisterCompanyMemberDto): String? {
+		val resp: HttpResponse = client.post("/auth/register-company-member") {
+			setBody(registerCompanyMemberDto)
 		}
 		return resp.bodyOrNullAsText()
 	}
@@ -59,13 +58,20 @@ class AppApi (
 		return resp.bodyOrNullAsText()
 	}
 
-	override suspend fun fetchStudent(userId: String): StudentProfileDto? {
-		val resp: HttpResponse = client.get("/users/student/$userId")
+	override suspend fun fetchStudentProfileById(userId: String): StudentProfileDto? {
+		val resp: HttpResponse = client.get("/student/me/$userId")
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<StudentProfileDto>()
 			else -> null
 		}
+	}
 
+	override suspend fun fetchCompanyMemberProfileById(userId: String): CompanyMemberProfileDto? {
+		val resp: HttpResponse = client.get("/company-member/me/$userId")
+		return when (resp.status) {
+			HttpStatusCode.OK -> resp.body<CompanyMemberProfileDto>()
+			else -> null
+		}
 	}
 
 	override suspend fun deleteUser(): String? {

@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
 import com.internconnect.internconnectfrontendclient.ui.screen.HomeScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.ProfileScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.Welcome
 
@@ -36,14 +37,15 @@ fun App() {
 			composable("register") {
 				RegisterScreen(
 					onSuccess = {
-						navController.navigate("home") {
+						navController.navigate("login") {
 							popUpTo("welcome") { inclusive = true }
 						}
 					},
 					onNavigateBack = { navController.popBackStack() }
 				)
 			}
-			composable("home") { HomeScreen() }
+			composable("home") { HomeScreen(onOpenProfile = { navController.navigate("profile") }) }
+			composable("profile") { ProfileScreen(onNavigateBack = { navController.popBackStack() }) }
 		}
 	}
 }

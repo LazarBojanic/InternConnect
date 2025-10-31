@@ -3,7 +3,7 @@ package com.internconnect.internconnectfrontendclient.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterCompanyDto(
+data class RegisterCompanyMemberDto(
 	val email: String,
 	val password: String,
 	val confirmPassword: String,

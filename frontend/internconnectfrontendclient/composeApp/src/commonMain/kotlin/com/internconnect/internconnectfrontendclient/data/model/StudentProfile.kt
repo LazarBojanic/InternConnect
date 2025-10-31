@@ -4,24 +4,26 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "student")
-data class Student (
+@Entity(tableName = "student_profile")
+data class StudentProfile (
 	@PrimaryKey(autoGenerate = false)
 	val userId: String,
 	@ColumnInfo(name = "email")
 	val email: String,
-	@ColumnInfo(name = "firstName")
+	@ColumnInfo(name = "first_name")
 	val firstName: String,
-	@ColumnInfo(name = "schoolName")
+	@ColumnInfo(name = "last_name")
 	val lastName: String,
 	@ColumnInfo(name = "fullName")
 	val fullName: String,
 	@ColumnInfo(name = "userRole")
 	val userRole: String,
 	@ColumnInfo(name = "isEmailVerified")
-	val isEmailVerified: String,
+	val isEmailVerified: Boolean,
 	@ColumnInfo(name = "userStatus")
 	val userStatus: String,
+	@ColumnInfo(name = "school_name")
+	val schoolName: String,
 	@ColumnInfo(name = "grade")
 	val grade: Int,
 	@ColumnInfo(name = "bio")

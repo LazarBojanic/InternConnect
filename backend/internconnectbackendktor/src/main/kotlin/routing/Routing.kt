@@ -19,6 +19,7 @@ fun Application.configureRouting() {
 		emailVerificationRoutes()
 		oAuthAccountRoutes()
 		companyInvitationRoutes()
+		studentRoutes()
 		companyMemberRoutes()
 		companyRoutes()
 		passwordResetRoutes()

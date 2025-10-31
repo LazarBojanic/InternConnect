@@ -64,12 +64,13 @@ kotlin {
             implementation(libs.coilCompose)
             implementation(libs.coilNetworkKtor)
 
-	        implementation(libs.roomKtx)
 	        implementation(libs.roomRuntime)
             implementation(libs.sqliteBundled)
 
 	        implementation(libs.ktorClientContentNegotiation)
 	        implementation(libs.ktorClientLogging)
+
+	        implementation(libs.oAuthJavaJwt)
 
         }
         androidMain.dependencies {

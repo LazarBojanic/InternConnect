@@ -1,19 +1,17 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.domain.RegisterCompanyViewModel
-import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyDto
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterCompanyMemberViewModel
+import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyMemberDto
 import org.koin.compose.koinInject
 
 @Composable
 fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
-	val vm: RegisterCompanyViewModel = koinInject()
+	val vm: RegisterCompanyMemberViewModel = koinInject()
 	val state by vm.uiState.collectAsState()
 
 	var email by remember { mutableStateOf("") }
@@ -24,7 +22,7 @@ fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 
 	fun submit() {
 		vm.register(
-			RegisterCompanyDto(
+			RegisterCompanyMemberDto(
 				email = email.trim(),
 				password = password.trim(),
 				confirmPassword = confirmPassword.trim(),
@@ -35,7 +33,7 @@ fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	}
 
 	LaunchedEffect(state) {
-		if (state is RegisterCompanyViewModel.UIState.Registered) onSuccess()
+		if (state is RegisterCompanyMemberViewModel.UiState.Success) onSuccess()
 	}
 
 	Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -47,12 +45,12 @@ fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 		Spacer(Modifier.height(12.dp))
 
 
-		val loading = state is RegisterCompanyViewModel.UIState.Loading
+		val loading = state is RegisterCompanyMemberViewModel.UiState.Loading
 		Button(onClick = { submit() }, enabled = !loading, modifier = Modifier.fillMaxWidth()) {
-			Text(if (loading) "Registering…" else "Register as Company")
+			Text(if (loading) "Registering…" else "Register as Company Member")
 		}
-		if (state is RegisterCompanyViewModel.UIState.Error) {
-			val msg = (state as RegisterCompanyViewModel.UIState.Error).message
+		if (state is RegisterCompanyMemberViewModel.UiState.Error) {
+			val msg = (state as RegisterCompanyMemberViewModel.UiState.Error).message
 			Text(msg, color = MaterialTheme.colorScheme.error)
 		}
 		TextButton(onClick = onBack) { Text("Back") }

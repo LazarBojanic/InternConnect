@@ -1,5 +1,6 @@
 package com.internconnect.internconnectfrontendclient.data.dto
 
+import com.internconnect.internconnectfrontendclient.data.model.StudentProfile
 import kotlinx.serialization.Serializable
 
 @Serializable

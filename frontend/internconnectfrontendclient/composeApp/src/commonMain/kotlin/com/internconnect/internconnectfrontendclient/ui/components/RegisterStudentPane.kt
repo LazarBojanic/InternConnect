@@ -1,13 +1,11 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.domain.RegisterStudentViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterStudentViewModel
 import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
 import org.koin.compose.koinInject
 
@@ -40,7 +38,7 @@ fun RegisterStudentPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	}
 
 	LaunchedEffect(state) {
-		if (state is RegisterStudentViewModel.UIState.Registered) onSuccess()
+		if (state is RegisterStudentViewModel.UiState.Success) onSuccess()
 	}
 
 	Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -53,12 +51,12 @@ fun RegisterStudentPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 		Slider(value = grade.toFloat(), onValueChange = { grade = it.toInt() }, valueRange = 1f..12f, steps = 11, modifier = Modifier.fillMaxWidth())
 		Spacer(Modifier.height(12.dp))
 
-		val loading = state is RegisterStudentViewModel.UIState.Loading
+		val loading = state is RegisterStudentViewModel.UiState.Loading
 		Button(onClick = { submit() }, enabled = !loading, modifier = Modifier.fillMaxWidth()) {
 			Text(if (loading) "Registering…" else "Register as Student")
 		}
-		if (state is RegisterStudentViewModel.UIState.Error) {
-			val msg = (state as RegisterStudentViewModel.UIState.Error).message
+		if (state is RegisterStudentViewModel.UiState.Error) {
+			val msg = (state as RegisterStudentViewModel.UiState.Error).message
 			Text(msg, color = MaterialTheme.colorScheme.error)
 		}
 		TextButton(onClick = onBack) { Text("Back") }

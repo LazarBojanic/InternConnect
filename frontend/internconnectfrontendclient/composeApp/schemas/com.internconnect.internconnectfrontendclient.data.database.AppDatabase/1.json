@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "364b2b28662f224a7fbd0e1294dc98ac",
+    "identityHash": "b081add7f3f03f875ddac92947b7f0c9",
     "entities": [
       {
-        "tableName": "student",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `email` TEXT NOT NULL, `firstName` TEXT NOT NULL, `schoolName` TEXT NOT NULL, `fullName` TEXT NOT NULL, `userRole` TEXT NOT NULL, `isEmailVerified` TEXT NOT NULL, `userStatus` TEXT NOT NULL, `grade` INTEGER NOT NULL, `bio` TEXT, `interests` TEXT, `avatarUrl` TEXT, PRIMARY KEY(`userId`))",
+        "tableName": "student_profile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `email` TEXT NOT NULL, `first_name` TEXT NOT NULL, `last_name` TEXT NOT NULL, `fullName` TEXT NOT NULL, `userRole` TEXT NOT NULL, `isEmailVerified` INTEGER NOT NULL, `userStatus` TEXT NOT NULL, `school_name` TEXT NOT NULL, `grade` INTEGER NOT NULL, `bio` TEXT, `interests` TEXT, `avatarUrl` TEXT, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -22,13 +22,13 @@
           },
           {
             "fieldPath": "firstName",
-            "columnName": "firstName",
+            "columnName": "first_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "lastName",
-            "columnName": "schoolName",
+            "columnName": "last_name",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -47,12 +47,18 @@
           {
             "fieldPath": "isEmailVerified",
             "columnName": "isEmailVerified",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "userStatus",
             "columnName": "userStatus",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "schoolName",
+            "columnName": "school_name",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -86,24 +92,66 @@
         }
       },
       {
-        "tableName": "company",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `industry` TEXT NOT NULL, `website` TEXT, `logo_url` TEXT, `hq_country` TEXT, `city` TEXT, `about` TEXT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "tableName": "company_member_profile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `user_email` TEXT NOT NULL, `name` TEXT NOT NULL, `industry` TEXT NOT NULL, `is_email_verified` INTEGER NOT NULL, `user_status` TEXT NOT NULL, `company_name` TEXT NOT NULL, `company_industry` TEXT NOT NULL, `company_size` TEXT NOT NULL, `company_status` TEXT NOT NULL, `website` TEXT, `logo_url` TEXT, `hq_country` TEXT, `city` TEXT, `about` TEXT, PRIMARY KEY(`userId`))",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "userId",
+            "columnName": "userId",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "name",
+            "fieldPath": "userEmail",
+            "columnName": "user_email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userFullName",
             "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "industry",
+            "fieldPath": "userRole",
             "columnName": "industry",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEmailVerified",
+            "columnName": "is_email_verified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userStatus",
+            "columnName": "user_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyName",
+            "columnName": "company_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyIndustry",
+            "columnName": "company_industry",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyMemberRole",
+            "columnName": "company_size",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyMemberStatus",
+            "columnName": "company_status",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -131,31 +179,19 @@
             "fieldPath": "about",
             "columnName": "about",
             "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "createdAt",
-            "columnName": "created_at",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "updatedAt",
-            "columnName": "updated_at",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "id"
+            "userId"
           ]
         }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '364b2b28662f224a7fbd0e1294dc98ac')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b081add7f3f03f875ddac92947b7f0c9')"
     ]
   }
 }

@@ -1,1 +1,3 @@
-fun MainViewController() = ComposeUIViewController { App() }
+fun MainViewController() = ComposeUIViewController {
+	App()
+}

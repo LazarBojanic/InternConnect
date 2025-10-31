@@ -1,19 +1,13 @@
 package com.internconnect.internconnectfrontendclient.ui.screen
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.domain.LoginUserViewModel
-import com.internconnect.internconnectfrontendclient.domain.RegisterCompanyViewModel
-import com.internconnect.internconnectfrontendclient.domain.RegisterStudentViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel
 import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
-import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyDto
-import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
 import com.internconnect.internconnectfrontendclient.ui.components.AppTextField
 import com.internconnect.internconnectfrontendclient.ui.components.PasswordTextField
 import org.koin.compose.koinInject
@@ -42,8 +36,10 @@ fun LoginScreen(
 	}
 
 	LaunchedEffect(state) {
-		if (state is LoginUserViewModel.UIState.LoggedIn) {
-			onSuccess()
+		when (val s = state) {
+			is LoginUserViewModel.LoginUiState.LoggedInStudent -> onSuccess()
+			is LoginUserViewModel.LoginUiState.LoggedInCompany -> onSuccess()
+			else -> Unit
 		}
 	}
 
@@ -61,15 +57,15 @@ fun LoginScreen(
 				modifier = Modifier.fillMaxWidth()
 			)
 			PasswordTextField(password, {password = it}, label = "Password", modifier = Modifier.fillMaxWidth())
-			val loading = state is LoginUserViewModel.UIState.Loading
+			val loading = state is LoginUserViewModel.LoginUiState.Loading
 			Button(
 				onClick = { submit() },
 				enabled = !loading,
 				modifier = Modifier.fillMaxWidth()
 			) { Text(if (loading) "Logging in…" else "Login") }
 
-			if (state is LoginUserViewModel.UIState.Error) {
-				val msg = (state as LoginUserViewModel.UIState.Error).message
+			if (state is LoginUserViewModel.LoginUiState.Error) {
+				val msg = (state as LoginUserViewModel.LoginUiState.Error).message
 				Text(text = msg, color = MaterialTheme.colorScheme.error)
 			}
 
