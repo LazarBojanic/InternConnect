@@ -22,24 +22,21 @@ fun Application.configureHTTP() {
 		allowMethod(HttpMethod.Post)
 		allowMethod(HttpMethod.Get)
 		allowHeader(HttpHeaders.Authorization)
+		anyHost()
 	}
-	install(ForwardedHeaders)
+	/*install(ForwardedHeaders)
 	install(XForwardedHeaders)
 
 	install(CallLogging){
 		mdc("rid") {
 			call -> call.callId
 		}
-
 		level = Level.INFO
-
 		format { call ->
-
 			val rid = call.callId
-
 			"${call.request.httpMethod.value} ${call.request.uri} rid=$rid ua=${call.request.headers["User-Agent"]}"
 		}
-	}
+	}*/
 	install(DefaultHeaders) {
 		header("X-Engine", "Ktor")
 	}

@@ -8,7 +8,7 @@ class AndroidApp : Application() {
 	override fun onCreate() {
 		super.onCreate()
 		initKoin(
-			baseUrl = "http://10.0.2.2:8800/api",
+			baseUrl = "http://10.0.2.2:8080/api",
 			androidModule(this)
 		)
 	}
