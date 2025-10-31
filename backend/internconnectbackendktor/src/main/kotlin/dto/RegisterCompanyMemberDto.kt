@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RegisterCompanyMemberDto(
 	val userEmail: String,
-	val companyEmail: String,
 	val userFirstName: String,
 	val userLastName: String,
 	val password: String,

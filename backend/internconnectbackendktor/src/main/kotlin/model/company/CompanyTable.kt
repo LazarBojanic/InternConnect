@@ -12,6 +12,7 @@ object CompanyTable : UUIDTable(name = "company") {
 	val hqCountry = varchar("hq_country", length = 255).nullable()
 	val city = varchar("city", length = 255).nullable()
 	val about = text("about").nullable()
+
 	val createdAt = timestamp("created_at").default(Instant.now())
 	val updatedAt = timestamp("updated_at").default(Instant.now())
 }

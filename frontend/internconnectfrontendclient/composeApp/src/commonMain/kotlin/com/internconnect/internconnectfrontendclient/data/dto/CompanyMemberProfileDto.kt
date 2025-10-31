@@ -16,6 +16,7 @@ data class CompanyMemberProfileDto(
 	val companyIndustry: String,
 	val companyMemberRole: String,
 	val companyMemberStatus: String,
+	val joinedAt: String?,
 	val website: String?,
 	val logoUrl: String?,
 	val hqCountry: String?,

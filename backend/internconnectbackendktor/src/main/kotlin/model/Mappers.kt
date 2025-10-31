@@ -127,9 +127,8 @@ fun CompanyInvitationEntity.setFrom(d: CompanyInvitation, mode: MapMode) {
 }
 
 fun CompanyMemberEntity.toDomain(): CompanyMember = CompanyMember(
-	id = this.id.value,
-	companyId = this.companyID.value,
 	userId = this.userId.value,
+	companyId = this.companyID.value,
 	companyMemberRole = runCatching { CompanyMemberRole.valueOf(this.companyMemberRole) }
 		.getOrDefault(CompanyMemberRole.viewer),
 	companyMemberStatus = runCatching { CompanyMemberStatus.valueOf(this.companyMemberStatus) }

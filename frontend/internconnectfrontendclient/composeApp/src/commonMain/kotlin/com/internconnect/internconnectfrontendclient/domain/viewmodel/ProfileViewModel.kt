@@ -25,14 +25,14 @@ class ProfileViewModel(
 		scope.launch {
 			try {
 				val cachedStudentProfile = userRepository.getCurrentStudentProfile()
-				val cachedCompanyProfile = userRepository.getCurrentCompanyMemberProfile()
+				val cachedCompanyMemberProfile = userRepository.getCurrentCompanyMemberProfile()
 
 				if (cachedStudentProfile != null) {
 					_uiState.value = ProfileUiState.StudentState(loading = false, data = cachedStudentProfile)
 					return@launch
 				}
-				if (cachedCompanyProfile != null) {
-					_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = cachedCompanyProfile)
+				if (cachedCompanyMemberProfile != null) {
+					_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = cachedCompanyMemberProfile)
 					return@launch
 				}
 

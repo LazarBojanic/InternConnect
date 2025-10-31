@@ -12,8 +12,8 @@ class CompanyMemberService (
 		return companyMemberRepository.findAll()
 	}
 
-	override suspend fun getById(id: UUID): CompanyMember? {
-		return companyMemberRepository.findById(id)
+	override suspend fun getByUserId(userId: UUID): CompanyMember? {
+		return companyMemberRepository.findByUserId(userId)
 	}
 
 	override suspend fun create(companyMember: CompanyMember): CompanyMember? {

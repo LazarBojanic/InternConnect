@@ -51,7 +51,7 @@ class AuthService(
 
 		val sessionId = UUID.randomUUID()
 
-		val companyMember = companyMemberService.getById(user.id)
+		val companyMember = companyMemberService.getByUserId(user.id)
 		var company: Company? = null
 		var companyId: UUID? = null
 		if (companyMember != null) {
@@ -144,7 +144,6 @@ class AuthService(
 	override suspend fun registerCompanyMember(registerCompanyMemberDto: RegisterCompanyMemberDto): User? = dbQuery {
 		val now = Instant.now()
 		require(registerCompanyMemberDto.userEmail.isNotBlank())
-		require(registerCompanyMemberDto.companyEmail.isNotBlank())
 		require(registerCompanyMemberDto.password.length >= 8)
 		require(registerCompanyMemberDto.password == registerCompanyMemberDto.confirmPassword) { "password_mismatch" }
 		require(registerCompanyMemberDto.companyName.isNotBlank())
@@ -174,7 +173,6 @@ class AuthService(
 
 		passwordAuthService.create(passwordAuthToCreate)
 			?: throw Exception("failed_to_register")
-
 
 		val existingCompany = companyService.getByName(registerCompanyMemberDto.companyName)
 		require(existingCompany == null) { "company_name_taken" }

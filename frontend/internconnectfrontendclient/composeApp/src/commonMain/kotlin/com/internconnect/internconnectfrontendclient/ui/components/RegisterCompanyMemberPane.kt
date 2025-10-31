@@ -10,24 +10,28 @@ import com.internconnect.internconnectfrontendclient.data.dto.RegisterCompanyMem
 import org.koin.compose.koinInject
 
 @Composable
-fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
+fun RegisterCompanyMemberPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	val vm: RegisterCompanyMemberViewModel = koinInject()
 	val state by vm.uiState.collectAsState()
 
-	var email by remember { mutableStateOf("") }
+	var userEmail by remember { mutableStateOf("") }
+	var userFirstName by remember { mutableStateOf("") }
+	var userLastName by remember { mutableStateOf("") }
 	var password by remember { mutableStateOf("") }
 	var confirmPassword by remember { mutableStateOf("") }
-	var name by remember { mutableStateOf("") }
-	var industry by remember { mutableStateOf("") }
+	var companyName by remember { mutableStateOf("") }
+	var companyIndustry by remember { mutableStateOf("") }
 
 	fun submit() {
 		vm.register(
 			RegisterCompanyMemberDto(
-				email = email.trim(),
+				userEmail = userEmail.trim(),
+				userFirstName = userFirstName.trim(),
+				userLastName = userLastName.trim(),
 				password = password.trim(),
 				confirmPassword = confirmPassword.trim(),
-				name = name.trim(),
-				industry = industry.trim(),
+				companyName = companyName.trim(),
+				companyIndustry = companyIndustry.trim()
 			)
 		)
 	}
@@ -37,11 +41,13 @@ fun RegisterCompanyPane(onSuccess: () -> Unit, onBack: () -> Unit) {
 	}
 
 	Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-		AppTextField(email, { email = it }, label = "Email", modifier = Modifier.fillMaxWidth())
+		AppTextField(userEmail, { userEmail = it }, label = "User Email", modifier = Modifier.fillMaxWidth())
 		PasswordTextField(password, {password = it}, label = "Password", modifier = Modifier.fillMaxWidth())
 		PasswordTextField(confirmPassword, {confirmPassword = it}, label = "Confirm Password", modifier = Modifier.fillMaxWidth())
-		AppTextField(name, { name = it }, label = "Name", modifier = Modifier.fillMaxWidth())
-		AppTextField(industry, { industry = it }, label = "Industry", modifier = Modifier.fillMaxWidth())
+		AppTextField(userFirstName, { userFirstName = it }, label = "User First Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(userLastName, { userLastName = it }, label = "User Last Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(companyName, { companyName = it }, label = "Company Name", modifier = Modifier.fillMaxWidth())
+		AppTextField(companyIndustry, { companyIndustry = it }, label = "Company Industry", modifier = Modifier.fillMaxWidth())
 		Spacer(Modifier.height(12.dp))
 
 

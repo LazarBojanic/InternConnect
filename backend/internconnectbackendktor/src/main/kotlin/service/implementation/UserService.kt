@@ -53,10 +53,10 @@ class UserService (
 		return studentProfileDto
 	}
 
-	override suspend fun getCompanyMemberProfileById(userId: UUID): CompanyMemberProfileDto? {
+	override suspend fun getCompanyMemberProfileByUserId(userId: UUID): CompanyMemberProfileDto? {
 		val user = userRepository.findById(userId)
 
-		val companyMember = companyMemberRepository.findById(userId)
+		val companyMember = companyMemberRepository.findByUserId(userId)
 
 		var companyMemberProfileDto: CompanyMemberProfileDto? = null
 
@@ -75,7 +75,12 @@ class UserService (
 					companyIndustry = company.industry,
 					companyMemberRole = companyMember.companyMemberRole.name,
 					companyMemberStatus = companyMember.companyMemberStatus.name,
-					joinedAt = companyMember.joinedAt.toString()
+					joinedAt = companyMember.joinedAt.toString(),
+					website = company.website,
+					logoUrl = company.logoUrl,
+					hqCountry = company.hqCountry,
+					city = company.city,
+					about = company.about
 				)
 			}
 		}

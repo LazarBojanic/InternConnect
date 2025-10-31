@@ -38,7 +38,7 @@ fun LoginScreen(
 	LaunchedEffect(state) {
 		when (val s = state) {
 			is LoginUserViewModel.LoginUiState.LoggedInStudent -> onSuccess()
-			is LoginUserViewModel.LoginUiState.LoggedInCompany -> onSuccess()
+			is LoginUserViewModel.LoginUiState.LoggedInCompanyMember -> onSuccess()
 			else -> Unit
 		}
 	}

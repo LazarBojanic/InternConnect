@@ -4,8 +4,6 @@ import com.internconnect.dto.CompanyMemberProfileDto
 import com.internconnect.service.specification.IUserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.authenticate
-import io.ktor.server.auth.jwt.JWTPrincipal
-import io.ktor.server.auth.principal
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
@@ -17,7 +15,7 @@ fun Route.companyMemberRoutes() {
 		route("/company-member/me/{userId}") {
 			get{
 				val userId = call.parameters["userId"] ?: return@get call.respond(HttpStatusCode.BadRequest)
-				val companyProfileDto: CompanyMemberProfileDto? = userService.getCompanyMemberProfileById(UUID.fromString(userId))
+				val companyProfileDto: CompanyMemberProfileDto? = userService.getCompanyMemberProfileByUserId(UUID.fromString(userId))
 				if (companyProfileDto != null) {
 					call.respond(HttpStatusCode.OK, companyProfileDto)
 				}

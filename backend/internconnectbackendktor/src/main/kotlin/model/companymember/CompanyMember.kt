@@ -7,18 +7,15 @@ import java.time.Instant
 import java.util.*
 
 @Serializable
-//TODO composite PK
 data class CompanyMember(
 	@Serializable(with = UUIDSerializer::class)
-	val id: UUID,
+	val userId: UUID,
 	@Serializable(with = UUIDSerializer::class)
 	val companyId: UUID,
-	@Serializable(with = UUIDSerializer::class)
-	val userId: UUID,
 	val companyMemberRole: CompanyMemberRole,
 	val companyMemberStatus: CompanyMemberStatus,
 	@Serializable(with = InstantSerializer::class)
-	val joinedAt: Instant,
+	val joinedAt: Instant?,
 	@Serializable(with = InstantSerializer::class)
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
@@ -39,7 +36,6 @@ data class CompanyMember(
 			val createdAt = createdAt ?: now
 			val updatedAt = updatedAt ?: now
 			return CompanyMember(
-				id = UUID.randomUUID(),
 				companyId = companyId,
 				userId = userId,
 				companyMemberRole = companyMemberRole,

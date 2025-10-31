@@ -35,7 +35,21 @@ private fun StudentProfileContent(state: ProfileUiState.StudentState) {
 @Composable
 private fun CompanyMemberProfileContent(state: ProfileUiState.CompanyMemberState) {
 	Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-
+		Text("Company Member", style = MaterialTheme.typography.titleMedium)
+		Text("Full name: ${state.data?.userFullName}")
+		Text("Email: ${state.data?.userEmail}")
+		Text("User role: ${state.data?.userRole}")
+		Text("Is email verified: ${state.data?.isEmailVerified}")
+		Text("User Status: ${state.data?.userStatus}")
+		Text("Company Industry: ${state.data?.companyIndustry}")
+		Text("Company Member Role: ${state.data?.companyMemberRole}")
+		Text("Company Member Status: ${state.data?.companyMemberStatus}")
+		Text("Joined At: ${state.data?.joinedAt}")
+		Text("Website: ${state.data?.website}")
+		Text("Logo URL: ${state.data?.logoUrl}")
+		Text("HQ Country: ${state.data?.hqCountry}")
+		Text("City: ${state.data?.city}")
+		Text("About: ${state.data?.about}")
 	}
 }
 

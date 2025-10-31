@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b081add7f3f03f875ddac92947b7f0c9",
+    "identityHash": "a163e7609d9bf432258e0d9a88687c79",
     "entities": [
       {
         "tableName": "student_profile",
@@ -93,7 +93,7 @@
       },
       {
         "tableName": "company_member_profile",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `user_email` TEXT NOT NULL, `name` TEXT NOT NULL, `industry` TEXT NOT NULL, `is_email_verified` INTEGER NOT NULL, `user_status` TEXT NOT NULL, `company_name` TEXT NOT NULL, `company_industry` TEXT NOT NULL, `company_size` TEXT NOT NULL, `company_status` TEXT NOT NULL, `website` TEXT, `logo_url` TEXT, `hq_country` TEXT, `city` TEXT, `about` TEXT, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `user_email` TEXT NOT NULL, `user_full_name` TEXT NOT NULL, `user_role` TEXT NOT NULL, `is_email_verified` INTEGER NOT NULL, `user_status` TEXT NOT NULL, `joined_at` TEXT, `company_name` TEXT NOT NULL, `company_industry` TEXT NOT NULL, `company_member_role` TEXT NOT NULL, `company_member_status` TEXT NOT NULL, `website` TEXT, `logo_url` TEXT, `hq_country` TEXT, `city` TEXT, `about` TEXT, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -109,13 +109,13 @@
           },
           {
             "fieldPath": "userFullName",
-            "columnName": "name",
+            "columnName": "user_full_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "userRole",
-            "columnName": "industry",
+            "columnName": "user_role",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -132,6 +132,11 @@
             "notNull": true
           },
           {
+            "fieldPath": "joinedAt",
+            "columnName": "joined_at",
+            "affinity": "TEXT"
+          },
+          {
             "fieldPath": "companyName",
             "columnName": "company_name",
             "affinity": "TEXT",
@@ -145,13 +150,13 @@
           },
           {
             "fieldPath": "companyMemberRole",
-            "columnName": "company_size",
+            "columnName": "company_member_role",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "companyMemberStatus",
-            "columnName": "company_status",
+            "columnName": "company_member_status",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -191,7 +196,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b081add7f3f03f875ddac92947b7f0c9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a163e7609d9bf432258e0d9a88687c79')"
     ]
   }
 }

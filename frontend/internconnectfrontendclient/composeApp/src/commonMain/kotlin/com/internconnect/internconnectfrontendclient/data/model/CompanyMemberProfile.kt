@@ -10,21 +10,23 @@ data class CompanyMemberProfile (
 	val userId: String,
 	@ColumnInfo(name = "user_email")
 	val userEmail: String,
-	@ColumnInfo(name = "name")
+	@ColumnInfo(name = "user_full_name")
 	val userFullName: String,
-	@ColumnInfo(name = "industry")
+	@ColumnInfo(name = "user_role")
 	val userRole: String,
 	@ColumnInfo(name = "is_email_verified")
 	val isEmailVerified: Boolean,
 	@ColumnInfo(name = "user_status")
 	val userStatus: String,
+	@ColumnInfo(name = "joined_at")
+	val joinedAt: String?,
 	@ColumnInfo(name = "company_name")
 	val companyName: String,
 	@ColumnInfo(name = "company_industry")
 	val companyIndustry: String,
-	@ColumnInfo(name = "company_size")
+	@ColumnInfo(name = "company_member_role")
 	val companyMemberRole: String,
-	@ColumnInfo(name = "company_status")
+	@ColumnInfo(name = "company_member_status")
 	val companyMemberStatus: String,
 	@ColumnInfo(name = "website")
 	val website: String?,

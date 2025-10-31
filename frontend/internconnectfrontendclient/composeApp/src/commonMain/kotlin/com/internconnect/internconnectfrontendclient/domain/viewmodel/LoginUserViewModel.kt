@@ -24,7 +24,7 @@ class LoginUserViewModel(
 		data object Loading : LoginUiState
 		data class Error(val message: String) : LoginUiState
 		data class LoggedInStudent(val userId: String) : LoginUiState
-		data class LoggedInCompany(val userId: String) : LoginUiState
+		data class LoggedInCompanyMember(val userId: String) : LoginUiState
 	}
 
 	private val scope = CoroutineScope(Dispatchers.Default)
@@ -51,7 +51,7 @@ class LoginUserViewModel(
 								}
 								"COMPANY_MEMBER" -> {
 									api.fetchCompanyMemberProfileById(userId)?.let { userRepository.setCurrentCompanyMemberProfile(it) }
-									_uiState.value = LoginUiState.LoggedInCompany(userId)
+									_uiState.value = LoginUiState.LoggedInCompanyMember(userId)
 								}
 								else -> _uiState.value = LoginUiState.Error("Unsupported role: $userRole")
 							}

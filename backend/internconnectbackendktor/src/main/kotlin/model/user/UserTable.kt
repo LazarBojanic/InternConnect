@@ -7,9 +7,9 @@ import java.time.Instant
 object UserTable : UUIDTable(name = "user") {
 	val email = varchar("email", length = 50).uniqueIndex()
 	val fullName = varchar("full_name", length = 255).nullable()
-	val role = varchar("role", length = 10)
+	val role = varchar("role", length = 50)
 	val isEmailVerified = bool("is_email_verified").default(false)
-	val status = varchar("status", length = 20).nullable()
+	val status = varchar("status", length = 50).nullable()
 	val createdAt = timestamp("created_at").default(Instant.now())
 	val updatedAt = timestamp("updated_at").default(Instant.now())
 }

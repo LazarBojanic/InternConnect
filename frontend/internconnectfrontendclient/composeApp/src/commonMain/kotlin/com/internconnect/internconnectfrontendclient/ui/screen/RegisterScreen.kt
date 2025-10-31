@@ -5,7 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.ui.components.RegisterCompanyPane
+import com.internconnect.internconnectfrontendclient.ui.components.RegisterCompanyMemberPane
 import com.internconnect.internconnectfrontendclient.ui.components.RegisterStudentPane
 
 @Composable
@@ -14,7 +14,7 @@ fun RegisterScreen(
 	onNavigateBack: () -> Unit,
 ) {
 	var tabIndex by remember { mutableStateOf(0) }
-	val tabs = listOf("Student", "Company")
+	val tabs = listOf("Student", "Company Member")
 
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
 		Text(text = "Register", style = MaterialTheme.typography.headlineSmall)
@@ -33,7 +33,7 @@ fun RegisterScreen(
 
 		when (tabIndex) {
 			0 -> RegisterStudentPane(onSuccess, onNavigateBack)
-			else -> RegisterCompanyPane(onSuccess, onNavigateBack)
+			else -> RegisterCompanyMemberPane(onSuccess, onNavigateBack)
 		}
 	}
 }
