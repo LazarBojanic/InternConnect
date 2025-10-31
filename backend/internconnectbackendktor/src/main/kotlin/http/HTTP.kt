@@ -7,8 +7,6 @@ import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
-import io.ktor.server.plugins.openapi.*
-import io.ktor.server.plugins.swagger.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import org.slf4j.event.Level
@@ -39,11 +37,5 @@ fun Application.configureHTTP() {
 	}*/
 	install(DefaultHeaders) {
 		header("X-Engine", "Ktor")
-	}
-	routing {
-		openAPI(path = "openapi")
-	}
-	routing {
-		swaggerUI(path = "openapi")
 	}
 }
