@@ -1,5 +1,6 @@
 package com.internconnect.repository.implementation
 
+import com.internconnect.database.dbQuery
 import com.internconnect.model.MapMode
 import com.internconnect.model.emailverification.EmailVerification
 import com.internconnect.model.emailverification.EmailVerificationEntity
@@ -12,22 +13,22 @@ import java.util.*
 
 class EmailVerificationRepository : IEmailVerificationRepository {
 	override suspend fun findAll(): List<EmailVerification> {
-		return transaction { EmailVerificationEntity.all().map { it.toDomain() } }
+		return dbQuery { EmailVerificationEntity.all().map { it.toDomain() } }
 	}
 
 	override suspend fun findById(id: UUID): EmailVerification? {
-		return transaction { EmailVerificationEntity.findById(id)?.toDomain() }
+		return dbQuery { EmailVerificationEntity.findById(id)?.toDomain() }
 	}
 
 	override suspend fun create(emailVerification: EmailVerification): EmailVerification? {
-		return transaction {
+		return dbQuery {
 			EmailVerificationEntity.new(emailVerification.id) { setFrom(emailVerification, MapMode.Insert) }.toDomain()
 		}
 	}
 
 	override suspend fun update(emailVerification: EmailVerification): EmailVerification? {
-		return transaction {
-			val e = EmailVerificationEntity.findById(emailVerification.id) ?: return@transaction null
+		return dbQuery {
+			val e = EmailVerificationEntity.findById(emailVerification.id) ?: return@dbQuery null
 			e.updatedAt = Instant.now()
 			e.setFrom(emailVerification.copy(updatedAt = e.updatedAt), MapMode.Update)
 			e.toDomain()
@@ -35,8 +36,8 @@ class EmailVerificationRepository : IEmailVerificationRepository {
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		return transaction {
-			val e = EmailVerificationEntity.findById(id) ?: return@transaction false
+		return dbQuery {
+			val e = EmailVerificationEntity.findById(id) ?: return@dbQuery false
 			e.delete(); true
 		}
 	}

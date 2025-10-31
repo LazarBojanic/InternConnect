@@ -1,5 +1,6 @@
 package com.internconnect.repository.implementation
 
+import com.internconnect.database.dbQuery
 import com.internconnect.model.MapMode
 import com.internconnect.model.setFrom
 import com.internconnect.model.student.Student
@@ -12,22 +13,22 @@ import java.util.*
 
 class StudentRepository : IStudentRepository {
 	override suspend fun findAll(): List<Student> {
-		return transaction { StudentEntity.all().map { it.toDomain() } }
+		return dbQuery { StudentEntity.all().map { it.toDomain() } }
 	}
 
 	override suspend fun findById(id: UUID): Student? {
-		return transaction { StudentEntity.findById(id)?.toDomain() }
+		return dbQuery { StudentEntity.findById(id)?.toDomain() }
 	}
 
 	override suspend fun create(student: Student): Student? {
-		return transaction {
+		return dbQuery {
 			StudentEntity.new(student.userId) { setFrom(student, MapMode.Insert) }.toDomain()
 		}
 	}
 
 	override suspend fun update(student: Student): Student? {
-		return transaction {
-			val e = StudentEntity.findById(student.userId) ?: return@transaction null
+		return dbQuery {
+			val e = StudentEntity.findById(student.userId) ?: return@dbQuery null
 			e.updatedAt = Instant.now()
 			e.setFrom(student.copy(updatedAt = e.updatedAt), MapMode.Update)
 			e.toDomain()
@@ -35,8 +36,8 @@ class StudentRepository : IStudentRepository {
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		return transaction {
-			val e = StudentEntity.findById(id) ?: return@transaction false
+		return dbQuery {
+			val e = StudentEntity.findById(id) ?: return@dbQuery false
 			e.delete(); true
 		}
 	}

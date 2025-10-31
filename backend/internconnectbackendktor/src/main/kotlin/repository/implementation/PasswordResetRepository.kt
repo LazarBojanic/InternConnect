@@ -1,5 +1,6 @@
 package com.internconnect.repository.implementation
 
+import com.internconnect.database.dbQuery
 import com.internconnect.model.MapMode
 import com.internconnect.model.passwordreset.PasswordReset
 import com.internconnect.model.passwordreset.PasswordResetEntity
@@ -12,22 +13,22 @@ import java.util.*
 
 class PasswordResetRepository : IPasswordResetRepository {
 	override suspend fun findAll(): List<PasswordReset> {
-		return transaction { PasswordResetEntity.all().map { it.toDomain() } }
+		return dbQuery { PasswordResetEntity.all().map { it.toDomain() } }
 	}
 
 	override suspend fun findById(id: UUID): PasswordReset? {
-		return transaction { PasswordResetEntity.findById(id)?.toDomain() }
+		return dbQuery { PasswordResetEntity.findById(id)?.toDomain() }
 	}
 
 	override suspend fun create(passwordReset: PasswordReset): PasswordReset? {
-		return transaction {
+		return dbQuery {
 			PasswordResetEntity.new(passwordReset.id) { setFrom(passwordReset, MapMode.Insert) }.toDomain()
 		}
 	}
 
 	override suspend fun update(passwordReset: PasswordReset): PasswordReset? {
-		return transaction {
-			val e = PasswordResetEntity.findById(passwordReset.id) ?: return@transaction null
+		return dbQuery {
+			val e = PasswordResetEntity.findById(passwordReset.id) ?: return@dbQuery null
 			e.updatedAt = Instant.now()
 			e.setFrom(passwordReset.copy(updatedAt = e.updatedAt), MapMode.Update)
 			e.toDomain()
@@ -35,8 +36,8 @@ class PasswordResetRepository : IPasswordResetRepository {
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		return transaction {
-			val e = PasswordResetEntity.findById(id) ?: return@transaction false
+		return dbQuery {
+			val e = PasswordResetEntity.findById(id) ?: return@dbQuery false
 			e.delete(); true
 		}
 	}

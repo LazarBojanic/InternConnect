@@ -1,5 +1,6 @@
 package com.internconnect.repository.implementation
 
+import com.internconnect.database.dbQuery
 import com.internconnect.model.MapMode
 import com.internconnect.model.setFrom
 import com.internconnect.model.toDomain
@@ -14,19 +15,19 @@ import java.util.*
 
 class UserRepository : IUserRepository {
 	override suspend fun findAll(): List<User> {
-		return transaction {
+		return dbQuery {
 			UserEntity.all().map { it.toDomain() }
 		}
 	}
 
 	override suspend fun findById(id: UUID): User? {
-		return transaction {
+		return dbQuery {
 			UserEntity.findById(id)?.toDomain()
 		}
 	}
 
 	override suspend fun findByEmail(email: String): User? {
-		return transaction {
+		return dbQuery {
 			UserEntity.find { UserTable.email eq email }
 				.firstOrNull()
 				?.toDomain()
@@ -34,7 +35,7 @@ class UserRepository : IUserRepository {
 	}
 
 	override suspend fun create(user: User): User? {
-		return transaction {
+		return dbQuery {
 			UserEntity.new(user.id) {
 				setFrom(user, MapMode.Insert)
 			}.toDomain()
@@ -42,8 +43,8 @@ class UserRepository : IUserRepository {
 	}
 
 	override suspend fun update(user: User): User? {
-		return transaction {
-			val entity = UserEntity.findById(user.id) ?: return@transaction null
+		return dbQuery {
+			val entity = UserEntity.findById(user.id) ?: return@dbQuery null
 			entity.updatedAt = Instant.now()
 			entity.setFrom(user.copy(updatedAt = entity.updatedAt), MapMode.Update)
 			entity.toDomain()
@@ -51,8 +52,8 @@ class UserRepository : IUserRepository {
 	}
 
 	override suspend fun delete(id: UUID): Boolean {
-		return transaction {
-			val entity = UserEntity.findById(id) ?: return@transaction false
+		return dbQuery {
+			val entity = UserEntity.findById(id) ?: return@dbQuery false
 			entity.delete()
 			true
 		}
