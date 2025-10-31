@@ -72,6 +72,11 @@ kotlin {
 
 	        implementation(libs.oAuthJavaJwt)
 
+	        implementation(libs.squareupOkio)
+	        implementation(libs.androidxDatastore)
+	        implementation(libs.androidxDatastorePreferences)
+
+
         }
         androidMain.dependencies {
             implementation(compose.preview)

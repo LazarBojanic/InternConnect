@@ -1,14 +1,13 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-import com.internconnect.internconnectfrontendclient.data.store.ITokenStore
+import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
 import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
-import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
-import com.internconnect.internconnectfrontendclient.dto.Token
+import com.internconnect.internconnectfrontendclient.data.dto.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.dto.Token
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -17,7 +16,7 @@ import kotlinx.serialization.json.jsonPrimitive
 
 class LoginUserViewModel(
 	private val api: IAppApi,
-	private val tokenStore: ITokenStore,
+	private val tokenStore: ITokenDataStore,
 	private val userRepository: IUserRepository,
 ) {
 	sealed interface LoginUiState {
@@ -38,7 +37,7 @@ class LoginUserViewModel(
 			try {
 				val token = api.login(dto)
 				if(token != null) {
-					tokenStore.setToken(token)
+					tokenStore.setToken(Token(token.access, token.refresh))
 					val access = token.access
 					if(access != null) {
 						val claims = jwtDecode(access)

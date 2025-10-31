@@ -1,13 +1,14 @@
 package com.internconnect.internconnectfrontendclient.di
 
-import com.internconnect.internconnectfrontendclient.data.store.ITokenStore
-import com.internconnect.internconnectfrontendclient.data.store.TokenStore
+import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
+import com.internconnect.internconnectfrontendclient.data.store.TokenDataStore
 import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.UserRepository
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.ProfileViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterCompanyMemberViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterStudentViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.WelcomeViewModel
 import com.internconnect.internconnectfrontendclient.http.AppApi
 import com.internconnect.internconnectfrontendclient.http.AppHttpClient
 import com.internconnect.internconnectfrontendclient.http.IAppApi
@@ -19,12 +20,9 @@ import org.koin.dsl.module
 expect fun platformEngine(): HttpClientEngineFactory<*>
 
 fun commonModule(baseUrl: String) = module {
-	// stores
-	single<ITokenStore> { TokenStore() }
-
 	// network
 	single { AppHttpClient(baseUrl, platformEngine(), get()) }
-	single<IAppApi> { AppApi(get()) }
+	single<IAppApi> { AppApi(get(), get()) }
 
 	// repositories
 	single<IUserRepository> { UserRepository(get(), get()) }
@@ -34,6 +32,7 @@ fun commonModule(baseUrl: String) = module {
 	factory { RegisterStudentViewModel(get()) }
 	factory { RegisterCompanyMemberViewModel(get()) }
 	factory { ProfileViewModel(get(), get(), get()) }
+	factory { WelcomeViewModel(get(), get()) }
 }
 fun initKoin(baseUrl: String, vararg platformModules: Module) {
 	startKoin {

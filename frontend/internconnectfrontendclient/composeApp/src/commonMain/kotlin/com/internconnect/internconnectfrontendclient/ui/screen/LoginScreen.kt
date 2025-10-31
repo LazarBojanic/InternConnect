@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel
-import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.dto.LoginUserDto
 import com.internconnect.internconnectfrontendclient.ui.components.AppTextField
 import com.internconnect.internconnectfrontendclient.ui.components.PasswordTextField
 import org.koin.compose.koinInject

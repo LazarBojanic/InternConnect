@@ -17,12 +17,14 @@ import kotlin.getValue
 
 fun Route.studentRoutes() {
 	val userService by inject<IUserService>()
-	route("/student/me/{userId}") {
-		get{
-			val userId = call.parameters["userId"] ?: return@get call.respond(HttpStatusCode.BadRequest)
-			val studentProfileDto: StudentProfileDto? = userService.getStudentProfileById(UUID.fromString(userId))
-			if (studentProfileDto != null) {
-				call.respond(HttpStatusCode.OK, studentProfileDto)
+	authenticate("auth-jwt") {
+		route("/student/me/{userId}") {
+			get{
+				val userId = call.parameters["userId"] ?: return@get call.respond(HttpStatusCode.BadRequest)
+				val studentProfileDto: StudentProfileDto? = userService.getStudentProfileById(UUID.fromString(userId))
+				if (studentProfileDto != null) {
+					call.respond(HttpStatusCode.OK, studentProfileDto)
+				}
 			}
 		}
 	}

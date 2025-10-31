@@ -3,7 +3,7 @@ package com.internconnect.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterCompanyDto(
+data class RegisterCompanyMemberDto(
 	val userEmail: String,
 	val companyEmail: String,
 	val userFirstName: String,

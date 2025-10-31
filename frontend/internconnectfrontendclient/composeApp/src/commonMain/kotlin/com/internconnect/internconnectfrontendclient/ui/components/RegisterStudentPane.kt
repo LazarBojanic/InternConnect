@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterStudentViewModel
-import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
+import com.internconnect.internconnectfrontendclient.data.dto.RegisterStudentDto
 import org.koin.compose.koinInject
 
 

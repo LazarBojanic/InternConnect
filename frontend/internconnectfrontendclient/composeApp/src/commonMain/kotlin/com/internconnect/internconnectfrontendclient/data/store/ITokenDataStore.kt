@@ -1,9 +1,9 @@
 package com.internconnect.internconnectfrontendclient.data.store
 
-import com.internconnect.internconnectfrontendclient.dto.Token
+import com.internconnect.internconnectfrontendclient.data.dto.Token
 import kotlinx.coroutines.flow.StateFlow
 
-interface ITokenStore {
+interface ITokenDataStore {
 	val token: StateFlow<Token?>
 	suspend fun setToken(token: Token)
 	suspend fun clear()

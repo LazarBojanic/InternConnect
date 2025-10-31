@@ -1,11 +1,13 @@
 package com.internconnect.internconnectfrontendclient.http
 
 import com.internconnect.internconnectfrontendclient.data.dto.CompanyMemberProfileDto
+import com.internconnect.internconnectfrontendclient.data.dto.RefreshDto
 import com.internconnect.internconnectfrontendclient.data.dto.StudentProfileDto
-import com.internconnect.internconnectfrontendclient.dto.LoginUserDto
-import com.internconnect.internconnectfrontendclient.dto.RegisterCompanyMemberDto
-import com.internconnect.internconnectfrontendclient.dto.RegisterStudentDto
-import com.internconnect.internconnectfrontendclient.dto.Token
+import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
+import com.internconnect.internconnectfrontendclient.data.dto.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.dto.RegisterCompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.dto.RegisterStudentDto
+import com.internconnect.internconnectfrontendclient.data.dto.Token
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -16,6 +18,7 @@ import io.ktor.http.HttpStatusCode
 
 class AppApi (
 	private val appHttpClient: AppHttpClient,
+	private val tokenDataStore: ITokenDataStore,
 ) : IAppApi{
 	private val client get() = appHttpClient.client
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String? {
@@ -53,9 +56,15 @@ class AppApi (
 		client.post("/auth/logout/TODO")
 	}
 
-	override suspend fun refreshToken(): String? {
-		val resp: HttpResponse = client.post("/auth/refresh")
-		return resp.bodyOrNullAsText()
+	override suspend fun refreshToken(): Token? {
+		val refreshDto = RefreshDto(tokenDataStore.token.value?.refresh, "composeApp", "0.0.0.0")
+		val resp: HttpResponse = client.post("/auth/refresh") {
+			setBody(refreshDto)
+		}
+		return when (resp.status) {
+			HttpStatusCode.OK -> resp.body<Token>()
+			else -> null
+		}
 	}
 
 	override suspend fun fetchStudentProfileById(userId: String): StudentProfileDto? {

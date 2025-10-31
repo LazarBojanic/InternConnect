@@ -1,6 +1,6 @@
 package com.internconnect.internconnectfrontendclient.http
 
-import com.internconnect.internconnectfrontendclient.data.store.ITokenStore
+import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 class AppHttpClient(
 	val baseUrl: String,
 	val platformEngine: HttpClientEngineFactory<*>,
-	private val tokenStore: ITokenStore
+	private val tokenStore: ITokenDataStore
 ) {
 	val client: HttpClient = HttpClient(platformEngine) {
 		install(ContentNegotiation) {

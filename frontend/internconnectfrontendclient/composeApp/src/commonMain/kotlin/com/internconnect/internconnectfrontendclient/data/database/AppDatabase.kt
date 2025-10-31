@@ -29,6 +29,6 @@ fun getAppDatabase(
 ): AppDatabase {
 	return builder
 		.setDriver(BundledSQLiteDriver())
-		.setQueryCoroutineContext(Dispatchers.IO)
+		.setQueryCoroutineContext(Dispatchers.Default)
 		.build()
 }

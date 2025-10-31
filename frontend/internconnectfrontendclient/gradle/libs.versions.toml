@@ -9,8 +9,10 @@ androidxAppcompat = "1.7.1"
 androidxCore = "1.17.0"
 androidxLifecycle = "2.10.0-alpha03"
 androidxNavigation = "2.9.1"
+androidxDatastore = "1.1.7"
 
 oAuthJavaJwt = "4.5.0"
+squareupOkio = "3.16.2"
 
 kotlinxSerializationJson = "1.9.0"
 kotlinxCoroutines = "1.10.2"
@@ -41,6 +43,11 @@ androidxLifecycleViewmodelCompose = { module = "org.jetbrains.androidx.lifecycle
 androidxLifecycleRuntimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 
 androidxNavigationCompose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
+
+androidxDatastore = { module = "androidx.datastore:datastore", version.ref = "androidxDatastore" }
+androidxDatastorePreferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidxDatastore" }
+
+squareupOkio = { module = "com.squareup.okio:okio", version.ref = "squareupOkio" }
 
 kotlinxSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }

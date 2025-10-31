@@ -2,7 +2,7 @@ package com.internconnect.routing
 
 import com.internconnect.dto.LoginUserDto
 import com.internconnect.dto.RefreshDto
-import com.internconnect.dto.RegisterCompanyDto
+import com.internconnect.dto.RegisterCompanyMemberDto
 import com.internconnect.dto.RegisterStudentDto
 import com.internconnect.service.specification.IAuthService
 import io.ktor.http.HttpStatusCode
@@ -59,8 +59,8 @@ fun Route.authRoutes() {
 	}
 	route("/auth/register-company-member") {
 		post {
-			val registerCompanyDto = call.receive<RegisterCompanyDto>()
-			authService.registerCompanyMember(registerCompanyDto)
+			val registerCompanyMemberDto = call.receive<RegisterCompanyMemberDto>()
+			authService.registerCompanyMember(registerCompanyMemberDto)
 			call.respond(HttpStatusCode.OK, "Registration successful")
 		}
 	}

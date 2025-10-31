@@ -20,7 +20,12 @@ fun App() {
 			composable("welcome") {
 				Welcome(
 					onRegister = { navController.navigate("register") },
-					onLogin = { navController.navigate("login") }
+					onLogin = { navController.navigate("login") },
+					onAutoNavigateHome = {
+						navController.navigate("home") {
+							popUpTo("welcome") { inclusive = true }
+						}
+					}
 				)
 			}
 			composable("login") {

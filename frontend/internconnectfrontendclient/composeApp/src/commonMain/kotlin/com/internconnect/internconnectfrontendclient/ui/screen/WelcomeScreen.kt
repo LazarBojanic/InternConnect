@@ -6,12 +6,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.WelcomeViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.PrimaryButton
 import com.internconnect.internconnectfrontendclient.ui.components.SecondaryButton
 import internconnectfrontendclient.composeapp.generated.resources.Res
@@ -20,10 +24,19 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Welcome(
-	onRegister: () -> Unit = {},
-	onLogin: () -> Unit = {},
+	onRegister: () -> Unit,
+	onLogin: () -> Unit,
+	onAutoNavigateHome: () -> Unit,
 	modifier: Modifier = Modifier,
 ) {
+	val vm: WelcomeViewModel = org.koin.compose.koinInject()
+	val state by vm.state.collectAsState()
+	LaunchedEffect(Unit) { vm.checkAuth() }
+
+	if (state is WelcomeViewModel.State.NavigateHome) {
+		onAutoNavigateHome()
+	}
+
 	val logo = painterResource(Res.drawable.internconnect_logo)
 
 	Surface(color = MaterialTheme.colorScheme.secondaryContainer, modifier = modifier.fillMaxSize()) {

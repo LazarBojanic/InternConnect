@@ -1,4 +1,4 @@
-package com.internconnect.internconnectfrontendclient.dto
+package com.internconnect.internconnectfrontendclient.data.dto
 
 import kotlinx.serialization.Serializable
 

@@ -1,6 +1,6 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-import com.internconnect.internconnectfrontendclient.data.store.ITokenStore
+import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
 import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
 import com.internconnect.internconnectfrontendclient.http.IAppApi
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
 	private val userRepository: IUserRepository,
 	private val api: IAppApi,
-	private val tokenStore: ITokenStore,
+	private val tokenStore: ITokenDataStore,
 ) {
 	private val scope = CoroutineScope(Dispatchers.Default)
 
