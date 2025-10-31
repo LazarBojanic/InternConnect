@@ -3,21 +3,23 @@ ktor:
         modules:
             - com.internconnect.ApplicationKt.module
     deployment:
-        port: 8800
+        host: $KTOR_DEPLOYMENT_HOST:72.61.23.122
+        port: $KTOR_DEPLOYMENT_PORT:8080
+        rootPath: $KTOR_DEPLOYMENT_ROOT_PATH:/api
     development: true
 jwt:
-    alg: "${JWT_ALG:HS256}"
-    iss: "${JWT_ISS:}"
-    aud: "${JWT_AUD:}"
-    access_ttl: "${JWT_ACCESS_TTL:PT15M}"
-    refresh_ttl: "${JWT_REFRESH_TTL:P30D}"
-    secret: "${JWT_SECRET:secret}"
+    alg: $JWT_ALG:HS256
+    iss: $JWT_ISS
+    aud: $JWT_AUD
+    access_ttl: $JWT_ACCESS_TTL:PT15M
+    refresh_ttl: $JWT_REFRESH_TTL:P30D
+    secret: $JWT_SECRET:secret
 database:
-    username: "${DATABASE_USERNAME:postgres}"
-    password: "${DATABASE_PASSWORD:postgres}"
-    ip: "${DATABASE_IP:127.0.0.1}"
-    port: "${DATABASE_PORT:5432}"
-    name: "${DATABASE_NAME:internconnect}"
-    properties: "${DATABASE_PROPERTIES:}"
-    dialect: "${DATABASE_DIALECT:postgresql}"
-    driver: "${DATABASE_DRIVER:org.postgresql.Driver}"
+    username: $DATABASE_USERNAME:postgres
+    password: $DATABASE_PASSWORD:postgres
+    ip: $DATABASE_IP:127.0.0.1
+    port: $DATABASE_PORT:5432
+    name: $DATABASE_NAME:internconnect
+    properties: $DATABASE_PROPERTIES
+    dialect: $DATABASE_DIALECT:postgresql
+    driver: $DATABASE_DRIVER:org.postgresql.Driver

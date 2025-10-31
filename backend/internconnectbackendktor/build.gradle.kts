@@ -3,16 +3,16 @@ val koin_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val postgres_version: String by project
-val exposed_kotlin_datetime_version: String by project
 val java_jwt_version: String by project
 val commons_email_version: String by project
 val jbcrypt_version: String by project
 val ktor_plugin_version: String by project
+val ktor_version: String by project
 
 plugins {
-    kotlin("jvm") version "2.3.0-Beta1"
+    kotlin("jvm") version "2.3.0-Beta2"
     id("io.ktor.plugin") version "3.3.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta2"
 }
 
 group = "com.internconnect"
@@ -40,6 +40,10 @@ dependencies {
 	implementation("io.ktor:ktor-server-html-builder")
 	implementation("io.ktor:ktor-server-config-yaml")
 	implementation("io.ktor:ktor-serialization-kotlinx-json")
+	implementation("io.ktor:ktor-server-forwarded-header")
+	implementation("io.ktor:ktor-server-call-logging")
+	implementation("io.ktor:ktor-server-call-id")
+
 	implementation("io.insert-koin:koin-ktor:$koin_version")
 	implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
 	implementation("org.postgresql:postgresql:$postgres_version")
@@ -52,4 +56,5 @@ dependencies {
 	implementation("ch.qos.logback:logback-classic:$logback_version")
 	implementation("org.apache.commons:commons-email:$commons_email_version")
 	implementation("org.mindrot:jbcrypt:$jbcrypt_version")
+
 }
