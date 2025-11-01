@@ -5,10 +5,10 @@ import ComposeApp
 @main
 struct iOSApp: App {
     init() {
-        FrameworksKt.doInitKoinIos()
+        Frameworks_iosKt.doInitKoinIos()
     }
     var body: some Scene {
-        WindowGroup {
+        WindowGroup {		
             ContentView()
         }
     }

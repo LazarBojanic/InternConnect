@@ -1,7 +1,5 @@
-package com.internconnect.internconnectfrontendclient.di
+package com.internconnect.internconnectfrontendclient
 
-import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
-import com.internconnect.internconnectfrontendclient.data.store.TokenDataStore
 import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.UserRepository
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel

@@ -6,7 +6,50 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3B2A0EE92EB64320008A03E7 /* ComposeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B58C5E62EB631C1001595A0 /* ComposeApp.framework */; };
+		3B2A0EEA2EB64320008A03E7 /* ComposeApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B58C5E62EB631C1001595A0 /* ComposeApp.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3B2A0EEB2EB64320008A03E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3B2A0EEA2EB64320008A03E7 /* ComposeApp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3B27C6122EB637F5004BD262 /* ComposeApp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ComposeApp.xcframework; path = ../composeApp/build/ComposeApp.xcframework; sourceTree = "<group>"; };
+		3B2A0ED32EB63A96008A03E7 /* ComposeApp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ComposeApp.xcframework; path = Frameworks/ComposeApp.xcframework; sourceTree = "<group>"; };
+		3B58C5DF2EB6319A001595A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3B58C5E12EB6319A001595A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3B58C5E22EB6319A001595A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3B58C5E32EB6319A001595A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B58C5E42EB6319A001595A0 /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		3B58C5E62EB631C1001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C5EB2EB6320F001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../composeApp/build/bin/iosArm64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C5EE2EB6321F001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C5F12EB6321F001595A0 /* androidparty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = androidparty.png; sourceTree = "<group>"; };
+		3B58C5F22EB6321F001595A0 /* bg_compose_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_compose_background.png; sourceTree = "<group>"; };
+		3B58C5F32EB6321F001595A0 /* compose-multiplatform.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "compose-multiplatform.xml"; sourceTree = "<group>"; };
+		3B58C5F42EB6321F001595A0 /* internconnect_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internconnect_logo.png; sourceTree = "<group>"; };
+		3B58C5F62EB6321F001595A0 /* strings.commonMain.cvr */ = {isa = PBXFileReference; lastKnownFileType = text; path = strings.commonMain.cvr; sourceTree = "<group>"; };
+		3B58C6002EB6321F001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C6032EB6322D001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C6062EB6322D001595A0 /* androidparty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = androidparty.png; sourceTree = "<group>"; };
+		3B58C6072EB6322D001595A0 /* bg_compose_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_compose_background.png; sourceTree = "<group>"; };
+		3B58C6082EB6322D001595A0 /* compose-multiplatform.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "compose-multiplatform.xml"; sourceTree = "<group>"; };
+		3B58C6092EB6322D001595A0 /* internconnect_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internconnect_logo.png; sourceTree = "<group>"; };
+		3B58C60B2EB6322D001595A0 /* strings.commonMain.cvr */ = {isa = PBXFileReference; lastKnownFileType = text; path = strings.commonMain.cvr; sourceTree = "<group>"; };
+		3B58C6152EB6322D001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ComposeApp.framework; sourceTree = "<group>"; };
+		3B58C61A2EB63297001595A0 /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../composeApp/build/bin/iosX64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
 		DDA3096581848CDC3B7C4421 /* internconnectfrontendclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = internconnectfrontendclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -41,27 +84,311 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2A0EE92EB64320008A03E7 /* ComposeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AFC72A34A0FC1AFC023F93DF = {
-			isa = PBXGroup;
-			children = (
-				CA262E96FE6A66BB3D09A59D /* Configuration */,
-				654120E35736B3D6BDEB8F2E /* iosApp */,
-				24517421AB8ADBCE7094A4E7 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
 		24517421AB8ADBCE7094A4E7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				DDA3096581848CDC3B7C4421 /* internconnectfrontendclient.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3B58C5DE2EB6319A001595A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B27C6122EB637F5004BD262 /* ComposeApp.xcframework */,
+				3B2A0ED32EB63A96008A03E7 /* ComposeApp.xcframework */,
+				3B58C61A2EB63297001595A0 /* ComposeApp.framework */,
+				3B58C6022EB6321F001595A0 /* iosArm64 */,
+				3B58C6172EB6322D001595A0 /* iosArm64 */,
+				3B58C5EB2EB6320F001595A0 /* ComposeApp.framework */,
+				3B58C5E72EB631C1001595A0 /* debugFramework */,
+				3B58C5E52EB6319A001595A0 /* iosApp */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B58C5E02EB6319A001595A0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5DF2EB6319A001595A0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3B58C5E52EB6319A001595A0 /* iosApp */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5E02EB6319A001595A0 /* Preview Content */,
+				3B58C5E12EB6319A001595A0 /* Assets.xcassets */,
+				3B58C5E22EB6319A001595A0 /* ContentView.swift */,
+				3B58C5E32EB6319A001595A0 /* Info.plist */,
+				3B58C5E42EB6319A001595A0 /* iOSApp.swift */,
+			);
+			path = iosApp;
+			sourceTree = "<group>";
+		};
+		3B58C5E72EB631C1001595A0 /* debugFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5E62EB631C1001595A0 /* ComposeApp.framework */,
+			);
+			name = debugFramework;
+			path = ../composeApp/build/bin/iosSimulatorArm64/debugFramework;
+			sourceTree = "<group>";
+		};
+		3B58C5EF2EB6321F001595A0 /* debugFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5EE2EB6321F001595A0 /* ComposeApp.framework */,
+			);
+			path = debugFramework;
+			sourceTree = "<group>";
+		};
+		3B58C5F02EB6321F001595A0 /* components.resources.library.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = components.resources.library.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5F52EB6321F001595A0 /* drawable */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5F12EB6321F001595A0 /* androidparty.png */,
+				3B58C5F22EB6321F001595A0 /* bg_compose_background.png */,
+				3B58C5F32EB6321F001595A0 /* compose-multiplatform.xml */,
+				3B58C5F42EB6321F001595A0 /* internconnect_logo.png */,
+			);
+			path = drawable;
+			sourceTree = "<group>";
+		};
+		3B58C5F72EB6321F001595A0 /* values */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5F62EB6321F001595A0 /* strings.commonMain.cvr */,
+			);
+			path = values;
+			sourceTree = "<group>";
+		};
+		3B58C5F82EB6321F001595A0 /* internconnectfrontendclient.composeapp.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5F52EB6321F001595A0 /* drawable */,
+				3B58C5F72EB6321F001595A0 /* values */,
+			);
+			path = internconnectfrontendclient.composeapp.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5F92EB6321F001595A0 /* io.coil_kt.coil3.coil_compose_core.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.coil_kt.coil3.coil_compose_core.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5FA2EB6321F001595A0 /* io.coil_kt.coil3.coil_compose.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.coil_kt.coil3.coil_compose.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5FB2EB6321F001595A0 /* io.insert_koin.koin_compose_viewmodel.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.insert_koin.koin_compose_viewmodel.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5FC2EB6321F001595A0 /* io.insert_koin.koin_compose.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.insert_koin.koin_compose.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C5FD2EB6321F001595A0 /* composeResources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5F02EB6321F001595A0 /* components.resources.library.generated.resources */,
+				3B58C5F82EB6321F001595A0 /* internconnectfrontendclient.composeapp.generated.resources */,
+				3B58C5F92EB6321F001595A0 /* io.coil_kt.coil3.coil_compose_core.generated.resources */,
+				3B58C5FA2EB6321F001595A0 /* io.coil_kt.coil3.coil_compose.generated.resources */,
+				3B58C5FB2EB6321F001595A0 /* io.insert_koin.koin_compose_viewmodel.generated.resources */,
+				3B58C5FC2EB6321F001595A0 /* io.insert_koin.koin_compose.generated.resources */,
+			);
+			path = composeResources;
+			sourceTree = "<group>";
+		};
+		3B58C5FE2EB6321F001595A0 /* compose-resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5FD2EB6321F001595A0 /* composeResources */,
+			);
+			path = "compose-resources";
+			sourceTree = "<group>";
+		};
+		3B58C5FF2EB6321F001595A0 /* debugTest */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5FE2EB6321F001595A0 /* compose-resources */,
+			);
+			path = debugTest;
+			sourceTree = "<group>";
+		};
+		3B58C6012EB6321F001595A0 /* releaseFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6002EB6321F001595A0 /* ComposeApp.framework */,
+			);
+			path = releaseFramework;
+			sourceTree = "<group>";
+		};
+		3B58C6022EB6321F001595A0 /* iosArm64 */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C5EF2EB6321F001595A0 /* debugFramework */,
+				3B58C5FF2EB6321F001595A0 /* debugTest */,
+				3B58C6012EB6321F001595A0 /* releaseFramework */,
+			);
+			name = iosArm64;
+			path = ../composeApp/build/bin/iosArm64;
+			sourceTree = "<group>";
+		};
+		3B58C6042EB6322D001595A0 /* debugFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6032EB6322D001595A0 /* ComposeApp.framework */,
+			);
+			path = debugFramework;
+			sourceTree = "<group>";
+		};
+		3B58C6052EB6322D001595A0 /* components.resources.library.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = components.resources.library.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C60A2EB6322D001595A0 /* drawable */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6062EB6322D001595A0 /* androidparty.png */,
+				3B58C6072EB6322D001595A0 /* bg_compose_background.png */,
+				3B58C6082EB6322D001595A0 /* compose-multiplatform.xml */,
+				3B58C6092EB6322D001595A0 /* internconnect_logo.png */,
+			);
+			path = drawable;
+			sourceTree = "<group>";
+		};
+		3B58C60C2EB6322D001595A0 /* values */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C60B2EB6322D001595A0 /* strings.commonMain.cvr */,
+			);
+			path = values;
+			sourceTree = "<group>";
+		};
+		3B58C60D2EB6322D001595A0 /* internconnectfrontendclient.composeapp.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C60A2EB6322D001595A0 /* drawable */,
+				3B58C60C2EB6322D001595A0 /* values */,
+			);
+			path = internconnectfrontendclient.composeapp.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C60E2EB6322D001595A0 /* io.coil_kt.coil3.coil_compose_core.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.coil_kt.coil3.coil_compose_core.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C60F2EB6322D001595A0 /* io.coil_kt.coil3.coil_compose.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.coil_kt.coil3.coil_compose.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C6102EB6322D001595A0 /* io.insert_koin.koin_compose_viewmodel.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.insert_koin.koin_compose_viewmodel.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C6112EB6322D001595A0 /* io.insert_koin.koin_compose.generated.resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = io.insert_koin.koin_compose.generated.resources;
+			sourceTree = "<group>";
+		};
+		3B58C6122EB6322D001595A0 /* composeResources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6052EB6322D001595A0 /* components.resources.library.generated.resources */,
+				3B58C60D2EB6322D001595A0 /* internconnectfrontendclient.composeapp.generated.resources */,
+				3B58C60E2EB6322D001595A0 /* io.coil_kt.coil3.coil_compose_core.generated.resources */,
+				3B58C60F2EB6322D001595A0 /* io.coil_kt.coil3.coil_compose.generated.resources */,
+				3B58C6102EB6322D001595A0 /* io.insert_koin.koin_compose_viewmodel.generated.resources */,
+				3B58C6112EB6322D001595A0 /* io.insert_koin.koin_compose.generated.resources */,
+			);
+			path = composeResources;
+			sourceTree = "<group>";
+		};
+		3B58C6132EB6322D001595A0 /* compose-resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6122EB6322D001595A0 /* composeResources */,
+			);
+			path = "compose-resources";
+			sourceTree = "<group>";
+		};
+		3B58C6142EB6322D001595A0 /* debugTest */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6132EB6322D001595A0 /* compose-resources */,
+			);
+			path = debugTest;
+			sourceTree = "<group>";
+		};
+		3B58C6162EB6322D001595A0 /* releaseFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6152EB6322D001595A0 /* ComposeApp.framework */,
+			);
+			path = releaseFramework;
+			sourceTree = "<group>";
+		};
+		3B58C6172EB6322D001595A0 /* iosArm64 */ = {
+			isa = PBXGroup;
+			children = (
+				3B58C6042EB6322D001595A0 /* debugFramework */,
+				3B58C6142EB6322D001595A0 /* debugTest */,
+				3B58C6162EB6322D001595A0 /* releaseFramework */,
+			);
+			name = iosArm64;
+			path = ../composeApp/build/bin/iosArm64;
+			sourceTree = "<group>";
+		};
+		AFC72A34A0FC1AFC023F93DF = {
+			isa = PBXGroup;
+			children = (
+				CA262E96FE6A66BB3D09A59D /* Configuration */,
+				654120E35736B3D6BDEB8F2E /* iosApp */,
+				3B58C5DE2EB6319A001595A0 /* Frameworks */,
+				24517421AB8ADBCE7094A4E7 /* Products */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,6 +402,7 @@
 				DAF83460897BDD4A204C9416 /* Sources */,
 				08576297FEF5B2A77069A229 /* Frameworks */,
 				B3D289A53E4B16419046881F /* Resources */,
+				3B2A0EEB2EB64320008A03E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,6 +495,72 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		20CBD99376CEE5AA6F2B1E05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework/**";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Intern Connect";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazar.internconnect;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		73BE94873D6EDA0947A791C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework/**";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Intern Connect";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lazar.internconnect;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		8873F056F7D610F809B5F979 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = CA262E96FE6A66BB3D09A59D /* Configuration */;
@@ -290,79 +684,23 @@
 			};
 			name = Release;
 		};
-		73BE94873D6EDA0947A791C9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		20CBD99376CEE5AA6F2B1E05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C9F0ADAA5739EE062466853E /* Build configuration list for PBXProject "iosApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8873F056F7D610F809B5F979 /* Debug */,
-				BF22BD505860432878A37C59 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8D89532BA26E532448E31A62 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				73BE94873D6EDA0947A791C9 /* Debug */,
 				20CBD99376CEE5AA6F2B1E05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9F0ADAA5739EE062466853E /* Build configuration list for PBXProject "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8873F056F7D610F809B5F979 /* Debug */,
+				BF22BD505860432878A37C59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

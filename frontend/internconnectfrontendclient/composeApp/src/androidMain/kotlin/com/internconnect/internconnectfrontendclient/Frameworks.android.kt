@@ -1,5 +1,6 @@
-package com.internconnect.internconnectfrontendclient.di
+package com.internconnect.internconnectfrontendclient
 
+import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.internconnect.internconnectfrontendclient.data.database.AppDatabase
@@ -9,25 +10,18 @@ import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
 import com.internconnect.internconnectfrontendclient.data.store.TokenDataStore
 import com.internconnect.internconnectfrontendclient.data.store.provideTokenDataStore
 import io.ktor.client.engine.HttpClientEngineFactory
-import io.ktor.client.engine.darwin.Darwin
-import org.koin.core.module.Module
+import io.ktor.client.engine.okhttp.OkHttp
 import org.koin.dsl.module
 
-actual fun platformEngine(): HttpClientEngineFactory<*> = Darwin
+actual fun platformEngine(): HttpClientEngineFactory<*> = OkHttp
 
-fun iosModule() = module {
-	single { getAppDatabase(getDatabaseBuilder()) }
+
+fun androidModule(appContext: Context) = module {
+	single { getAppDatabase(getDatabaseBuilder(appContext)) }
 	single { get<AppDatabase>().getStudentProfileDao() }
 	single { get<AppDatabase>().getCompanyMemberProfileDao() }
 	single<DataStore<Preferences>> {
-		provideTokenDataStore()
+		provideTokenDataStore(appContext)
 	}
 	single<ITokenDataStore> { TokenDataStore(get()) }
-}
-
-fun initKoinIos() {
-	initKoin(
-		baseUrl = "http://72.61.23.122:8080",
-		iosModule(),
-	)
 }
