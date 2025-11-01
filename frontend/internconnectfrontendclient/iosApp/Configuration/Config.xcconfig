@@ -1,7 +1,7 @@
 TEAM_ID=
 
 PRODUCT_NAME=internconnectfrontendclient
-PRODUCT_BUNDLE_IDENTIFIER=com.lazar.internconnectfrontendclient.internconnectfrontendclient$(TEAM_ID)
+PRODUCT_BUNDLE_IDENTIFIER=com.internconnect.internconnect(TEAM_ID)
 
 CURRENT_PROJECT_VERSION=1
 MARKETING_VERSION=1.0
