@@ -53,7 +53,6 @@ private fun CompanyMemberProfileContent(state: ProfileUiState.CompanyMemberState
 	}
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(onNavigateBack: () -> Unit) {
 	val vm: ProfileViewModel = koinInject()
@@ -64,22 +63,15 @@ fun ProfileScreen(onNavigateBack: () -> Unit) {
 
 	}
 
-	Scaffold(
-		topBar = {
-			TopAppBar(
-				title = { Text("Profile") },
-				navigationIcon = {
-					IconButton(onClick = onNavigateBack) {
-						Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-					}
-				}
-			)
+	Column(Modifier.fillMaxSize()) {
+		Spacer(Modifier.height(48.dp))
+		IconButton(onClick = onNavigateBack) {
+			Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
 		}
-	) { padding ->
 		when {
-			state.loading -> Box(Modifier.fillMaxSize().padding(padding)) { CircularProgressIndicator(Modifier.padding(24.dp)) }
-			state.error != null -> Box(Modifier.fillMaxSize().padding(padding)) { Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error) }
-			else -> Box(Modifier.fillMaxSize().padding(padding).padding(16.dp)) {
+			state.loading -> Box(Modifier.fillMaxSize()) { CircularProgressIndicator(Modifier.padding(24.dp)) }
+			state.error != null -> Box(Modifier.fillMaxSize()) { Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error) }
+			else -> Box(Modifier.fillMaxSize().padding(16.dp)) {
 				when (state.role) {
 					"STUDENT" -> StudentProfileContent(state = state as ProfileUiState.StudentState)
 					"COMPANY_MEMBER" -> CompanyMemberProfileContent(state = state as ProfileUiState.CompanyMemberState)
@@ -88,4 +80,8 @@ fun ProfileScreen(onNavigateBack: () -> Unit) {
 			}
 		}
 	}
+
+
+
+
 }
