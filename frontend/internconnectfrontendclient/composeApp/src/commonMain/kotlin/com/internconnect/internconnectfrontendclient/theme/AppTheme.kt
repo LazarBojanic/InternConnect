@@ -1,6 +1,7 @@
 package com.internconnect.internconnectfrontendclient.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
@@ -9,10 +10,13 @@ fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
-    val colorScheme = when {
-        darkTheme -> darkScheme
-        else -> lightScheme
-    }
+	val useDarkThemeDev = false
+	var colorScheme = lightScheme;
+	if(useDarkThemeDev) {
+		if(darkTheme){
+			colorScheme = darkScheme;
+		}
+	}
     MaterialTheme(
         colorScheme = colorScheme,
         typography = AppTypography,
