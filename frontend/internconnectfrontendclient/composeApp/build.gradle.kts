@@ -31,10 +31,18 @@ kotlin {
         }
     }
 
-    sourceSets.commonMain{
-        kotlin.srcDir("build/generated/ksp/main/kotlin")
-    }
-    sourceSets {
+	sourceSets {
+		commonMain {
+			kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+			kotlin.srcDir("build/generated/ksp/commonMain/kotlin")
+		}
+		iosX64Main { kotlin.srcDir("build/generated/ksp/iosX64Main/kotlin") }
+		iosArm64Main { kotlin.srcDir("build/generated/ksp/iosArm64Main/kotlin") }
+		iosSimulatorArm64Main { kotlin.srcDir("build/generated/ksp/iosSimulatorArm64Main/kotlin") }
+		androidMain { kotlin.srcDir("build/generated/ksp/androidMain/kotlin") }
+	}
+
+	sourceSets {
         commonMain.dependencies {
 			implementation(libs.androidxCoreKtx)
 			implementation(libs.androidxAppcompat)
@@ -124,6 +132,7 @@ kotlin {
     }
 }
 
+
 android {
     namespace = "com.internconnect.internconnectfrontendclient"
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
@@ -161,5 +170,15 @@ dependencies {
     add("kspIosArm64", libs.roomCompiler)
     add("kspIosX64", libs.roomCompiler)
     add("kspIosSimulatorArm64", libs.roomCompiler)
+
+	add("kspCommonMainMetadata", libs.koinKspCompiler)
+	add("kspAndroid", libs.koinKspCompiler)
+	add("kspIosX64", libs.koinKspCompiler)
+	add("kspIosArm64", libs.koinKspCompiler)
+	add("kspIosSimulatorArm64", libs.koinKspCompiler)
     debugImplementation(compose.uiTooling)
+}
+
+tasks.matching { it.name.startsWith("ksp") && !it.name.startsWith("kspCommon") }.configureEach {
+	dependsOn("kspCommonMainKotlinMetadata")
 }
