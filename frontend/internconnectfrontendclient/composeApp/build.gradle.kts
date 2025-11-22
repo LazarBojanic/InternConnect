@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinMultiplatform)
-
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
@@ -31,16 +30,6 @@ kotlin {
         }
     }
 
-	sourceSets {
-		commonMain {
-			kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-			kotlin.srcDir("build/generated/ksp/commonMain/kotlin")
-		}
-		iosX64Main { kotlin.srcDir("build/generated/ksp/iosX64Main/kotlin") }
-		iosArm64Main { kotlin.srcDir("build/generated/ksp/iosArm64Main/kotlin") }
-		iosSimulatorArm64Main { kotlin.srcDir("build/generated/ksp/iosSimulatorArm64Main/kotlin") }
-		androidMain { kotlin.srcDir("build/generated/ksp/androidMain/kotlin") }
-	}
 
 	sourceSets {
         commonMain.dependencies {
@@ -54,36 +43,31 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+	        implementation(libs.kotlinxCoroutinesCore)
+	        implementation(libs.kotlinxSerializationJson)
+
 	        implementation(libs.androidxLifecycleViewModelSavedState)
 	        implementation(libs.androidxLifecycleViewmodelCompose)
 	        implementation(libs.androidxLifecycleRuntimeCompose)
 	        implementation(libs.androidxNavigationCompose)
-
-	        implementation(libs.ktorSerializationKotlinxJson)
-            implementation(libs.kotlinxSerializationJson)
-            implementation(libs.kotlinxCoroutinesCore)
-
-            implementation(libs.ktorClientCore)
-            api(libs.koinCore)
-            implementation(libs.koinCompose)
-            implementation(libs.koinComposeViewModel)
-
-            implementation(libs.coil)
-            implementation(libs.coilCompose)
-            implementation(libs.coilNetworkKtor)
-
-	        implementation(libs.roomRuntime)
-            implementation(libs.sqliteBundled)
-
-	        implementation(libs.ktorClientContentNegotiation)
-	        implementation(libs.ktorClientLogging)
-
-	        implementation(libs.oAuthJavaJwt)
-
-	        implementation(libs.squareupOkio)
 	        implementation(libs.androidxDatastore)
 	        implementation(libs.androidxDatastorePreferences)
 
+	        api(libs.koinCore)
+	        api(libs.koinAnnotations)
+	        implementation(libs.koinCompose)
+	        implementation(libs.koinComposeViewModel)
+
+	        implementation(libs.roomRuntime)
+	        implementation(libs.sqliteBundled)
+
+	        implementation(libs.ktorSerializationKotlinxJson)
+            implementation(libs.ktorClientCore)
+	        implementation(libs.ktorClientContentNegotiation)
+	        implementation(libs.ktorClientLogging)
+	        implementation(libs.squareupOkio)
+
+	        implementation(libs.oAuthJavaJwt)
 
         }
         androidMain.dependencies {
@@ -93,41 +77,32 @@ kotlin {
 
             implementation(libs.kotlinxCoroutinesAndroid)
 
+	        implementation(libs.koinAndroid)
+	        implementation(libs.koinAndroidXCompose)
+
+	        implementation(libs.roomRuntimeAndroid)
+	        implementation(libs.sqliteWrapper)
+
             implementation(libs.ktorClientOkHttp)
-            implementation(libs.koinAndroid)
-            implementation(libs.koinAndroidXCompose)
 
-            implementation(libs.sqliteWrapper)
-            implementation(libs.roomRuntimeAndroid)
-
-
-            implementation(libs.coilAndroid)
-            implementation(libs.coilComposeAndroid)
-            implementation(libs.coilNetworkKtorAndroid)
         }
         iosMain.dependencies {
             implementation(libs.ktorClientDarwin)
         }
         iosX64Main.dependencies {
-            implementation(libs.koinCoreIosX64)
-            implementation(libs.roomRuntimeIosX64)
-            implementation(libs.coilComposeIosX64)
-            implementation(libs.coilNetworkKtorIosX64)
-            implementation(libs.kotlinxCoroutinesCoreIosX64)
+	        implementation(libs.kotlinxCoroutinesCoreIosX64)
+	        implementation(libs.koinCoreIosX64)
+	        implementation(libs.roomRuntimeIosX64)
         }
         iosArm64Main.dependencies {
-            implementation(libs.koinCoreIosArm64)
-            implementation(libs.roomRuntimeIosArm64)
-            implementation(libs.coilComposeIosArm64)
-            implementation(libs.coilNetworkKtorIosArm64)
-            implementation(libs.kotlinxCoroutinesCoreIosArm64)
+	        implementation(libs.kotlinxCoroutinesCoreIosArm64)
+	        implementation(libs.koinCoreIosArm64)
+	        implementation(libs.roomRuntimeIosArm64)
         }
         iosSimulatorArm64Main.dependencies {
-            implementation(libs.koinCoreIosSimulatorArm64)
-            implementation(libs.roomRuntimeIosSimulatorArm64)
-            implementation(libs.coilComposeIosSimulatorArm64)
-            implementation(libs.coilNetworkKtorIosSimulatorArm64)
-            implementation(libs.kotlinxCoroutinesCoreIosSimulatorArm64)
+	        implementation(libs.kotlinxCoroutinesCoreIosSimulatorArm64)
+	        implementation(libs.koinCoreIosSimulatorArm64)
+	        implementation(libs.roomRuntimeIosSimulatorArm64)
         }
     }
 }
@@ -165,13 +140,11 @@ room {
 }
 
 dependencies {
-    add("kspCommonMainMetadata", libs.roomCompiler)
     add("kspAndroid", libs.roomCompiler)
     add("kspIosArm64", libs.roomCompiler)
     add("kspIosX64", libs.roomCompiler)
     add("kspIosSimulatorArm64", libs.roomCompiler)
 
-	add("kspCommonMainMetadata", libs.koinKspCompiler)
 	add("kspAndroid", libs.koinKspCompiler)
 	add("kspIosX64", libs.koinKspCompiler)
 	add("kspIosArm64", libs.koinKspCompiler)
@@ -179,6 +152,7 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-tasks.matching { it.name.startsWith("ksp") && !it.name.startsWith("kspCommon") }.configureEach {
-	dependsOn("kspCommonMainKotlinMetadata")
+ksp{
+	arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
+	arg("KOIN_CONFIG_CHECK", "true")
 }
