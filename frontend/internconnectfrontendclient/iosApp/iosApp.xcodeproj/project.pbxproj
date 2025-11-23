@@ -204,7 +204,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework/**";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Intern Connect";
+				INFOPLIST_KEY_CFBundleDisplayName = internconnectfrontendclient;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -215,7 +215,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.internconnect.internconnectfrontendclient;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionAdHocProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionAppStoreConnectProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -237,7 +237,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework/**";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Intern Connect";
+				INFOPLIST_KEY_CFBundleDisplayName = internconnectfrontendclient;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
