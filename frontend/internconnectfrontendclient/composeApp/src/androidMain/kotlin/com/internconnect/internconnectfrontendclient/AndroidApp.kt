@@ -6,7 +6,7 @@ class AndroidApp : Application() {
 	override fun onCreate() {
 		super.onCreate()
 		initKoin(
-			baseUrl = "http://72.61.23.122:8080",
+			baseUrl = "https://srv1092316.hstgr.cloud",
 			androidModule(this)
 		)
 	}

@@ -26,7 +26,7 @@ fun iosModule() = module {
 
 fun initKoinIos() {
 	initKoin(
-		baseUrl = "http://72.61.23.122:8080",
+		baseUrl = "https://srv1092316.hstgr.cloud",
 		iosModule(),
 	)
 }
