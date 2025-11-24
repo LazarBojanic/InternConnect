@@ -16,6 +16,7 @@ import com.internconnect.model.refreshtoken.RefreshTokenTable
 import com.internconnect.model.student.StudentTable
 import com.internconnect.model.user.UserTable
 import com.internconnect.routing.configureRouting
+import com.internconnect.routing.configureStaticRouting
 import com.internconnect.util.configureSerialization
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
@@ -33,6 +34,7 @@ fun Application.module() {
 	configureFrameworks()
 	configureSecurity()
 	configureRouting()
+	configureStaticRouting()
 
 	val allTables = arrayOf(
 		AuditLogTable,

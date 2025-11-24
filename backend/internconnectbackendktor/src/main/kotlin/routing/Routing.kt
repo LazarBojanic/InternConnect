@@ -9,11 +9,7 @@ fun Application.configureRouting() {
 	install(Resources)
 
 	routing {
-		route("/"){
-			get {
-				call.respondText("hello world")
-			}
-		}
+
 		auditLogRoutes()
 		userRoutes()
 		emailVerificationRoutes()
