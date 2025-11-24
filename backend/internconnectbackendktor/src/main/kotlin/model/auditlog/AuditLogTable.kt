@@ -7,7 +7,7 @@ import org.jetbrains.exposed.v1.javatime.timestamp
 import org.jetbrains.exposed.v1.json.jsonb
 import java.time.Instant
 
-object  AuditLogTable : UUIDTable(name = "audit_log") {
+object AuditLogTable : UUIDTable(name = "audit_log") {
 	val userId = reference("user_id", UserTable.id)
 	val action = varchar("action", length = 255)
 	val metadata = jsonb<Metadata>("metadata", Util.jsonFormat(), Metadata.serializer()).nullable()

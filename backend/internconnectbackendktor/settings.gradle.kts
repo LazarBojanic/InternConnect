@@ -1,7 +1,7 @@
 rootProject.name = "internconnectbackendktor"
 
 dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
+	repositories {
+		mavenCentral()
+	}
 }

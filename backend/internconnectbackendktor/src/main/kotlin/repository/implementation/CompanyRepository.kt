@@ -9,7 +9,6 @@ import com.internconnect.model.setFrom
 import com.internconnect.model.toDomain
 import com.internconnect.repository.specification.ICompanyRepository
 import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.Instant
 import java.util.*
 

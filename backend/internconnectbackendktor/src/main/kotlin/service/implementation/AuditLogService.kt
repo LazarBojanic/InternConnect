@@ -5,9 +5,9 @@ import com.internconnect.repository.specification.IAuditLogRepository
 import com.internconnect.service.specification.IAuditLogService
 import java.util.*
 
-class AuditLogService (
+class AuditLogService(
 	private val auditLogRepository: IAuditLogRepository,
-): IAuditLogService {
+) : IAuditLogService {
 	override suspend fun getAll(): List<AuditLog> {
 		return auditLogRepository.findAll()
 	}

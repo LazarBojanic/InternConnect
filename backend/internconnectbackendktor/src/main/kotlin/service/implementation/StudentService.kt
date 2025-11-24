@@ -5,7 +5,7 @@ import com.internconnect.repository.specification.IStudentRepository
 import com.internconnect.service.specification.IStudentService
 import java.util.*
 
-class StudentService (
+class StudentService(
 	private val studentRepository: IStudentRepository,
 ) : IStudentService {
 	override suspend fun getAll(): List<Student> {

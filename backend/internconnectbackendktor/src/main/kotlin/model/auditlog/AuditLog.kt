@@ -19,7 +19,7 @@ data class AuditLog(
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			userId: UUID,
@@ -46,6 +46,6 @@ data class AuditLog(
 }
 
 @Serializable
-data class Metadata (
+data class Metadata(
 	val data: String
 )

@@ -7,6 +7,7 @@ import java.util.*
 
 class OAuthAccountEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<OAuthAccountEntity>(OAuthAccountTable)
+
 	var userId by OAuthAccountTable.userId
 	var provider by OAuthAccountTable.provider
 	var providerUserID by OAuthAccountTable.providerUserID

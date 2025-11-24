@@ -7,7 +7,7 @@ import java.time.Instant
 import java.util.*
 
 @Serializable
-data class Student (
+data class Student(
 	@Serializable(with = UUIDSerializer::class)
 	val userId: UUID,
 	val firstName: String,
@@ -21,7 +21,7 @@ data class Student (
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			userId: UUID,
@@ -34,7 +34,7 @@ data class Student (
 			avatarUrl: String?,
 			createdAt: Instant? = null,
 			updatedAt: Instant? = null
-		): Student{
+		): Student {
 			val now = Instant.now()
 			val createdAt = createdAt ?: now
 			val updatedAt = updatedAt ?: now

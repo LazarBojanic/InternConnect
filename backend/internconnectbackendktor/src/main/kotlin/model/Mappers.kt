@@ -44,8 +44,13 @@ fun AuditLogEntity.setFrom(d: AuditLog, mode: MapMode) {
 	metadata = d.metadata
 	ip = d.ip
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -67,8 +72,13 @@ fun UserEntity.setFrom(d: User, mode: MapMode) {
 	isEmailVerified = d.isEmailVerified
 	status = d.userStatus.name
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -94,8 +104,13 @@ fun CompanyEntity.setFrom(d: Company, mode: MapMode) {
 	city = d.city
 	about = d.about
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -121,8 +136,13 @@ fun CompanyInvitationEntity.setFrom(d: CompanyInvitation, mode: MapMode) {
 	acceptedBy = d.acceptedBy?.let { EntityID(it, UserTable) }
 	acceptedAt = d.acceptedAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -145,8 +165,13 @@ fun CompanyMemberEntity.setFrom(d: CompanyMember, mode: MapMode) {
 	companyMemberStatus = d.companyMemberStatus.name
 	joinedAt = d.joinedAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -168,8 +193,13 @@ fun EmailVerificationEntity.setFrom(d: EmailVerification, mode: MapMode) {
 	expiresAt = d.expiresAt
 	consumedAt = d.consumedAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -196,8 +226,13 @@ fun OAuthAccountEntity.setFrom(d: OAuthAccount, mode: MapMode) {
 	encryptedRefreshToken = d.encryptedRefreshToken
 	tokenExpiresAt = d.tokenExpiresAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -215,8 +250,13 @@ fun PasswordAuthEntity.setFrom(d: PasswordAuth, mode: MapMode) {
 	encryptionAlgorithm = d.encryptionAlgorithm
 	passwordSetAt = d.passwordSetAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -236,8 +276,13 @@ fun PasswordResetEntity.setFrom(d: PasswordReset, mode: MapMode) {
 	expiresAt = d.expiresAt
 	consumedAt = d.consumedAt
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -265,8 +310,13 @@ fun RefreshTokenEntity.setFrom(d: RefreshToken, mode: MapMode) {
 	userAgent = d.userAgent
 	ip = d.ip
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }
 
@@ -292,7 +342,12 @@ fun StudentEntity.setFrom(d: Student, mode: MapMode) {
 	interests = d.interests
 	avatarUrl = d.avatarUrl
 	when (mode) {
-		MapMode.Insert -> { createdAt = d.createdAt; updatedAt = d.updatedAt }
-		MapMode.Update -> { updatedAt = d.updatedAt }
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
 	}
 }

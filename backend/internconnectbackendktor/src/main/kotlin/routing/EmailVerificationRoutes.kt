@@ -1,6 +1,5 @@
 package com.internconnect.routing
 
-import com.internconnect.service.implementation.EmailVerificationService
 import com.internconnect.service.specification.IEmailVerificationService
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

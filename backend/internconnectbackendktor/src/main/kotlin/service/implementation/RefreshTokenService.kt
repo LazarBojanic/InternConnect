@@ -6,9 +6,9 @@ import com.internconnect.service.specification.IRefreshTokenService
 import java.time.Instant
 import java.util.*
 
-class RefreshTokenService (
+class RefreshTokenService(
 	private val refreshTokenRepository: IRefreshTokenRepository,
-) : IRefreshTokenService{
+) : IRefreshTokenService {
 	override suspend fun getAll(): List<RefreshToken> {
 		return refreshTokenRepository.findAll()
 	}

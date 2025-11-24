@@ -14,7 +14,7 @@ data class PasswordAuth(
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			userId: UUID,

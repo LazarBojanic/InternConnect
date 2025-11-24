@@ -7,6 +7,7 @@ import java.util.*
 
 class StudentEntity(userId: EntityID<UUID>) : UUIDEntity(userId) {
 	companion object : UUIDEntityClass<StudentEntity>(StudentTable)
+
 	var firstName by StudentTable.firstName
 	var lastName by StudentTable.lastName
 	var schoolName by StudentTable.schoolName

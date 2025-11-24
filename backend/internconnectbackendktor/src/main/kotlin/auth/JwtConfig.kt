@@ -18,10 +18,10 @@ data class JwtConfig(
 			val secret = config.property("jwt.secret").getString()
 			val algString = config.property("jwt.alg").getString()
 			var alg: Algorithm
-			if(algString == "HS256"){
+			if (algString == "HS256") {
 				alg = Algorithm.HMAC256(secret)
 			}
-			else{
+			else {
 				throw IllegalArgumentException(
 					"Unsupported algorithm: $algString"
 				)

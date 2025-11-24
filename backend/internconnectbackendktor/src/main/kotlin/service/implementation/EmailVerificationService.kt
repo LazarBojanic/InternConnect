@@ -5,7 +5,7 @@ import com.internconnect.repository.specification.IEmailVerificationRepository
 import com.internconnect.service.specification.IEmailVerificationService
 import java.util.*
 
-class EmailVerificationService (
+class EmailVerificationService(
 	private val emailVerificationRepository: IEmailVerificationRepository,
 ) : IEmailVerificationService {
 	override suspend fun getAll(): List<EmailVerification> {

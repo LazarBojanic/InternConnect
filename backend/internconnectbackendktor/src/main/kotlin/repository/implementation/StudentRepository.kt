@@ -7,7 +7,6 @@ import com.internconnect.model.student.Student
 import com.internconnect.model.student.StudentEntity
 import com.internconnect.model.toDomain
 import com.internconnect.repository.specification.IStudentRepository
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.Instant
 import java.util.*
 

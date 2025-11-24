@@ -20,7 +20,7 @@ data class User(
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			email: String,

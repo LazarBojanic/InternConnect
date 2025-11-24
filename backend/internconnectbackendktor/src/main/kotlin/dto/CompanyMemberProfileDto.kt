@@ -1,6 +1,5 @@
 package com.internconnect.dto
 
-import com.internconnect.model.companymember.CompanyMemberRole
 import kotlinx.serialization.Serializable
 
 @Serializable

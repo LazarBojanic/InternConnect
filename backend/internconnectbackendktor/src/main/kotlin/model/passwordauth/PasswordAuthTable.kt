@@ -11,7 +11,8 @@ import java.util.*
 
 
 object PasswordAuthTable : IdTable<UUID>(name = "password_auth") {
-	override val id: Column<EntityID<UUID>> = reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
+	override val id: Column<EntityID<UUID>> =
+		reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
 	val userId = id
 	val encryptedPassword = varchar("encrypted_password", 255)
 	val encryptionAlgorithm = varchar("encryption_algorithm", 20)

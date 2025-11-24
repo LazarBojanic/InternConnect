@@ -10,7 +10,7 @@ fun Application.configureFrameworks() {
 	install(Koin) {
 		slf4jLogger()
 		modules(
-			module { single { JwtConfig.from(environment.config) }},
+			module { single { JwtConfig.from(environment.config) } },
 			repositoryModule,
 			serviceModule
 		)

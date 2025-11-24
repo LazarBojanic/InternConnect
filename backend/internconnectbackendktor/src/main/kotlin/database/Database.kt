@@ -2,10 +2,8 @@ package com.internconnect.database
 
 import io.ktor.server.application.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.experimental.newSuspendedTransaction
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 fun Application.configureDatabase() {
 	val databaseName = environment.config.property("database.name").getString()

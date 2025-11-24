@@ -1,6 +1,5 @@
 package com.internconnect.routing
 
-import com.internconnect.service.implementation.AuditLogService
 import com.internconnect.service.specification.IAuditLogService
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

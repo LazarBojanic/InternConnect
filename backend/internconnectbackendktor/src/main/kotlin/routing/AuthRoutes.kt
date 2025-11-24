@@ -5,14 +5,14 @@ import com.internconnect.dto.RefreshDto
 import com.internconnect.dto.RegisterCompanyMemberDto
 import com.internconnect.dto.RegisterStudentDto
 import com.internconnect.service.specification.IAuthService
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.JWTPrincipal
-import io.ktor.server.request.receive
-import io.ktor.server.response.respond
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
-import java.util.UUID
+import java.util.*
 
 fun Route.authRoutes() {
 	val authService by inject<IAuthService>()

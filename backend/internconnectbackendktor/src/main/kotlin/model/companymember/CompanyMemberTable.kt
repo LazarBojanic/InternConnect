@@ -6,13 +6,13 @@ import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.ReferenceOption
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IdTable
-import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 object CompanyMemberTable : IdTable<UUID>(name = "company_member") {
-	override val id: Column<EntityID<UUID>> = reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
+	override val id: Column<EntityID<UUID>> =
+		reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
 	val userId = id
 	val companyID = reference("company_id", CompanyTable.id)
 	val companyMemberRole = varchar("company_member_role", length = 255)

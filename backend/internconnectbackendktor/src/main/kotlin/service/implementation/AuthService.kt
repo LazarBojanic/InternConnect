@@ -4,11 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.internconnect.auth.JwtConfig
 import com.internconnect.database.dbQuery
-import com.internconnect.dto.LoginUserDto
-import com.internconnect.dto.RefreshDto
-import com.internconnect.dto.Token
-import com.internconnect.dto.RegisterCompanyMemberDto
-import com.internconnect.dto.RegisterStudentDto
+import com.internconnect.dto.*
 import com.internconnect.model.company.Company
 import com.internconnect.model.companymember.CompanyMember
 import com.internconnect.model.companymember.CompanyMemberRole
@@ -19,7 +15,7 @@ import com.internconnect.model.student.Student
 import com.internconnect.model.user.User
 import com.internconnect.model.user.UserRole
 import com.internconnect.service.specification.*
-import io.ktor.server.auth.jwt.JWTPrincipal
+import io.ktor.server.auth.jwt.*
 import org.mindrot.jbcrypt.BCrypt
 import java.security.MessageDigest
 import java.time.Instant
@@ -56,10 +52,10 @@ class AuthService(
 		var companyId: UUID? = null
 		if (companyMember != null) {
 			company = companyService.getById(companyMember.companyId)
-			if(company != null){
+			if (company != null) {
 				companyId = company.id
 			}
-			else{
+			else {
 				companyId = UUID.fromString("00000000-0000-0000-0000-000000000000")
 			}
 		}
@@ -72,7 +68,7 @@ class AuthService(
 			sessionId = sessionId
 		) ?: throw Exception("failed_to_login")
 
-		val refresh = issueRefresh(user.id, user.email, user.userRole.name,companyId, sessionId)
+		val refresh = issueRefresh(user.id, user.email, user.userRole.name, companyId, sessionId)
 			?: throw Exception("failed_to_login")
 
 		val refreshHash = sha256(refresh) ?: throw Exception("failed_to_login")
@@ -285,7 +281,7 @@ class AuthService(
 			var refresh: String? = refreshDto.refresh
 			var access: String? = null
 			var newRefresh: String? = null
-			if(refresh != null){
+			if (refresh != null) {
 				val decoded = JWT.decode(refresh)
 				require(decoded.getClaim("typ").asString() == "refresh") { "invalid_token_type" }
 
@@ -307,11 +303,13 @@ class AuthService(
 					?: throw Exception("failed_to_refresh")
 
 				newRefresh =
-					issueRefresh(UUID.fromString(decoded.subject),
+					issueRefresh(
+						UUID.fromString(decoded.subject),
 						decoded.getClaim("email").asString() ?: "",
 						decoded.getClaim("userRole").asString() ?: "student",
 						null,
-						UUID.fromString(decoded.getClaim("sid").asString()))
+						UUID.fromString(decoded.getClaim("sid").asString())
+					)
 						?: throw Exception("failed_to_refresh")
 
 				val newParsed = JWT.decode(newRefresh)

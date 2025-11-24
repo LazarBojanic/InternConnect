@@ -7,6 +7,7 @@ import java.util.*
 
 class PasswordAuthEntity(userId: EntityID<UUID>) : UUIDEntity(userId) {
 	companion object : UUIDEntityClass<PasswordAuthEntity>(PasswordAuthTable)
+
 	var encryptedPassword by PasswordAuthTable.encryptedPassword
 	var encryptionAlgorithm by PasswordAuthTable.encryptionAlgorithm
 	var passwordSetAt by PasswordAuthTable.passwordSetAt

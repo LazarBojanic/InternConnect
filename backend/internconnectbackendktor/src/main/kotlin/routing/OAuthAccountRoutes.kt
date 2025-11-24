@@ -1,6 +1,5 @@
 package com.internconnect.routing
 
-import com.internconnect.service.implementation.OAuthAccountService
 import com.internconnect.service.specification.IOAuthAccountService
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

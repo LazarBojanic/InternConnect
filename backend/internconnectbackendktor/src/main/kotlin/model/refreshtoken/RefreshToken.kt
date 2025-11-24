@@ -27,7 +27,7 @@ data class RefreshToken(
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			userId: UUID,

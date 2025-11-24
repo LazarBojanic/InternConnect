@@ -9,11 +9,10 @@ import com.internconnect.model.setFrom
 import com.internconnect.model.toDomain
 import com.internconnect.repository.specification.ICompanyMemberRepository
 import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.Instant
 import java.util.*
 
-class   CompanyMemberRepository : ICompanyMemberRepository {
+class CompanyMemberRepository : ICompanyMemberRepository {
 	override suspend fun findAll(): List<CompanyMember> {
 		return dbQuery {
 			CompanyMemberEntity.all().map { it.toDomain() }

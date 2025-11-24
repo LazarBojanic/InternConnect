@@ -11,7 +11,8 @@ import java.util.*
 
 
 object StudentTable : IdTable<UUID>(name = "student") {
-	override val id: Column<EntityID<UUID>> = reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
+	override val id: Column<EntityID<UUID>> =
+		reference("user_id", UserTable.id, onDelete = ReferenceOption.CASCADE).uniqueIndex()
 	val userId = id
 	val firstName = varchar("first_name", 255)
 	val lastName = varchar("last_name", 255)

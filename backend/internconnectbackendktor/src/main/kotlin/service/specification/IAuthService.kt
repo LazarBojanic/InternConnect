@@ -1,13 +1,9 @@
 package com.internconnect.service.specification
 
 import com.auth0.jwt.JWTVerifier
-import com.internconnect.dto.LoginUserDto
-import com.internconnect.dto.RefreshDto
-import com.internconnect.dto.Token
-import com.internconnect.dto.RegisterCompanyMemberDto
-import com.internconnect.dto.RegisterStudentDto
+import com.internconnect.dto.*
 import com.internconnect.model.user.User
-import io.ktor.server.auth.jwt.JWTPrincipal
+import io.ktor.server.auth.jwt.*
 import java.util.*
 
 interface IAuthService {

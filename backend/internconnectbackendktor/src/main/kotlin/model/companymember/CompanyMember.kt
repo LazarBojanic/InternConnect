@@ -20,7 +20,7 @@ data class CompanyMember(
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val updatedAt: Instant
-){
+) {
 	companion object {
 		fun createNew(
 			companyId: UUID,
@@ -30,7 +30,7 @@ data class CompanyMember(
 			joinedAt: Instant? = null,
 			createdAt: Instant? = null,
 			updatedAt: Instant? = null
-		) : CompanyMember {
+		): CompanyMember {
 			val now = Instant.now()
 			val joinedAt = joinedAt ?: now
 			val createdAt = createdAt ?: now
@@ -51,6 +51,7 @@ data class CompanyMember(
 enum class CompanyMemberRole {
 	owner, admin, recruiter, viewer
 }
+
 enum class CompanyMemberStatus {
 	invited, active, disabled
 }

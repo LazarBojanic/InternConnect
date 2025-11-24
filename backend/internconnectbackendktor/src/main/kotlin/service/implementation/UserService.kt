@@ -10,7 +10,7 @@ import com.internconnect.repository.specification.IUserRepository
 import com.internconnect.service.specification.IUserService
 import java.util.*
 
-class UserService (
+class UserService(
 	private val userRepository: IUserRepository,
 	private val studentRepository: IStudentRepository,
 	private val companyRepository: ICompanyRepository,
@@ -23,6 +23,7 @@ class UserService (
 	override suspend fun getById(id: UUID): User? {
 		return userRepository.findById(id)
 	}
+
 	override suspend fun getByEmail(email: String): User? {
 		return userRepository.findByEmail(email)
 	}
@@ -30,9 +31,9 @@ class UserService (
 	override suspend fun getStudentProfileById(userId: UUID): StudentProfileDto? {
 		val user = userRepository.findById(userId)
 		var studentProfileDto: StudentProfileDto? = null
-		if(user != null){
+		if (user != null) {
 			val student = studentRepository.findById(userId)
-			if(student != null){
+			if (student != null) {
 				studentProfileDto = StudentProfileDto(
 					userId = userId.toString(),
 					email = user.email,
@@ -60,10 +61,10 @@ class UserService (
 
 		var companyMemberProfileDto: CompanyMemberProfileDto? = null
 
-		if(user != null && companyMember != null){
+		if (user != null && companyMember != null) {
 			val company = companyRepository.findById(companyMember.companyId)
 
-			if(company != null){
+			if (company != null) {
 				companyMemberProfileDto = CompanyMemberProfileDto(
 					userId = userId.toString(),
 					userEmail = user.email,

@@ -7,7 +7,6 @@ import com.internconnect.model.passwordauth.PasswordAuthEntity
 import com.internconnect.model.setFrom
 import com.internconnect.model.toDomain
 import com.internconnect.repository.specification.IPasswordAuthRepository
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.Instant
 import java.util.*
 

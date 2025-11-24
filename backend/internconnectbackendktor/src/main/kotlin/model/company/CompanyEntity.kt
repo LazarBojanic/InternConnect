@@ -8,6 +8,7 @@ import java.util.*
 
 class CompanyEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<CompanyEntity>(CompanyTable)
+
 	var name by CompanyTable.name
 	var industry by CompanyTable.industry
 	var website by CompanyTable.website

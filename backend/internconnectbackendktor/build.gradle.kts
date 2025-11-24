@@ -10,26 +10,26 @@ val ktor_plugin_version: String by project
 val ktor_version: String by project
 
 plugins {
-    kotlin("jvm") version "2.3.0-Beta2"
-    id("io.ktor.plugin") version "3.3.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta2"
+	kotlin("jvm") version "2.3.0-Beta2"
+	id("io.ktor.plugin") version "3.3.0"
+	id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta2"
 }
 
 group = "com.internconnect"
 version = "0.0.1"
 
 application {
-    mainClass = "io.ktor.server.netty.EngineMain"
+	mainClass = "io.ktor.server.netty.EngineMain"
 
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-cors")
-    implementation("io.ktor:ktor-server-default-headers")
-    implementation("io.ktor:ktor-server-core")
-    implementation("io.ktor:ktor-server-auth")
-    implementation("io.ktor:ktor-server-auth-jwt")
-    implementation("io.ktor:ktor-client-core")
+	implementation("io.ktor:ktor-server-cors")
+	implementation("io.ktor:ktor-server-default-headers")
+	implementation("io.ktor:ktor-server-core")
+	implementation("io.ktor:ktor-server-auth")
+	implementation("io.ktor:ktor-server-auth-jwt")
+	implementation("io.ktor:ktor-client-core")
 	implementation("io.ktor:ktor-server-netty")
 	implementation("io.ktor:ktor-client-apache")
 	implementation("io.ktor:ktor-server-csrf")

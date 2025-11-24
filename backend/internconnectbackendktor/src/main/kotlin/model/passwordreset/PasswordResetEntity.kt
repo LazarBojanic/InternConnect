@@ -8,6 +8,7 @@ import java.util.*
 
 class PasswordResetEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<PasswordResetEntity>(PasswordResetTable)
+
 	var userId by PasswordResetTable.userId
 	var codeHash by PasswordResetTable.codeHash
 	var expiresAt by PasswordResetTable.expiresAt

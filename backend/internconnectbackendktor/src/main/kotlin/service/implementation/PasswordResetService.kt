@@ -5,7 +5,7 @@ import com.internconnect.repository.specification.IPasswordResetRepository
 import com.internconnect.service.specification.IPasswordResetService
 import java.util.*
 
-class PasswordResetService (
+class PasswordResetService(
 	private val passwordResetRepository: IPasswordResetRepository,
 ) : IPasswordResetService {
 	override suspend fun getAll(): List<PasswordReset> {

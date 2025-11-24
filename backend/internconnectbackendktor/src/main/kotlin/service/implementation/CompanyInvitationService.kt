@@ -5,7 +5,7 @@ import com.internconnect.repository.specification.ICompanyInvitationRepository
 import com.internconnect.service.specification.ICompanyInvitationService
 import java.util.*
 
-class CompanyInvitationService (
+class CompanyInvitationService(
 	private val companyInvitationRepository: ICompanyInvitationRepository,
 ) : ICompanyInvitationService {
 	override suspend fun getAll(): List<CompanyInvitation> {

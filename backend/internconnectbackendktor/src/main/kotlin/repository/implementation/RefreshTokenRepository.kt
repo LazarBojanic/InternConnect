@@ -8,12 +8,7 @@ import com.internconnect.model.refreshtoken.RefreshTokenTable
 import com.internconnect.model.setFrom
 import com.internconnect.model.toDomain
 import com.internconnect.repository.specification.IRefreshTokenRepository
-import org.jetbrains.exposed.v1.core.and
-import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.core.greater
-import org.jetbrains.exposed.v1.core.less
-import org.jetbrains.exposed.v1.core.isNull
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import org.jetbrains.exposed.v1.core.*
 import java.time.Instant
 import java.util.*
 
@@ -85,7 +80,7 @@ class RefreshTokenRepository : IRefreshTokenRepository {
 		}
 	}
 
-	override suspend fun deleteExpired(now: Instant): Int  {
+	override suspend fun deleteExpired(now: Instant): Int {
 		return dbQuery {
 			RefreshTokenEntity.find { RefreshTokenTable.expiresAt less now }.count().also {
 				RefreshTokenEntity.find { RefreshTokenTable.expiresAt less now }.forEach { it.delete() }

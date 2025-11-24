@@ -1,18 +1,14 @@
 package com.internconnect.auth
 
+import com.internconnect.model.user.UserRole
 import com.internconnect.service.specification.IAuthService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
-import io.ktor.server.routing.Route
-import io.ktor.server.routing.RouteSelector
-import io.ktor.server.routing.intercept
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
-import com.internconnect.model.user.UserRole
-import io.ktor.server.routing.RouteSelectorEvaluation
-import io.ktor.server.routing.RoutingResolveContext
 
 fun Application.configureSecurity() {
 	val authService by inject<IAuthService>()

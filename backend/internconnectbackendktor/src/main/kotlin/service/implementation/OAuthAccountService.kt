@@ -5,9 +5,9 @@ import com.internconnect.repository.specification.IOAuthAccountRepository
 import com.internconnect.service.specification.IOAuthAccountService
 import java.util.*
 
-class OAuthAccountService (
+class OAuthAccountService(
 	private val oAuthAccountRepository: IOAuthAccountRepository,
-): IOAuthAccountService {
+) : IOAuthAccountService {
 	override suspend fun getAll(): List<OAuthAccount> {
 		return oAuthAccountRepository.findAll()
 	}

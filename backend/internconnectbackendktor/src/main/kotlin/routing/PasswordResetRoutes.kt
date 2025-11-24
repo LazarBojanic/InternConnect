@@ -1,6 +1,5 @@
 package com.internconnect.routing
 
-import com.internconnect.service.implementation.PasswordResetService
 import com.internconnect.service.specification.IPasswordResetService
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

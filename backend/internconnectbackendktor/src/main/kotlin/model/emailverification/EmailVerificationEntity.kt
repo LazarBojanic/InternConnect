@@ -7,6 +7,7 @@ import java.util.*
 
 class EmailVerificationEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<EmailVerificationEntity>(EmailVerificationTable)
+
 	var userId by EmailVerificationTable.userId
 	var codeHash by EmailVerificationTable.codeHash
 	var sentToEmail by EmailVerificationTable.sentToEmail

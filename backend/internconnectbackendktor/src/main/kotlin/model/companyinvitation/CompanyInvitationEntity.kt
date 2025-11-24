@@ -7,6 +7,7 @@ import java.util.*
 
 class CompanyInvitationEntity(id: EntityID<UUID>) : UUIDEntity(id) {
 	companion object : UUIDEntityClass<CompanyInvitationEntity>(CompanyInvitationTable)
+
 	var companyID by CompanyInvitationTable.companyID
 	var email by CompanyInvitationTable.email
 	var codeHash by CompanyInvitationTable.codeHash
