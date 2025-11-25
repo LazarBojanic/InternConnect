@@ -50,9 +50,7 @@ fun Application.module() {
 		UserTable,
 	)
 
-	transaction {
-		exec("DROP SCHEMA IF EXISTS public CASCADE;")
-		exec("CREATE SCHEMA public;")
+	transaction{
+		SchemaUtils.createMissingTablesAndColumns(*allTables)
 	}
-	transaction { SchemaUtils.create(*allTables) }
 }
