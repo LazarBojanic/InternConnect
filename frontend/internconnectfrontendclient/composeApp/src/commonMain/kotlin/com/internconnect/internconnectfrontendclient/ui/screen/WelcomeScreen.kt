@@ -51,14 +51,14 @@ fun Welcome(
 
 			Image(
 				painter = logo,
-				contentDescription = "InternConnect logo",
+				contentDescription = "InternConnector Logo",
 				modifier = Modifier.size(500.dp)
 			)
 
 			Spacer(Modifier.height(20.dp))
 
 			Text(
-				text = "InternConnect",
+				text = "InternConnector",
 				color = Color(0xFFFFFFFF),
 				textAlign = TextAlign.Center,
 				lineHeight = 34.sp,

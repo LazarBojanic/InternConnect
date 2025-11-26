@@ -38,7 +38,7 @@ fun HomeScreen(onOpenProfile: () -> Unit) {
 			Box(Modifier.fillMaxSize()) {
 
 				Text(
-					text = "Welcome to InternConnect",
+					text = "Welcome to InternConnector",
 					modifier = Modifier.align(Alignment.Center),
 					color = Color.White,
 					fontSize = 22.sp,
@@ -57,17 +57,17 @@ fun HomeScreen(onOpenProfile: () -> Unit) {
 				onClick = onOpenProfile
 			)
 
-			ActionCard(
+			/*ActionCard(
 				title = "Browse",
 				description = "Explore internships and companies",
 				onClick = { /* TODO (future) */ }
-			)
+			)*/
 
-			ActionCard(
+			/*ActionCard(
 				title = "Messages",
 				description = "Connect and chat",
 				onClick = { /* TODO (future) */ }
-			)
+			)*/
 		}
 	}
 }
