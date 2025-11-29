@@ -6,9 +6,10 @@ import com.internconnect.di.configureFrameworks
 import com.internconnect.http.configureHTTP
 import com.internconnect.model.auditlog.AuditLogTable
 import com.internconnect.model.company.CompanyTable
-import com.internconnect.model.companyinvitation.CompanyInvitationTable
 import com.internconnect.model.companymember.CompanyMemberTable
 import com.internconnect.model.emailverification.EmailVerificationTable
+import com.internconnect.model.internship.InternshipTable
+import com.internconnect.model.internshipapplication.InternshipApplicationTable
 import com.internconnect.model.oauthaccount.OAuthAccountTable
 import com.internconnect.model.passwordauth.PasswordAuthTable
 import com.internconnect.model.passwordreset.PasswordResetTable
@@ -39,9 +40,10 @@ fun Application.module() {
 	val allTables = arrayOf(
 		AuditLogTable,
 		CompanyTable,
-		CompanyInvitationTable,
 		CompanyMemberTable,
 		EmailVerificationTable,
+		InternshipTable,
+		InternshipApplicationTable,
 		OAuthAccountTable,
 		PasswordAuthTable,
 		PasswordResetTable,

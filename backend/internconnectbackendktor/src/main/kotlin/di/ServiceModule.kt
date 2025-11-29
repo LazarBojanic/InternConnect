@@ -13,7 +13,8 @@ val serviceModule = module {
 	single<IStudentService> { StudentService(get()) }
 	single<ICompanyService> { CompanyService(get()) }
 	single<ICompanyMemberService> { CompanyMemberService(get()) }
-	single<ICompanyInvitationService> { CompanyInvitationService(get()) }
+	single<IInternshipService>{ InternshipService(get()) }
+	single<IInternshipApplicationService> { InternshipApplicationService(get()) }
 	single<IAuditLogService> { AuditLogService(get()) }
 	single<IOAuthAccountService> { OAuthAccountService(get()) }
 	single<IAuthService> { AuthService(get(), get(), get(), get(), get(), get(), get()) }

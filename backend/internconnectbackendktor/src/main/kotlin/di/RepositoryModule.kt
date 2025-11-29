@@ -13,7 +13,8 @@ val repositoryModule = module {
 	single<IStudentRepository> { StudentRepository() }
 	single<ICompanyRepository> { CompanyRepository() }
 	single<ICompanyMemberRepository> { CompanyMemberRepository() }
-	single<ICompanyInvitationRepository> { CompanyInvitationRepository() }
+	single<IInternshipRepository>{ InternshipRepository() }
+	single<IInternshipApplicationRepository> { InternshipApplicationRepository() }
 	single<IAuditLogRepository> { AuditLogRepository() }
 	single<IOAuthAccountRepository> { OAuthAccountRepository() }
 }

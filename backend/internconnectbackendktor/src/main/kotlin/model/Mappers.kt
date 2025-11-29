@@ -6,14 +6,18 @@ import com.internconnect.model.auditlog.AuditLogEntity
 import com.internconnect.model.company.Company
 import com.internconnect.model.company.CompanyEntity
 import com.internconnect.model.company.CompanyTable
-import com.internconnect.model.companyinvitation.CompanyInvitation
-import com.internconnect.model.companyinvitation.CompanyInvitationEntity
 import com.internconnect.model.companymember.CompanyMember
 import com.internconnect.model.companymember.CompanyMemberEntity
 import com.internconnect.model.companymember.CompanyMemberRole
 import com.internconnect.model.companymember.CompanyMemberStatus
 import com.internconnect.model.emailverification.EmailVerification
 import com.internconnect.model.emailverification.EmailVerificationEntity
+import com.internconnect.model.internship.Internship
+import com.internconnect.model.internship.InternshipEntity
+import com.internconnect.model.internship.InternshipTable
+import com.internconnect.model.internshipapplication.InternshipApplication
+import com.internconnect.model.internshipapplication.InternshipApplicationEntity
+import com.internconnect.model.internshipapplication.InternshipApplicationStatus
 import com.internconnect.model.oauthaccount.OAuthAccount
 import com.internconnect.model.oauthaccount.OAuthAccountEntity
 import com.internconnect.model.passwordauth.PasswordAuth
@@ -24,9 +28,11 @@ import com.internconnect.model.refreshtoken.RefreshToken
 import com.internconnect.model.refreshtoken.RefreshTokenEntity
 import com.internconnect.model.student.Student
 import com.internconnect.model.student.StudentEntity
+import com.internconnect.model.student.StudentTable
 import com.internconnect.model.user.*
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
+enum class MapMode { Insert, Update }
 
 fun AuditLogEntity.toDomain(): AuditLog = AuditLog(
 	id = this.id.value,
@@ -114,37 +120,6 @@ fun CompanyEntity.setFrom(d: Company, mode: MapMode) {
 	}
 }
 
-fun CompanyInvitationEntity.toDomain(): CompanyInvitation = CompanyInvitation(
-	id = this.id.value,
-	companyID = this.companyID.value,
-	email = this.email,
-	codeHash = this.codeHash,
-	expiresAt = this.expiresAt,
-	invitedBy = this.invitedBy.value,
-	acceptedBy = this.acceptedBy?.value,
-	acceptedAt = this.acceptedAt,
-	createdAt = this.createdAt,
-	updatedAt = this.updatedAt,
-)
-
-fun CompanyInvitationEntity.setFrom(d: CompanyInvitation, mode: MapMode) {
-	companyID = EntityID(d.companyID, CompanyTable)
-	email = d.email
-	codeHash = d.codeHash
-	expiresAt = d.expiresAt
-	invitedBy = EntityID(d.invitedBy, UserTable)
-	acceptedBy = d.acceptedBy?.let { EntityID(it, UserTable) }
-	acceptedAt = d.acceptedAt
-	when (mode) {
-		MapMode.Insert -> {
-			createdAt = d.createdAt; updatedAt = d.updatedAt
-		}
-
-		MapMode.Update -> {
-			updatedAt = d.updatedAt
-		}
-	}
-}
 
 fun CompanyMemberEntity.toDomain(): CompanyMember = CompanyMember(
 	userId = this.userId.value,
@@ -203,7 +178,57 @@ fun EmailVerificationEntity.setFrom(d: EmailVerification, mode: MapMode) {
 	}
 }
 
-// -------------------- OAuthAccount --------------------
+fun InternshipEntity.toDomain(): Internship = Internship(
+	id = this.id.value,
+	companyId = this.companyId.value,
+	title = this.title,
+	category = this.category,
+	description = this.description,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt,
+)
+
+fun InternshipEntity.setFrom(d: Internship, mode: MapMode) {
+	companyId = EntityID(d.companyId, CompanyTable)
+	title = d.title
+	category = d.category
+	description = d.description
+	when (mode) {
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
+	}
+}
+
+fun InternshipApplicationEntity.toDomain(): InternshipApplication = InternshipApplication(
+	id = this.id.value,
+	internshipId = this.internshipId.value,
+	studentId = this.studentId.value,
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
+	status = runCatching { InternshipApplicationStatus.valueOf(this.status) }.getOrDefault(InternshipApplicationStatus.PENDING),
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt,
+)
+fun InternshipApplicationEntity.setFrom(d: InternshipApplication, mode: MapMode) {
+	internshipId = EntityID(d.internshipId, InternshipTable)
+	studentId = EntityID(d.studentId, StudentTable)
+	resume = d.resume
+	interviewNotes = d.interviewNotes
+	status = d.status.name
+	when (mode) {
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
+	}
+}
+
 fun OAuthAccountEntity.toDomain(): OAuthAccount = OAuthAccount(
 	id = this.id.value,
 	userId = this.userId.value,
