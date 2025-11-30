@@ -1,13 +1,13 @@
 package com.internconnect.internconnectfrontendclient.domain.repository
 
-import com.internconnect.internconnectfrontendclient.data.dto.CompanyMemberProfileDto
-import com.internconnect.internconnectfrontendclient.data.dto.StudentProfileDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.CompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.StudentDto
 
 interface IUserRepository {
-	suspend fun getCurrentStudentProfile(): StudentProfileDto?
-	suspend fun getCurrentCompanyMemberProfile(): CompanyMemberProfileDto?
-	suspend fun setCurrentStudentProfile(studentProfileDto: StudentProfileDto)
-	suspend fun setCurrentCompanyMemberProfile(companyMemberProfileDto: CompanyMemberProfileDto)
+	suspend fun getCurrentStudentProfile(): StudentDto?
+	suspend fun getCurrentCompanyMemberProfile(): CompanyMemberDto?
+	suspend fun setCurrentStudentProfile(studentDto: StudentDto)
+	suspend fun setCurrentCompanyMemberProfile(companyMemberDto: CompanyMemberDto)
 	suspend fun clear()
 }
 

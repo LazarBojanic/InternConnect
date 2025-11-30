@@ -36,7 +36,7 @@ class ProfileViewModel(
 					return@launch
 				}
 
-				val access: String? = tokenStore.token.value?.access
+				val access: String? = tokenStore.tokenDto.value?.access
 				var userId: String? = null
 				var userRole: String? = null
 				if(access !=  null) {

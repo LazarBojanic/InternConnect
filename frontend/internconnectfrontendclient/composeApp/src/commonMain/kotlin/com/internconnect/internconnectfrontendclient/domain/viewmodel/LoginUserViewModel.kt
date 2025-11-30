@@ -3,8 +3,8 @@ package com.internconnect.internconnectfrontendclient.domain.viewmodel
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
 import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
-import com.internconnect.internconnectfrontendclient.data.dto.LoginUserDto
-import com.internconnect.internconnectfrontendclient.data.dto.Token
+import com.internconnect.internconnectfrontendclient.data.dto.request.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +37,7 @@ class LoginUserViewModel(
 			try {
 				val token = api.login(dto)
 				if(token != null) {
-					tokenStore.setToken(Token(token.access, token.refresh))
+					tokenStore.setToken(TokenDto(token.access, token.refresh))
 					val access = token.access
 					if(access != null) {
 						val claims = jwtDecode(access)

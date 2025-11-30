@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.internconnect.internconnectfrontendclient.data.dto.Token
+import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,22 +19,22 @@ class TokenDataStore(private val dataStore: DataStore<Preferences>) : ITokenData
 
 	private val scope = CoroutineScope(Dispatchers.Default)
 
-	private val tokenFlow: Flow<Token?> = dataStore.data.map { prefs ->
+	private val tokenDtoFlow: Flow<TokenDto?> = dataStore.data.map { prefs ->
 		val access = prefs[keyAccess]
 		val refresh = prefs[keyRefresh]
-		if (access != null || refresh != null) Token(access = access, refresh = refresh) else null
+		if (access != null || refresh != null) TokenDto(access = access, refresh = refresh) else null
 	}
 
-	override val token = tokenFlow.stateIn(
+	override val tokenDto = tokenDtoFlow.stateIn(
 		scope = scope,
 		started = SharingStarted.Eagerly,
 		initialValue = null
 	)
 
-	override suspend fun setToken(token: Token) {
+	override suspend fun setToken(tokenDto: TokenDto) {
 		dataStore.edit { prefs ->
-			if (!token.access.isNullOrBlank()) prefs[keyAccess] = token.access else prefs.remove(keyAccess)
-			if (!token.refresh.isNullOrBlank()) prefs[keyRefresh] = token.refresh else prefs.remove(keyRefresh)
+			if (!tokenDto.access.isNullOrBlank()) prefs[keyAccess] = tokenDto.access else prefs.remove(keyAccess)
+			if (!tokenDto.refresh.isNullOrBlank()) prefs[keyRefresh] = tokenDto.refresh else prefs.remove(keyRefresh)
 		}
 	}
 

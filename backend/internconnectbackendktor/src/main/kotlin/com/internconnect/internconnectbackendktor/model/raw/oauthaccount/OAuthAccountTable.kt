@@ -1,0 +1,19 @@
+package com.internconnect.internconnectbackendktor.model.raw.oauthaccount
+
+import com.internconnect.internconnectbackendktor.model.raw.user.UserTable
+import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
+import org.jetbrains.exposed.v1.javatime.timestamp
+import java.time.Instant
+
+
+object OAuthAccountTable : UUIDTable(name = "oauth_account") {
+	val userId = reference("user_id", UserTable.id)
+	val provider = varchar("provider", length = 255).nullable()
+	val providerUserId = uuid("provider_user_id")
+	val providerEmail = varchar("provider_email", length = 255).nullable()
+	val encryptedAccessToken = varchar("encrypted_access_token", length = 255).nullable()
+	val encryptedRefreshToken = varchar("encrypted_refresh_token", length = 255).nullable()
+	val tokenExpiresAt = timestamp("token_expires_at")
+	val createdAt = timestamp("created_at").default(Instant.now())
+	val updatedAt = timestamp("updated_at").default(Instant.now())
+}

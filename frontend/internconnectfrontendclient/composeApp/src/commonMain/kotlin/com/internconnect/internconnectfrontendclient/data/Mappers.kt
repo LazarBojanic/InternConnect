@@ -1,16 +1,12 @@
 package com.internconnect.internconnectfrontendclient.data
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-import com.internconnect.internconnectfrontendclient.data.dto.CompanyMemberProfileDto
-import com.internconnect.internconnectfrontendclient.data.dto.StudentProfileDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.CompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.StudentDto
 import com.internconnect.internconnectfrontendclient.data.model.CompanyMemberProfile
 import com.internconnect.internconnectfrontendclient.data.model.StudentProfile
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
-fun StudentProfileDto.toDomain(): StudentProfile{
+fun StudentDto.toDomain(): StudentProfile{
 	return StudentProfile(
 		userId = this.userId,
 		email = this.email,
@@ -28,7 +24,7 @@ fun StudentProfileDto.toDomain(): StudentProfile{
 	)
 }
 @OptIn(ExperimentalTime::class)
-fun CompanyMemberProfileDto.toDomain(): CompanyMemberProfile{
+fun CompanyMemberDto.toDomain(): CompanyMemberProfile{
 	return CompanyMemberProfile(
 		userId = this.userId,
 		userEmail = this.userEmail,
@@ -49,7 +45,7 @@ fun CompanyMemberProfileDto.toDomain(): CompanyMemberProfile{
 	)
 }
 
-fun StudentProfile.toDto(): StudentProfileDto = StudentProfileDto(
+fun StudentProfile.toDto(): StudentDto = StudentDto(
 	userId = userId,
 	email = email,
 	firstName = firstName,
@@ -65,7 +61,7 @@ fun StudentProfile.toDto(): StudentProfileDto = StudentProfileDto(
 	avatarUrl = avatarUrl,
 )
 
-fun CompanyMemberProfile.toDto(): CompanyMemberProfileDto = CompanyMemberProfileDto(
+fun CompanyMemberProfile.toDto(): CompanyMemberDto = CompanyMemberDto(
 	userId = userId,
 	userEmail = userEmail,
 	userFullName = userFullName,

@@ -6,7 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.data.dto.InternshipDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.InternshipDto
 import com.internconnect.internconnectfrontendclient.ui.components.CategoryFilter
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard

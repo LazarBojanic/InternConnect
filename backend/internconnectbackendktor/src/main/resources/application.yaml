@@ -1,11 +1,11 @@
 ktor:
   application:
     modules:
-      - com.internconnect.ApplicationKt.module
+      - com.internconnect.internconnectbackendktor.ApplicationKt.module
   deployment:
     host: $KTOR_DEPLOYMENT_HOST:127.0.0.1
     port: $KTOR_DEPLOYMENT_PORT:8080
-  development: true
+  development: false
 jwt:
   alg: $JWT_ALG:HS256
   iss: $JWT_ISS

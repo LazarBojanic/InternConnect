@@ -1,17 +1,12 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-import com.internconnect.internconnectfrontendclient.data.dto.RefreshDto
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
-import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.longOrNull
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 class WelcomeViewModel(
@@ -32,7 +27,7 @@ class WelcomeViewModel(
 	fun checkAuth(userAgent: String? = null, ip: String? = null) {
 		scope.launch {
 			_state.value = State.Checking
-			val current = tokenStore.token.value
+			val current = tokenStore.tokenDto.value
 			val access = current?.access
 			val refresh = current?.refresh
 

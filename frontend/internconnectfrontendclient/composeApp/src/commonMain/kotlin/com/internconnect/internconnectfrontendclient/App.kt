@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.internconnect.internconnectfrontendclient.data.dto.ApplicationDto
 import com.internconnect.internconnectfrontendclient.data.dto.ApplicationStatus
-import com.internconnect.internconnectfrontendclient.data.dto.InternshipDto
+import com.internconnect.internconnectfrontendclient.data.dto.response.InternshipDto
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen

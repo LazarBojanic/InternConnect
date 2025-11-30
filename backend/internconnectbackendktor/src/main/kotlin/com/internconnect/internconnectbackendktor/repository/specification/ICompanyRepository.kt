@@ -1,0 +1,13 @@
+package com.internconnect.internconnectbackendktor.repository.specification
+
+import com.internconnect.internconnectbackendktor.model.raw.company.Company
+import java.util.*
+
+interface ICompanyRepository {
+	suspend fun findAll(): List<Company>
+	suspend fun findById(id: UUID): Company?
+	suspend fun findByName(name: String): Company?
+	suspend fun create(company: Company): Company?
+	suspend fun update(company: Company): Company?
+	suspend fun delete(id: UUID): Boolean
+}
