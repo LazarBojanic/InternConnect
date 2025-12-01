@@ -16,6 +16,7 @@ fun StudentFindInternshipsScreen(
 	categories: List<String>,
 	onBack: (() -> Unit)? = null,
 	onOpenDetails: (id: String) -> Unit,
+	onApply: (id: String) -> Unit,
 ) {
 	var query by remember { mutableStateOf("") }
 	var selectedCategory by remember { mutableStateOf("All") }
@@ -49,8 +50,9 @@ fun StudentFindInternshipsScreen(
 		LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxSize()) {
 			items(display) { item ->
 				InternshipCard(
-					item,
-					onApply = { onOpenDetails(item.id) },
+					internship = item,
+					onApply = { onApply(item.id) },
+					onDetails = { onOpenDetails(item.id) },
 					modifier = Modifier.fillMaxWidth()
 				)
 			}

@@ -9,16 +9,15 @@ import com.internconnect.internconnectfrontendclient.data.model.joined.Internshi
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 
 @Composable
-fun StudentInternshipDetailsScreen(
+fun StudentMakeInternshipApplicationScreen(
 	internship: InternshipJoined?,
 	onBack: () -> Unit,
-	onUploadResume: () -> Unit = {}, // Placeholder for a real picker
-	onApply: (resumeText: String?) -> Unit,
+	onSubmit: (resumeText: String?) -> Unit,
 ) {
 	var resumeText by remember { mutableStateOf("") }
 
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
-		Header(title = "Internship Details", onBack = onBack)
+		Header(title = "Internship Application", onBack = onBack)
 		Spacer(Modifier.height(16.dp))
 
 		if (internship == null) {
@@ -26,11 +25,9 @@ fun StudentInternshipDetailsScreen(
 			return
 		}
 
-		Text(internship.title, style = MaterialTheme.typography.headlineSmall)
-		Text(internship.company.name, style = MaterialTheme.typography.titleMedium)
-		Text("${internship.company.country}, ${internship.company.city}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-		Spacer(Modifier.height(8.dp))
-		Text(internship.description, style = MaterialTheme.typography.bodyLarge)
+		// Context header
+		Text(internship.title, style = MaterialTheme.typography.titleMedium)
+		Text(internship.company.name, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
 		Spacer(Modifier.height(24.dp))
 		Text("Resume", style = MaterialTheme.typography.titleMedium)
@@ -42,11 +39,11 @@ fun StudentInternshipDetailsScreen(
 			modifier = Modifier.fillMaxWidth()
 		)
 		Spacer(Modifier.height(8.dp))
-		OutlinedButton(onClick = onUploadResume) { Text("Upload file (coming soon)") }
+		OutlinedButton(onClick = { /* file picker to come */ }) { Text("Upload file (coming soon)") }
 
 		Spacer(Modifier.height(24.dp))
-		Button(onClick = { onApply(resumeText.ifBlank { null }) }, modifier = Modifier.fillMaxWidth()) {
-			Text("Apply")
+		Button(onClick = { onSubmit(resumeText.ifBlank { null }) }, modifier = Modifier.fillMaxWidth()) {
+			Text("Submit Application")
 		}
 	}
 }

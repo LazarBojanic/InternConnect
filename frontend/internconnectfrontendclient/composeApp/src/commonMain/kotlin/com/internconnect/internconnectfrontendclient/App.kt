@@ -5,13 +5,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LogoutViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentFindInternshipsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentMyApplicationsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentSavedInternshipsViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberDashboardViewModel
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
@@ -26,11 +30,12 @@ import com.internconnect.internconnectfrontendclient.ui.screen.companymember.Com
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberProfileScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentFindInternshipsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentHomeScreen
-import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentInternshipDetailsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMessagesScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMyApplicationsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentProfileScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentSavedInternshipsScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.InternshipDetailsScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMakeInternshipApplicationScreen
 import org.koin.compose.koinInject
 
 object Routes {
@@ -46,17 +51,20 @@ object Routes {
 	const val StudentHome = "student/home"
 	const val StudentProfile = "student/profile"
 	const val StudentFindInternships = "student/find-internships"
-	const val StudentInternshipDetails = "student/internship-details"
 	const val StudentMyApplications = "student/my-applications"
 	const val StudentSavedInternships = "student/saved-internships"
 	const val StudentMessages = "student/messages"
+	const val MakeApplication = "student/make-application" // + /{id}
+
+	// Shared
+	const val InternshipDetails = "internship/details" // + /{id}
 
 	// Company member
 	const val CompanyMemberHome = "company-member/home"
 	const val CompanyMemberProfile = "company-member/profile"
 	const val CompanyMemberDashboard = "company-member/dashboard"
 	const val CompanyMemberPostInternship = "company-member/post-internship"
-	const val CompanyMemberCandidates = "company-member/candidates"
+	const val CompanyMemberCandidates = "company-member/candidates" // + /{id}
 	const val CompanyMemberMessages = "company-member/messages"
 	const val CompanyMemberAnalytics = "company-member/analytics"
 }
@@ -64,15 +72,20 @@ object Routes {
 @Composable
 fun App() {
 	val navController = rememberNavController()
-	var selectedInternshipId by remember { mutableStateOf<String?>(null) }
-	var selectedCompanyInternshipId by remember { mutableStateOf<String?>(null) }
+
+	// Central in-memory store for internships so details/app screens can look up by id
+	val internshipStore = remember { mutableStateOf<Map<String, InternshipJoined>>(emptyMap()) }
+	fun upsertInternships(list: List<InternshipJoined>) {
+		if (list.isEmpty()) return
+		internshipStore.value = internshipStore.value + list.associateBy { it.id }
+	}
 
 	// Development switches: toggle dummy vs API-backed data per screen
 	var useDummyFind by remember { mutableStateOf(true) }
 	var useDummyApps by remember { mutableStateOf(true) }
 	var useDummySaved by remember { mutableStateOf(true) }
 
-	// Company switches (new)
+	// Company switches
 	var useDummyCompanyDashboard by remember { mutableStateOf(true) }
 	var useDummyCompanyCandidates by remember { mutableStateOf(true) }
 	var useDummyCompanyAnalytics by remember { mutableStateOf(true) }
@@ -142,32 +155,47 @@ fun App() {
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyFind) { vm.setUseDummy(useDummyFind); vm.load() }
 
+				// keep store updated for details/app screens
+				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
+
 				Column(Modifier.fillMaxSize()) {
-					/*Row(Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-						Text("Dummy data")
-						Switch(checked = useDummyFind, onCheckedChange = { useDummyFind = it })
-					}*/
 					StudentFindInternshipsScreen(
 						internships = state.internships,
 						categories = state.categories,
 						onBack = { navController.popBackStack() },
-						onOpenDetails = { id ->
-							selectedInternshipId = id
-							navController.navigate(Routes.StudentInternshipDetails)
-						}
+						onOpenDetails = { id -> navController.navigate("${Routes.InternshipDetails}/$id") },
+						onApply = { id -> navController.navigate("${Routes.MakeApplication}/$id") }
 					)
 					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
 					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
 				}
 			}
 
-			composable(Routes.StudentInternshipDetails) {
-				val internship = when (selectedInternshipId) { else -> null }
-				StudentInternshipDetailsScreen(
+			// Shared details screen (student + company)
+			composable(
+				route = "${Routes.InternshipDetails}/{id}",
+				arguments = listOf(navArgument("id") { type = NavType.StringType })
+			) { backStackEntry ->
+				val id = requireNotNull(backStackEntry.arguments?.getString("id"))
+				val internship = internshipStore.value[id]
+				InternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
-					onUploadResume = { /* TODO */ },
-					onApply = { navController.navigate(Routes.StudentMyApplications) }
+					onApply = { targetId -> navController.navigate("${Routes.MakeApplication}/$targetId") }
+				)
+			}
+
+			// Student application screen
+			composable(
+				route = "${Routes.MakeApplication}/{id}",
+				arguments = listOf(navArgument("id") { type = NavType.StringType })
+			) { backStackEntry ->
+				val id = requireNotNull(backStackEntry.arguments?.getString("id"))
+				val internship = internshipStore.value[id]
+				StudentMakeInternshipApplicationScreen(
+					internship = internship,
+					onBack = { navController.popBackStack() },
+					onSubmit = { /* submit logic; after success: */ navController.navigate(Routes.StudentMyApplications) }
 				)
 			}
 
@@ -177,10 +205,6 @@ fun App() {
 				LaunchedEffect(useDummyApps) { vm.setUseDummy(useDummyApps); vm.load() }
 
 				Column(Modifier.fillMaxSize()) {
-					/*Row(Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-						Text("Dummy data")
-						Switch(checked = useDummyApps, onCheckedChange = { useDummyApps = it })
-					}*/
 					StudentMyApplicationsScreen(
 						applications = state.applications,
 						onBack = { navController.popBackStack() },
@@ -196,18 +220,15 @@ fun App() {
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummySaved) { vm.setUseDummy(useDummySaved); vm.load() }
 
+				// keep store updated
+				LaunchedEffect(state.saved) { upsertInternships(state.saved) }
+
 				Column(Modifier.fillMaxSize()) {
-					/*Row(Modifier.padding(12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-						Text("Dummy data")
-						Switch(checked = useDummySaved, onCheckedChange = { useDummySaved = it })
-					}*/
 					StudentSavedInternshipsScreen(
 						saved = state.saved,
 						onBack = { navController.popBackStack() },
-						onOpenDetails = { id ->
-							selectedInternshipId = id
-							navController.navigate(Routes.StudentInternshipDetails)
-						}
+						onOpenDetails = { id -> navController.navigate("${Routes.InternshipDetails}/$id") },
+						onApply = { id -> navController.navigate("${Routes.MakeApplication}/$id") }
 					)
 					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
 					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
@@ -216,49 +237,39 @@ fun App() {
 
 			composable(Routes.StudentMessages) { StudentMessagesScreen(onBack = { navController.popBackStack() }) }
 
-			// Company flow
-			composable(Routes.CompanyMemberHome) {
-				val logoutVm: LogoutViewModel = koinInject()
-				CompanyMemberHomeScreen(
-					onDashboard = { navController.navigate(Routes.CompanyMemberDashboard) },
-					onAnalytics = { navController.navigate(Routes.CompanyMemberAnalytics) },
-					onPostInternship = { navController.navigate(Routes.CompanyMemberPostInternship) },
-					onCandidates = { navController.navigate(Routes.CompanyMemberDashboard) }, // navigate to dashboard first to pick posting
-					onMessages = { navController.navigate(Routes.CompanyMemberMessages) },
-					onProfile = { navController.navigate(Routes.CompanyMemberProfile) },
-					onPreferences = { /* navController.navigate("company/preferences") */ },
-					onLogout = {
-						logoutVm.logout {
-							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
-						}
-					}
-				)
-			}
-
+			// Company member flow
+			composable(Routes.CompanyMemberHome) { CompanyMemberHomeScreen(onBack = { navController.popBackStack() }) }
 			composable(Routes.CompanyMemberProfile) { CompanyMemberProfileScreen(onBack = { navController.popBackStack() }) }
 
-			// Company member details
 			composable(Routes.CompanyMemberDashboard) {
+				val vm: CompanyMemberDashboardViewModel = koinInject()
+				val state by vm.state.collectAsState()
+				LaunchedEffect(useDummyCompanyDashboard) { vm.setUseDummy(useDummyCompanyDashboard); vm.load() }
+
+				// keep store updated for details
+				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
+
 				CompanyMemberDashboardScreen(
 					onBack = { navController.popBackStack() },
-					onOpenCandidates = { id ->
-						selectedCompanyInternshipId = id
-						navController.navigate(Routes.CompanyMemberCandidates)
-					}
+					onOpenCandidates = { internshipId -> navController.navigate("${Routes.CompanyMemberCandidates}/$internshipId") },
+					onOpenDetails = { id -> navController.navigate("${Routes.InternshipDetails}/$id") }
 				)
 			}
 
-			composable(Routes.CompanyMemberCandidates) {
-				val id = selectedCompanyInternshipId ?: return@composable CompanyMemberCandidatesScreen(
-					"",
-					onBack = { navController.popBackStack() })
+			composable(Routes.CompanyMemberPostInternship) { CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() }) }
+
+			// Company Member Candidates with required internship id
+			composable(
+				route = "${Routes.CompanyMemberCandidates}/{id}",
+				arguments = listOf(navArgument("id") { type = NavType.StringType })
+			) { backStackEntry ->
+				val id = requireNotNull(backStackEntry.arguments?.getString("id"))
 				CompanyMemberCandidatesScreen(
 					internshipId = id,
 					onBack = { navController.popBackStack() }
 				)
 			}
 
-			composable(Routes.CompanyMemberPostInternship) { CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() }) }
 			composable(Routes.CompanyMemberMessages) { CompanyMemberMessagesScreen(onBack = { navController.popBackStack() }) }
 			composable(Routes.CompanyMemberAnalytics) { CompanyMemberAnalyticsScreen(onBack = { navController.popBackStack() }) }
 		}

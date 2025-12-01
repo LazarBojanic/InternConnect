@@ -15,6 +15,7 @@ fun StudentSavedInternshipsScreen(
 	saved: List<InternshipJoined>,
 	onBack: () -> Unit,
 	onOpenDetails: (id: String) -> Unit,
+	onApply: (id: String) -> Unit,
 ) {
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
 		Header(title = "Saved Internships", onBack = onBack)
@@ -23,8 +24,9 @@ fun StudentSavedInternshipsScreen(
 		LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxSize()) {
 			items(saved) { item ->
 				InternshipCard(
-					item,
-					onApply = { onOpenDetails(item.id) },
+					internship = item,
+					onApply = { onApply(item.id) },
+					onDetails = { onOpenDetails(item.id) },
 					modifier = Modifier.fillMaxWidth()
 				)
 			}

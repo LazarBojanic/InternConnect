@@ -16,6 +16,7 @@ import org.koin.compose.koinInject
 fun CompanyMemberDashboardScreen(
 	onBack: () -> Unit,
 	onOpenCandidates: (internshipId: String) -> Unit,
+	onOpenDetails: (internshipId: String) -> Unit,
 ) {
 	val vm: CompanyMemberDashboardViewModel = koinInject()
 	val state by vm.state.collectAsState()
@@ -38,7 +39,8 @@ fun CompanyMemberDashboardScreen(
 				items(state.internships) { item ->
 					InternshipCard(
 						internship = item,
-						onApply = { onOpenCandidates(item.id) },
+						onApply = null, // company members don't apply
+						onDetails = { onOpenDetails(item.id) },
 						modifier = Modifier.fillMaxWidth()
 					)
 				}
