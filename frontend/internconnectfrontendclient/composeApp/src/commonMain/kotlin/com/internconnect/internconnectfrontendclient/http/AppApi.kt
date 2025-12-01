@@ -43,22 +43,22 @@ class AppApi (
 			else -> null
 		}
 	}
-
+	//TODO forgot password
 	override suspend fun forgotPassword(email: String): String? {
 		val resp: HttpResponse = client.post("/TODO") {
 			url { parameters.append("email", email) }
 		}
 		return resp.bodyOrNullAsText()
 	}
-
+	//TODO logout
 	override suspend fun logout() {
 		client.post("/auth/logout/TODO")
 	}
 
 	override suspend fun refreshToken(): TokenDto? {
-		val requestTokenDto = tokenDataStore.tokenDto.value
+		val tokenDto = tokenDataStore.tokenDto
 		val resp: HttpResponse = client.post("/auth/refresh") {
-			setBody(requestTokenDto)
+			setBody(tokenDto)
 		}
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<TokenDto>()

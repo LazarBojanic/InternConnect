@@ -1,5 +1,6 @@
 package com.internconnect.internconnectfrontendclient.data.model.joined
 
+import com.internconnect.internconnectfrontendclient.data.model.raw.InternshipApplicationStatus
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,6 +14,3 @@ data class InternshipApplicationJoined(
 	val createdAt: String,
 	val updatedAt: String
 )
-enum class InternshipApplicationStatus {
-	APPLIED, REJECTED, ACCEPTED
-}

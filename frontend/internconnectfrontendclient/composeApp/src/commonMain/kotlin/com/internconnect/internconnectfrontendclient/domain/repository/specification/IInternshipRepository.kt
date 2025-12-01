@@ -1,0 +1,4 @@
+package com.internconnect.internconnectfrontendclient.domain.repository.specification
+
+interface IInternshipRepository {
+}

@@ -2,14 +2,21 @@ package com.internconnect.internconnectfrontendclient.data
 
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.CompanyDto
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.CompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.InternshipApplicationDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.InternshipDto
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.StudentDto
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.UserDto
 import com.internconnect.internconnectfrontendclient.data.model.joined.CompanyJoined
 import com.internconnect.internconnectfrontendclient.data.model.joined.CompanyMemberJoined
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.data.model.joined.StudentJoined
 import com.internconnect.internconnectfrontendclient.data.model.joined.UserJoined
 import com.internconnect.internconnectfrontendclient.data.model.raw.Company
 import com.internconnect.internconnectfrontendclient.data.model.raw.CompanyMember
+import com.internconnect.internconnectfrontendclient.data.model.raw.Internship
+import com.internconnect.internconnectfrontendclient.data.model.raw.InternshipApplication
+import com.internconnect.internconnectfrontendclient.data.model.raw.InternshipApplicationStatus
 import com.internconnect.internconnectfrontendclient.data.model.raw.Student
 import com.internconnect.internconnectfrontendclient.data.model.raw.User
 
@@ -232,6 +239,106 @@ fun CompanyDto.toJoined(): CompanyJoined = CompanyJoined(
 	country = this.country,
 	city = this.city,
 	about = this.about,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+
+fun Internship.join(company: CompanyJoined): InternshipJoined = InternshipJoined(
+	id = this.id,
+	company = company,
+	title = title,
+	category = category,
+	description = description,
+	createdAt = createdAt,
+	updatedAt = updatedAt
+
+)
+fun InternshipJoined.toRaw(): Internship = Internship(
+	id = this.id,
+	companyId = this.company.id,
+	title = this.title,
+	category = this.category,
+	description = this.description,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipJoined.toDto(): InternshipDto = InternshipDto(
+	id = this.id,
+	company = this.company.toDto(),
+	title = this.title,
+	category = this.category,
+	description = this.description,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipDto.toRaw(): Internship = Internship(
+	id = this.id,
+	companyId = this.company.id,
+	title = this.title,
+	category = this.category,
+	description = this.description,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipDto.toJoined(): InternshipJoined = InternshipJoined(
+	id = this.id,
+	company = this.company.toJoined(),
+	title = this.title,
+	category = this.category,
+	description = this.description,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipApplication.join(internship: InternshipJoined, student: StudentJoined): InternshipApplicationJoined =
+	InternshipApplicationJoined(
+		id = this.id,
+		internship = internship,
+		student = student,
+		status = status,
+		resume = resume,
+		interviewNotes = interviewNotes,
+		createdAt = createdAt,
+		updatedAt = updatedAt
+	)
+
+fun InternshipApplicationJoined.toRaw(): InternshipApplication = InternshipApplication(
+	id = this.id,
+	internshipId = this.internship.id,
+	studentId = this.student.user.id,
+	status = this.status,
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+
+fun InternshipApplicationJoined.toDto(): InternshipApplicationDto = InternshipApplicationDto(
+	id = this.id,
+	internship = this.internship.toDto(),
+	student = this.student.toDto(),
+	status = this.status.name,
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipApplicationDto.toRaw(): InternshipApplication = InternshipApplication(
+	id = this.id,
+	internshipId = this.internship.id,
+	studentId = this.student.user.id,
+	status = InternshipApplicationStatus.valueOf(this.status),
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt
+)
+fun InternshipApplicationDto.toJoined(): InternshipApplicationJoined = InternshipApplicationJoined(
+	id = this.id,
+	internship = this.internship.toJoined(),
+	student = this.student.toJoined(),
+	status = InternshipApplicationStatus.valueOf(this.status),
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt
 )

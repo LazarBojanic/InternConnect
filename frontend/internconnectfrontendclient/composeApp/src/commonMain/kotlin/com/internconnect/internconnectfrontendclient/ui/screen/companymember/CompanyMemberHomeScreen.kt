@@ -53,12 +53,11 @@ fun CompanyMemberHomeScreen(
 				state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
 				state.error != null -> Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error)
 				state is ProfileUiState.CompanyMemberState -> {
-					val dto = (state as ProfileUiState.CompanyMemberState).data
-					val firstName = dto?.userFullName?.trim()?.split(" ")?.firstOrNull().orEmpty().ifEmpty { "there" }
-
+					val companyMember = (state as ProfileUiState.CompanyMemberState).data
+					val hello = "Hello ${companyMember?.user?.firstName}!"
 					Surface(tonalElevation = 2.dp, shadowElevation = 2.dp, shape = MaterialTheme.shapes.large) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-							Text(text = "Welcome back, $firstName!", style = MaterialTheme.typography.titleLarge)
+							Text(text = hello, style = MaterialTheme.typography.titleLarge)
 							Text(
 								text = "Company Tools",
 								style = MaterialTheme.typography.bodyMedium,

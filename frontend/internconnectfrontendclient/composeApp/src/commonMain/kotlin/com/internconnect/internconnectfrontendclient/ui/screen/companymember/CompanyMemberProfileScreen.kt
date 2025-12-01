@@ -33,16 +33,12 @@ fun CompanyMemberProfileScreen(onBack: () -> Unit) {
 				state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
 				state.error != null -> Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error)
 				state is ProfileUiState.CompanyMemberState -> {
-					val dto = (state as ProfileUiState.CompanyMemberState).data
-
-					// Profile header card
+					val companyMember = (state as ProfileUiState.CompanyMemberState).data
 					ElevatedCard(shape = MaterialTheme.shapes.extraLarge) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 							Row(verticalAlignment = Alignment.CenterVertically) {
-								val initials = remember(dto?.userFullName) {
-									dto?.userFullName?.trim()?.split(" ")?.mapNotNull { it.firstOrNull()?.toString() }?.take(2)?.joinToString("")?.uppercase()
-										?: "CM"
-								}
+								val initials = companyMember?.user?.firstName?.first().toString() + " " + companyMember?.user?.lastName?.first().toString()
+								val fullName = companyMember?.user?.firstName + " " + companyMember?.user?.lastName
 								Box(
 									modifier = Modifier.size(64.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer),
 									contentAlignment = Alignment.Center
@@ -51,14 +47,14 @@ fun CompanyMemberProfileScreen(onBack: () -> Unit) {
 								}
 								Spacer(Modifier.width(16.dp))
 								Column(Modifier.weight(1f)) {
-									Text(text = dto?.userFullName ?: "Company Member", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
-									Text(text = dto?.userEmail ?: "—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+									Text(text = fullName, style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
+									Text(text = companyMember?.user?.email ?: "", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
 								}
 							}
 							Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-								StatusChip(text = dto?.userRole ?: "COMPANY_MEMBER")
-								if (dto?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
-								dto?.userStatus?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
+								StatusChip(text = companyMember?.user?.role ?: "COMPANY_MEMBER")
+								if (companyMember?.user?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
+								companyMember?.user?.status?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
 							}
 						}
 					}
@@ -67,27 +63,27 @@ fun CompanyMemberProfileScreen(onBack: () -> Unit) {
 
 					// Company
 					SectionCard(title = "Company") {
-						InfoRow("Company", dto?.companyName)
-						InfoRow("Industry", dto?.companyIndustry)
-						InfoRow("Role", dto?.companyMemberRole)
-						InfoRow("Member status", dto?.companyMemberStatus)
+						InfoRow("Company", companyMember?.company?.name)
+						InfoRow("Industry", companyMember?.company?.industry)
+						InfoRow("Role", companyMember?.role)
+						InfoRow("Member status", companyMember?.status)
 					}
 
 					Spacer(Modifier.height(12.dp))
 
 					// Location & Meta
 					SectionCard(title = "Location & Meta") {
-						InfoRow("HQ Country", dto?.hqCountry)
-						InfoRow("City", dto?.city)
-						InfoRow("Joined", dto?.joinedAt)
-						InfoRow("Website", dto?.website)
+						InfoRow("Country", companyMember?.company?.country ?: "Unknown")
+						InfoRow("City", companyMember?.company?.city ?: "Unknown")
+						InfoRow("Joined", companyMember?.joinedAt ?: "Unknown")
+						InfoRow("Website", companyMember?.company?.website ?: "Unknown")
 					}
 
 					Spacer(Modifier.height(12.dp))
 
 					// About
 					SectionCard(title = "About") {
-						InfoRow("About", dto?.about)
+						InfoRow("About", companyMember?.company?.about)
 					}
 				}
 				else -> Text("Not a company member profile.")

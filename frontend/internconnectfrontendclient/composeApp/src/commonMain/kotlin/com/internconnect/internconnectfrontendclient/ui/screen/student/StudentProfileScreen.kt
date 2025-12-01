@@ -36,7 +36,8 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 					ElevatedCard(shape = MaterialTheme.shapes.extraLarge) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 							Row(verticalAlignment = Alignment.CenterVertically) {
-								val initials = remember()
+								val initials = student?.user?.firstName?.first().toString() + " " + student?.user?.lastName?.first().toString()
+								val fullName = student?.user?.firstName + " " + student?.user?.lastName
 								Box(
 									modifier = Modifier.size(64.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer),
 									contentAlignment = Alignment.Center
@@ -45,8 +46,8 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 								}
 								Spacer(Modifier.width(16.dp))
 								Column(Modifier.weight(1f)) {
-									Text(text = student?.fullName ?: "Student", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
-									Text(text = student?.email ?: "—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+									Text(text = fullName, style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
+									Text(text = student?.user?.email ?: "—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
 								}
 							}
 							Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
