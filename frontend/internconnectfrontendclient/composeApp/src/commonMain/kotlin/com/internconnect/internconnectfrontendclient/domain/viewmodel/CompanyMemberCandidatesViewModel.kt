@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CompanyCandidatesViewModel(private val api: IAppApi) {
+class CompanyMemberCandidatesViewModel(private val api: IAppApi) {
 	data class UiState(
 		val loading: Boolean = false,
 		val applications: List<InternshipApplicationJoined> = emptyList(),

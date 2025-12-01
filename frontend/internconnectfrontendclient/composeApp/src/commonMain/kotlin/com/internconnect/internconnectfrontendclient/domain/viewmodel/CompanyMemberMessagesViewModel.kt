@@ -1,4 +1,7 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-class CompanyMemberMessagesViewModel {
-}
+import com.internconnect.internconnectfrontendclient.http.IAppApi
+
+class CompanyMemberMessagesViewModel(
+	private val api: IAppApi
+)

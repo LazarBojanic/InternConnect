@@ -7,7 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined
-import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyCandidatesViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberCandidatesViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import org.koin.compose.koinInject
 @Composable
@@ -15,7 +15,7 @@ fun CompanyMemberCandidatesScreen(
 	internshipId: String,
 	onBack: () -> Unit,
 ) {
-	val vm: CompanyCandidatesViewModel = koinInject()
+	val vm: CompanyMemberCandidatesViewModel = koinInject()
 	val state by vm.state.collectAsState()
 	var useDummy by remember { mutableStateOf(true) }
 

@@ -1,6 +1,5 @@
 package com.internconnect.internconnectfrontendclient.ui.screen.companymember
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +27,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun CompanyMemberHomeScreen(
-	onCompanyDashboard: () -> Unit,
+	onDashboard: () -> Unit,
 	onAnalytics: () -> Unit,
 	onPostInternship: () -> Unit,
 	onCandidates: () -> Unit,
@@ -72,7 +71,7 @@ fun CompanyMemberHomeScreen(
 
 					TwoColumnGrid(
 						labels = listOf(
-							"Company Dashboard" to onCompanyDashboard,
+							"Dashboard" to onDashboard,
 							"Analytics" to onAnalytics,
 							"Post Internship" to onPostInternship,
 							"Candidates" to onCandidates,

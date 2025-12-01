@@ -7,14 +7,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyAnalyticsViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberAnalyticsViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
 import org.koin.compose.koinInject
 
 @Composable
 fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
-	val vm: CompanyAnalyticsViewModel = koinInject()
+	val vm: CompanyMemberAnalyticsViewModel = koinInject()
 	val state by vm.state.collectAsState()
 	var useDummy by remember { mutableStateOf(true) }
 

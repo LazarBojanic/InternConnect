@@ -1,10 +1,7 @@
 package com.internconnect.internconnectfrontendclient.ui.screen.student
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +29,7 @@ import org.koin.compose.koinInject
 fun StudentHomeScreen(
 	onFindInternships: () -> Unit,
 	onMyApplications: () -> Unit,
-	onSavedOpportunities: () -> Unit,
+	onSavedInternships: () -> Unit,
 	onMessages: () -> Unit,
 	onProfile: () -> Unit,
 	onPreferences: () -> Unit,
@@ -75,7 +72,7 @@ fun StudentHomeScreen(
 						labels = listOf(
 							"Find Internships" to onFindInternships,
 							"My Applications" to onMyApplications,
-							"Saved Internships" to onSavedOpportunities,
+							"Saved Internships" to onSavedInternships,
 							"Messages" to onMessages,
 							"Profile" to onProfile,
 							"Preferences" to onPreferences,

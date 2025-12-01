@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CompanyDashboardViewModel(private val api: IAppApi) {
+class CompanyMemberDashboardViewModel(private val api: IAppApi) {
 	data class UiState(
 		val loading: Boolean = false,
 		val internships: List<InternshipJoined> = emptyList(),

@@ -2,7 +2,6 @@ package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.CompanyDto
 import com.internconnect.internconnectfrontendclient.data.model.dto.response.InternshipDto
-import com.internconnect.internconnectfrontendclient.data.model.joined.CompanyJoined
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CompanyPostInternshipViewModel(private val api: IAppApi) {
+class CompanyMemberPostInternshipViewModel(private val api: IAppApi) {
 	data class UiState(
 		val loading: Boolean = false,
 		val successMessage: String? = null,

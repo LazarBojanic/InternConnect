@@ -5,13 +5,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyPostInternshipViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberPostInternshipViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import org.koin.compose.koinInject
 
 @Composable
 fun CompanyMemberPostInternshipScreen(onBack: () -> Unit) {
-	val vm: CompanyPostInternshipViewModel = koinInject()
+	val vm: CompanyMemberPostInternshipViewModel = koinInject()
 	val state by vm.state.collectAsState()
 
 	var title by remember { mutableStateOf("") }

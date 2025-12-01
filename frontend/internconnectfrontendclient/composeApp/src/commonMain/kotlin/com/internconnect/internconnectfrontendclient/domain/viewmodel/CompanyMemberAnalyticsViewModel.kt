@@ -1,6 +1,5 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined
 import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.data.toJoined
 import com.internconnect.internconnectfrontendclient.domain.util.DummyData
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CompanyAnalyticsViewModel(private val api: IAppApi) {
+class CompanyMemberAnalyticsViewModel(private val api: IAppApi) {
 	data class UiState(
 		val loading: Boolean = false,
 		val totalPostings: Int = 0,
