@@ -8,17 +8,12 @@ fun Application.configureRouting() {
 	install(Resources)
 
 	routing {
-		auditLogRoutes()
 		userRoutes()
-		emailVerificationRoutes()
-		oAuthAccountRoutes()
 		studentRoutes()
 		companyMemberRoutes()
 		companyRoutes()
 		internshipRoutes()
 		internshipApplicationRoutes()
-		passwordResetRoutes()
-		refreshTokenRoutes()
 		authRoutes()
 	}
 }

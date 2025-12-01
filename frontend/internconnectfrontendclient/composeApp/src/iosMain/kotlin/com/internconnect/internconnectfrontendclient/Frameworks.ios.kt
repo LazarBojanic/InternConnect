@@ -33,7 +33,7 @@ fun initKoinIos() {
 	val dev = true
 	var url = ""
 	if(dev){
-		url = "127.0.0.1"
+		url = "http://127.0.0.1:8080"
 	}
 	else{
 		url = "https://srv1092316.hstgr.cloud"
