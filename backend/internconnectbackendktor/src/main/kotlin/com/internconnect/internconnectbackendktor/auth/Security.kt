@@ -1,5 +1,6 @@
 package com.internconnect.internconnectbackendktor.auth
 
+import com.internconnect.internconnectbackendktor.model.TokenType
 import com.internconnect.internconnectbackendktor.model.raw.user.UserRole
 import com.internconnect.internconnectbackendktor.service.specification.IAuthService
 import io.ktor.http.*
@@ -17,7 +18,7 @@ fun Application.configureSecurity() {
 			verifier(authService.verifier())
 			validate { cred ->
 				val sub = cred.payload.subject ?: return@validate null
-				if (cred.payload.getClaim("typ").asString() == "refresh") return@validate null
+				if (cred.payload.getClaim("typ").asString() == TokenType.REFRESH.name) return@validate null
 				JWTPrincipal(cred.payload)
 			}
 			challenge { _, _ -> call.respond(HttpStatusCode.Unauthorized, mapOf("error" to "unauthorized")) }
@@ -61,16 +62,3 @@ fun Route.authorize(vararg roles: UserRole, build: Route.() -> Unit): Route {
 	authorizedRoute.build()
 	return authorizedRoute
 }
-
-/*fun Route.authorize(vararg allow: UserRole, build: Route.() -> Unit): Route {
-	val authorized = createChild(AttributeKey<Unit>("Authorized${allow.joinToString()}"))
-	authorized.intercept(ApplicationCallPipeline.Plugins) {
-		val p = call.principal<AppPrincipal>() ?: return@intercept call.respond(HttpStatusCode.Unauthorized)
-		if (allow.contains(p.role).not()) {
-			return@intercept call.respond(HttpStatusCode.Forbidden, mapOf("error" to "insufficient_role"))
-		}
-	}
-	authorized.build()
-	return authorized
-
-}*/

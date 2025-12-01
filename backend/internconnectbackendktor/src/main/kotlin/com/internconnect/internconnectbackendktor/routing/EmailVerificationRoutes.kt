@@ -10,9 +10,7 @@ fun Route.emailVerificationRoutes() {
 	val emailVerificationService by inject<IEmailVerificationService>()
 	route("/email-verifications") {
 		get {
-			val emailVerificationsJoined = emailVerificationService.getAll()
-			val emailVerificationDtos = emailVerificationsJoined.map { it.toDto() }
-			call.respond(emailVerificationDtos)
+
 		}
 	}
 }

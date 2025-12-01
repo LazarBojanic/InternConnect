@@ -1,7 +1,7 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
-import com.internconnect.internconnectfrontendclient.data.dto.response.CompanyMemberDto
-import com.internconnect.internconnectfrontendclient.data.dto.response.StudentDto
+import com.internconnect.internconnectfrontendclient.data.model.joined.CompanyMemberJoined
+import com.internconnect.internconnectfrontendclient.data.model.joined.StudentJoined
 
 sealed interface ProfileUiState {
 	val loading: Boolean
@@ -12,13 +12,13 @@ sealed interface ProfileUiState {
 		override val loading: Boolean = true,
 		override val error: String? = null,
 		override val role: String? = "STUDENT",
-		val data: StudentDto? = null
+		val data: StudentJoined? = null
 	) : ProfileUiState
 
 	data class CompanyMemberState(
 		override val loading: Boolean = true,
 		override val error: String? = null,
 		override val role: String? = "COMPANY_MEMBER",
-		val data: CompanyMemberDto? = null
+		val data: CompanyMemberJoined? = null
 	) : ProfileUiState
 }

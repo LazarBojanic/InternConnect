@@ -10,9 +10,7 @@ fun Route.auditLogRoutes() {
 	val auditLogService by inject<IAuditLogService>()
 	route("/audit-logs") {
 		get {
-			val auditLogsJoined = auditLogService.getAll()
-			val auditLogDtos = auditLogsJoined.map { it.toDto() }
-			call.respond(auditLogDtos)
+
 		}
 	}
 }

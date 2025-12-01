@@ -10,9 +10,7 @@ fun Route.refreshTokenRoutes() {
 	val refreshTokenService by inject<IRefreshTokenService>()
 	route("/refresh-tokens") {
 		get {
-			val refreshTokensJoined = refreshTokenService.getAll()
-			val refreshTokenDtos = refreshTokensJoined.map { it.toDto() }
-			call.respond(refreshTokenDtos)
+
 		}
 	}
 }

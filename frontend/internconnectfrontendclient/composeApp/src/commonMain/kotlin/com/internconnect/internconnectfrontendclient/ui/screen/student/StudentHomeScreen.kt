@@ -55,12 +55,11 @@ fun StudentHomeScreen(
 				state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
 				state.error != null -> Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error)
 				state is ProfileUiState.StudentState -> {
-					val dto = (state as ProfileUiState.StudentState).data
-					val firstName = dto?.fullName?.trim()?.split(" ")?.firstOrNull().orEmpty().ifEmpty { "there" }
-
+					val student = (state as ProfileUiState.StudentState).data
+					val hello = "Hello ${student?.user?.firstName}!"
 					Surface(tonalElevation = 2.dp, shadowElevation = 2.dp, shape = MaterialTheme.shapes.large) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-							Text(text = "Hello $firstName!", style = MaterialTheme.typography.titleLarge)
+							Text(text = hello, style = MaterialTheme.typography.titleLarge)
 							Text(
 								text = "Welcome to InternConnector",
 								style = MaterialTheme.typography.bodyMedium,

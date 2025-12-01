@@ -13,10 +13,12 @@ import com.internconnect.internconnectbackendktor.model.raw.refreshtoken.*
 import com.internconnect.internconnectbackendktor.model.raw.student.*
 import com.internconnect.internconnectbackendktor.model.raw.user.*
 
-import com.internconnect.internconnectbackendktor.model.dto.request.*
 import com.internconnect.internconnectbackendktor.model.dto.response.*
 
 import com.internconnect.internconnectbackendktor.model.joined.*
+import com.internconnect.internconnectbackendktor.model.raw.session.Session
+import com.internconnect.internconnectbackendktor.model.raw.session.SessionEntity
+import com.internconnect.internconnectbackendktor.model.raw.session.SessionTable
 
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
@@ -56,16 +58,6 @@ fun AuditLog.join(user: UserJoined): AuditLogJoined = AuditLogJoined(
 	ip = this.ip,
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt,
-)
-
-fun AuditLogJoined.toDto(): AuditLogDto = AuditLogDto(
-	id = this.id.toString(),
-	user = this.user.toDto(),
-	action = this.action,
-	metadata = this.metadata.toString(),
-	ip = this.ip,
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString()
 )
 
 
@@ -268,16 +260,6 @@ fun EmailVerification.join(user: UserJoined): EmailVerificationJoined = EmailVer
 	updatedAt = this.updatedAt
 )
 
-fun EmailVerificationJoined.toDto(): EmailVerificationDto = EmailVerificationDto(
-	id = this.id.toString(),
-	user = this.user.toDto(),
-	codeHash = this.codeHash,
-	sentToEmail = this.sentToEmail,
-	expiresAt = this.expiresAt.toString(),
-	consumedAt = this.consumedAt.toString(),
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString(),
-)
 
 fun InternshipEntity.toDomain(): Internship = Internship(
 	id = this.id.value,
@@ -419,18 +401,6 @@ fun OAuthAccount.join(user: UserJoined): OAuthAccountJoined = OAuthAccountJoined
 	updatedAt = this.updatedAt,
 )
 
-fun OAuthAccountJoined.toDto(): OAuthAccountDto = OAuthAccountDto(
-	id = this.id.toString(),
-	user = this.user.toDto(),
-	provider = this.provider,
-	providerUserId = this.providerUserId.toString(),
-	providerEmail = this.providerEmail,
-	encryptedAccessToken = this.encryptedAccessToken,
-	encryptedRefreshToken = this.encryptedRefreshToken,
-	tokenExpiresAt = this.tokenExpiresAt.toString(),
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString(),
-)
 
 fun PasswordAuthEntity.toDomain(): PasswordAuth = PasswordAuth(
 	userId = this.id.value,
@@ -462,16 +432,6 @@ fun PasswordAuth.join(user: UserJoined): PasswordAuthJoined = PasswordAuthJoined
 	passwordSetAt = this.passwordSetAt,
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt,
-)
-
-fun PasswordAuthJoined.toDto(): PasswordAuthDto = PasswordAuthDto(
-	user = this.user.toDto(),
-	encryptedPassword = this.encryptedPassword,
-	encryptionAlgorithm = this.encryptionAlgorithm,
-	passwordSetAt = this.passwordSetAt.toString(),
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString(),
-
 )
 
 fun PasswordResetEntity.toDomain(): PasswordReset = PasswordReset(
@@ -512,80 +472,44 @@ fun PasswordReset.join(user: UserJoined): PasswordResetJoined = PasswordResetJoi
 
 )
 
-fun PasswordResetJoined.toDto(): PasswordResetDto = PasswordResetDto(
-	id = this.id.toString(),
-	user = this.user.toDto(),
-	codeHash = this.codeHash,
-	expiresAt = this.expiresAt.toString(),
-	consumedAt = this.consumedAt.toString(),
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString(),
-
-)
 fun RefreshTokenEntity.toDomain(): RefreshToken = RefreshToken(
 	id = this.id.value,
-	userId = this.userId.value,
-	sessionId = this.sessionId,
+	sessionId = this.sessionId.value,
 	hash = this.hash,
 	issuedAt = this.issuedAt,
 	expiresAt = this.expiresAt,
 	revokedAt = this.revokedAt,
-	userAgent = this.userAgent,
-	ip = this.ip,
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt,
 )
 
 fun RefreshTokenEntity.setFrom(d: RefreshToken, mode: MapMode) {
-	userId = EntityID(d.userId, UserTable)
-	sessionId = d.sessionId
+	sessionId = EntityID(d.sessionId, SessionTable)
 	hash = d.hash
 	issuedAt = d.issuedAt
 	expiresAt = d.expiresAt
 	revokedAt = d.revokedAt
-	userAgent = d.userAgent
-	ip = d.ip
 	when (mode) {
 		MapMode.Insert -> {
 			createdAt = d.createdAt; updatedAt = d.updatedAt
 		}
-
 		MapMode.Update -> {
 			updatedAt = d.updatedAt
 		}
 	}
+
 }
-fun RefreshToken.join(user: UserJoined): RefreshTokenJoined = RefreshTokenJoined(
+fun RefreshToken.join(sessionJoined: SessionJoined): RefreshTokenJoined = RefreshTokenJoined(
 	id = this.id,
-	user = user,
-	sessionId = this.sessionId,
+	sessionJoined = sessionJoined,
 	hash = this.hash,
 	issuedAt = this.issuedAt,
 	expiresAt = this.expiresAt,
 	revokedAt = this.revokedAt,
-	userAgent = this.userAgent,
-	ip = this.ip,
 	createdAt = this.createdAt,
-	updatedAt = this.updatedAt,
-
+	updatedAt = this.updatedAt
 )
 
-fun RefreshTokenJoined.toDto(): RefreshTokenDto = RefreshTokenDto(
-	id = this.id.toString(),
-	user = this.user.toDto(),
-	sessionId = this.sessionId.toString(),
-	hash = this.hash,
-	issuedAt = this.issuedAt.toString(),
-	expiresAt = this.expiresAt.toString(),
-	revokedAt = this.revokedAt.toString(),
-	userAgent = this.userAgent,
-	ip = this.ip,
-	createdAt = this.createdAt.toString(),
-	updatedAt = this.updatedAt.toString()
-
-
-
-)
 fun StudentEntity.toDomain(): Student = Student(
 	userId = this.id.value,
 	schoolName = this.schoolName,
@@ -623,7 +547,6 @@ fun Student.join(user: UserJoined): StudentJoined = StudentJoined(
 	createdAt = this.createdAt,
 	updatedAt = this.updatedAt,
 
-
 )
 
 fun StudentJoined.toDto(): StudentDto = StudentDto(
@@ -636,4 +559,35 @@ fun StudentJoined.toDto(): StudentDto = StudentDto(
 	createdAt = this.createdAt.toString(),
 	updatedAt = this.updatedAt.toString(),
 
+)
+
+fun SessionEntity.toDomain(): Session = Session(
+	id = this.id.value,
+	userId = this.userId.value,
+	ip = this.ip,
+	userAgent = this.userAgent,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt,
+)
+
+fun SessionEntity.setFrom(d: Session, mode: MapMode) {
+	userId = EntityID(d.userId, UserTable)
+	ip = d.ip
+	userAgent = d.userAgent
+	when (mode) {
+		MapMode.Insert -> {
+			createdAt = d.createdAt; updatedAt = d.updatedAt
+		}
+		MapMode.Update -> {
+			updatedAt = d.updatedAt
+		}
+	}
+}
+fun Session.join(user: UserJoined): SessionJoined = SessionJoined(
+	id = this.id,
+	user = user,
+	ip = this.ip,
+	userAgent = this.userAgent,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt,
 )

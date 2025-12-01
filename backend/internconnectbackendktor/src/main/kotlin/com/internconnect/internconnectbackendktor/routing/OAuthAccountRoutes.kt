@@ -10,9 +10,7 @@ fun Route.oAuthAccountRoutes() {
 	val oAuthAccountService by inject<IOAuthAccountService>()
 	route("/oauth-accounts") {
 		get {
-			val oAuthAccountsJoined = oAuthAccountService.getAll()
-			val oAuthAccountDtos = oAuthAccountsJoined.map { it.toDto() }
-			call.respond(oAuthAccountDtos)
+
 		}
 	}
 }

@@ -1,19 +1,17 @@
 package com.internconnect.internconnectbackendktor.model.raw.refreshtoken
 
+import com.internconnect.internconnectbackendktor.model.raw.session.SessionTable
 import com.internconnect.internconnectbackendktor.model.raw.user.UserTable
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import org.jetbrains.exposed.v1.javatime.timestamp
 import java.time.Instant
 
 object RefreshTokenTable : UUIDTable(name = "refresh_token") {
-	val userId = reference("user_id", UserTable.id)
-	val sessionId = uuid("session_id")
-	val hash = varchar("hash", length = 255)
-	val issuedAt = timestamp("issued_at")
-	val expiresAt = timestamp("expires_at")
-	val revokedAt = timestamp("revoked_at").nullable()
-	val userAgent = varchar("user_agent", length = 255).nullable()
-	val ip = varchar("ip", length = 255).nullable()
+	val sessionId = reference("session_id", SessionTable.id)
+	val hash = text("hash")
+	val issuedAt = timestamp("issued_at").default(Instant.now())
+	val expiresAt = timestamp("expires_at").default(Instant.now())
+	val revokedAt = timestamp("revoked_at").default(Instant.now()).nullable()
 	val createdAt = timestamp("created_at").default(Instant.now())
 	val updatedAt = timestamp("updated_at").default(Instant.now())
 }

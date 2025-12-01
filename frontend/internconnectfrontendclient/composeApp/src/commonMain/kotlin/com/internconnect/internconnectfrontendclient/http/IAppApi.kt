@@ -1,11 +1,12 @@
 package com.internconnect.internconnectfrontendclient.http
 
-import com.internconnect.internconnectfrontendclient.data.dto.response.CompanyMemberDto
-import com.internconnect.internconnectfrontendclient.data.dto.response.StudentDto
-import com.internconnect.internconnectfrontendclient.data.dto.request.LoginUserDto
-import com.internconnect.internconnectfrontendclient.data.dto.request.RegisterCompanyMemberDto
-import com.internconnect.internconnectfrontendclient.data.dto.request.RegisterStudentDto
-import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.RegisterCompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.RegisterStudentDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.CompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.StudentDto
+
 
 interface IAppApi{
 	suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String?
@@ -14,7 +15,7 @@ interface IAppApi{
 	suspend fun forgotPassword(email: String): String?
 	suspend fun logout()
 	suspend fun refreshToken(): TokenDto?
-	suspend fun fetchStudentProfileById(userId: String): StudentDto?
-	suspend fun fetchCompanyMemberProfileById(userId: String): CompanyMemberDto?
+	suspend fun fetchStudentById(userId: String): StudentDto?
+	suspend fun fetchCompanyMemberById(userId: String): CompanyMemberDto?
 	suspend fun deleteUser(): String?
 }

@@ -1,12 +1,12 @@
 package com.internconnect.internconnectfrontendclient.http
 
-import com.internconnect.internconnectfrontendclient.data.dto.response.CompanyMemberDto
-import com.internconnect.internconnectfrontendclient.data.dto.response.StudentDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.RegisterCompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.RegisterStudentDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.CompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.response.StudentDto
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
-import com.internconnect.internconnectfrontendclient.data.dto.request.LoginUserDto
-import com.internconnect.internconnectfrontendclient.data.dto.request.RegisterCompanyMemberDto
-import com.internconnect.internconnectfrontendclient.data.dto.request.RegisterStudentDto
-import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
 import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -17,7 +17,7 @@ import io.ktor.http.HttpStatusCode
 
 class AppApi (
 	private val appHttpClient: AppHttpClient,
-	private val tokenDataStore: ITokenDataStore,
+	private val tokenDataStore: ITokenDataStore
 ) : IAppApi{
 	private val client get() = appHttpClient.client
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String? {
@@ -56,9 +56,9 @@ class AppApi (
 	}
 
 	override suspend fun refreshToken(): TokenDto? {
-		val refreshDto = RefreshDto(tokenDataStore.tokenDto.value?.refresh, "composeApp", "0.0.0.0")
+		val requestTokenDto = tokenDataStore.tokenDto.value
 		val resp: HttpResponse = client.post("/auth/refresh") {
-			setBody(refreshDto)
+			setBody(requestTokenDto)
 		}
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<TokenDto>()
@@ -66,7 +66,7 @@ class AppApi (
 		}
 	}
 
-	override suspend fun fetchStudentProfileById(userId: String): StudentDto? {
+	override suspend fun fetchStudentById(userId: String): StudentDto? {
 		val resp: HttpResponse = client.get("/student/me/$userId")
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<StudentDto>()
@@ -74,7 +74,7 @@ class AppApi (
 		}
 	}
 
-	override suspend fun fetchCompanyMemberProfileById(userId: String): CompanyMemberDto? {
+	override suspend fun fetchCompanyMemberById(userId: String): CompanyMemberDto? {
 		val resp: HttpResponse = client.get("/company-member/me/$userId")
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<CompanyMemberDto>()

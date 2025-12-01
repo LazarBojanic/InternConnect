@@ -3,9 +3,10 @@ package com.internconnect.internconnectbackendktor.service.implementation
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.internconnect.internconnectbackendktor.auth.JwtConfig
-import com.internconnect.internconnectbackendktor.model.dto.TokenDto
+import com.internconnect.internconnectbackendktor.model.TokenClaims
+import com.internconnect.internconnectbackendktor.model.TokenType
+import com.internconnect.internconnectbackendktor.model.dto.response.TokenDto
 import com.internconnect.internconnectbackendktor.model.dto.request.*
-import com.internconnect.internconnectbackendktor.model.dto.response.*
 import com.internconnect.internconnectbackendktor.model.joined.CompanyJoined
 import com.internconnect.internconnectbackendktor.model.joined.UserJoined
 import com.internconnect.internconnectbackendktor.model.raw.company.Company
@@ -14,6 +15,7 @@ import com.internconnect.internconnectbackendktor.model.raw.companymember.Compan
 import com.internconnect.internconnectbackendktor.model.raw.companymember.CompanyMemberStatus
 import com.internconnect.internconnectbackendktor.model.raw.passwordauth.PasswordAuth
 import com.internconnect.internconnectbackendktor.model.raw.refreshtoken.RefreshToken
+import com.internconnect.internconnectbackendktor.model.raw.session.Session
 import com.internconnect.internconnectbackendktor.model.raw.student.Student
 import com.internconnect.internconnectbackendktor.model.raw.user.User
 import com.internconnect.internconnectbackendktor.model.raw.user.UserRole
@@ -24,9 +26,9 @@ import java.security.MessageDigest
 import java.time.Instant
 import java.util.*
 
-
 class AuthService(
 	private val userService: IUserService,
+	private val sessionService: ISessionService,
 	private val passwordAuthService: IPasswordAuthService,
 	private val studentService: IStudentService,
 	private val companyService: ICompanyService,
@@ -35,65 +37,91 @@ class AuthService(
 	private val jwtConfig: JwtConfig
 ) : IAuthService {
 
-
 	override suspend fun login(loginUserDto: LoginUserDto): TokenDto? {
 		val now = Instant.now()
 		require(loginUserDto.email.isNotBlank())
 		require(loginUserDto.password.isNotBlank())
-		val userJoined = userService.getByEmail(loginUserDto.email) ?: throw Exception("invalid_credentials")
-		val passwordAuth = passwordAuthService.getByUserId(userJoined.id) ?: throw Exception("invalid_credentials")
-		require(BCrypt.checkpw(loginUserDto.password, passwordAuth.encryptedPassword)) { "invalid_credentials" }
-		val sessionId = UUID.randomUUID()
-		val companyMemberJoined = companyMemberService.getById(userJoined.id) ?: throw Exception("invalid_credentials")
-		val access = issueAccess(
-			userId = userJoined.id,
-			email = userJoined.email,
-			role = userJoined.role.name,
-			companyId = companyMemberJoined.company.id,
-			sessionId = sessionId,
-			time = now
+
+		val user = userService.getByEmail(loginUserDto.email) ?: throw Exception("invalid_credentials")
+		val passwordAuth = passwordAuthService.getByUserId(user.id) ?: throw Exception("invalid_credentials")
+		if (!BCrypt.checkpw(loginUserDto.password, passwordAuth.encryptedPassword)) throw Exception("invalid_credentials")
+
+		val createdSession = sessionService.create(
+			Session.createNew(
+				userId = user.id,
+				ip = loginUserDto.ip,
+				userAgent = loginUserDto.userAgent,
+				createdAt = now,
+				updatedAt = now
+			)
 		) ?: throw Exception("failed_to_login")
 
-		val refresh = issueRefresh(
-			userId = userJoined.id,
-			email = userJoined.email,
-			role = userJoined.role.name,
-			companyId = companyMemberJoined.company.id,
-			sessionId = sessionId,
-			time = now
+		var companyId: UUID? = null
+		if (user.role == UserRole.COMPANY_MEMBER) {
+			companyId = companyMemberService.getById(user.id)?.company?.id
+		}
+		else {
+			companyId = null
+		}
+		val nowPlusExpAccess = now.plus(jwtConfig.accessTtl)
+		val access = issueJWT(
+			TokenClaims(
+				type = TokenType.ACCESS,
+				userId = user.id,
+				sessionId = createdSession.id,
+				companyId = companyId,
+				email = user.email,
+				role = user.role,
+				ip = loginUserDto.ip,
+				userAgent = loginUserDto.userAgent,
+				issuedAt = now,
+				expiresAt = nowPlusExpAccess,
+				revokedAt = null
+			)
+		) ?: throw Exception("failed_to_login")
+		val nowPlusExpRefresh = now.plus(jwtConfig.refreshTtl)
+		val refresh = issueJWT(
+			TokenClaims(
+				type = TokenType.REFRESH,
+				userId = user.id,
+				sessionId = createdSession.id,
+				companyId = companyId,
+				email = user.email,
+				role = user.role,
+				ip = loginUserDto.ip,
+				userAgent = loginUserDto.userAgent,
+				issuedAt = now,
+				expiresAt = nowPlusExpRefresh,
+				revokedAt = null
+			)
 		) ?: throw Exception("failed_to_login")
 
 		val refreshHash = sha256(refresh) ?: throw Exception("failed_to_login")
-
 		val parsedRefresh = JWT.decode(refresh)
 
-		val refreshTokenToCreate = RefreshToken.createNew(
-			userId = userJoined.id,
-			sessionId = sessionId,
-			hash = refreshHash,
-			issuedAt = parsedRefresh.issuedAt.toInstant(),
-			expiresAt = parsedRefresh.expiresAt.toInstant(),
-			revokedAt = null,
-			userAgent = loginUserDto.userAgent,
-			ip = loginUserDto.ip,
-			createdAt = now,
-			updatedAt = now
-		)
-
-		refreshTokenService.create(refreshTokenToCreate)
-			?: throw Exception("failed_to_login")
+		refreshTokenService.create(
+			RefreshToken.createNew(
+				sessionId = createdSession.id,
+				hash = refreshHash,
+				issuedAt = now,
+				expiresAt = parsedRefresh.expiresAt.toInstant(),
+				revokedAt = null,
+				createdAt = now,
+				updatedAt = now
+			)
+		) ?: throw Exception("failed_to_login")
 
 		return TokenDto(access, refresh)
 	}
 
-	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): UserJoined {
+	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): UserJoined? {
 		val now = Instant.now()
 		require(registerStudentDto.email.isNotBlank())
 		require(registerStudentDto.password.length >= 8)
 		require(registerStudentDto.password == registerStudentDto.confirmPassword) { "password_mismatch" }
 
-		val userJoined = userService.getByEmail(registerStudentDto.email)
-		require(userJoined == null) { "email_taken" }
+		val existing = userService.getByEmail(registerStudentDto.email)
+		require(existing == null) { "email_taken" }
 
 		val encryptedPassword = BCrypt.hashpw(registerStudentDto.password, BCrypt.gensalt())
 
@@ -105,21 +133,19 @@ class AuthService(
 			createdAt = now,
 			updatedAt = now
 		)
-
-		val createdUserJoined = userService.create(userToCreate) ?: throw Exception("failed_to_register")
+		val createdUser = userService.create(userToCreate) ?: return null
 
 		val passwordAuthToCreate = PasswordAuth.createNew(
-			userId = createdUserJoined.id,
+			userId = createdUser.id,
 			encryptedPassword = encryptedPassword,
 			encryptionAlgorithm = "bcrypt",
 			createdAt = now,
 			updatedAt = now
 		)
-
-		passwordAuthService.create(passwordAuthToCreate) ?: throw Exception("failed_to_register")
+		passwordAuthService.create(passwordAuthToCreate) ?: return null
 
 		val studentToCreate = Student.createNew(
-			userId = createdUserJoined.id,
+			userId = createdUser.id,
 			grade = registerStudentDto.grade,
 			schoolName = registerStudentDto.schoolName,
 			bio = null,
@@ -128,11 +154,9 @@ class AuthService(
 			createdAt = now,
 			updatedAt = now
 		)
+		studentService.create(studentToCreate) ?: return null
 
-		studentService.create(studentToCreate)
-			?: throw Exception("failed_to_register")
-
-		return createdUserJoined
+		return createdUser
 	}
 
 	override suspend fun registerCompanyMember(registerCompanyMemberDto: RegisterCompanyMemberDto): UserJoined? {
@@ -143,8 +167,8 @@ class AuthService(
 		require(registerCompanyMemberDto.companyName.isNotBlank())
 		require(registerCompanyMemberDto.companyIndustry.isNotBlank())
 
-		val userJoined = userService.getByEmail(registerCompanyMemberDto.userEmail)
-		require(userJoined == null) { "email_taken" }
+		val existingUser = userService.getByEmail(registerCompanyMemberDto.userEmail)
+		require(existingUser == null) { "email_taken" }
 
 		val encryptedPassword = BCrypt.hashpw(registerCompanyMemberDto.password, BCrypt.gensalt())
 
@@ -156,20 +180,16 @@ class AuthService(
 			createdAt = now,
 			updatedAt = now
 		)
-
-		val createdUserJoined = userService.create(userToCreate)
-			?: throw Exception("failed_to_register")
+		val createdUser = userService.create(userToCreate) ?: return null
 
 		val passwordAuthToCreate = PasswordAuth.createNew(
-			userId = createdUserJoined.id,
+			userId = createdUser.id,
 			encryptedPassword = encryptedPassword,
 			encryptionAlgorithm = "bcrypt",
 			createdAt = now,
 			updatedAt = now
 		)
-
-		passwordAuthService.create(passwordAuthToCreate)
-			?: throw Exception("failed_to_register")
+		passwordAuthService.create(passwordAuthToCreate) ?: return null
 
 		val existingCompanyJoined = companyService.getByName(registerCompanyMemberDto.companyName)
 		require(existingCompanyJoined == null) { "company_name_taken" }
@@ -186,22 +206,19 @@ class AuthService(
 			createdAt = now,
 			updatedAt = now
 		)
-
-		companyService.create(companyToCreate)
-			?: throw Exception("failed_to_register")
+		companyService.create(companyToCreate) ?: return null
 
 		val companyMemberToCreate = CompanyMember.createNew(
 			companyId = companyToCreate.id,
-			userId = createdUserJoined.id,
+			userId = createdUser.id,
 			role = CompanyMemberRole.OWNER,
 			status = CompanyMemberStatus.ACTIVE
 		)
+		companyMemberService.create(companyMemberToCreate) ?: return null
 
-		companyMemberService.create(companyMemberToCreate) ?: throw Exception("failed_to_register")
-
-		return createdUserJoined
+		return createdUser
 	}
-
+	//TODO logout revoke session also maybe
 	override suspend fun logoutCurrentSession(principal: JWTPrincipal): Boolean {
 		val sid = principal.payload.getClaim("sid").asString()
 		if (!sid.isNullOrBlank()) {
@@ -211,58 +228,24 @@ class AuthService(
 		return false
 	}
 
-	override suspend fun logoutAllSessions(userId: UUID): Boolean {
-		return refreshTokenService.revokeAllForUser(userId) > 0
-	}
-
-	override fun issueAccess(
-		userId: UUID,
-		email: String,
-		role: String,
-		companyId: UUID?,
-		sessionId: UUID?,
-		time: Instant?
+	override fun issueJWT(
+		tokenClaims: TokenClaims,
 	): String? {
-		val now = time ?: Instant.now()
-		val nowPlusExp = now.plus(jwtConfig.accessTtl)
 		return JWT.create()
 			.withIssuer(jwtConfig.iss)
 			.withAudience(jwtConfig.aud)
-			.withSubject(userId.toString())
-			.withClaim("email", email)
-			.withClaim("role", role)
-			.withClaim("companyId", companyId?.toString())
-			.withClaim("sid", sessionId?.toString())
-			.withClaim("typ", "access")
-			.withIssuedAt(now)
-			.withExpiresAt(nowPlusExp)
+			.withClaim("typ", tokenClaims.type.name)
+			.withSubject(tokenClaims.userId.toString())
+			.withClaim("sid", tokenClaims.sessionId.toString())
+			.withClaim("companyId", tokenClaims.companyId?.toString())
+			.withClaim("email", tokenClaims.email)
+			.withClaim("role", tokenClaims.role.name)
+			.withClaim("ip", tokenClaims.ip)
+			.withClaim("userAgent", tokenClaims.userAgent)
+			.withClaim("revokedAt", tokenClaims.revokedAt?.toString())
+			.withIssuedAt(tokenClaims.issuedAt)
+			.withExpiresAt(tokenClaims.expiresAt)
 			.sign(jwtConfig.alg)
-	}
-
-	override fun issueRefresh(
-		userId: UUID,
-		email: String,
-		role: String,
-		companyId: UUID?,
-		sessionId: UUID?,
-		time: Instant?
-	): String? {
-		val now = time ?: Instant.now()
-		val nowPlusExp = now.plus(jwtConfig.refreshTtl)
-
-		return JWT.create()
-			.withIssuer(jwtConfig.iss)
-			.withAudience(jwtConfig.aud)
-			.withSubject(userId.toString())
-			.withClaim("email", email)
-			.withClaim("role", role)
-			.withClaim("companyId", companyId?.toString())
-			.withClaim("sid", sessionId?.toString())
-			.withClaim("typ", "access")
-			.withIssuedAt(now)
-			.withExpiresAt(nowPlusExp)
-			.sign(jwtConfig.alg)
-
 	}
 
 	override fun verifier(): JWTVerifier {
@@ -280,59 +263,65 @@ class AuthService(
 	}
 
 	override suspend fun refresh(tokenDto: TokenDto): TokenDto? {
-		var refresh: String? = tokenDto.refresh
-		var access: String? = null
-		var newRefresh: String? = null
-		if (refresh != null) {
-			val decoded = JWT.decode(refresh)
-			require(decoded.getClaim("typ").asString() == "refresh") { "invalid_token_type" }
+		val now = Instant.now()
+		val refresh = tokenDto.refresh ?: return null
 
-			val refreshHash = sha256(refresh) ?: throw Exception("invalid_refresh")
-			val storedRefreshTokenJoined = refreshTokenService.findActiveByHash(refreshHash) ?: throw Exception("invalid_refresh")
+		val decoded = JWT.decode(refresh)
+		require(decoded.getClaim("typ").asString() == TokenType.REFRESH.name) { "invalid_token_type" }
 
-			require(decoded.subject == storedRefreshTokenJoined.user.id.toString()) { "invalid_refresh" }
-			require(decoded.getClaim("sid").asString() == storedRefreshTokenJoined.sessionId.toString()) { "invalid_refresh" }
+		val refreshHash = sha256(refresh) ?: return null
+		val stored = refreshTokenService.findActiveByHash(refreshHash) ?: return null
 
-			refreshTokenService.revokeById(storedRefreshTokenJoined.id)
+		require(decoded.subject == stored.sessionJoined.user.id.toString()) { "invalid_refresh" }
+		require(decoded.getClaim("sid").asString() == stored.sessionJoined.id.toString()) { "invalid_refresh" }
 
-			access = issueAccess(
+		refreshTokenService.revokeById(stored.id)
+
+		val nowPlusExpAccess = now.plus(jwtConfig.accessTtl)
+		val access = issueJWT(
+			TokenClaims(
+				type = TokenType.ACCESS,
 				userId = UUID.fromString(decoded.subject),
-				email = decoded.getClaim("email").asString() ?: "",
-				role = decoded.getClaim("role").asString() ?: "student",
-				companyId = decoded.getClaim("companyId").asString()?.let { UUID.fromString(it) } ,
-				sessionId = UUID.fromString(decoded.getClaim("sid").asString()),
-				time = decoded.issuedAt.toInstant()
+				sessionId = stored.sessionJoined.id,
+				companyId = UUID.fromString(decoded.getClaim("companyId").toString()),
+				email = stored.sessionJoined.user.email,
+				role = stored.sessionJoined.user.role,
+				ip = decoded.getClaim("ip").asString(),
+				userAgent = decoded.getClaim("userAgent").asString(),
+				issuedAt = now,
+				expiresAt = nowPlusExpAccess,
+				revokedAt = null,
 			)
-				?: throw Exception("failed_to_refresh")
+		) ?: return null
+		val nowPlusExpRefresh = now.plus(jwtConfig.refreshTtl)
+		val newRefresh = issueJWT(
+			TokenClaims(
+				type = TokenType.REFRESH,
+				userId = UUID.fromString(decoded.subject),
+				sessionId = stored.sessionJoined.id,
+				companyId = UUID.fromString(decoded.getClaim("companyId").toString()),
+				email = stored.sessionJoined.user.email,
+				role = stored.sessionJoined.user.role,
+				ip = decoded.getClaim("ip").asString(),
+				userAgent = decoded.getClaim("userAgent").asString(),
+				issuedAt = now,
+				expiresAt = nowPlusExpRefresh,
+				revokedAt = null,
+			)
+		) ?: return null
 
-			newRefresh =
-				issueRefresh(
-					userId = UUID.fromString(decoded.subject),
-					email = decoded.getClaim("email").asString() ?: "",
-					role = decoded.getClaim("role").asString() ?: "student",
-					companyId = decoded.getClaim("companyId").asString()?.let { UUID.fromString(it) } ,
-					sessionId = UUID.fromString(decoded.getClaim("sid").asString()),
-					time = decoded.issuedAt.toInstant()
-				)
-					?: throw Exception("failed_to_refresh")
+		val newParsed = JWT.decode(newRefresh)
+		val newHash = sha256(newRefresh) ?: return null
 
-			val newParsed = JWT.decode(newRefresh)
-			val newHash = sha256(newRefresh) ?: throw Exception("failed_to_refresh")
-
-			//TODO fix userAgent and ip
-			refreshTokenService.create(
-				RefreshToken.createNew(
-					userId = UUID.fromString(decoded.subject),
-					sessionId = UUID.fromString(decoded.getClaim("sid").asString()),
-					hash = newHash,
-					issuedAt = newParsed.issuedAt.toInstant(),
-					expiresAt = newParsed.expiresAt.toInstant(),
-					revokedAt = null,
-					userAgent = null,
-					ip = null
-				)
-			) ?: throw Exception("failed_to_refresh")
-		}
+		refreshTokenService.create(
+			RefreshToken.createNew(
+				sessionId = stored.sessionJoined.id,
+				hash = newHash,
+				issuedAt = newParsed.issuedAt.toInstant(),
+				expiresAt = newParsed.expiresAt.toInstant(),
+				revokedAt = null,
+			)
+		) ?: return null
 
 		return TokenDto(access, newRefresh)
 	}

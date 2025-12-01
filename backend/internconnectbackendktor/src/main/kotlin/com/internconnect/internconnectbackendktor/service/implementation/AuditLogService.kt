@@ -1,6 +1,5 @@
 package com.internconnect.internconnectbackendktor.service.implementation
 
-import com.internconnect.internconnectbackendktor.model.dto.response.AuditLogDto
 import com.internconnect.internconnectbackendktor.model.join
 import com.internconnect.internconnectbackendktor.model.joined.AuditLogJoined
 import com.internconnect.internconnectbackendktor.model.raw.auditlog.AuditLog

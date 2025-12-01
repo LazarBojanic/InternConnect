@@ -6,13 +6,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.data.dto.response.InternshipDto
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.ui.components.CategoryFilter
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
 @Composable
 fun StudentFindInternshipsScreen(
-	internships: List<InternshipDto>,
+	internships: List<InternshipJoined>,
 	categories: List<String>,
 	onBack: (() -> Unit)? = null,
 	onOpenDetails: (id: String) -> Unit,
@@ -22,7 +22,7 @@ fun StudentFindInternshipsScreen(
 
 	val display = internships.filter { item ->
 		(selectedCategory == "All" || item.category == selectedCategory) &&
-			(query.isBlank() || item.position.contains(query, ignoreCase = true) || item.company.contains(query, ignoreCase = true))
+			(query.isBlank() || item.title.contains(query, ignoreCase = true) || item.company.name.contains(query, ignoreCase = true))
 	}
 
 	Column(Modifier.fillMaxSize().padding(16.dp)) {

@@ -8,7 +8,7 @@ val repositoryModule = module {
 	single<IUserRepository> { UserRepository() }
 	single<IPasswordAuthRepository> { PasswordAuthRepository() }
 	single<IPasswordResetRepository> { PasswordResetRepository() }
-	single<IRefreshTokenRepository> { RefreshTokenRepository() }
+	single<IRefreshTokenRepository> { RefreshRefreshTokenRepository() }
 	single<IEmailVerificationRepository> { EmailVerificationRepository() }
 	single<IStudentRepository> { StudentRepository() }
 	single<ICompanyRepository> { CompanyRepository() }

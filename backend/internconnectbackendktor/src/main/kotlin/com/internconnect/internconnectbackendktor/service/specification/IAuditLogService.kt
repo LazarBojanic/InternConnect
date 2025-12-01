@@ -1,6 +1,5 @@
 package com.internconnect.internconnectbackendktor.service.specification
 
-import com.internconnect.internconnectbackendktor.model.dto.response.AuditLogDto
 import com.internconnect.internconnectbackendktor.model.joined.AuditLogJoined
 import com.internconnect.internconnectbackendktor.model.raw.auditlog.*
 import java.util.*

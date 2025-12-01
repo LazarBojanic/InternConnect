@@ -5,12 +5,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.data.dto.response.InternshipDto
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 
 @Composable
 fun StudentInternshipDetailsScreen(
-	internship: InternshipDto?,
+	internship: InternshipJoined?,
 	onBack: () -> Unit,
 	onUploadResume: () -> Unit = {}, // Placeholder for a real picker
 	onApply: (resumeText: String?) -> Unit,
@@ -26,9 +26,9 @@ fun StudentInternshipDetailsScreen(
 			return
 		}
 
-		Text(internship.position, style = MaterialTheme.typography.headlineSmall)
-		Text(internship.company, style = MaterialTheme.typography.titleMedium)
-		Text("${internship.country}, ${internship.city}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+		Text(internship.title, style = MaterialTheme.typography.headlineSmall)
+		Text(internship.company.name, style = MaterialTheme.typography.titleMedium)
+		Text("${internship.company.country}, ${internship.company.city}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
 		Spacer(Modifier.height(8.dp))
 		Text(internship.description, style = MaterialTheme.typography.bodyLarge)
 

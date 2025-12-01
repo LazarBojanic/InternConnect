@@ -10,9 +10,7 @@ fun Route.passwordResetRoutes() {
 	val passwordResetService by inject<IPasswordResetService>()
 	route("/password-resets") {
 		get {
-			val passwordResetsJoined = passwordResetService.getAll()
-			val passwordResetDtos = passwordResetsJoined.map { it.toDto() }
-			call.respond(passwordResetDtos)
+
 		}
 	}
 }

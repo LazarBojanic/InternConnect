@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterCompanyMemberViewModel
-import com.internconnect.internconnectfrontendclient.data.dto.request.RegisterCompanyMemberDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.RegisterCompanyMemberDto
 import org.koin.compose.koinInject
 
 @Composable

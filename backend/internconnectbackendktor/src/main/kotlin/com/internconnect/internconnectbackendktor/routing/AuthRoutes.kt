@@ -1,7 +1,7 @@
 package com.internconnect.internconnectbackendktor.routing
 
 
-import com.internconnect.internconnectbackendktor.model.dto.TokenDto
+import com.internconnect.internconnectbackendktor.model.dto.response.TokenDto
 import com.internconnect.internconnectbackendktor.model.dto.request.LoginUserDto
 import com.internconnect.internconnectbackendktor.model.dto.request.RegisterCompanyMemberDto
 import com.internconnect.internconnectbackendktor.model.dto.request.RegisterStudentDto
@@ -42,14 +42,7 @@ fun Route.authRoutes() {
 				call.respond(HttpStatusCode.OK)
 			}
 		}
-		route("/auth/logout-all") {
-			post {
-				val principal = call.principal<JWTPrincipal>()!!
-				val userId = UUID.fromString(principal.payload.subject)
-				authService.logoutAllSessions(userId)
-				call.respond(HttpStatusCode.OK)
-			}
-		}
+
 	}
 	route("/auth/register-student") {
 		post {

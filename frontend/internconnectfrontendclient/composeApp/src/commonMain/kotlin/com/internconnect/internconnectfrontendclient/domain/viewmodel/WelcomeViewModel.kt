@@ -1,13 +1,15 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
+import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlin.time.ExperimentalTime
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 class WelcomeViewModel(
 	private val tokenStore: ITokenDataStore,
@@ -56,12 +58,7 @@ class WelcomeViewModel(
 		}
 	}
 
-	@OptIn(ExperimentalTime::class)
-	private fun isJwtExpired(jwt: String): Boolean = try {
-		/*val claims = jwtDecode(jwt)
-		val expSec = claims["exp"]?.jsonPrimitive?.longOrNull ?: return true
-		val nowSec = Clock.System.now().epochSeconds
-		nowSec >= expSec*/
-		false
-	} catch (_: Throwable) { true }
+	private fun isJwtExpired(jwt: String): Boolean {
+		return false
+	}
 }

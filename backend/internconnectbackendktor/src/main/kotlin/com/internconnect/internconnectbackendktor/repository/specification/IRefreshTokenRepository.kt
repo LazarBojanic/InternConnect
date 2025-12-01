@@ -14,6 +14,5 @@ interface IRefreshTokenRepository {
 	suspend fun findActiveByHash(hash: String): RefreshToken?
 	suspend fun revokeById(id: UUID): Boolean
 	suspend fun revokeBySessionId(sessionId: UUID): Int
-	suspend fun revokeAllForUser(userId: UUID): Int
 	suspend fun deleteExpired(now: Instant = Instant.now()): Int
 }

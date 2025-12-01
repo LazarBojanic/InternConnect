@@ -31,17 +31,12 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 				state.loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
 				state.error != null -> Text("Error: ${state.error}", color = MaterialTheme.colorScheme.error)
 				state is ProfileUiState.StudentState -> {
-					val dto = (state as ProfileUiState.StudentState).data
+					val student = (state as ProfileUiState.StudentState).data
 
-					// Profile header card
 					ElevatedCard(shape = MaterialTheme.shapes.extraLarge) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 							Row(verticalAlignment = Alignment.CenterVertically) {
-								// Fallback avatar using initials
-								val initials = remember(dto?.fullName) {
-									dto?.fullName?.trim()?.split(" ")?.mapNotNull { it.firstOrNull()?.toString() }?.take(2)?.joinToString("")?.uppercase()
-										?: "ST"
-								}
+								val initials = remember()
 								Box(
 									modifier = Modifier.size(64.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer),
 									contentAlignment = Alignment.Center
@@ -50,14 +45,14 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 								}
 								Spacer(Modifier.width(16.dp))
 								Column(Modifier.weight(1f)) {
-									Text(text = dto?.fullName ?: "Student", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
-									Text(text = dto?.email ?: "—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+									Text(text = student?.fullName ?: "Student", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.SemiBold))
+									Text(text = student?.email ?: "—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
 								}
 							}
 							Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-								StatusChip(text = dto?.userRole ?: "STUDENT")
-								if (dto?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
-								dto?.userStatus?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
+								StatusChip(text = student?.userRole ?: "STUDENT")
+								if (student?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
+								student?.userStatus?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
 							}
 						}
 					}
@@ -66,16 +61,16 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 
 					// Education
 					SectionCard(title = "Education") {
-						InfoRow("School", dto?.schoolName)
-						InfoRow("Grade", dto?.grade?.toString())
+						InfoRow("School", student?.schoolName)
+						InfoRow("Grade", student?.grade?.toString())
 					}
 
 					Spacer(Modifier.height(12.dp))
 
 					// About
 					SectionCard(title = "About") {
-						InfoRow("Bio", dto?.bio)
-						InfoRow("Interests", dto?.interests)
+						InfoRow("Bio", student?.bio)
+						InfoRow("Interests", student?.interests)
 					}
 				}
 				else -> Text("Not a student profile.")

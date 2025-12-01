@@ -15,6 +15,5 @@ interface IRefreshTokenService {
 	suspend fun findActiveByHash(hash: String): RefreshTokenJoined?
 	suspend fun revokeById(id: UUID): Boolean
 	suspend fun revokeBySessionId(sessionId: UUID): Int
-	suspend fun revokeAllForUser(userId: UUID): Int
 	suspend fun deleteExpired(now: Instant = Instant.now()): Int
 }

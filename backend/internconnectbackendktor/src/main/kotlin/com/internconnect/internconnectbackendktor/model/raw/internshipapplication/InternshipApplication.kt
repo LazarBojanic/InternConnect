@@ -52,5 +52,5 @@ data class InternshipApplication(
 }
 
 enum class InternshipApplicationStatus {
-	PENDING, APPROVED, REJECTED
+	APPLIED, REJECTED, ACCEPTED
 }

@@ -1,7 +1,5 @@
 package com.internconnect.internconnectfrontendclient
 
-import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
-import com.internconnect.internconnectfrontendclient.domain.repository.UserRepository
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.ProfileViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterCompanyMemberViewModel

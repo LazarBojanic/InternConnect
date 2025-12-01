@@ -7,14 +7,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.internconnect.internconnectfrontendclient.data.dto.ApplicationDto
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined
 import com.internconnect.internconnectfrontendclient.ui.components.ApplicationStatusChip
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 
 
 @Composable
 fun StudentMyApplicationsScreen(
-	applications: List<ApplicationDto>,
+	applications: List<InternshipApplicationJoined>,
 	onBack: () -> Unit,
 	onExploreInternships: () -> Unit,
 ) {
@@ -23,13 +23,13 @@ fun StudentMyApplicationsScreen(
 		Spacer(Modifier.height(16.dp))
 
 		LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.weight(1f)) {
-			items(applications) { app ->
+			items(applications) { internshipApplication ->
 				ElevatedCard(shape = MaterialTheme.shapes.large) {
 					Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-						Text(app.position, style = MaterialTheme.typography.titleMedium)
-						Text(app.company, style = MaterialTheme.typography.bodyMedium)
-						Text("${app.country}, ${app.city}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-						ApplicationStatusChip(app.status)
+						Text(internshipApplication.internship.title, style = MaterialTheme.typography.titleMedium)
+						Text(internshipApplication.internship.company.name, style = MaterialTheme.typography.bodyMedium)
+						Text("${internshipApplication.internship.company.country}, ${internshipApplication.internship.company.city}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+						ApplicationStatusChip(internshipApplication.status)
 					}
 				}
 			}

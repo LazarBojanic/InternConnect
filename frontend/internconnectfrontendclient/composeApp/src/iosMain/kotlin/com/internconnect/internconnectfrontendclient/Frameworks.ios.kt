@@ -16,8 +16,8 @@ actual fun platformEngine(): HttpClientEngineFactory<*> = Darwin
 
 fun iosModule() = module {
 	single { getAppDatabase(getDatabaseBuilder()) }
-	single { get<AppDatabase>().getStudentProfileDao() }
-	single { get<AppDatabase>().getCompanyMemberProfileDao() }
+	single { get<AppDatabase>().getStudentDao() }
+	single { get<AppDatabase>().getCompanyMemberDao() }
 	single<DataStore<Preferences>> {
 		provideTokenDataStore()
 	}

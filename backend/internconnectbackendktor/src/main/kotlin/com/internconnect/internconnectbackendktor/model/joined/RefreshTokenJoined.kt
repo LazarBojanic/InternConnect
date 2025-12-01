@@ -11,9 +11,7 @@ import java.util.UUID
 data class RefreshTokenJoined(
 	@Serializable(with = UUIDSerializer::class)
 	val id: UUID,
-	val user: UserJoined,
-	@Serializable(with = UUIDSerializer::class)
-	val sessionId: UUID,
+	val sessionJoined: SessionJoined,
 	val hash: String,
 	@Serializable(with = InstantSerializer::class)
 	val issuedAt: Instant,
@@ -21,8 +19,6 @@ data class RefreshTokenJoined(
 	val expiresAt: Instant,
 	@Serializable(with = InstantSerializer::class)
 	val revokedAt: Instant?,
-	val userAgent: String?,
-	val ip: String?,
 	@Serializable(with = InstantSerializer::class)
 	val createdAt: Instant,
 	@Serializable(with = InstantSerializer::class)

@@ -10,9 +10,9 @@ val ktor_plugin_version: String by project
 val ktor_version: String by project
 
 plugins {
-	kotlin("jvm") version "2.3.0-Beta2"
-	id("io.ktor.plugin") version "3.3.0"
-	id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-Beta2"
+	kotlin("jvm") version "2.2.21"
+	id("io.ktor.plugin") version "3.3.1"
+	id("org.jetbrains.kotlin.plugin.serialization") version "2.2.21"
 }
 
 group = "com.internconnect"

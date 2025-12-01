@@ -18,8 +18,8 @@ actual fun platformEngine(): HttpClientEngineFactory<*> = OkHttp
 
 fun androidModule(appContext: Context) = module {
 	single { getAppDatabase(getDatabaseBuilder(appContext)) }
-	single { get<AppDatabase>().getStudentProfileDao() }
-	single { get<AppDatabase>().getCompanyMemberProfileDao() }
+	single { get<AppDatabase>().getStudentDao() }
+	single { get<AppDatabase>().getCompanyMemberDao() }
 	single<DataStore<Preferences>> {
 		provideTokenDataStore(appContext)
 	}

@@ -1,10 +1,13 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
-import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
-import com.internconnect.internconnectfrontendclient.data.dto.request.LoginUserDto
-import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.request.LoginUserDto
+import com.internconnect.internconnectfrontendclient.data.toRaw
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.ICompanyMemberRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.IStudentRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.IUserRepository
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +21,8 @@ class LoginUserViewModel(
 	private val api: IAppApi,
 	private val tokenStore: ITokenDataStore,
 	private val userRepository: IUserRepository,
+	private val studentRepository: IStudentRepository,
+	private val companyMemberRepository: ICompanyMemberRepository,
 ) {
 	sealed interface LoginUiState {
 		data object Idle : LoginUiState
@@ -46,11 +51,19 @@ class LoginUserViewModel(
 						if(userId != null && userRole != null) {
 							when (userRole) {
 								"STUDENT" -> {
-									api.fetchStudentProfileById(userId)?.let { userRepository.setCurrentStudentProfile(it) }
+									val studentDto = api.fetchStudentById(userId)
+									if(studentDto != null){
+										userRepository.setCurrentUser(studentDto.user.toRaw())
+										studentRepository.setCurrentStudent(studentDto.toRaw())
+									}
 									_uiState.value = LoginUiState.LoggedInStudent(userId)
 								}
 								"COMPANY_MEMBER" -> {
-									api.fetchCompanyMemberProfileById(userId)?.let { userRepository.setCurrentCompanyMemberProfile(it) }
+									val companyMemberDto = api.fetchCompanyMemberById(userId)
+									if(companyMemberDto != null){
+										userRepository.setCurrentUser(companyMemberDto.user.toRaw())
+										companyMemberRepository.setCurrentCompanyMember(companyMemberDto.toRaw())
+									}
 									_uiState.value = LoginUiState.LoggedInCompanyMember(userId)
 								}
 								else -> _uiState.value = LoginUiState.Error("Unsupported role: $userRole")

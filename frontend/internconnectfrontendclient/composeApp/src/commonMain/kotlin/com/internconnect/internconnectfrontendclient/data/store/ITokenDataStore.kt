@@ -1,6 +1,6 @@
 package com.internconnect.internconnectfrontendclient.data.store
 
-import com.internconnect.internconnectfrontendclient.data.dto.TokenDto
+import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
 import kotlinx.coroutines.flow.StateFlow
 
 interface ITokenDataStore {

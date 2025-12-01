@@ -8,9 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.internconnect.internconnectfrontendclient.data.dto.ApplicationDto
-import com.internconnect.internconnectfrontendclient.data.dto.ApplicationStatus
-import com.internconnect.internconnectfrontendclient.data.dto.response.InternshipDto
+import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
@@ -84,14 +82,8 @@ fun App() {
 
 			// New student routes
 			composable("student/find") {
-				val sample = listOf(
-					InternshipDto("1", "Android Intern", "Acme Corp", "Germany", "Berlin", "Build amazing Android apps.", "Software"),
-					InternshipDto("2", "Data Intern", "Datafy", "USA", "Austin", "Help the team with ETL.", "Data"),
-					InternshipDto("3", "Marketing Intern", "BrightCo", "UK", "London", "Social campaigns and growth.", "Marketing"),
-				)
-				val categories = sample.map { it.category }
 				StudentFindInternshipsScreen(
-					internships = sample,
+					internships = emptyList<InternshipJoined>(),
 					categories = categories,
 					onBack = { navController.popBackStack() },
 					onOpenDetails = { id ->

@@ -1,7 +1,15 @@
 package com.internconnect.internconnectfrontendclient.domain.viewmodel
 
+import com.internconnect.internconnectfrontendclient.data.join
 import com.internconnect.internconnectfrontendclient.data.store.ITokenDataStore
-import com.internconnect.internconnectfrontendclient.domain.repository.IUserRepository
+import com.internconnect.internconnectfrontendclient.data.toJoined
+import com.internconnect.internconnectfrontendclient.data.toRaw
+import com.internconnect.internconnectfrontendclient.domain.repository.implementation.CompanyRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.implementation.StudentRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.ICompanyMemberRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.ICompanyRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.IStudentRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
@@ -12,9 +20,12 @@ import kotlinx.coroutines.launch
 
 
 class ProfileViewModel(
-	private val userRepository: IUserRepository,
 	private val api: IAppApi,
 	private val tokenStore: ITokenDataStore,
+	private val userRepository: IUserRepository,
+	private val studentRepository: IStudentRepository,
+	private val companyRepository: ICompanyRepository,
+	private val companyMemberRepository: ICompanyMemberRepository,
 ) {
 	private val scope = CoroutineScope(Dispatchers.Default)
 
@@ -24,16 +35,20 @@ class ProfileViewModel(
 	fun load() {
 		scope.launch {
 			try {
-				val cachedStudentProfile = userRepository.getCurrentStudentProfile()
-				val cachedCompanyMemberProfile = userRepository.getCurrentCompanyMemberProfile()
+				val cachedUser = userRepository.getCurrentUser()
+				val cachedStudent = studentRepository.getCurrentStudent()
+				val cachedCompany = companyRepository.getCurrentCompany()
+				val cachedCompanyMember = companyMemberRepository.getCurrentCompanyMember()
 
-				if (cachedStudentProfile != null) {
-					_uiState.value = ProfileUiState.StudentState(loading = false, data = cachedStudentProfile)
-					return@launch
-				}
-				if (cachedCompanyMemberProfile != null) {
-					_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = cachedCompanyMemberProfile)
-					return@launch
+				if(cachedUser != null && cachedCompany != null) {
+					if(cachedStudent != null){
+						_uiState.value = ProfileUiState.StudentState(loading = false, data = cachedStudent.join(cachedUser.join()))
+						return@launch
+					}
+					else if (cachedCompanyMember != null) {
+						_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = cachedCompanyMember.join(cachedUser.join(), cachedCompany.join()))
+						return@launch
+					}
 				}
 
 				val access: String? = tokenStore.tokenDto.value?.access
@@ -41,21 +56,21 @@ class ProfileViewModel(
 				var userRole: String? = null
 				if(access !=  null) {
 					userId = jwtDecode(access)["userId"]?.toString()
+					userRole = jwtDecode(access)["userRole"]?.toString()
 					if (userId != null) {
-						userRole = jwtDecode(access)["userRole"]?.toString()
 						if(userRole == "STUDENT") {
-							val studentProfileDto = api.fetchStudentProfileById(userId)
-							if (studentProfileDto != null) {
-								userRepository.setCurrentStudentProfile(studentProfileDto)
-								_uiState.value = ProfileUiState.StudentState(loading = false, data = studentProfileDto)
+							val studentDto = api.fetchStudentById(userId)
+							if (studentDto != null) {
+								studentRepository.setCurrentStudent(studentDto.toRaw())
+								_uiState.value = ProfileUiState.StudentState(loading = false, data = studentDto.toJoined())
 								return@launch
 							}
 						}
 						else if(userRole == "COMPANY_MEMBER") {
-							val companyMemberProfileDto = api.fetchCompanyMemberProfileById(userId)
-							if (companyMemberProfileDto != null) {
-								userRepository.setCurrentCompanyMemberProfile(companyMemberProfileDto)
-								_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = companyMemberProfileDto)
+							val companyMemberDto = api.fetchCompanyMemberById(userId)
+							if (companyMemberDto != null) {
+								companyMemberRepository.setCurrentCompanyMember(companyMemberDto.toRaw())
+								_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = companyMemberDto.toJoined())
 								return@launch
 							}
 						}
