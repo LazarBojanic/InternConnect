@@ -11,8 +11,17 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InternshipApplicationDao {
-	@Query("SELECT * FROM internship_application LIMIT 1")
-	fun findFirst(): Flow<InternshipApplication?>
+	@Query("SELECT * FROM internship_application")
+	fun findAll(): Flow<List<InternshipApplication>>
+
+	@Query("SELECT * FROM internship_application WHERE student_id = :studentId")
+	fun findAllByStudentId(studentId: String): Flow<List<InternshipApplication>>
+
+	@Query("SELECT * FROM internship_application WHERE internship_id = :internshipId")
+	fun findAllByInternshipId(internshipId: String): Flow<List<InternshipApplication>>
+
+	@Query("SELECT * FROM internship_application WHERE id = :id LIMIT 1")
+	fun findById(id: String): Flow<InternshipApplication?>
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun upsert(internshipApplication: InternshipApplication)

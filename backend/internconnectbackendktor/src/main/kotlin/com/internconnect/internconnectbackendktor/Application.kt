@@ -15,6 +15,7 @@ import com.internconnect.internconnectbackendktor.model.raw.oauthaccount.OAuthAc
 import com.internconnect.internconnectbackendktor.model.raw.passwordauth.PasswordAuthTable
 import com.internconnect.internconnectbackendktor.model.raw.passwordreset.PasswordResetTable
 import com.internconnect.internconnectbackendktor.model.raw.refreshtoken.RefreshTokenTable
+import com.internconnect.internconnectbackendktor.model.raw.session.SessionTable
 import com.internconnect.internconnectbackendktor.model.raw.student.StudentTable
 import com.internconnect.internconnectbackendktor.model.raw.user.UserTable
 import com.internconnect.internconnectbackendktor.routing.configureRouting
@@ -30,6 +31,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+	val dev = true
 	configureHTTP()
 	configureSerialization()
 	configureDatabase()
@@ -48,10 +50,17 @@ fun Application.module() {
 		OAuthAccountTable,
 		PasswordAuthTable,
 		PasswordResetTable,
+		SessionTable,
 		RefreshTokenTable,
 		StudentTable,
 		UserTable,
 	)
+	transaction {
+		if(dev){
+			exec("DROP SCHEMA IF EXISTS public CASCADE;")
+			exec("CREATE SCHEMA public;")
+		}
+	}
 
 	transaction{
 		SchemaUtils.createMissingTablesAndColumns(*allTables)

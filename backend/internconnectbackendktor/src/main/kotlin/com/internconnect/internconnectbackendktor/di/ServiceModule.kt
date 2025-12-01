@@ -18,4 +18,5 @@ val serviceModule = module {
 	single<IAuditLogService> { AuditLogService(get(), get()) }
 	single<IOAuthAccountService> { OAuthAccountService(get(), get()) }
 	single<IAuthService> { AuthService(get(), get(), get(), get(), get(), get(), get(), get()) }
+	single<ISessionService> { SessionService(get(), get()) }
 }

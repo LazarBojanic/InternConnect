@@ -51,9 +51,9 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 								}
 							}
 							Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-								StatusChip(text = student?.userRole ?: "STUDENT")
-								if (student?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
-								student?.userStatus?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
+								StatusChip(text = student?.user?.role ?: "STUDENT")
+								if (student?.user?.isEmailVerified == true) StatusChip(text = "Verified", container = MaterialTheme.colorScheme.tertiaryContainer)
+								student?.user?.status?.takeIf { it.isNotBlank() }?.let { StatusChip(text = it) }
 							}
 						}
 					}

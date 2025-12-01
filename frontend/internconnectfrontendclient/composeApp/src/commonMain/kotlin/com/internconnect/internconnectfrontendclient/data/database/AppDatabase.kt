@@ -7,18 +7,21 @@ import com.internconnect.internconnectfrontendclient.data.model.dao.CompanyMembe
 import com.internconnect.internconnectfrontendclient.data.model.dao.InternshipApplicationDao
 import com.internconnect.internconnectfrontendclient.data.model.dao.InternshipDao
 import com.internconnect.internconnectfrontendclient.data.model.dao.StudentDao
+import com.internconnect.internconnectfrontendclient.data.model.dao.UserDao
 import com.internconnect.internconnectfrontendclient.data.model.raw.Company
 import com.internconnect.internconnectfrontendclient.data.model.raw.CompanyMember
 import com.internconnect.internconnectfrontendclient.data.model.raw.Internship
 import com.internconnect.internconnectfrontendclient.data.model.raw.InternshipApplication
 import com.internconnect.internconnectfrontendclient.data.model.raw.Student
+import com.internconnect.internconnectfrontendclient.data.model.raw.User
 import kotlinx.coroutines.Dispatchers
 
 @Database(entities =
-	[Student::class, CompanyMember::class, Company::class, Internship::class, InternshipApplication::class],
+	[User::class, Student::class, CompanyMember::class, Company::class, Internship::class, InternshipApplication::class],
 	version = 1)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {
+	abstract fun getUserDao(): UserDao
 	abstract fun getStudentDao(): StudentDao
 	abstract fun getCompanyMemberDao(): CompanyMemberDao
 	abstract fun getCompanyDao(): CompanyDao

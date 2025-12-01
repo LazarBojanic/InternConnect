@@ -2,15 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a163e7609d9bf432258e0d9a88687c79",
+    "identityHash": "7061326b928d64ed4970d598bb9b4327",
     "entities": [
       {
-        "tableName": "student_profile",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `email` TEXT NOT NULL, `first_name` TEXT NOT NULL, `last_name` TEXT NOT NULL, `fullName` TEXT NOT NULL, `userRole` TEXT NOT NULL, `isEmailVerified` INTEGER NOT NULL, `userStatus` TEXT NOT NULL, `school_name` TEXT NOT NULL, `grade` INTEGER NOT NULL, `bio` TEXT, `interests` TEXT, `avatarUrl` TEXT, PRIMARY KEY(`userId`))",
+        "tableName": "user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `email` TEXT NOT NULL, `first_name` TEXT NOT NULL, `last_name` TEXT NOT NULL, `role` TEXT NOT NULL, `is_email_verified` INTEGER NOT NULL, `status` TEXT NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "userId",
-            "columnName": "userId",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -33,26 +33,50 @@
             "notNull": true
           },
           {
-            "fieldPath": "fullName",
-            "columnName": "fullName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "userRole",
-            "columnName": "userRole",
+            "fieldPath": "role",
+            "columnName": "role",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "isEmailVerified",
-            "columnName": "isEmailVerified",
+            "columnName": "is_email_verified",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "userStatus",
-            "columnName": "userStatus",
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "student",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `school_name` TEXT NOT NULL, `grade` INTEGER NOT NULL, `bio` TEXT, `interests` TEXT, `avatarUrl` TEXT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`userId`), FOREIGN KEY(`userId`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -82,6 +106,18 @@
             "fieldPath": "avatarUrl",
             "columnName": "avatarUrl",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -89,11 +125,24 @@
           "columnNames": [
             "userId"
           ]
-        }
+        },
+        "foreignKeys": [
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "userId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       },
       {
-        "tableName": "company_member_profile",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `user_email` TEXT NOT NULL, `user_full_name` TEXT NOT NULL, `user_role` TEXT NOT NULL, `is_email_verified` INTEGER NOT NULL, `user_status` TEXT NOT NULL, `joined_at` TEXT, `company_name` TEXT NOT NULL, `company_industry` TEXT NOT NULL, `company_member_role` TEXT NOT NULL, `company_member_status` TEXT NOT NULL, `website` TEXT, `logo_url` TEXT, `hq_country` TEXT, `city` TEXT, `about` TEXT, PRIMARY KEY(`userId`))",
+        "tableName": "company_member",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `company_id` TEXT NOT NULL, `role` TEXT NOT NULL, `status` TEXT NOT NULL, `joined_at` TEXT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`userId`), FOREIGN KEY(`userId`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "userId",
@@ -102,32 +151,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "userEmail",
-            "columnName": "user_email",
+            "fieldPath": "companyId",
+            "columnName": "company_id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "userFullName",
-            "columnName": "user_full_name",
+            "fieldPath": "role",
+            "columnName": "role",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "userRole",
-            "columnName": "user_role",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isEmailVerified",
-            "columnName": "is_email_verified",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "userStatus",
-            "columnName": "user_status",
+            "fieldPath": "status",
+            "columnName": "status",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -137,26 +174,57 @@
             "affinity": "TEXT"
           },
           {
-            "fieldPath": "companyName",
-            "columnName": "company_name",
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "companyIndustry",
-            "columnName": "company_industry",
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "userId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "userId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "company",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `industry` TEXT NOT NULL, `website` TEXT, `logoUrl` TEXT, `country` TEXT, `city` TEXT, `about` TEXT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "companyMemberRole",
-            "columnName": "company_member_role",
+            "fieldPath": "name",
+            "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "companyMemberStatus",
-            "columnName": "company_member_status",
+            "fieldPath": "industry",
+            "columnName": "industry",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -167,12 +235,12 @@
           },
           {
             "fieldPath": "logoUrl",
-            "columnName": "logo_url",
+            "columnName": "logoUrl",
             "affinity": "TEXT"
           },
           {
-            "fieldPath": "hqCountry",
-            "columnName": "hq_country",
+            "fieldPath": "country",
+            "columnName": "country",
             "affinity": "TEXT"
           },
           {
@@ -184,19 +252,144 @@
             "fieldPath": "about",
             "columnName": "about",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "userId"
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "internship",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `company_id` TEXT NOT NULL, `title` TEXT NOT NULL, `category` TEXT NOT NULL, `description` TEXT NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyId",
+            "columnName": "company_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "internship_application",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `internship_id` TEXT NOT NULL, `student_id` TEXT NOT NULL, `status` TEXT NOT NULL, `resume` TEXT NOT NULL, `interview_notes` TEXT, `created_at` TEXT NOT NULL, `updated_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "internshipId",
+            "columnName": "internship_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "studentId",
+            "columnName": "student_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resume",
+            "columnName": "resume",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interviewNotes",
+            "columnName": "interview_notes",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
           ]
         }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a163e7609d9bf432258e0d9a88687c79')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7061326b928d64ed4970d598bb9b4327')"
     ]
   }
 }

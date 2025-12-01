@@ -47,9 +47,9 @@ class LoginUserViewModel(
 					if(access != null) {
 						val claims = jwtDecode(access)
 						val userId = claims["sub"]?.jsonPrimitive?.content
-						val userRole = claims["userRole"]?.jsonPrimitive?.content
-						if(userId != null && userRole != null) {
-							when (userRole) {
+						val role = claims["role"]?.jsonPrimitive?.content
+						if(userId != null && role != null) {
+							when (role) {
 								"STUDENT" -> {
 									val studentDto = api.fetchStudentById(userId)
 									if(studentDto != null){
@@ -66,7 +66,7 @@ class LoginUserViewModel(
 									}
 									_uiState.value = LoginUiState.LoggedInCompanyMember(userId)
 								}
-								else -> _uiState.value = LoginUiState.Error("Unsupported role: $userRole")
+								else -> _uiState.value = LoginUiState.Error("Unsupported role: $role")
 							}
 						}
 						else {

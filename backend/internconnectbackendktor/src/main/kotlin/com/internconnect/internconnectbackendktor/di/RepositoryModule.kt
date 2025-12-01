@@ -17,4 +17,5 @@ val repositoryModule = module {
 	single<IInternshipApplicationRepository> { InternshipApplicationRepository() }
 	single<IAuditLogRepository> { AuditLogRepository() }
 	single<IOAuthAccountRepository> { OAuthAccountRepository() }
+	single<ISessionRepository> { SessionRepository() }
 }

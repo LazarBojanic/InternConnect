@@ -22,7 +22,7 @@ import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentIn
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMessagesScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMyApplicationsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentProfileScreen
-import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentSavedOpportunitiesScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentSavedInternshipsScreen
 
 
 @Composable
@@ -84,7 +84,7 @@ fun App() {
 			composable("student/find") {
 				StudentFindInternshipsScreen(
 					internships = emptyList<InternshipJoined>(),
-					categories = categories,
+					categories = emptyList(),
 					onBack = { navController.popBackStack() },
 					onOpenDetails = { id ->
 						// 2) Save selection then navigate without params
@@ -95,9 +95,6 @@ fun App() {
 			}
 			composable("student/details") {
 				val internship = when (selectedInternshipId) {
-					"1" -> InternshipDto("1", "Android Intern", "Acme Corp", "Germany", "Berlin", "Build amazing Android apps.", "Software")
-					"2" -> InternshipDto("2", "Data Intern", "Datafy", "USA", "Austin", "Help the team with ETL.", "Data")
-					"3" -> InternshipDto("3", "Marketing Intern", "BrightCo", "UK", "London", "Social campaigns and growth.", "Marketing")
 					else -> null
 				}
 				StudentInternshipDetailsScreen(
@@ -107,33 +104,16 @@ fun App() {
 					onApply = { navController.navigate("student/applications") }
 				)
 			}
-			composable("student/applications") {
-				val apps = listOf(
-					ApplicationDto("1", "Android Intern", "Acme Corp", "Germany", "Berlin", ApplicationStatus.APPLIED),
-					ApplicationDto("2", "Data Intern", "Datafy", "USA", "Austin", ApplicationStatus.REJECTED),
-					ApplicationDto("3", "Marketing Intern", "BrightCo", "UK", "London", ApplicationStatus.ACCEPTED),
-				)
+			composable("student/internship-applications") {
 				StudentMyApplicationsScreen(
-					applications = apps,
+					applications = emptyList(),
 					onBack = { navController.popBackStack() },
 					onExploreInternships = { navController.navigate("student/find") }
 				)
 			}
-			composable("student/saved") {
-				val saved = listOf(
-					InternshipDto(
-						"1",
-						"Android Intern",
-						"Acme Corp",
-						"Germany",
-						"Berlin",
-						"Build amazing Android apps.",
-						"Software"
-					),
-					InternshipDto("3", "Marketing Intern", "BrightCo", "UK", "London", "Social campaigns and growth.", "Marketing")
-				)
-				StudentSavedOpportunitiesScreen(
-					saved = saved,
+			composable("student/saved-internships") {
+				StudentSavedInternshipsScreen(
+					saved = emptyList(),
 					onBack = { navController.popBackStack() },
 					onOpenDetails = { id -> navController.navigate("student/details/$id") }
 				)
