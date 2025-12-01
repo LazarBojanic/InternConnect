@@ -17,7 +17,12 @@ import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RoleRouter
 import com.internconnect.internconnectfrontendclient.ui.screen.Welcome
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberAnalyticsScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberCandidatesScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberDashboardScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberHomeScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberMessagesScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberPostInternshipScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberProfileScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentFindInternshipsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentHomeScreen
@@ -49,17 +54,30 @@ object Routes {
 	// Company member
 	const val CompanyHome = "company/home"
 	const val CompanyProfile = "company/profile"
+
+	// new company member routes
+	const val CompanyDashboard = "company/dashboard"
+	const val CompanyPost = "company/post"
+	const val CompanyCandidates = "company/candidates"
+	const val CompanyMessages = "company/messages"
+	const val CompanyAnalytics = "company/analytics"
 }
 
 @Composable
 fun App() {
 	val navController = rememberNavController()
 	var selectedInternshipId by remember { mutableStateOf<String?>(null) }
+	var selectedCompanyInternshipId by remember { mutableStateOf<String?>(null) }
 
 	// Development switches: toggle dummy vs API-backed data per screen
 	var useDummyFind by remember { mutableStateOf(true) }
 	var useDummyApps by remember { mutableStateOf(true) }
 	var useDummySaved by remember { mutableStateOf(true) }
+
+	// Company switches (new)
+	var useDummyCompanyDashboard by remember { mutableStateOf(true) }
+	var useDummyCompanyCandidates by remember { mutableStateOf(true) }
+	var useDummyCompanyAnalytics by remember { mutableStateOf(true) }
 
 	AppTheme {
 		NavHost(navController = navController, startDestination = Routes.Welcome) {
@@ -113,17 +131,13 @@ fun App() {
 					onPreferences = { /* navController.navigate("student/preferences") */ },
 					onLogout = {
 						logoutVm.logout {
-							navController.navigate(Routes.Welcome) {
-								popUpTo(0) { inclusive = true }
-							}
+							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
 						}
 					}
 				)
 			}
 
-			composable(Routes.StudentProfile) {
-				StudentProfileScreen(onBack = { navController.popBackStack() })
-			}
+			composable(Routes.StudentProfile) { StudentProfileScreen(onBack = { navController.popBackStack() }) }
 
 			composable(Routes.StudentFindInternships) {
 				val vm: StudentFindInternshipsViewModel = koinInject()
@@ -150,9 +164,7 @@ fun App() {
 			}
 
 			composable(Routes.StudentInternshipDetails) {
-				val internship = when (selectedInternshipId) {
-					else -> null
-				}
+				val internship = when (selectedInternshipId) { else -> null }
 				StudentInternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
@@ -204,34 +216,53 @@ fun App() {
 				}
 			}
 
-			composable(Routes.StudentMessages) {
-				StudentMessagesScreen(onBack = { navController.popBackStack() })
-			}
+			composable(Routes.StudentMessages) { StudentMessagesScreen(onBack = { navController.popBackStack() }) }
 
 			// Company flow
 			composable(Routes.CompanyHome) {
 				val logoutVm: LogoutViewModel = koinInject()
 				CompanyMemberHomeScreen(
-					onCompanyDashboard = { /* navController.navigate("company/dashboard") */ },
-					onAnalytics = { /* navController.navigate("company/analytics") */ },
-					onPostInternship = { /* navController.navigate("company/post") */ },
-					onCandidates = { /* navController.navigate("company/candidates") */ },
-					onMessages = { /* navController.navigate("company/messages") */ },
+					onCompanyDashboard = { navController.navigate(Routes.CompanyDashboard) },
+					onAnalytics = { navController.navigate(Routes.CompanyAnalytics) },
+					onPostInternship = { navController.navigate(Routes.CompanyPost) },
+					onCandidates = { navController.navigate(Routes.CompanyDashboard) }, // navigate to dashboard first to pick posting
+					onMessages = { navController.navigate(Routes.CompanyMessages) },
 					onProfile = { navController.navigate(Routes.CompanyProfile) },
 					onPreferences = { /* navController.navigate("company/preferences") */ },
 					onLogout = {
 						logoutVm.logout {
-							navController.navigate(Routes.Welcome) {
-								popUpTo(0) { inclusive = true }
-							}
+							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
 						}
 					}
 				)
 			}
 
-			composable(Routes.CompanyProfile) {
-				CompanyMemberProfileScreen(onBack = { navController.popBackStack() })
+			composable(Routes.CompanyProfile) { CompanyMemberProfileScreen(onBack = { navController.popBackStack() }) }
+
+			// Company member details
+			composable(Routes.CompanyDashboard) {
+				CompanyMemberDashboardScreen(
+					onBack = { navController.popBackStack() },
+					onOpenCandidates = { id ->
+						selectedCompanyInternshipId = id
+						navController.navigate(Routes.CompanyCandidates)
+					}
+				)
 			}
+
+			composable(Routes.CompanyCandidates) {
+				val id = selectedCompanyInternshipId ?: return@composable CompanyMemberCandidatesScreen(
+					"",
+					onBack = { navController.popBackStack() })
+				CompanyMemberCandidatesScreen(
+					internshipId = id,
+					onBack = { navController.popBackStack() }
+				)
+			}
+
+			composable(Routes.CompanyPost) { CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.CompanyMessages) { CompanyMemberMessagesScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.CompanyAnalytics) { CompanyMemberAnalyticsScreen(onBack = { navController.popBackStack() }) }
 		}
 	}
 }

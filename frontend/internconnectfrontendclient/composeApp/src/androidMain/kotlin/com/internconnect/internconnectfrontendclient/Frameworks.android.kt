@@ -29,4 +29,5 @@ fun androidModule(appContext: Context) = module {
 	single { get<AppDatabase>().getInternshipDao() }
 	single { get<AppDatabase>().getInternshipApplicationDao() }
 
+
 }

@@ -21,9 +21,13 @@ interface IAppApi{
 	suspend fun fetchCompanyMemberById(userId: String): CompanyMemberDto?
 	suspend fun deleteUser(): String?
 
-
 	suspend fun fetchInternships(): List<InternshipDto>?
 	suspend fun fetchCategories(): List<String>?
 	suspend fun fetchMyApplications(): List<InternshipApplicationDto>?
 	suspend fun fetchSavedInternships(): List<InternshipDto>?
+
+	suspend fun fetchCompanyInternships(): List<InternshipDto>?
+	suspend fun postInternship(internship: InternshipDto): String?
+	suspend fun fetchCandidates(internshipId: String): List<InternshipApplicationDto>?
+	suspend fun updateApplicationStatus(applicationId: String, status: String): String?
 }

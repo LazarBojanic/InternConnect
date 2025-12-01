@@ -13,28 +13,28 @@ import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.parameters
 
 class AppApi (
 	private val appHttpClient: AppHttpClient,
 	private val tokenDataStore: ITokenDataStore
 ) : IAppApi{
 	private val client get() = appHttpClient.client
+
 	override suspend fun registerStudent(registerStudentDto: RegisterStudentDto): String? {
-		val resp: HttpResponse = client.post("/auth/register-student") {
-			setBody(registerStudentDto)
-		}
+		val resp: HttpResponse = client.post("/auth/register-student") { setBody(registerStudentDto) }
 		return resp.bodyOrNullAsText()
 	}
 
 	override suspend fun registerCompanyMember(registerCompanyMemberDto: RegisterCompanyMemberDto): String? {
-		val resp: HttpResponse = client.post("/auth/register-company-member") {
-			setBody(registerCompanyMemberDto)
-		}
+		val resp: HttpResponse = client.post("/auth/register-company-member") { setBody(registerCompanyMemberDto) }
 		return resp.bodyOrNullAsText()
 	}
+
 	override suspend fun fetchInternships(): List<InternshipDto>? {
 		val resp: HttpResponse = client.get("/internships")
 		return when (resp.status) {
@@ -66,23 +66,20 @@ class AppApi (
 			else -> null
 		}
 	}
+
 	override suspend fun login(loginUserDto: LoginUserDto): TokenDto? {
-		val resp: HttpResponse = client.post("/auth/login") {
-			setBody(loginUserDto)
-		}
+		val resp: HttpResponse = client.post("/auth/login") { setBody(loginUserDto) }
 		return when (resp.status) {
 			HttpStatusCode.OK, HttpStatusCode.Created -> resp.body<TokenDto>()
 			else -> null
 		}
 	}
-	//TODO forgot password
+
 	override suspend fun forgotPassword(email: String): String? {
-		val resp: HttpResponse = client.post("/TODO") {
-			url { parameters.append("email", email) }
-		}
+		val resp: HttpResponse = client.post("/TODO") { url { parameters.append("email", email) } }
 		return resp.bodyOrNullAsText()
 	}
-	//TODO logout
+
 	override suspend fun logout(): Boolean {
 		val resp: HttpResponse = client.post("/auth/logout")
 		return resp.status == HttpStatusCode.OK
@@ -90,9 +87,7 @@ class AppApi (
 
 	override suspend fun refreshToken(): TokenDto? {
 		val tokenDto = tokenDataStore.tokenDto.value
-		val resp: HttpResponse = client.post("/auth/refresh") {
-			setBody(tokenDto)
-		}
+		val resp: HttpResponse = client.post("/auth/refresh") { setBody(tokenDto) }
 		return when (resp.status) {
 			HttpStatusCode.OK -> resp.body<TokenDto>()
 			else -> null
@@ -120,13 +115,40 @@ class AppApi (
 		return resp.bodyOrNullAsText()
 	}
 
+	// -----------------------------
+	// Company-member side (new)
+	// -----------------------------
+	override suspend fun fetchCompanyInternships(): List<InternshipDto>? {
+		val resp: HttpResponse = client.get("/company-member/internships")
+		return when (resp.status) {
+			HttpStatusCode.OK -> resp.body<List<InternshipDto>>()
+			else -> null
+		}
+	}
+
+	override suspend fun postInternship(internship: InternshipDto): String? {
+		val resp: HttpResponse = client.post("/company-member/internships") { setBody(internship) }
+		return resp.bodyOrNullAsText()
+	}
+
+	override suspend fun fetchCandidates(internshipId: String): List<InternshipApplicationDto>? {
+		val resp: HttpResponse = client.get("/company-member/internships/$internshipId/applications")
+		return when (resp.status) {
+			HttpStatusCode.OK -> resp.body<List<InternshipApplicationDto>>()
+			else -> null
+		}
+	}
+
+	override suspend fun updateApplicationStatus(applicationId: String, status: String): String? {
+		val resp: HttpResponse = client.put("/company-member/applications/$applicationId/status") {
+			url { parameters.append("status", status) }
+		}
+		return resp.bodyOrNullAsText()
+	}
+
 	private suspend inline fun HttpResponse.bodyOrNullAsText(): String? =
 		when (status) {
-			HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted -> try {
-				body<String>()
-			} catch (_: Throwable) {
-				null
-			}
+			HttpStatusCode.OK, HttpStatusCode.Created, HttpStatusCode.Accepted -> try { body<String>() } catch (_: Throwable) { null }
 			else -> null
 		}
 }
