@@ -30,7 +30,7 @@ fun RoleRouter(navController: NavController) {
 			Text("Failed to detect role: ${state.error}", color = MaterialTheme.colorScheme.error)
 		}
 		state is ProfileUiState.CompanyMemberState -> {
-			LaunchedEffect("company-route") {
+			LaunchedEffect("company-member-route") {
 				navController.navigate(Routes.CompanyMemberHome) {
 					popUpTo(Routes.RoleRouter) { inclusive = true }
 				}
