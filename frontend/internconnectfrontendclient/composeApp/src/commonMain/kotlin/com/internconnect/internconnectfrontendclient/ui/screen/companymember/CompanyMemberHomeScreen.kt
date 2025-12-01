@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -34,12 +35,13 @@ fun CompanyMemberHomeScreen(
 	onMessages: () -> Unit,
 	onProfile: () -> Unit,
 	onPreferences: () -> Unit,
+	onLogout: () -> Unit,
 ) {
 	val vm: ProfileViewModel = koinInject()
 	val state by vm.uiState.collectAsState()
 
 	LaunchedEffect(Unit) { vm.load() }
-	Surface (modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.secondaryContainer){
+	Surface (modifier = Modifier.fillMaxSize()){
 		Column(
 			modifier = Modifier
 				.fillMaxSize()
@@ -84,6 +86,8 @@ fun CompanyMemberHomeScreen(
 					Text("Not a company member account.")
 				}
 			}
+			Spacer(Modifier.height(16.dp))
+			Button(onClick = onLogout, modifier = Modifier.fillMaxWidth()) { Text("Logout") }
 		}
 	}
 

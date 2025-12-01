@@ -15,9 +15,13 @@ import com.internconnect.internconnectfrontendclient.domain.repository.specifica
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IStudentRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LoginUserViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.LogoutViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.ProfileViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterCompanyMemberViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.RegisterStudentViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentFindInternshipsViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentMyApplicationsViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentSavedInternshipsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.WelcomeViewModel
 import com.internconnect.internconnectfrontendclient.http.AppApi
 import com.internconnect.internconnectfrontendclient.http.AppHttpClient
@@ -43,11 +47,15 @@ fun commonModule(baseUrl: String) = module {
 	single<IInternshipApplicationRepository> { InternshipApplicationRepository(get()) }
 
 	// view models
-	factory { LoginUserViewModel(get(), get(), get(), get(), get()) }
+	factory { LoginUserViewModel(get(), get(), get(), get(), get(), get()) }
 	factory { RegisterStudentViewModel(get()) }
 	factory { RegisterCompanyMemberViewModel(get()) }
 	factory { ProfileViewModel(get(), get(), get(), get(), get(), get()) }
 	factory { WelcomeViewModel(get(), get()) }
+	factory { StudentFindInternshipsViewModel(get()) }
+	factory { StudentMyApplicationsViewModel(get()) }
+	factory { StudentSavedInternshipsViewModel(get()) }
+	factory { LogoutViewModel(get(), get()) }
 }
 fun initKoin(baseUrl: String, vararg platformModules: Module) {
 	startKoin {

@@ -36,12 +36,13 @@ fun StudentHomeScreen(
 	onMessages: () -> Unit,
 	onProfile: () -> Unit,
 	onPreferences: () -> Unit,
+	onLogout: () -> Unit,
 ) {
 	val vm: ProfileViewModel = koinInject()
 	val state by vm.uiState.collectAsState()
 
 	LaunchedEffect(Unit) { vm.load() }
-	Surface (modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.secondaryContainer){
+	Surface (modifier = Modifier.fillMaxSize()){
 		Column(
 			modifier = Modifier
 				.fillMaxSize()
@@ -74,7 +75,7 @@ fun StudentHomeScreen(
 						labels = listOf(
 							"Find Internships" to onFindInternships,
 							"My Applications" to onMyApplications,
-							"Saved Opportunities" to onSavedOpportunities,
+							"Saved Internships" to onSavedOpportunities,
 							"Messages" to onMessages,
 							"Profile" to onProfile,
 							"Preferences" to onPreferences,
@@ -86,6 +87,8 @@ fun StudentHomeScreen(
 					Text("Not a student account.")
 				}
 			}
+			Spacer(Modifier.height(16.dp))
+			Button(onClick = onLogout, modifier = Modifier.fillMaxWidth()) { Text("Logout") }
 		}
 	}
 

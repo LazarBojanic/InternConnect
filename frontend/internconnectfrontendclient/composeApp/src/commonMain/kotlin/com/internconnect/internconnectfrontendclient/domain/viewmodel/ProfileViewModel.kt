@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.jsonPrimitive
 
 
 class ProfileViewModel(
@@ -51,29 +52,59 @@ class ProfileViewModel(
 					}
 				}
 
-				val access: String? = tokenStore.tokenDto.value?.access
-				var userId: String? = null
-				var userRole: String? = null
-				if(access !=  null) {
-					userId = jwtDecode(access)["userId"]?.toString()
-					userRole = jwtDecode(access)["userRole"]?.toString()
-					if (userId != null) {
-						if(userRole == "STUDENT") {
-							val studentDto = api.fetchStudentById(userId)
-							if (studentDto != null) {
-								studentRepository.setCurrentStudent(studentDto.toRaw())
-								_uiState.value = ProfileUiState.StudentState(loading = false, data = studentDto.toJoined())
-								return@launch
-							}
+				val access = tokenStore.tokenDto.value?.access
+				if (access.isNullOrBlank()) {
+					_uiState.value = when (val it = _uiState.value) {
+						is ProfileUiState.StudentState -> it.copy(loading = false, error = "Missing access token")
+						is ProfileUiState.CompanyMemberState -> it.copy(loading = false, error = "Missing access token")
+					}
+					return@launch
+				}
+
+				val claims = jwtDecode(access)
+				val userId = claims["sub"]?.jsonPrimitive?.content
+				val role = claims["role"]?.jsonPrimitive?.content
+
+				if (userId.isNullOrBlank() || role.isNullOrBlank()) {
+					_uiState.value = when (val it = _uiState.value) {
+						is ProfileUiState.StudentState -> it.copy(loading = false, error = "Missing JWT claims")
+						is ProfileUiState.CompanyMemberState -> it.copy(loading = false, error = "Missing JWT claims")
+					}
+					return@launch
+				}
+
+				when (role) {
+					"STUDENT" -> {
+						val studentDto = api.fetchStudentById(userId)
+						if (studentDto != null) {
+							userRepository.setCurrentUser(studentDto.user.toRaw())
+							studentRepository.setCurrentStudent(studentDto.toRaw())
+							_uiState.value = ProfileUiState.StudentState(loading = false, data = studentDto.toJoined())
+							return@launch
+						} else {
+							_uiState.value = ProfileUiState.StudentState(loading = false, error = "Failed to load student profile")
+							return@launch
 						}
-						else if(userRole == "COMPANY_MEMBER") {
-							val companyMemberDto = api.fetchCompanyMemberById(userId)
-							if (companyMemberDto != null) {
-								companyMemberRepository.setCurrentCompanyMember(companyMemberDto.toRaw())
-								_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = companyMemberDto.toJoined())
-								return@launch
-							}
+					}
+					"COMPANY_MEMBER" -> {
+						val companyMemberDto = api.fetchCompanyMemberById(userId)
+						if (companyMemberDto != null) {
+							userRepository.setCurrentUser(companyMemberDto.user.toRaw())
+							companyRepository.setCurrentCompany(companyMemberDto.company.toRaw())
+							companyMemberRepository.setCurrentCompanyMember(companyMemberDto.toRaw())
+							_uiState.value = ProfileUiState.CompanyMemberState(loading = false, data = companyMemberDto.toJoined())
+							return@launch
+						} else {
+							_uiState.value = ProfileUiState.CompanyMemberState(loading = false, error = "Failed to load company member profile")
+							return@launch
 						}
+					}
+					else -> {
+						_uiState.value = when (val it = _uiState.value) {
+							is ProfileUiState.StudentState -> it.copy(loading = false, error = "Unsupported role: $role")
+							is ProfileUiState.CompanyMemberState -> it.copy(loading = false, error = "Unsupported role: $role")
+						}
+						return@launch
 					}
 				}
 			}

@@ -6,6 +6,7 @@ import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
 import com.internconnect.internconnectfrontendclient.data.model.dto.request.LoginUserDto
 import com.internconnect.internconnectfrontendclient.data.toRaw
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.ICompanyMemberRepository
+import com.internconnect.internconnectfrontendclient.domain.repository.specification.ICompanyRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IStudentRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IUserRepository
 import com.internconnect.internconnectfrontendclient.http.IAppApi
@@ -22,6 +23,7 @@ class LoginUserViewModel(
 	private val tokenStore: ITokenDataStore,
 	private val userRepository: IUserRepository,
 	private val studentRepository: IStudentRepository,
+	private val companyRepository: ICompanyRepository,
 	private val companyMemberRepository: ICompanyMemberRepository,
 ) {
 	sealed interface LoginUiState {
@@ -62,6 +64,7 @@ class LoginUserViewModel(
 									val companyMemberDto = api.fetchCompanyMemberById(userId)
 									if(companyMemberDto != null){
 										userRepository.setCurrentUser(companyMemberDto.user.toRaw())
+										companyRepository.setCurrentCompany(companyMemberDto.company.toRaw())
 										companyMemberRepository.setCurrentCompanyMember(companyMemberDto.toRaw())
 									}
 									_uiState.value = LoginUiState.LoggedInCompanyMember(userId)
@@ -70,7 +73,7 @@ class LoginUserViewModel(
 							}
 						}
 						else {
-							_uiState.value = LoginUiState.Error("Missing userId or userRole claims")
+							_uiState.value = LoginUiState.Error("Missing userId or role claims")
 						}
 					}
 					else {

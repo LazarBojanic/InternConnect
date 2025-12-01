@@ -30,7 +30,7 @@ fun Header(
 	onBack: (() -> Unit)? = null
 ) {
 	Spacer(modifier = Modifier.height(36.dp))
-	Surface(color = MaterialTheme.colorScheme.secondaryContainer) {
+	Surface(Modifier.fillMaxWidth()) {
 		Column(Modifier.fillMaxWidth()){
 			Icon(
 				painter = painterResource(Res.drawable.internconnect_logo),

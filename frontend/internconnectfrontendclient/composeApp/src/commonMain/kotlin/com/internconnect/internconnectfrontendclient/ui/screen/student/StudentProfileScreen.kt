@@ -22,7 +22,7 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 	val state by vm.uiState.collectAsState()
 	LaunchedEffect(Unit) { vm.load() }
 
-	Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.secondaryContainer) {
+	Surface(modifier = Modifier.fillMaxSize()) {
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			Header(title = "Profile", onBack = onBack)
 			Spacer(Modifier.height(16.dp))
@@ -33,7 +33,7 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 				state is ProfileUiState.StudentState -> {
 					val student = (state as ProfileUiState.StudentState).data
 
-					ElevatedCard(shape = MaterialTheme.shapes.extraLarge) {
+					ElevatedCard(shape = MaterialTheme.shapes.extraLarge, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
 						Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 							Row(verticalAlignment = Alignment.CenterVertically) {
 								val initials = student?.user?.firstName?.first().toString() + " " + student?.user?.lastName?.first().toString()

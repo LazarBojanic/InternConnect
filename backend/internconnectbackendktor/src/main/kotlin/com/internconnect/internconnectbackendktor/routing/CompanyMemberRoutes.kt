@@ -12,7 +12,6 @@ import org.koin.ktor.ext.inject
 import java.util.*
 
 fun Route.companyMemberRoutes() {
-	val userService by inject<IUserService>()
 	val companyMemberService by inject<ICompanyMemberService>()
 	authenticate("auth-jwt") {
 		route("/company-member/me/{userId}") {
@@ -22,6 +21,9 @@ fun Route.companyMemberRoutes() {
 				val companyMemberJoined = companyMemberService.getById(userUUID)
 				if (companyMemberJoined != null) {
 					call.respond(HttpStatusCode.OK, companyMemberJoined.toDto())
+				}
+				else{
+					call.respond(HttpStatusCode.NotFound)
 				}
 			}
 		}
