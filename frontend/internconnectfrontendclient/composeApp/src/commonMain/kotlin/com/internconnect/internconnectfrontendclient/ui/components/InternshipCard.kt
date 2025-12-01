@@ -13,12 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
 
-
 @Composable
 fun InternshipCard(
 	internship: InternshipJoined,
 	onApply: (() -> Unit)? = null,
 	onDetails: (() -> Unit)? = null,
+	onCandidates: (() -> Unit)? = null,
 	modifier: Modifier = Modifier
 ) {
 	Surface(
@@ -27,8 +27,16 @@ fun InternshipCard(
 		tonalElevation = 2.dp,
 		shadowElevation = 2.dp
 	) {
-		Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-			Text(internship.title, style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
+		Column(
+			Modifier
+				.fillMaxWidth()
+				.padding(16.dp),
+			verticalArrangement = Arrangement.spacedBy(8.dp)
+		) {
+			Text(
+				internship.title,
+				style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+			)
 			Text(internship.company.name, style = MaterialTheme.typography.bodyMedium)
 			Text(
 				internship.company.country + " " + internship.company.city,
@@ -40,6 +48,10 @@ fun InternshipCard(
 			Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 				if (onDetails != null) {
 					OutlinedButton(onClick = onDetails, shape = RoundedCornerShape(12.dp)) { Text("Details") }
+					Spacer(Modifier.width(8.dp))
+				}
+				if (onCandidates != null) {
+					Button(onClick = onCandidates, shape = RoundedCornerShape(12.dp)) { Text("Candidates") }
 					Spacer(Modifier.width(8.dp))
 				}
 				if (onApply != null) {

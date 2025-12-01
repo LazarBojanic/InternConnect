@@ -27,20 +27,20 @@ fun CompanyMemberDashboardScreen(
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
 		Header(title = "Dashboard", onBack = onBack)
 		Spacer(Modifier.height(12.dp))
-		/*Row(Modifier.padding(bottom = 8.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-			Text("Dummy data")
-			Switch(checked = useDummy, onCheckedChange = { useDummy = it })
-		}*/
 
 		when {
 			state.loading -> LinearProgressIndicator(Modifier.fillMaxWidth())
 			state.error != null -> Text(state.error!!, color = MaterialTheme.colorScheme.error)
-			else -> LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxSize()) {
+			else -> LazyColumn(
+				verticalArrangement = Arrangement.spacedBy(12.dp),
+				modifier = Modifier.fillMaxSize()
+			) {
 				items(state.internships) { item ->
 					InternshipCard(
 						internship = item,
-						onApply = null, // company members don't apply
+						onApply = null, // company members don’t apply
 						onDetails = { onOpenDetails(item.id) },
+						onCandidates = { onOpenCandidates(item.id) },
 						modifier = Modifier.fillMaxWidth()
 					)
 				}
