@@ -110,36 +110,43 @@ fun App() {
 				LoginScreen(
 					onSuccess = {
 						navController.navigate(Routes.RoleRouter) {
-							popUpTo(Routes.Login) { inclusive = true }
+							popUpTo(Routes.Welcome) { inclusive = true }
 						}
 					},
-					onBack = { navController.popBackStack() }
+					onNavigateBack = { navController.popBackStack() },
+					onNavigateRegister = { navController.navigate(Routes.Register) }
 				)
 			}
 
 			composable(Routes.Register) {
 				RegisterScreen(
-					onSuccess = { navController.navigate(Routes.Login) },
-					onBack = { navController.popBackStack() }
+					onSuccess = {
+						navController.navigate(Routes.Login) {
+							popUpTo(Routes.Welcome) { inclusive = true }
+						}
+					},
+					onNavigateBack = { navController.popBackStack() }
 				)
 			}
 
-			// Role router
-			composable(Routes.RoleRouter) {
-				RoleRouter(
-					navigateStudent = { navController.navigate(Routes.StudentHome) { popUpTo(0) { inclusive = true } } },
-					navigateCompanyMember = { navController.navigate(Routes.CompanyMemberHome) { popUpTo(0) { inclusive = true } } }
-				)
-			}
+			// Role router (decides student vs company)
+			composable(Routes.RoleRouter) { RoleRouter(navController) }
 
 			// Student flow
 			composable(Routes.StudentHome) {
+				val logoutVm: LogoutViewModel = koinInject()
 				StudentHomeScreen(
-					onProfile = { navController.navigate(Routes.StudentProfile) },
 					onFindInternships = { navController.navigate(Routes.StudentFindInternships) },
 					onMyApplications = { navController.navigate(Routes.StudentMyApplications) },
 					onSavedInternships = { navController.navigate(Routes.StudentSavedInternships) },
-					onMessages = { navController.navigate(Routes.StudentMessages) }
+					onMessages = { navController.navigate(Routes.StudentMessages) },
+					onProfile = { navController.navigate(Routes.StudentProfile) },
+					onPreferences = { /* navController.navigate("student/preferences") */ },
+					onLogout = {
+						logoutVm.logout {
+							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+						}
+					}
 				)
 			}
 
@@ -150,12 +157,13 @@ fun App() {
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyFind) { vm.setUseDummy(useDummyFind); vm.load() }
 
-				// keep store updated
-				LaunchedEffect(state.results) { upsertInternships(state.results) }
+				// keep store updated for details/app screens
+				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
 
 				Column(Modifier.fillMaxSize()) {
 					StudentFindInternshipsScreen(
-						results = state.results,
+						internships = state.internships,
+						categories = state.categories,
 						onBack = { navController.popBackStack() },
 						onOpenDetails = { id ->
 							selectedInternshipId = id
@@ -171,11 +179,18 @@ fun App() {
 				}
 			}
 
-			// Internship details screen
+			// Shared details screen (student + company)
 			composable(Routes.InternshipDetails) {
 				val id = selectedInternshipId
 				val internship = id?.let { internshipStore.value[it] }
-				InternshipDetailsScreen(internship = internship, onBack = { navController.popBackStack() })
+				InternshipDetailsScreen(
+					internship = internship,
+					onBack = { navController.popBackStack() },
+					onApply = { targetId ->
+						selectedInternshipId = targetId
+						navController.navigate(Routes.MakeApplication)
+					}
+				)
 			}
 
 			// Student application screen

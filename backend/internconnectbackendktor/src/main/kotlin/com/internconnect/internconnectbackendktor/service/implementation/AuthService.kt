@@ -191,9 +191,6 @@ class AuthService(
 		)
 		passwordAuthService.create(passwordAuthToCreate) ?: return null
 
-		val existingCompanyJoined = companyService.getByName(registerCompanyMemberDto.companyName)
-		require(existingCompanyJoined == null) { "company_name_taken" }
-
 		val companyToCreate = Company(
 			id = UUID.randomUUID(),
 			name = registerCompanyMemberDto.companyName,

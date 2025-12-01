@@ -42,7 +42,7 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 		Spacer(Modifier.height(8.dp))
 		LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxSize()) {
 			items(state.latestPostings) { item ->
-				InternshipCard(internship = item, onApply = {}, modifier = Modifier.fillMaxWidth())
+				InternshipCard(internship = item, onApply = null, modifier = Modifier.fillMaxWidth())
 			}
 		}
 	}
