@@ -135,9 +135,7 @@ fun App() {
 			}
 
 			// Role router (decides student vs company)
-			composable(Routes.RoleRouter) {
-				RoleRouter(onNavigate = { route -> navController.navigate(route) })
-			}
+			composable(Routes.RoleRouter) { RoleRouter(navController) }
 
 			// ---------------------
 			// Student flow
