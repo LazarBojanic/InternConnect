@@ -1,15 +1,12 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -30,9 +27,21 @@ fun Header(
 	title: String,
 	onBack: (() -> Unit)? = null
 ) {
-	Spacer(modifier = Modifier.height(36.dp))
-	Surface(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.secondaryContainer)) {
-		Column(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.secondaryContainer)){
+	// Use Surface color prop (not modifier.background) so the color actually paints reliably on all targets.
+	// Also add statusBarsPadding so content is placed below the system status bar without needing TopAppBar.
+	Surface(
+		modifier = Modifier
+			.fillMaxWidth(),
+		color = MaterialTheme.colorScheme.secondaryContainer,
+		tonalElevation = 0.dp,
+		shadowElevation = 0.dp
+	) {
+		Column(
+			modifier = Modifier
+				.fillMaxWidth()
+				.statusBarsPadding()
+				.padding(horizontal = 12.dp, vertical = 8.dp)
+		) {
 			Icon(
 				painter = painterResource(Res.drawable.internconnect_logo),
 				contentDescription = "InternConnector Logo",
@@ -42,7 +51,7 @@ fun Header(
 			Row(
 				modifier = Modifier
 					.fillMaxWidth()
-					.padding(horizontal = 8.dp, vertical = 8.dp),
+					.padding(top = 8.dp, bottom = 4.dp),
 				verticalAlignment = Alignment.CenterVertically,
 				horizontalArrangement = Arrangement.Start
 			) {
@@ -54,10 +63,9 @@ fun Header(
 				Text(
 					text = title,
 					style = MaterialTheme.typography.titleLarge,
-					modifier = Modifier.padding(start = if (onBack != null) 4.dp else 8.dp)
+					modifier = Modifier.padding(start = if (onBack != null) 4.dp else 0.dp)
 				)
 			}
 		}
-
 	}
 }
