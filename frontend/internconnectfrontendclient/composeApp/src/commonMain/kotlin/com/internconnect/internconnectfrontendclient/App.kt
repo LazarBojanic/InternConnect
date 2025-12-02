@@ -1,3 +1,4 @@
+
 package com.internconnect.internconnectfrontendclient
 
 import androidx.compose.foundation.layout.*
@@ -9,17 +10,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipJoined
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberDashboardViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.LogoutViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentFindInternshipsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentMyApplicationsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentSavedInternshipsViewModel
-import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberDashboardViewModel
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
+import com.internconnect.internconnectfrontendclient.ui.screen.InternshipDetailsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RoleRouter
 import com.internconnect.internconnectfrontendclient.ui.screen.Welcome
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberAnalyticsScreen
+import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberApplicationDetailsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberCandidatesScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberDashboardScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.companymember.CompanyMemberHomeScreen
@@ -32,7 +35,6 @@ import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMe
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMyApplicationsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentProfileScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentSavedInternshipsScreen
-import com.internconnect.internconnectfrontendclient.ui.screen.InternshipDetailsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.student.StudentMakeInternshipApplicationScreen
 import org.koin.compose.koinInject
 
@@ -52,17 +54,18 @@ object Routes {
 	const val StudentMyApplications = "student/my-applications"
 	const val StudentSavedInternships = "student/saved-internships"
 	const val StudentMessages = "student/messages"
-	const val MakeApplication = "student/make-application" // plain route; selected id kept in state
+	const val MakeApplication = "student/make-application" // selected id kept in state
 
 	// Shared
-	const val InternshipDetails = "internship/details" // plain route; selected id kept in state
+	const val InternshipDetails = "internship/details" // selected id kept in state
 
 	// Company member
 	const val CompanyMemberHome = "company-member/home"
 	const val CompanyMemberProfile = "company-member/profile"
 	const val CompanyMemberDashboard = "company-member/dashboard"
 	const val CompanyMemberPostInternship = "company-member/post-internship"
-	const val CompanyMemberCandidates = "company-member/candidates" // plain route; selected id kept in state
+	const val CompanyMemberCandidates = "company-member/candidates" // selected id kept in state
+	const val CompanyMemberApplicationDetails = "company-member/application-details"
 	const val CompanyMemberMessages = "company-member/messages"
 	const val CompanyMemberAnalytics = "company-member/analytics"
 }
@@ -81,6 +84,8 @@ fun App() {
 	// Selection state (avoids platform-specific Bundle APIs)
 	var selectedInternshipId by remember { mutableStateOf<String?>(null) }
 	var selectedCompanyInternshipId by remember { mutableStateOf<String?>(null) }
+	var selectedApplicationId by remember { mutableStateOf<String?>(null) }
+	var selectedApplicationInternshipId by remember { mutableStateOf<String?>(null) }
 
 	// Development switches: toggle dummy vs API-backed data per screen
 	var useDummyFind by remember { mutableStateOf(true) }
@@ -130,9 +135,13 @@ fun App() {
 			}
 
 			// Role router (decides student vs company)
-			composable(Routes.RoleRouter) { RoleRouter(navController) }
+			composable(Routes.RoleRouter) {
+				RoleRouter(onNavigate = { route -> navController.navigate(route) })
+			}
 
+			// ---------------------
 			// Student flow
+			// ---------------------
 			composable(Routes.StudentHome) {
 				val logoutVm: LogoutViewModel = koinInject()
 				StudentHomeScreen(
@@ -141,7 +150,7 @@ fun App() {
 					onSavedInternships = { navController.navigate(Routes.StudentSavedInternships) },
 					onMessages = { navController.navigate(Routes.StudentMessages) },
 					onProfile = { navController.navigate(Routes.StudentProfile) },
-					onPreferences = { /* navController.navigate("student/preferences") */ },
+					onPreferences = { /* future route */ },
 					onLogout = {
 						logoutVm.logout {
 							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
@@ -251,7 +260,9 @@ fun App() {
 
 			composable(Routes.StudentMessages) { StudentMessagesScreen(onBack = { navController.popBackStack() }) }
 
+			// ---------------------
 			// Company member flow
+			// ---------------------
 			composable(Routes.CompanyMemberHome) {
 				val logoutVm: LogoutViewModel = koinInject()
 				CompanyMemberHomeScreen(
@@ -260,7 +271,7 @@ fun App() {
 					onPostInternship = { navController.navigate(Routes.CompanyMemberPostInternship) },
 					onMessages = { navController.navigate(Routes.CompanyMemberMessages) },
 					onProfile = { navController.navigate(Routes.CompanyMemberProfile) },
-					onPreferences = { /* navController.navigate("company-member/preferences") */ },
+					onPreferences = { /* future route */ },
 					onLogout = {
 						logoutVm.logout {
 							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
@@ -296,15 +307,26 @@ fun App() {
 				CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() })
 			}
 
-			// Company Member Candidates (uses state-held id)
+			// Company Member Candidates (uses state-held internship id)
 			composable(Routes.CompanyMemberCandidates) {
 				val id = selectedCompanyInternshipId
 				CompanyMemberCandidatesScreen(
 					internshipId = id.orEmpty(),
 					onBack = { navController.popBackStack() },
 					onOpenDetails = { applicationId ->
-						navController.navigate("company-member/candidate-details/$applicationId")
+						selectedApplicationId = applicationId
+						selectedApplicationInternshipId = id
+						navController.navigate(Routes.CompanyMemberApplicationDetails)
 					}
+				)
+			}
+
+			// Company Member Application Details
+			composable(Routes.CompanyMemberApplicationDetails) {
+				CompanyMemberApplicationDetailsScreen(
+					applicationId = selectedApplicationId.orEmpty(),
+					internshipId = selectedApplicationInternshipId.orEmpty(),
+					onBack = { navController.popBackStack() }
 				)
 			}
 
