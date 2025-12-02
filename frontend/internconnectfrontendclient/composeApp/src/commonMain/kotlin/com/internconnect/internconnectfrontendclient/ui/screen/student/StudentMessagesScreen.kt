@@ -9,6 +9,7 @@ import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.ImageStub
 import internconnectfrontendclient.composeapp.generated.resources.Res
 import internconnectfrontendclient.composeapp.generated.resources.internconnect_logo
+import internconnectfrontendclient.composeapp.generated.resources.messages
 
 @Composable
 fun StudentMessagesScreen(onBack: () -> Unit) {
@@ -19,7 +20,7 @@ fun StudentMessagesScreen(onBack: () -> Unit) {
 			Spacer(Modifier.height(8.dp))
 			// Replace with your real message screenshot resource when available
 			ImageStub(
-				resource = Res.drawable.internconnect_logo,
+				resource = Res.drawable.messages,
 				contentDescription = "Messages Screen Placeholder"
 			)
 		}

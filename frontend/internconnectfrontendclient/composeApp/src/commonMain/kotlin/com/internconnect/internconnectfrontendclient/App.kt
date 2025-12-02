@@ -53,17 +53,17 @@ object Routes {
 	const val StudentMyApplications = "student/my-applications"
 	const val StudentSavedInternships = "student/saved-internships"
 	const val StudentMessages = "student/messages"
-	const val MakeApplication = "student/make-application" // selected id kept in state
+	const val MakeApplication = "student/make-application"
 
 	// Shared
-	const val InternshipDetails = "internship/details" // selected id kept in state
+	const val InternshipDetails = "internship/details"
 
 	// Company member
 	const val CompanyMemberHome = "company-member/home"
 	const val CompanyMemberProfile = "company-member/profile"
 	const val CompanyMemberDashboard = "company-member/dashboard"
 	const val CompanyMemberPostInternship = "company-member/post-internship"
-	const val CompanyMemberCandidates = "company-member/candidates" // selected id kept in state
+	const val CompanyMemberCandidates = "company-member/candidates"
 	const val CompanyMemberApplicationDetails = "company-member/application-details"
 	const val CompanyMemberMessages = "company-member/messages"
 	const val CompanyMemberAnalytics = "company-member/analytics"
@@ -150,7 +150,7 @@ fun App() {
 					onSavedInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentSavedInternships) },
 					onMessages = { navController.navigate(Routes.StudentMessages) },
 					onProfile = { navController.navigate(Routes.StudentProfile) },
-					onPreferences = { /* future route */ },
+					onPreferences = { /* future */ },
 					onLogout = {
 						logoutVm.logout {
 							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
@@ -199,12 +199,9 @@ fun App() {
 				InternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
-					onApply = { targetId: String ->
-						// Guard: do nothing if viewing as company (keeps type non-null and avoids crash)
-						if (!viewingAsCompany) {
-							selectedInternshipId = targetId
-							navController.navigate(Routes.MakeApplication)
-						}
+					onApply = if (viewingAsCompany) null else { targetId: String ->
+						selectedInternshipId = targetId
+						navController.navigate(Routes.MakeApplication)
 					}
 				)
 			}
@@ -282,7 +279,7 @@ fun App() {
 					onPostInternship = { navController.navigate(Routes.CompanyMemberPostInternship) },
 					onMessages = { navController.navigate(Routes.CompanyMemberMessages) },
 					onProfile = { navController.navigate(Routes.CompanyMemberProfile) },
-					onPreferences = { /* future route */ },
+					onPreferences = { /* future */ },
 					onLogout = {
 						logoutVm.logout {
 							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }

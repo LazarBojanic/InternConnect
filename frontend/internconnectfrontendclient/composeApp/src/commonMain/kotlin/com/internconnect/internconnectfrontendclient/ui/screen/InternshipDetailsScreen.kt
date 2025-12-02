@@ -12,30 +12,29 @@ import com.internconnect.internconnectfrontendclient.ui.components.Header
 fun InternshipDetailsScreen(
 	internship: InternshipJoined?,
 	onBack: () -> Unit,
-	onApply: (internshipId: String) -> Unit,
+	// Now nullable: if null, the Apply button is hidden
+	onApply: ((String) -> Unit)?
 ) {
-	Column(Modifier.fillMaxSize().padding(16.dp)) {
+	Column(Modifier.fillMaxSize()) {
 		Header(title = "Internship Details", onBack = onBack)
-		Spacer(Modifier.height(16.dp))
+		Column(Modifier.fillMaxSize().padding(16.dp)) {
+			if (internship == null) {
+				Text("No internship selected", style = MaterialTheme.typography.bodyMedium)
+				return@Column
+			}
 
-		if (internship == null) {
-			Text("Not found", color = MaterialTheme.colorScheme.error)
-			return
-		}
+			Text(internship.title, style = MaterialTheme.typography.headlineSmall)
+			Spacer(Modifier.height(4.dp))
+			Text(internship.company.name, style = MaterialTheme.typography.titleMedium)
+			Spacer(Modifier.height(12.dp))
+			Text(internship.description, style = MaterialTheme.typography.bodyMedium)
+			Spacer(Modifier.height(24.dp))
 
-		Text(internship.title, style = MaterialTheme.typography.headlineSmall)
-		Text(internship.company.name, style = MaterialTheme.typography.titleMedium)
-		Text(
-			"${internship.company.country}, ${internship.company.city}",
-			style = MaterialTheme.typography.bodyMedium,
-			color = MaterialTheme.colorScheme.onSurfaceVariant
-		)
-		Spacer(Modifier.height(8.dp))
-		Text(internship.description, style = MaterialTheme.typography.bodyLarge)
-
-		Spacer(Modifier.height(24.dp))
-		Button(onClick = { onApply(internship.id) }, modifier = Modifier.fillMaxWidth()) {
-			Text("Apply")
+			if (onApply != null) {
+				Button(onClick = { onApply.invoke(internship.id) }) {
+					Text("Apply")
+				}
+			}
 		}
 	}
 }
