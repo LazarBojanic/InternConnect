@@ -199,9 +199,12 @@ fun App() {
 				InternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
-					onApply = if (viewingAsCompany) null else { targetId: String ->
-						selectedInternshipId = targetId
-						navController.navigate(Routes.MakeApplication)
+					onApply = { targetId: String ->
+						// Guard: do nothing if viewing as company (keeps type non-null and avoids crash)
+						if (!viewingAsCompany) {
+							selectedInternshipId = targetId
+							navController.navigate(Routes.MakeApplication)
+						}
 					}
 				)
 			}

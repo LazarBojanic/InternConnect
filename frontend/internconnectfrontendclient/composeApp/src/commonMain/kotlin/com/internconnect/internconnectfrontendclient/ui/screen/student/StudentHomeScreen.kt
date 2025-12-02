@@ -75,7 +75,7 @@ fun StudentHomeScreen(
 							"Saved Internships" to onSavedInternships,
 							"Messages" to onMessages,
 							"Profile" to onProfile,
-							"Preferences" to onPreferences,
+							/*"Preferences" to onPreferences,*/
 						)
 					)
 				}

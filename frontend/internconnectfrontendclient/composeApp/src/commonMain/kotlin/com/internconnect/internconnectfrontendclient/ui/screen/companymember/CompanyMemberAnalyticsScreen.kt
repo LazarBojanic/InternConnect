@@ -12,6 +12,9 @@ import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.ImageStub
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
 import com.internconnect.internconnectfrontendclient.ui.components.StatPad
+import internconnectfrontendclient.composeapp.generated.resources.Res
+import internconnectfrontendclient.composeapp.generated.resources.analytics
+import internconnectfrontendclient.composeapp.generated.resources.internconnect_logo
 import org.koin.compose.koinInject
 
 @Composable
@@ -41,8 +44,11 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 			Text("Statistics", style = MaterialTheme.typography.titleMedium)
 			Spacer(Modifier.height(8.dp))
 
-			// Graph placeholder (image stub)
-			ImageStub(label = "Analytics Graph Placeholder (drop screenshot here)")
+			// Graph image stub – replace with your generated analytics graph drawable
+			ImageStub(
+				resource = Res.drawable.analytics,
+				contentDescription = "Analytics Graph Placeholder"
+			)
 
 			Spacer(Modifier.height(16.dp))
 			Text("Top internships", style = MaterialTheme.typography.titleMedium)

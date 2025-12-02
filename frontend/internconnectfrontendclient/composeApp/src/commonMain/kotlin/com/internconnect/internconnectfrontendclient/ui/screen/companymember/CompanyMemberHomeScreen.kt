@@ -76,7 +76,7 @@ fun CompanyMemberHomeScreen(
 							// "Candidates" removed: pick a posting from Dashboard
 							"Messages" to onMessages,
 							"Profile" to onProfile,
-							"Preferences" to onPreferences,
+							/*"Preferences" to onPreferences,*/
 						)
 					)
 				}

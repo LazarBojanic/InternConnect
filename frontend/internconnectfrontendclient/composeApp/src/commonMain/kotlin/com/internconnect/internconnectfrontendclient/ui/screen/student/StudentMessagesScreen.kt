@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.ImageStub
+import internconnectfrontendclient.composeapp.generated.resources.Res
+import internconnectfrontendclient.composeapp.generated.resources.internconnect_logo
 
 @Composable
 fun StudentMessagesScreen(onBack: () -> Unit) {
@@ -15,7 +17,11 @@ fun StudentMessagesScreen(onBack: () -> Unit) {
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			Text("Messages", style = MaterialTheme.typography.titleMedium)
 			Spacer(Modifier.height(8.dp))
-			ImageStub(label = "Messages Screen Placeholder (drop screenshot here)")
+			// Replace with your real message screenshot resource when available
+			ImageStub(
+				resource = Res.drawable.internconnect_logo,
+				contentDescription = "Messages Screen Placeholder"
+			)
 		}
 	}
 }
