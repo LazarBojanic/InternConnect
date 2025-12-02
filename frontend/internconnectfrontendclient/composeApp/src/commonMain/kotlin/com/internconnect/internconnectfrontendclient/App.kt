@@ -80,7 +80,7 @@ fun App() {
 		internshipStore.value = internshipStore.value + list.associateBy { it.id }
 	}
 
-	// Selection state (avoids platform-specific Bundle APIs)
+	// Selection state
 	var selectedInternshipId by remember { mutableStateOf<String?>(null) }
 	var selectedCompanyInternshipId by remember { mutableStateOf<String?>(null) }
 	var selectedApplicationId by remember { mutableStateOf<String?>(null) }
@@ -89,7 +89,7 @@ fun App() {
 	// Track whether InternshipDetails is opened from company context
 	var viewingAsCompany by remember { mutableStateOf(false) }
 
-	// Development switches: toggle dummy vs API-backed data per screen
+	// Development switches (dummy vs API)
 	var useDummyFind by remember { mutableStateOf(true) }
 	var useDummyApps by remember { mutableStateOf(true) }
 	var useDummySaved by remember { mutableStateOf(true) }
@@ -166,26 +166,28 @@ fun App() {
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyFind) { vm.setUseDummy(useDummyFind); vm.load() }
 
-				// keep store updated for details/app screens
 				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
 
 				Column(Modifier.fillMaxSize()) {
-					StudentFindInternshipsScreen(
-						internships = state.internships,
-						categories = state.categories,
-						onBack = { navController.popBackStack() },
-						onOpenDetails = { id ->
-							viewingAsCompany = false
-							selectedInternshipId = id
-							navController.navigate(Routes.InternshipDetails)
-						},
-						onApply = { id ->
-							selectedInternshipId = id
-							navController.navigate(Routes.MakeApplication)
-						}
-					)
-					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "Find Internships", onBack = { navController.popBackStack() })
+					Column(Modifier.fillMaxSize().padding(16.dp)) {
+						StudentFindInternshipsScreen(
+							internships = state.internships,
+							categories = state.categories,
+							onBack = { navController.popBackStack() },
+							onOpenDetails = { id ->
+								viewingAsCompany = false
+								selectedInternshipId = id
+								navController.navigate(Routes.InternshipDetails)
+							},
+							onApply = { id ->
+								selectedInternshipId = id
+								navController.navigate(Routes.MakeApplication)
+							}
+						)
+						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					}
 				}
 			}
 
@@ -197,14 +199,10 @@ fun App() {
 				InternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
-					onApply = {
-						id ->
-						if(!viewingAsCompany){
-							selectedInternshipId = id
-							navController.navigate(Routes.MakeApplication)
-						}
+					onApply = if (viewingAsCompany) null else { targetId: String ->
+						selectedInternshipId = targetId
+						navController.navigate(Routes.MakeApplication)
 					}
-
 				)
 			}
 
@@ -216,7 +214,6 @@ fun App() {
 					internship = internship,
 					onBack = { navController.popBackStack() },
 					onSubmit = {
-						// submit logic; after success:
 						navController.navigate(Routes.StudentMyApplications)
 					}
 				)
@@ -228,13 +225,16 @@ fun App() {
 				LaunchedEffect(useDummyApps) { vm.setUseDummy(useDummyApps); vm.load() }
 
 				Column(Modifier.fillMaxSize()) {
-					StudentMyApplicationsScreen(
-						applications = state.applications,
-						onBack = { navController.popBackStack() },
-						onExploreInternships = { navController.navigate(Routes.StudentFindInternships) }
-					)
-					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "My Applications", onBack = { navController.popBackStack() })
+					Column(Modifier.fillMaxSize().padding(16.dp)) {
+						StudentMyApplicationsScreen(
+							applications = state.applications,
+							onBack = { navController.popBackStack() },
+							onExploreInternships = { navController.navigate(Routes.StudentFindInternships) }
+						)
+						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					}
 				}
 			}
 
@@ -242,26 +242,27 @@ fun App() {
 				val vm: StudentSavedInternshipsViewModel = koinInject()
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummySaved) { vm.setUseDummy(useDummySaved); vm.load() }
-
-				// keep store updated
 				LaunchedEffect(state.saved) { upsertInternships(state.saved) }
 
 				Column(Modifier.fillMaxSize()) {
-					StudentSavedInternshipsScreen(
-						saved = state.saved,
-						onBack = { navController.popBackStack() },
-						onOpenDetails = { id ->
-							viewingAsCompany = false
-							selectedInternshipId = id
-							navController.navigate(Routes.InternshipDetails)
-						},
-						onApply = { id ->
-							selectedInternshipId = id
-							navController.navigate(Routes.MakeApplication)
-						}
-					)
-					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "Saved Internships", onBack = { navController.popBackStack() })
+					Column(Modifier.fillMaxSize().padding(16.dp)) {
+						StudentSavedInternshipsScreen(
+							saved = state.saved,
+							onBack = { navController.popBackStack() },
+							onOpenDetails = { id ->
+								viewingAsCompany = false
+								selectedInternshipId = id
+								navController.navigate(Routes.InternshipDetails)
+							},
+							onApply = { id ->
+								selectedInternshipId = id
+								navController.navigate(Routes.MakeApplication)
+							}
+						)
+						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
+					}
 				}
 			}
 
@@ -293,8 +294,6 @@ fun App() {
 				val vm: CompanyMemberDashboardViewModel = koinInject()
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyCompanyDashboard) { vm.setUseDummy(useDummyCompanyDashboard); vm.load() }
-
-				// keep store updated for details
 				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
 
 				CompanyMemberDashboardScreen(
@@ -315,7 +314,6 @@ fun App() {
 				CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() })
 			}
 
-			// Company Member Candidates (uses state-held internship id)
 			composable(Routes.CompanyMemberCandidates) {
 				val id = selectedCompanyInternshipId
 				CompanyMemberCandidatesScreen(
@@ -329,7 +327,6 @@ fun App() {
 				)
 			}
 
-			// Company Member Application Details
 			composable(Routes.CompanyMemberApplicationDetails) {
 				CompanyMemberApplicationDetailsScreen(
 					applicationId = selectedApplicationId.orEmpty(),

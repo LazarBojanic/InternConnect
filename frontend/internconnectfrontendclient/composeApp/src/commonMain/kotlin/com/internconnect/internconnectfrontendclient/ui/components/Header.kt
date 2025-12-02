@@ -1,12 +1,6 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -27,11 +21,9 @@ fun Header(
 	title: String,
 	onBack: (() -> Unit)? = null
 ) {
-	// Use Surface color prop (not modifier.background) so the color actually paints reliably on all targets.
-	// Also add statusBarsPadding so content is placed below the system status bar without needing TopAppBar.
+	// Edge-to-edge background via Surface color; content is padded from status bar.
 	Surface(
-		modifier = Modifier
-			.fillMaxWidth(),
+		modifier = Modifier.fillMaxWidth(),
 		color = MaterialTheme.colorScheme.secondaryContainer,
 		tonalElevation = 0.dp,
 		shadowElevation = 0.dp

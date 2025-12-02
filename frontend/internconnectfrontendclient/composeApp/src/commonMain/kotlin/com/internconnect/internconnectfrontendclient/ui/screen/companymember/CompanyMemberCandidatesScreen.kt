@@ -1,5 +1,5 @@
 package com.internconnect.internconnectfrontendclient.ui.screen.companymember
-import StatusRadio
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberCandidatesViewModel
@@ -53,27 +54,11 @@ private fun CandidateRow(app: InternshipApplicationJoined, onUpdate: (String) ->
 			Spacer(Modifier.height(6.dp))
 			Text("Status: ${app.status.name}")
 			Spacer(Modifier.height(6.dp))
-			// Three status selectors (radio) equally distributed
 			var selected by remember(app.id, app.status) { mutableStateOf(app.status.name) }
 			Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-				StatusRadio(
-					label = "APPLIED",
-					selected = selected,
-					onSelect = { selected = it; onUpdate(it) },
-					modifier = Modifier.weight(1f)
-				)
-				StatusRadio(
-					label = "ACCEPTED",
-					selected = selected,
-					onSelect = { selected = it; onUpdate(it) },
-					modifier = Modifier.weight(1f)
-				)
-				StatusRadio(
-					label = "REJECTED",
-					selected = selected,
-					onSelect = { selected = it; onUpdate(it) },
-					modifier = Modifier.weight(1f)
-				)
+				StatusRadio(label = "APPLIED", selected = selected, onSelect = { selected = it; onUpdate(it) }, modifier = Modifier.weight(1f))
+				StatusRadio(label = "ACCEPTED", selected = selected, onSelect = { selected = it; onUpdate(it) }, modifier = Modifier.weight(1f))
+				StatusRadio(label = "REJECTED", selected = selected, onSelect = { selected = it; onUpdate(it) }, modifier = Modifier.weight(1f))
 			}
 			Spacer(Modifier.height(4.dp))
 			OutlinedButton(onClick = { /* message (unimplemented) */ }, enabled = false) { Text("Message") }
@@ -81,3 +66,15 @@ private fun CandidateRow(app: InternshipApplicationJoined, onUpdate: (String) ->
 	}
 }
 
+@Composable
+private fun StatusRadio(label: String, selected: String, onSelect: (String) -> Unit, modifier: Modifier = Modifier) {
+	Row(
+		modifier = modifier,
+		verticalAlignment = Alignment.CenterVertically,
+		horizontalArrangement = Arrangement.Center
+	) {
+		RadioButton(selected = selected == label, onClick = { onSelect(label) })
+		Spacer(Modifier.width(4.dp))
+		Text(label, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.labelSmall)
+	}
+}

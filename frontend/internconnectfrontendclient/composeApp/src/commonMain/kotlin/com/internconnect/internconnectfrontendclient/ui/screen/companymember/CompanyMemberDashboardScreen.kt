@@ -28,11 +28,8 @@ fun CompanyMemberDashboardScreen(
 	Column(Modifier.fillMaxSize()) {
 		Header(title = "Dashboard", onBack = onBack)
 
-		// Content area with padding, header stays edge-to-edge
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			Spacer(Modifier.height(8.dp))
-
-			// Top pads
 			Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
 				StatPad(label = "Posted Internships", value = state.postedCount)
 				StatPad(label = "Active Applications", value = state.activeApplications)

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberAnalyticsViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
+import com.internconnect.internconnectfrontendclient.ui.components.ImageStub
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
 import com.internconnect.internconnectfrontendclient.ui.components.StatPad
 import org.koin.compose.koinInject
@@ -39,10 +40,9 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 			Spacer(Modifier.height(8.dp))
 			Text("Statistics", style = MaterialTheme.typography.titleMedium)
 			Spacer(Modifier.height(8.dp))
-			// Graph placeholder
-			OutlinedCard(Modifier.fillMaxWidth().height(160.dp)) {
-				Box(Modifier.fillMaxSize().padding(12.dp)) { Text("Graph placeholder") }
-			}
+
+			// Graph placeholder (image stub)
+			ImageStub(label = "Analytics Graph Placeholder (drop screenshot here)")
 
 			Spacer(Modifier.height(16.dp))
 			Text("Top internships", style = MaterialTheme.typography.titleMedium)

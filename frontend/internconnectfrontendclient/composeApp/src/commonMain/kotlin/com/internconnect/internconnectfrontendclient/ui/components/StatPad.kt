@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -21,20 +22,16 @@ fun RowScope.StatPad(label: String, value: Int) {
 	Box(
 		modifier = Modifier
 			.weight(1f)
-			.height(84.dp)
+			.height(100.dp)
 			.clip(MaterialTheme.shapes.medium)
 			.background(yellow)
-			.then(Modifier) // keep chain flexible
+			.padding(horizontal = 10.dp, vertical = 8.dp),
+		contentAlignment = Alignment.CenterStart
 	) {
-		Column(modifier = Modifier
-			.height(84.dp)
-			.clip(MaterialTheme.shapes.medium)
-			.background(yellow)
-			.padding(12.dp)
-		) {
-			Text(label, style = MaterialTheme.typography.bodyMedium)
-			Spacer(Modifier.height(6.dp))
-			Text("$value", style = MaterialTheme.typography.titleLarge)
+		Column {
+			Text(label, style = MaterialTheme.typography.bodySmall, maxLines = 1)
+			Spacer(Modifier.height(4.dp))
+			Text("$value", style = MaterialTheme.typography.titleMedium, maxLines = 1)
 		}
 	}
 }
