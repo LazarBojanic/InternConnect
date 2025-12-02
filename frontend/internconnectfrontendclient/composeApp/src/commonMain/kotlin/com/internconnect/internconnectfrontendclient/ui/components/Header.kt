@@ -1,6 +1,7 @@
 package com.internconnect.internconnectfrontendclient.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,13 +31,13 @@ fun Header(
 	onBack: (() -> Unit)? = null
 ) {
 	Spacer(modifier = Modifier.height(36.dp))
-	Surface(Modifier.fillMaxWidth()) {
-		Column(Modifier.fillMaxWidth()){
+	Surface(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.secondaryContainer)) {
+		Column(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.secondaryContainer)){
 			Icon(
 				painter = painterResource(Res.drawable.internconnect_logo),
 				contentDescription = "InternConnector Logo",
 				tint = androidx.compose.ui.graphics.Color.Unspecified,
-				modifier = Modifier.size(28.dp)
+				modifier = Modifier.size(42.dp)
 			)
 			Row(
 				modifier = Modifier
