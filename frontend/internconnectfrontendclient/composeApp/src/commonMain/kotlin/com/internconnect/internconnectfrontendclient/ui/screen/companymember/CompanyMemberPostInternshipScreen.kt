@@ -22,7 +22,6 @@ fun CompanyMemberPostInternshipScreen(onBack: () -> Unit) {
 	LaunchedEffect(useDummy) { vm.setUseDummy(useDummy) }
 
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
-		Header(title = "Post Internship", onBack = onBack)
 		Spacer(Modifier.height(16.dp))
 		/*Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
 			Text("Dummy data")

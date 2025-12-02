@@ -26,7 +26,6 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 	LaunchedEffect(useDummy) { vm.setUseDummy(useDummy); vm.load() }
 
 	Column(Modifier.fillMaxSize()) {
-		Header(title = "Analytics", onBack = onBack)
 
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			Spacer(Modifier.height(8.dp))

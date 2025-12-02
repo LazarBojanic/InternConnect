@@ -24,7 +24,6 @@ fun StudentProfileScreen(onBack: () -> Unit) {
 
 	Surface(modifier = Modifier.fillMaxSize()) {
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
-			Header(title = "Profile", onBack = onBack)
 			Spacer(Modifier.height(16.dp))
 
 			when {

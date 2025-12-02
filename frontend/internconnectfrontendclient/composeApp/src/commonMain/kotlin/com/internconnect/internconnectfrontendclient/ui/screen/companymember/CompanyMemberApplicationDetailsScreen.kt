@@ -27,7 +27,6 @@ fun CompanyMemberApplicationDetailsScreen(
 	}
 
 	Column(Modifier.fillMaxSize()) {
-		Header(title = "Application Details", onBack = onBack)
 
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())

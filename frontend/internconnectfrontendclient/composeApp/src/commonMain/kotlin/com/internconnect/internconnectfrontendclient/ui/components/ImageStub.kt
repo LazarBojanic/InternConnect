@@ -4,13 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -21,6 +22,7 @@ fun ImageStub(
 	contentDescription: String,
 	modifier: Modifier = Modifier,
 	forceContentScale: ContentScale? = null,
+	maxHeight: Dp = 280.dp, // cap to keep layout neat on all screens
 ) {
 	val painter = painterResource(resource)
 
@@ -37,15 +39,17 @@ fun ImageStub(
 		BoxWithConstraints {
 			val appliedScale = forceContentScale ?: ContentScale.Fit
 			val imgModifier = if (ratio != null) {
-				// Preserve aspect ratio -> width determines height
+				// Preserve aspect ratio -> width determines height, but cap the height
 				Modifier
 					.fillMaxWidth()
-					.then(Modifier.aspectRatio(ratio))
+					.aspectRatio(ratio)
+					.heightIn(max = maxHeight)
 					.padding(8.dp)
 			} else {
 				// Fallback if intrinsic size is unknown
 				Modifier
 					.fillMaxWidth()
+					.heightIn(max = maxHeight, min = 160.dp)
 					.padding(8.dp)
 			}
 

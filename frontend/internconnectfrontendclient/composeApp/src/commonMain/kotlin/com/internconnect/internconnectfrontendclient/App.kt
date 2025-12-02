@@ -15,6 +15,7 @@ import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentFin
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentMyApplicationsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.StudentSavedInternshipsViewModel
 import com.internconnect.internconnectfrontendclient.theme.AppTheme
+import com.internconnect.internconnectfrontendclient.ui.components.ScreenScaffold
 import com.internconnect.internconnectfrontendclient.ui.screen.InternshipDetailsScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.LoginScreen
 import com.internconnect.internconnectfrontendclient.ui.screen.RegisterScreen
@@ -144,50 +145,54 @@ fun App() {
 			// ---------------------
 			composable(Routes.StudentHome) {
 				val logoutVm: LogoutViewModel = koinInject()
-				StudentHomeScreen(
-					onFindInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentFindInternships) },
-					onMyApplications = { viewingAsCompany = false; navController.navigate(Routes.StudentMyApplications) },
-					onSavedInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentSavedInternships) },
-					onMessages = { navController.navigate(Routes.StudentMessages) },
-					onProfile = { navController.navigate(Routes.StudentProfile) },
-					onPreferences = { /* future */ },
-					onLogout = {
-						logoutVm.logout {
-							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+				ScreenScaffold(
+					title = "Home",
+					onBack = { navController.popBackStack() }
+				){
+					StudentHomeScreen(
+						onFindInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentFindInternships) },
+						onMyApplications = { viewingAsCompany = false; navController.navigate(Routes.StudentMyApplications) },
+						onSavedInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentSavedInternships) },
+						onMessages = { navController.navigate(Routes.StudentMessages) },
+						onProfile = { navController.navigate(Routes.StudentProfile) },
+						onPreferences = { /* future */ },
+						onLogout = {
+							logoutVm.logout {
+								navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+							}
 						}
-					}
-				)
+					)
+				}
+
 			}
 
-			composable(Routes.StudentProfile) { StudentProfileScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.StudentProfile) {
+				ScreenScaffold(title = "Profile", onBack = { navController.popBackStack() }) { StudentProfileScreen(onBack = { navController.popBackStack() }) }
+			}
 
 			composable(Routes.StudentFindInternships) {
 				val vm: StudentFindInternshipsViewModel = koinInject()
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyFind) { vm.setUseDummy(useDummyFind); vm.load() }
-
 				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
 
-				Column(Modifier.fillMaxSize()) {
-					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "Find Internships", onBack = { navController.popBackStack() })
-					Column(Modifier.fillMaxSize().padding(16.dp)) {
-						StudentFindInternshipsScreen(
-							internships = state.internships,
-							categories = state.categories,
-							onBack = { navController.popBackStack() },
-							onOpenDetails = { id ->
-								viewingAsCompany = false
-								selectedInternshipId = id
-								navController.navigate(Routes.InternshipDetails)
-							},
-							onApply = { id ->
-								selectedInternshipId = id
-								navController.navigate(Routes.MakeApplication)
-							}
-						)
-						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
-					}
+				ScreenScaffold(title = "Find Internships", onBack = { navController.popBackStack() }) {
+					StudentFindInternshipsScreen(
+						internships = state.internships,
+						categories = state.categories,
+						onBack = { navController.popBackStack() },
+						onOpenDetails = { id ->
+							viewingAsCompany = false
+							selectedInternshipId = id
+							navController.navigate(Routes.InternshipDetails)
+						},
+						onApply = { id ->
+							selectedInternshipId = id
+							navController.navigate(Routes.MakeApplication)
+						}
+					)
+					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
 				}
 			}
 
@@ -195,28 +200,33 @@ fun App() {
 			composable(Routes.InternshipDetails) {
 				val id = selectedInternshipId
 				val internship = id?.let { internshipStore.value[it] }
+				ScreenScaffold(title = internship?.title ?: "Internship Details", onBack = { navController.popBackStack() }) {
+					InternshipDetailsScreen(
+						internship = internship,
+						onBack = { navController.popBackStack() },
+						onApply = if (viewingAsCompany) null else { targetId: String ->
+							selectedInternshipId = targetId
+							navController.navigate(Routes.MakeApplication)
+						}
+					)
+				}
 
-				InternshipDetailsScreen(
-					internship = internship,
-					onBack = { navController.popBackStack() },
-					onApply = if (viewingAsCompany) null else { targetId: String ->
-						selectedInternshipId = targetId
-						navController.navigate(Routes.MakeApplication)
-					}
-				)
 			}
 
 			// Student application screen
 			composable(Routes.MakeApplication) {
 				val id = selectedInternshipId
 				val internship = id?.let { internshipStore.value[it] }
-				StudentMakeInternshipApplicationScreen(
-					internship = internship,
-					onBack = { navController.popBackStack() },
-					onSubmit = {
-						navController.navigate(Routes.StudentMyApplications)
-					}
-				)
+				ScreenScaffold(title = "Make Application", onBack = { navController.popBackStack() }) {
+					StudentMakeInternshipApplicationScreen(
+						internship = internship,
+						onBack = { navController.popBackStack() },
+						onSubmit = {
+							navController.navigate(Routes.StudentMyApplications)
+						}
+					)
+				}
+
 			}
 
 			composable(Routes.StudentMyApplications) {
@@ -224,17 +234,14 @@ fun App() {
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyApps) { vm.setUseDummy(useDummyApps); vm.load() }
 
-				Column(Modifier.fillMaxSize()) {
-					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "My Applications", onBack = { navController.popBackStack() })
-					Column(Modifier.fillMaxSize().padding(16.dp)) {
-						StudentMyApplicationsScreen(
-							applications = state.applications,
-							onBack = { navController.popBackStack() },
-							onExploreInternships = { navController.navigate(Routes.StudentFindInternships) }
-						)
-						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
-					}
+				ScreenScaffold(title = "My Applications", onBack = { navController.popBackStack() }) {
+					StudentMyApplicationsScreen(
+						applications = state.applications,
+						onBack = { navController.popBackStack() },
+						onExploreInternships = { navController.navigate(Routes.StudentFindInternships) }
+					)
+					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
 				}
 			}
 
@@ -244,99 +251,125 @@ fun App() {
 				LaunchedEffect(useDummySaved) { vm.setUseDummy(useDummySaved); vm.load() }
 				LaunchedEffect(state.saved) { upsertInternships(state.saved) }
 
-				Column(Modifier.fillMaxSize()) {
-					com.internconnect.internconnectfrontendclient.ui.components.Header(title = "Saved Internships", onBack = { navController.popBackStack() })
-					Column(Modifier.fillMaxSize().padding(16.dp)) {
-						StudentSavedInternshipsScreen(
-							saved = state.saved,
-							onBack = { navController.popBackStack() },
-							onOpenDetails = { id ->
-								viewingAsCompany = false
-								selectedInternshipId = id
-								navController.navigate(Routes.InternshipDetails)
-							},
-							onApply = { id ->
-								selectedInternshipId = id
-								navController.navigate(Routes.MakeApplication)
-							}
-						)
-						if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-						state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
-					}
+				ScreenScaffold(title = "Saved Internships", onBack = { navController.popBackStack() }) {
+					StudentSavedInternshipsScreen(
+						saved = state.saved,
+						onBack = { navController.popBackStack() },
+						onOpenDetails = { id ->
+							viewingAsCompany = false
+							selectedInternshipId = id
+							navController.navigate(Routes.InternshipDetails)
+						},
+						onApply = { id ->
+							selectedInternshipId = id
+							navController.navigate(Routes.MakeApplication)
+						}
+					)
+					if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+					state.error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp)) }
 				}
 			}
 
-			composable(Routes.StudentMessages) { StudentMessagesScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.StudentMessages) {
+				ScreenScaffold(title = "Messages", onBack = { navController.popBackStack() }) { StudentMessagesScreen(onBack = { navController.popBackStack() }) }
+			}
 
 			// ---------------------
 			// Company member flow
 			// ---------------------
 			composable(Routes.CompanyMemberHome) {
 				val logoutVm: LogoutViewModel = koinInject()
-				CompanyMemberHomeScreen(
-					onDashboard = { navController.navigate(Routes.CompanyMemberDashboard) },
-					onAnalytics = { navController.navigate(Routes.CompanyMemberAnalytics) },
-					onPostInternship = { navController.navigate(Routes.CompanyMemberPostInternship) },
-					onMessages = { navController.navigate(Routes.CompanyMemberMessages) },
-					onProfile = { navController.navigate(Routes.CompanyMemberProfile) },
-					onPreferences = { /* future */ },
-					onLogout = {
-						logoutVm.logout {
-							navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+				ScreenScaffold(title = "Home", onBack = { navController.popBackStack() }) {
+					CompanyMemberHomeScreen(
+						onDashboard = { navController.navigate(Routes.CompanyMemberDashboard) },
+						onAnalytics = { navController.navigate(Routes.CompanyMemberAnalytics) },
+						onPostInternship = { navController.navigate(Routes.CompanyMemberPostInternship) },
+						onMessages = { navController.navigate(Routes.CompanyMemberMessages) },
+						onProfile = { navController.navigate(Routes.CompanyMemberProfile) },
+						onPreferences = { /* future */ },
+						onLogout = {
+							logoutVm.logout {
+								navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+							}
 						}
-					}
-				)
+					)
+				}
 			}
 
-			composable(Routes.CompanyMemberProfile) { CompanyMemberProfileScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.CompanyMemberProfile) {
+				ScreenScaffold(title = "Profile", onBack = { navController.popBackStack() }) { CompanyMemberProfileScreen(onBack = { navController.popBackStack() }) }
+			}
 
 			composable(Routes.CompanyMemberDashboard) {
 				val vm: CompanyMemberDashboardViewModel = koinInject()
 				val state by vm.state.collectAsState()
 				LaunchedEffect(useDummyCompanyDashboard) { vm.setUseDummy(useDummyCompanyDashboard); vm.load() }
 				LaunchedEffect(state.internships) { upsertInternships(state.internships) }
+				ScreenScaffold(title = "Dashboard", onBack = { navController.popBackStack() }) {
+					CompanyMemberDashboardScreen(
+						onBack = { navController.popBackStack() },
+						onOpenCandidates = { internshipId ->
+							selectedCompanyInternshipId = internshipId
+							navController.navigate(Routes.CompanyMemberCandidates)
+						},
+						onOpenDetails = { id ->
+							viewingAsCompany = true
+							selectedInternshipId = id
+							navController.navigate(Routes.InternshipDetails)
+						}
+					)
+				}
 
-				CompanyMemberDashboardScreen(
-					onBack = { navController.popBackStack() },
-					onOpenCandidates = { internshipId ->
-						selectedCompanyInternshipId = internshipId
-						navController.navigate(Routes.CompanyMemberCandidates)
-					},
-					onOpenDetails = { id ->
-						viewingAsCompany = true
-						selectedInternshipId = id
-						navController.navigate(Routes.InternshipDetails)
-					}
-				)
 			}
 
 			composable(Routes.CompanyMemberPostInternship) {
-				CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() })
+				ScreenScaffold(title = "Post Internship", onBack = { navController.popBackStack() }) {
+					CompanyMemberPostInternshipScreen(onBack = { navController.popBackStack() })
+				}
 			}
 
 			composable(Routes.CompanyMemberCandidates) {
 				val id = selectedCompanyInternshipId
-				CompanyMemberCandidatesScreen(
-					internshipId = id.orEmpty(),
-					onBack = { navController.popBackStack() },
-					onOpenDetails = { applicationId ->
-						selectedApplicationId = applicationId
-						selectedApplicationInternshipId = id
-						navController.navigate(Routes.CompanyMemberApplicationDetails)
-					}
-				)
+				ScreenScaffold(
+					title = "Candidates",
+					onBack = { navController.popBackStack() }
+				){
+					CompanyMemberCandidatesScreen(
+						internshipId = id.orEmpty(),
+						onBack = { navController.popBackStack() },
+						onOpenDetails = { applicationId ->
+							selectedApplicationId = applicationId
+							selectedApplicationInternshipId = id
+							navController.navigate(Routes.CompanyMemberApplicationDetails)
+						}
+					)
+				}
+
 			}
 
 			composable(Routes.CompanyMemberApplicationDetails) {
-				CompanyMemberApplicationDetailsScreen(
-					applicationId = selectedApplicationId.orEmpty(),
-					internshipId = selectedApplicationInternshipId.orEmpty(),
-					onBack = { navController.popBackStack() }
-				)
+				ScreenScaffold(title = "Application Details", onBack = { navController.popBackStack() }) {
+					CompanyMemberApplicationDetailsScreen(
+						applicationId = selectedApplicationId.orEmpty(),
+						internshipId = selectedApplicationInternshipId.orEmpty(),
+						onBack = { navController.popBackStack() }
+					)
+				}
+
 			}
 
-			composable(Routes.CompanyMemberMessages) { CompanyMemberMessagesScreen(onBack = { navController.popBackStack() }) }
-			composable(Routes.CompanyMemberAnalytics) { CompanyMemberAnalyticsScreen(onBack = { navController.popBackStack() }) }
+			composable(Routes.CompanyMemberMessages) {
+				ScreenScaffold(title = "Messages", onBack = { navController.popBackStack() }) {
+					CompanyMemberMessagesScreen(onBack = { navController.popBackStack() })
+
+				}
+			}
+			composable(Routes.CompanyMemberAnalytics) {
+				ScreenScaffold(title = "Analytics", onBack = { navController.popBackStack() }) {
+					CompanyMemberAnalyticsScreen(onBack = { navController.popBackStack() })
+
+				}
+			}
 		}
 	}
 }

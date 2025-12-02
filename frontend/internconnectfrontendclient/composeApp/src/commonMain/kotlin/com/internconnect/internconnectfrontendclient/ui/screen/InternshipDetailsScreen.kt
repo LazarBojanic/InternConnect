@@ -16,7 +16,6 @@ fun InternshipDetailsScreen(
 	onApply: ((String) -> Unit)?
 ) {
 	Column(Modifier.fillMaxSize()) {
-		Header(title = "Internship Details", onBack = onBack)
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			if (internship == null) {
 				Text("No internship selected", style = MaterialTheme.typography.bodyMedium)

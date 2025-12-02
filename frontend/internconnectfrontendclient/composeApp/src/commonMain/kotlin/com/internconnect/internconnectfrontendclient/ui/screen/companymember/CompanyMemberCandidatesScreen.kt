@@ -28,7 +28,6 @@ fun CompanyMemberCandidatesScreen(
 	LaunchedEffect(internshipId, useDummy) { vm.setUseDummy(useDummy); vm.load(internshipId) }
 
 	Column(Modifier.fillMaxSize()) {
-		Header(title = "Candidates", onBack = onBack)
 
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			if (state.loading) LinearProgressIndicator(Modifier.fillMaxWidth())

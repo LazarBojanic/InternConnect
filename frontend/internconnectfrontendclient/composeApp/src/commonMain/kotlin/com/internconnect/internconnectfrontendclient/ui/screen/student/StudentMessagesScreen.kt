@@ -14,7 +14,6 @@ import internconnectfrontendclient.composeapp.generated.resources.messages
 @Composable
 fun StudentMessagesScreen(onBack: () -> Unit) {
 	Column(Modifier.fillMaxSize()) {
-		Header(title = "Messages", onBack = onBack)
 		Column(Modifier.fillMaxSize().padding(16.dp)) {
 			Text("Messages", style = MaterialTheme.typography.titleMedium)
 			Spacer(Modifier.height(8.dp))
