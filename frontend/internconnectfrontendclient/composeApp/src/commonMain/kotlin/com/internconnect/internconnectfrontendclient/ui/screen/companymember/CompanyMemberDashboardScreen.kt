@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberDashboardViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
+import com.internconnect.internconnectfrontendclient.ui.components.StatPad
 import org.koin.compose.koinInject
 
 @Composable
@@ -27,6 +28,20 @@ fun CompanyMemberDashboardScreen(
 	Column(Modifier.fillMaxSize().padding(16.dp)) {
 		Header(title = "Dashboard", onBack = onBack)
 		Spacer(Modifier.height(12.dp))
+		/*Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+			Text("Dummy data")
+			Switch(checked = useDummy, onCheckedChange = { useDummy = it })
+		}*/
+		Spacer(Modifier.height(8.dp))
+
+		// Top pads
+		Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+			StatPad(label = "Posted Internships", value = state.postedCount)
+			StatPad(label = "Active Applications", value = state.activeApplications)
+			StatPad(label = "Pending Reviews", value = state.pendingReviews)
+		}
+
+		Spacer(Modifier.height(16.dp))
 
 		when {
 			state.loading -> LinearProgressIndicator(Modifier.fillMaxWidth())

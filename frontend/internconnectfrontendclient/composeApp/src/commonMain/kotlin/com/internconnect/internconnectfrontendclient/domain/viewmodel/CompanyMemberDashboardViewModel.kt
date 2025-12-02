@@ -16,6 +16,10 @@ class CompanyMemberDashboardViewModel(private val api: IAppApi) {
 		val internships: List<InternshipJoined> = emptyList(),
 		val error: String? = null,
 		val useDummy: Boolean = true,
+		// stats
+		val postedCount: Int = 0,
+		val activeApplications: Int = 0,
+		val pendingReviews: Int = 0,
 	)
 
 	private val scope = CoroutineScope(Dispatchers.Default)
@@ -28,15 +32,28 @@ class CompanyMemberDashboardViewModel(private val api: IAppApi) {
 		scope.launch {
 			_state.value = _state.value.copy(loading = true, error = null)
 			try {
+				val postings: List<InternshipJoined>
+				val active: Int
+				val pending: Int
 				if (_state.value.useDummy) {
-					// Use a subset that represents "my" company’s postings (companyA from DummyData)
 					val companyId = "comp-001"
-					val mine = DummyData.internships().filter { it.company.id == companyId }
-					_state.value = _state.value.copy(loading = false, internships = mine)
+					postings = DummyData.internships().filter { it.company.id == companyId }
+					val apps = DummyData.internshipApplications().filter { app -> postings.any { it.id == app.internship.id } }
+					active = apps.size
+					pending = apps.count { it.status.name == "APPLIED" }
 				} else {
-					val list = api.fetchCompanyInternships().orEmpty().map { it.toJoined() }
-					_state.value = _state.value.copy(loading = false, internships = list)
+					postings = api.fetchCompanyInternships().orEmpty().map { it.toJoined() }
+					val allApps = postings.flatMap { p -> api.fetchCandidates(p.id).orEmpty() }.map { it.toJoined() }
+					active = allApps.size
+					pending = allApps.count { it.status.name == "APPLIED" }
 				}
+				_state.value = _state.value.copy(
+					loading = false,
+					internships = postings,
+					postedCount = postings.size,
+					activeApplications = active,
+					pendingReviews = pending,
+				)
 			} catch (t: Throwable) {
 				_state.value = _state.value.copy(loading = false, error = t.message ?: "Failed to load internships")
 			}

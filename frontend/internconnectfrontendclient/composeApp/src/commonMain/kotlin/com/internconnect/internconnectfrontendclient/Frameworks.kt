@@ -15,6 +15,7 @@ import com.internconnect.internconnectfrontendclient.domain.repository.specifica
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IStudentRepository
 import com.internconnect.internconnectfrontendclient.domain.repository.specification.IUserRepository
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberAnalyticsViewModel
+import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberApplicationDetailsViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberCandidatesViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberDashboardViewModel
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberMessagesViewModel
@@ -67,7 +68,7 @@ fun commonModule(baseUrl: String) = module {
 	factory{ CompanyMemberCandidatesViewModel(get()) }
 	factory{ CompanyMemberPostInternshipViewModel(get()) }
 
-
+	factory { CompanyMemberApplicationDetailsViewModel(get()) }
 	factory { LogoutViewModel(get(), get()) }
 }
 fun initKoin(baseUrl: String, vararg platformModules: Module) {

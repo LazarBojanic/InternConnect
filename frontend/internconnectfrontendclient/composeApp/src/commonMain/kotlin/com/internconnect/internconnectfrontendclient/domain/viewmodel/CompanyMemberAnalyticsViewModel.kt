@@ -17,6 +17,7 @@ class CompanyMemberAnalyticsViewModel(private val api: IAppApi) {
 		val totalApplicants: Int = 0,
 		val byStatus: Map<String, Int> = emptyMap(),
 		val latestPostings: List<InternshipJoined> = emptyList(),
+		val topInternships: List<InternshipJoined> = emptyList(),
 		val error: String? = null,
 		val useDummy: Boolean = true,
 	)
@@ -31,26 +32,29 @@ class CompanyMemberAnalyticsViewModel(private val api: IAppApi) {
 		scope.launch {
 			_state.value = _state.value.copy(loading = true, error = null)
 			try {
-				val (postings, applications) = if (_state.value.useDummy) {
+				val postings: List<InternshipJoined>
+				val applications = mutableListOf<com.internconnect.internconnectfrontendclient.data.model.joined.InternshipApplicationJoined>()
+				if (_state.value.useDummy) {
 					val companyId = "comp-001"
-					val postings = DummyData.internships().filter { it.company.id == companyId }
-					val apps = DummyData.internshipApplications().filter { app -> postings.any { it.id == app.internship.id } }
-					postings to apps
+					postings = DummyData.internships().filter { it.company.id == companyId }
+					applications += DummyData.internshipApplications().filter { app -> postings.any { it.id == app.internship.id } }
 				} else {
-					val postings = api.fetchCompanyInternships().orEmpty().map { it.toJoined() }
-					// Aggregate all candidates for each posting
-					val apps = postings.flatMap { posting ->
-						api.fetchCandidates(posting.id).orEmpty().map { it.toJoined() }
+					postings = api.fetchCompanyInternships().orEmpty().map { it.toJoined() }
+					postings.forEach { posting ->
+						applications += api.fetchCandidates(posting.id).orEmpty().map { it.toJoined() }
 					}
-					postings to apps
 				}
+
 				val by = applications.groupBy { it.status.name }.mapValues { it.value.size }
+				val top = postings.sortedByDescending { p -> applications.count { it.internship.id == p.id } }
+
 				_state.value = _state.value.copy(
 					loading = false,
 					totalPostings = postings.size,
 					totalApplicants = applications.size,
 					byStatus = by,
-					latestPostings = postings.take(5)
+					latestPostings = postings.take(5),
+					topInternships = top
 				)
 			} catch (t: Throwable) {
 				_state.value = _state.value.copy(loading = false, error = t.message ?: "Failed to load analytics")

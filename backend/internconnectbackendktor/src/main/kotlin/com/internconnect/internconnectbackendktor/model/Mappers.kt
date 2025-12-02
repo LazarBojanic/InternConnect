@@ -357,6 +357,17 @@ fun InternshipApplicationJoined.toDto(): InternshipApplicationDto = InternshipAp
 
 )
 
+fun InternshipApplicationJoined.toDomain(): InternshipApplication = InternshipApplication(
+	id = this.id,
+	internshipId = this.internship.id,
+	studentId = this.student.user.id,
+	resume = this.resume,
+	interviewNotes = this.interviewNotes,
+	status = this.status,
+	createdAt = this.createdAt,
+	updatedAt = this.updatedAt,
+)
+
 fun OAuthAccountEntity.toDomain(): OAuthAccount = OAuthAccount(
 	id = this.id.value,
 	userId = this.userId.value,

@@ -301,7 +301,10 @@ fun App() {
 				val id = selectedCompanyInternshipId
 				CompanyMemberCandidatesScreen(
 					internshipId = id.orEmpty(),
-					onBack = { navController.popBackStack() }
+					onBack = { navController.popBackStack() },
+					onOpenDetails = { applicationId ->
+						navController.navigate("company-member/candidate-details/$applicationId")
+					}
 				)
 			}
 
