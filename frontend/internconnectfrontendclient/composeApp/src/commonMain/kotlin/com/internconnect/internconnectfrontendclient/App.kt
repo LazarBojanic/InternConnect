@@ -1,4 +1,3 @@
-
 package com.internconnect.internconnectfrontendclient
 
 import androidx.compose.foundation.layout.*
@@ -87,6 +86,9 @@ fun App() {
 	var selectedApplicationId by remember { mutableStateOf<String?>(null) }
 	var selectedApplicationInternshipId by remember { mutableStateOf<String?>(null) }
 
+	// Track whether InternshipDetails is opened from company context
+	var viewingAsCompany by remember { mutableStateOf(false) }
+
 	// Development switches: toggle dummy vs API-backed data per screen
 	var useDummyFind by remember { mutableStateOf(true) }
 	var useDummyApps by remember { mutableStateOf(true) }
@@ -143,9 +145,9 @@ fun App() {
 			composable(Routes.StudentHome) {
 				val logoutVm: LogoutViewModel = koinInject()
 				StudentHomeScreen(
-					onFindInternships = { navController.navigate(Routes.StudentFindInternships) },
-					onMyApplications = { navController.navigate(Routes.StudentMyApplications) },
-					onSavedInternships = { navController.navigate(Routes.StudentSavedInternships) },
+					onFindInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentFindInternships) },
+					onMyApplications = { viewingAsCompany = false; navController.navigate(Routes.StudentMyApplications) },
+					onSavedInternships = { viewingAsCompany = false; navController.navigate(Routes.StudentSavedInternships) },
 					onMessages = { navController.navigate(Routes.StudentMessages) },
 					onProfile = { navController.navigate(Routes.StudentProfile) },
 					onPreferences = { /* future route */ },
@@ -173,6 +175,7 @@ fun App() {
 						categories = state.categories,
 						onBack = { navController.popBackStack() },
 						onOpenDetails = { id ->
+							viewingAsCompany = false
 							selectedInternshipId = id
 							navController.navigate(Routes.InternshipDetails)
 						},
@@ -190,13 +193,18 @@ fun App() {
 			composable(Routes.InternshipDetails) {
 				val id = selectedInternshipId
 				val internship = id?.let { internshipStore.value[it] }
+
 				InternshipDetailsScreen(
 					internship = internship,
 					onBack = { navController.popBackStack() },
-					onApply = { targetId ->
-						selectedInternshipId = targetId
-						navController.navigate(Routes.MakeApplication)
+					onApply = {
+						id ->
+						if(!viewingAsCompany){
+							selectedInternshipId = id
+							navController.navigate(Routes.MakeApplication)
+						}
 					}
+
 				)
 			}
 
@@ -243,6 +251,7 @@ fun App() {
 						saved = state.saved,
 						onBack = { navController.popBackStack() },
 						onOpenDetails = { id ->
+							viewingAsCompany = false
 							selectedInternshipId = id
 							navController.navigate(Routes.InternshipDetails)
 						},
@@ -295,6 +304,7 @@ fun App() {
 						navController.navigate(Routes.CompanyMemberCandidates)
 					},
 					onOpenDetails = { id ->
+						viewingAsCompany = true
 						selectedInternshipId = id
 						navController.navigate(Routes.InternshipDetails)
 					}

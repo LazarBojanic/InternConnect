@@ -25,39 +25,38 @@ fun CompanyMemberDashboardScreen(
 
 	LaunchedEffect(useDummy) { vm.setUseDummy(useDummy); vm.load() }
 
-	Column(Modifier.fillMaxSize().padding(16.dp)) {
+	Column(Modifier.fillMaxSize()) {
 		Header(title = "Dashboard", onBack = onBack)
-		Spacer(Modifier.height(12.dp))
-		/*Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-			Text("Dummy data")
-			Switch(checked = useDummy, onCheckedChange = { useDummy = it })
-		}*/
-		Spacer(Modifier.height(8.dp))
 
-		// Top pads
-		Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-			StatPad(label = "Posted Internships", value = state.postedCount)
-			StatPad(label = "Active Applications", value = state.activeApplications)
-			StatPad(label = "Pending Reviews", value = state.pendingReviews)
-		}
+		// Content area with padding, header stays edge-to-edge
+		Column(Modifier.fillMaxSize().padding(16.dp)) {
+			Spacer(Modifier.height(8.dp))
 
-		Spacer(Modifier.height(16.dp))
+			// Top pads
+			Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+				StatPad(label = "Posted Internships", value = state.postedCount)
+				StatPad(label = "Active Applications", value = state.activeApplications)
+				StatPad(label = "Pending Reviews", value = state.pendingReviews)
+			}
 
-		when {
-			state.loading -> LinearProgressIndicator(Modifier.fillMaxWidth())
-			state.error != null -> Text(state.error!!, color = MaterialTheme.colorScheme.error)
-			else -> LazyColumn(
-				verticalArrangement = Arrangement.spacedBy(12.dp),
-				modifier = Modifier.fillMaxSize()
-			) {
-				items(state.internships) { item ->
-					InternshipCard(
-						internship = item,
-						onApply = null, // company members don’t apply
-						onDetails = { onOpenDetails(item.id) },
-						onCandidates = { onOpenCandidates(item.id) },
-						modifier = Modifier.fillMaxWidth()
-					)
+			Spacer(Modifier.height(16.dp))
+
+			when {
+				state.loading -> LinearProgressIndicator(Modifier.fillMaxWidth())
+				state.error != null -> Text(state.error!!, color = MaterialTheme.colorScheme.error)
+				else -> LazyColumn(
+					verticalArrangement = Arrangement.spacedBy(12.dp),
+					modifier = Modifier.fillMaxSize()
+				) {
+					items(state.internships) { item ->
+						InternshipCard(
+							internship = item,
+							onApply = null, // company members don’t apply
+							onDetails = { onOpenDetails(item.id) },
+							onCandidates = { onOpenCandidates(item.id) },
+							modifier = Modifier.fillMaxWidth()
+						)
+					}
 				}
 			}
 		}
