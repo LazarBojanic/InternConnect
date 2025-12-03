@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-	val dev = false
+	val dev: Boolean = environment.config.property("ktor.development") .getString().toBoolean()
 	configureHTTP()
 	configureSerialization()
 	configureDatabase()

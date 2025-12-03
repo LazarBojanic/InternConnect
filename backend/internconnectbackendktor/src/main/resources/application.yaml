@@ -5,7 +5,7 @@ ktor:
   deployment:
     host: $KTOR_DEPLOYMENT_HOST:127.0.0.1
     port: $KTOR_DEPLOYMENT_PORT:8080
-  development: false
+  development: $KTOR_DEVELOPMENT
 jwt:
   alg: $JWT_ALG:HS256
   iss: $JWT_ISS
