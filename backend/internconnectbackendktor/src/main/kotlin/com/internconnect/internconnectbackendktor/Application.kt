@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-	val dev = true
+	val dev = false
 	configureHTTP()
 	configureSerialization()
 	configureDatabase()
