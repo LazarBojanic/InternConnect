@@ -51,7 +51,6 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 			Image(
 				painter = painter, contentDescription = "Analytics Graph Placeholder",
 				alignment = Alignment.Center,
-				contentScale = ContentScale.FillBounds
 			)
 
 			Spacer(Modifier.height(16.dp))
