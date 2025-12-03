@@ -30,8 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 }
 
-@Suppress("KotlinNoActualForExpect")
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+@Suppress("KotlinNoActualForExpect") expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
     override fun initialize(): AppDatabase
 }
 
