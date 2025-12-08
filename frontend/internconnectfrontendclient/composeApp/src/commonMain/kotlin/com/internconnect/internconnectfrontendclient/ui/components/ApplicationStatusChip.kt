@@ -18,17 +18,17 @@ private val NeutralGrey = Color(0xFF424242)
 
 @Composable
 fun statusContainerColor(status: InternshipApplicationStatus): Color = when (status) {
-	InternshipApplicationStatus.APPLIED -> StrongRed.copy(alpha = 0.10f)
-	InternshipApplicationStatus.ACCEPTED  -> StrongYellow.copy(alpha = 0.12f)
-	InternshipApplicationStatus.REJECTED -> StrongGreen.copy(alpha = 0.10f)
+	InternshipApplicationStatus.APPLIED -> StrongYellow.copy(alpha = 0.10f)
+	InternshipApplicationStatus.ACCEPTED  -> StrongGreen.copy(alpha = 0.12f)
+	InternshipApplicationStatus.REJECTED -> StrongRed.copy(alpha = 0.10f)
 	else                                 -> NeutralGrey.copy(alpha = 0.10f)
 }
 
 @Composable
 fun statusTextColor(status: InternshipApplicationStatus): Color = when (status) {
-	InternshipApplicationStatus.APPLIED -> StrongRed
-	InternshipApplicationStatus.ACCEPTED  -> StrongYellow
-	InternshipApplicationStatus.REJECTED -> StrongGreen
+	InternshipApplicationStatus.APPLIED -> StrongYellow
+	InternshipApplicationStatus.ACCEPTED  -> StrongGreen
+	InternshipApplicationStatus.REJECTED -> StrongRed
 	else                                 -> NeutralGrey
 }
 

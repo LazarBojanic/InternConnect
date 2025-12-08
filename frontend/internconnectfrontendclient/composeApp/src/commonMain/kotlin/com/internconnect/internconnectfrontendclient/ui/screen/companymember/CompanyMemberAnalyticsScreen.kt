@@ -1,20 +1,23 @@
 package com.internconnect.internconnectfrontendclient.ui.screen.companymember
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.internconnect.internconnectfrontendclient.domain.viewmodel.CompanyMemberAnalyticsViewModel
 import com.internconnect.internconnectfrontendclient.ui.components.Header
-import com.internconnect.internconnectfrontendclient.ui.components.ImageStub
 import com.internconnect.internconnectfrontendclient.ui.components.InternshipCard
 import com.internconnect.internconnectfrontendclient.ui.components.StatPad
 import internconnectfrontendclient.composeapp.generated.resources.Res
 import internconnectfrontendclient.composeapp.generated.resources.analytics
 import internconnectfrontendclient.composeapp.generated.resources.internconnect_logo
+import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 
 @Composable
@@ -44,9 +47,10 @@ fun CompanyMemberAnalyticsScreen(onBack: () -> Unit) {
 			Spacer(Modifier.height(8.dp))
 
 			// Graph image stub – replace with your generated analytics graph drawable
-			ImageStub(
-				resource = Res.drawable.analytics,
-				contentDescription = "Analytics Graph Placeholder"
+			val painter = painterResource(Res.drawable.analytics)
+			Image(
+				painter = painter, contentDescription = "Analytics Graph Placeholder",
+				alignment = Alignment.Center,
 			)
 
 			Spacer(Modifier.height(16.dp))
