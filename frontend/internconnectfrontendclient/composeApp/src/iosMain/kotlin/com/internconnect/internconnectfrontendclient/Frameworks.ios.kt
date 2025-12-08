@@ -30,7 +30,7 @@ fun iosModule() = module {
 }
 
 fun initKoinIos() {
-	val dev = true
+	val dev = false
 	var url = ""
 	if(dev){
 		url = "http://127.0.0.1:8080"
