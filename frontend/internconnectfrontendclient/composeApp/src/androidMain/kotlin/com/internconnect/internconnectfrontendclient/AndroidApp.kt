@@ -5,7 +5,7 @@ import android.app.Application
 class AndroidApp : Application() {
 	override fun onCreate() {
 		super.onCreate()
-		val dev = true
+		val dev = false
 		var url = ""
 		if(dev){
 			url = "http://10.0.2.2:8080"
