@@ -15,4 +15,8 @@ class UserRepository(
 	override suspend fun setCurrentUser(user: User) {
 		userDao.upsert(user)
 	}
+
+	override suspend fun clear() {
+		userDao.clearAll()
+	}
 }

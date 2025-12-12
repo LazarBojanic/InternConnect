@@ -158,7 +158,7 @@ fun App() {
 						onPreferences = { /* future */ },
 						onLogout = {
 							logoutVm.logout {
-								navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+								navController.navigate(Routes.Welcome) { popUpTo(Routes.Welcome) { inclusive = true } }
 							}
 						}
 					)
@@ -289,7 +289,7 @@ fun App() {
 						onPreferences = { /* future */ },
 						onLogout = {
 							logoutVm.logout {
-								navController.navigate(Routes.Welcome) { popUpTo(0) { inclusive = true } }
+								navController.navigate(Routes.Welcome) { popUpTo(Routes.Welcome) { inclusive = true } }
 							}
 						}
 					)

@@ -69,7 +69,7 @@ fun commonModule(baseUrl: String) = module {
 	factory{ CompanyMemberPostInternshipViewModel(get()) }
 
 	factory { CompanyMemberApplicationDetailsViewModel(get()) }
-	factory { LogoutViewModel(get(), get()) }
+	factory { LogoutViewModel(get(), get(), get(), get(), get(), get()) }
 }
 fun initKoin(baseUrl: String, vararg platformModules: Module) {
 	startKoin {
