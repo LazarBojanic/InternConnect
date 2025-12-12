@@ -12,6 +12,7 @@ import com.internconnect.internconnectfrontendclient.domain.repository.specifica
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class LoginUserViewModel(
 		data class LoggedInCompanyMember(val userId: String) : LoginUiState
 	}
 
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 	private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
 	val uiState: StateFlow<LoginUiState> = _uiState
 

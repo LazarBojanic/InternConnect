@@ -4,6 +4,7 @@ import com.internconnect.internconnectfrontendclient.data.model.dto.request.Regi
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class RegisterCompanyMemberViewModel(
 		data object Success : UiState
 	}
 
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 	private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
 	val uiState: StateFlow<UiState> = _uiState
 

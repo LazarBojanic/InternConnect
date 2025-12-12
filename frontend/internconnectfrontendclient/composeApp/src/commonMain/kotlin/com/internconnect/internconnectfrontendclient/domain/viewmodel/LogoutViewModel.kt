@@ -9,6 +9,7 @@ import com.internconnect.internconnectfrontendclient.domain.repository.specifica
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 
 class LogoutViewModel(
@@ -19,7 +20,7 @@ class LogoutViewModel(
 	private val companyRepository: ICompanyRepository,
 	private val companyMemberRepository: ICompanyMemberRepository
 ) {
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 
 	fun logout(onDone: (() -> Unit)? = null) {
 		scope.launch {

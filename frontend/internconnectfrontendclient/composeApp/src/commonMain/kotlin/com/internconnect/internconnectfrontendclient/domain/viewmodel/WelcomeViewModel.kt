@@ -5,6 +5,7 @@ import com.internconnect.internconnectfrontendclient.domain.util.jwtDecode
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class WelcomeViewModel(
 		data object StayOnWelcome : State
 	}
 
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 	private val _state = MutableStateFlow<State>(State.Idle)
 	val state: StateFlow<State> = _state
 

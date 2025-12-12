@@ -1,0 +1,336 @@
+/Users/esteh/Library/Caches/JetBrains/IntelliJIdea2025.3/DerivedData/XcodeShared/Products/Debug-iphonesimulator/internconnectfrontendclient.app
+HttpClient: REQUEST: https://srv1092316.hstgr.cloud/student/me/56a0d028-4c92-4afe-b097-455e79acc8c4
+METHOD: GET
+2025-12-12 18:33:32.201780+0100 internconnectfrontendclient[2297:38064] [connection] nw_socket_get_input_frames [C1.1.1.1:2] recvmsg(fd 17, 9216 bytes) [61: Connection refused]
+2025-12-12 18:33:32.205677+0100 internconnectfrontendclient[2297:38064] [connection] nw_connection_copy_protocol_metadata_internal_block_invoke [C2] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+2025-12-12 18:33:32.206123+0100 internconnectfrontendclient[2297:38064] [connection] nw_connection_copy_protocol_metadata_internal_block_invoke [C2] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+2025-12-12 18:33:32.206487+0100 internconnectfrontendclient[2297:38064] [connection] nw_connection_copy_connected_local_endpoint_block_invoke [C2] Client called nw_connection_copy_connected_local_endpoint on unconnected nw_connection
+2025-12-12 18:33:32.206738+0100 internconnectfrontendclient[2297:38064] [connection] nw_connection_copy_connected_remote_endpoint_block_invoke [C2] Client called nw_connection_copy_connected_remote_endpoint on unconnected nw_connection
+2025-12-12 18:33:32.210800+0100 internconnectfrontendclient[2297:38064] [connection] nw_endpoint_flow_failed_with_error [C1.1.1.1 72.61.23.122:443 in_progress socket-flow (satisfied (Path is satisfied), interface: en0[802.11], uses wifi, LQM: unknown)] already failing, returning
+HttpClient: RESPONSE: 200 OK
+METHOD: GET
+FROM: https://srv1092316.hstgr.cloud/student/me/56a0d028-4c92-4afe-b097-455e79acc8c4
+Error was captured in composition.
+kotlin.internal.IrLinkageError: Property accessor 'LocalSafeArea.<get-LocalSafeArea>' can not be called: No property accessor found for symbol 'androidx.compose.ui.platform/LocalSafeArea.<get-LocalSafeArea>|<get-LocalSafeArea>(){}[0]'
+    at 0   internconnectfrontendclient.debug.dylib 0x10a50b13d        kfun:kotlin.Throwable#<init>(kotlin.String?){} + 93 
+    at 1   internconnectfrontendclient.debug.dylib 0x10a5056f9        kfun:kotlin.Error#<init>(kotlin.String?){} + 89 
+    at 2   internconnectfrontendclient.debug.dylib 0x10a54d5a9        kfun:kotlin.internal.IrLinkageError#<init>(kotlin.String?){} + 89 
+    at 3   internconnectfrontendclient.debug.dylib 0x10a54d65b        kfun:kotlin.internal#throwIrLinkageError(kotlin.String?){}kotlin.Nothing + 155 
+    at 4   internconnectfrontendclient.debug.dylib 0x10b8a0cbe        kfun:androidx.compose.foundation.layout.<get-iosSafeArea>#internal + 382 
+    at 5   internconnectfrontendclient.debug.dylib 0x10b8a105d        kfun:androidx.compose.foundation.layout#<get-statusBars>__at__androidx.compose.foundation.layout.WindowInsets.Companion(androidx.compose.runtime.Composer?;kotlin.Int){}androidx.compose.foundation.layout.WindowInsets + 509 
+    at 6   internconnectfrontendclient.debug.dylib 0x10b89ffe2        kfun:androidx.compose.foundation.layout.statusBarsPadding$$inlined$windowInsetsPadding$1.invoke#internal + 1058 
+    at 7   internconnectfrontendclient.debug.dylib 0x10b8a0242        kfun:androidx.compose.foundation.layout.statusBarsPadding$$inlined$windowInsetsPadding$1.$<bridge-NNNNU>invoke(androidx.compose.ui.Modifier;androidx.compose.runtime.Composer;kotlin.Int){}androidx.compose.ui.Modifier#internal + 226 
+    at 8   internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 9   internconnectfrontendclient.debug.dylib 0x10b4454b2        kfun:androidx.compose.ui.materializeImpl$result$1.invoke#internal + 514 
+    at 10  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 11  internconnectfrontendclient.debug.dylib 0x10b445b32        kfun:androidx.compose.ui.Modifier.Element#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 130 
+    at 12  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 13  internconnectfrontendclient.debug.dylib 0x10b447c3b        kfun:androidx.compose.ui.CombinedModifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 315 
+    at 14  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 15  internconnectfrontendclient.debug.dylib 0x10b447c13        kfun:androidx.compose.ui.CombinedModifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 275 
+    at 16  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 17  internconnectfrontendclient.debug.dylib 0x10b44509a        kfun:androidx.compose.ui.materializeImpl#internal + 410 
+    at 18  internconnectfrontendclient.debug.dylib 0x10b444e8e        kfun:androidx.compose.ui#materialize__at__androidx.compose.runtime.Composer(androidx.compose.ui.Modifier){}androidx.compose.ui.Modifier + 174 
+    at 19  internconnectfrontendclient.debug.dylib 0x109e50b0b        kfun:com.internconnect.internconnectfrontendclient.ui.components.Header$1.invoke#internal + 5931 
+    at 20  internconnectfrontendclient.debug.dylib 0x109e528b9        kfun:com.internconnect.internconnectfrontendclient.ui.components.Header$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 21  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 22  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 23  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 24  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 25  internconnectfrontendclient.debug.dylib 0x10bfafe4c        kfun:androidx.compose.material3.Surface$1.invoke#internal + 6156 
+    at 26  internconnectfrontendclient.debug.dylib 0x10bfb01b9        kfun:androidx.compose.material3.Surface$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 27  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 28  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 29  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 30  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 31  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 32  internconnectfrontendclient.debug.dylib 0x10bfac587        kfun:androidx.compose.material3#Surface(androidx.compose.ui.Modifier?;androidx.compose.ui.graphics.Shape?;androidx.compose.ui.graphics.Color;androidx.compose.ui.graphics.Color;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp;androidx.compose.foundation.BorderStroke?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 3799 
+    at 33  internconnectfrontendclient.debug.dylib 0x109e4ebd3        kfun:com.internconnect.internconnectfrontendclient.ui.components#Header(kotlin.String;kotlin.Function0<kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 2083 
+    at 34  internconnectfrontendclient.debug.dylib 0x109e78478        kfun:com.internconnect.internconnectfrontendclient.ui.components#ScreenScaffold(kotlin.String;kotlin.Function0<kotlin.Unit>?;kotlin.Function3<androidx.compose.foundation.layout.ColumnScope,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 7816 
+    at 35  internconnectfrontendclient.debug.dylib 0x109d7f815        kfun:com.internconnect.internconnectfrontendclient.App$1.App$1$invoke$$inlined$cache$1.App$1$invoke$$inlined$cache$1$invoke$5.invoke#internal + 3413 
+    at 36  internconnectfrontendclient.debug.dylib 0x109d8241d        kfun:com.internconnect.internconnectfrontendclient.App$1.App$1$invoke$$inlined$cache$1.App$1$invoke$$inlined$cache$1$invoke$5.$<bridge-DNNNNU>invoke(androidx.compose.animation.AnimatedContentScope;androidx.navigation.NavBackStackEntry;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 285 
+    at 37  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 38  internconnectfrontendclient.debug.dylib 0x10a929284        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 868 
+    at 39  internconnectfrontendclient.debug.dylib 0x10a938531        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNNU>invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 289 
+    at 40  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 41  internconnectfrontendclient.debug.dylib 0x10be97de8        kfun:androidx.navigation.compose.NavHost$9.NavHost$9$invoke$1.invoke#internal + 6504 
+    at 42  internconnectfrontendclient.debug.dylib 0x10be986e9        kfun:androidx.navigation.compose.NavHost$9.NavHost$9$invoke$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 43  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 44  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 45  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 46  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 47  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 48  internconnectfrontendclient.debug.dylib 0x10a1a2a6f        kfun:androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider#internal + 4527 
+    at 49  internconnectfrontendclient.debug.dylib 0x10a1a9980        kfun:androidx.compose.runtime.saveable.SaveableStateHolder#SaveableStateProvider(kotlin.Any;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}-trampoline + 96 
+    at 50  internconnectfrontendclient.debug.dylib 0x10be839a2        kfun:androidx.navigation.compose.SaveableStateProvider#internal + 3618 
+    at 51  internconnectfrontendclient.debug.dylib 0x10be84431        kfun:androidx.navigation.compose.LocalOwnersProvider$1.invoke#internal + 561 
+    at 52  internconnectfrontendclient.debug.dylib 0x10be84539        kfun:androidx.navigation.compose.LocalOwnersProvider$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 53  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 54  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 55  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 56  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 57  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 58  internconnectfrontendclient.debug.dylib 0x10be82a30        kfun:androidx.navigation.compose#LocalOwnersProvider__at__androidx.navigation.NavBackStackEntry(androidx.compose.runtime.saveable.SaveableStateHolder;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 2032 
+    at 59  internconnectfrontendclient.debug.dylib 0x10be9626c        kfun:androidx.navigation.compose.NavHost$9.invoke#internal + 1964 
+    at 60  internconnectfrontendclient.debug.dylib 0x10be9884d        kfun:androidx.navigation.compose.NavHost$9.$<bridge-DNNNNU>invoke(androidx.compose.animation.AnimatedContentScope;androidx.navigation.NavBackStackEntry;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 285 
+    at 61  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 62  internconnectfrontendclient.debug.dylib 0x10a929284        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 868 
+    at 63  internconnectfrontendclient.debug.dylib 0x10a938531        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNNU>invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 289 
+    at 64  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 65  internconnectfrontendclient.debug.dylib 0x10a250e1e        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.AnimatedContent$$inlined$fastForEach$1$invoke$4.invoke#internal + 3518 
+    at 66  internconnectfrontendclient.debug.dylib 0x10a25135e        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.AnimatedContent$$inlined$fastForEach$1$invoke$4.$<bridge-DNNNU>invoke(androidx.compose.animation.AnimatedVisibilityScope;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 222 
+    at 67  internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 68  internconnectfrontendclient.debug.dylib 0x10a928e02        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 802 
+    at 69  internconnectfrontendclient.debug.dylib 0x10a9383c2        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNU>invoke(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 226 
+    at 70  internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 71  internconnectfrontendclient.debug.dylib 0x10a256bc6        kfun:androidx.compose.animation#AnimatedEnterExitImpl(androidx.compose.animation.core.Transition<0:0>;kotlin.Function1<0:0,kotlin.Boolean>;androidx.compose.ui.Modifier;androidx.compose.animation.EnterTransition;androidx.compose.animation.ExitTransition;kotlin.Function2<androidx.compose.animation.EnterExitState,androidx.compose.animation.EnterExitState,kotlin.Boolean>;androidx.compose.animation.OnLookaheadMeasured?;kotlin.Function3<androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.runtime. + 15862 
+    at 72  internconnectfrontendclient.debug.dylib 0x10a24f3f8        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.invoke#internal + 8424 
+    at 73  internconnectfrontendclient.debug.dylib 0x10a251439        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 74  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 75  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 76  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 77  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 78  internconnectfrontendclient.debug.dylib 0x10a248fb8        kfun:androidx.compose.animation#AnimatedContent__at__androidx.compose.animation.core.Transition<0:0>(androidx.compose.ui.Modifier?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<0:0>,androidx.compose.animation.ContentTransform>?;androidx.compose.ui.Alignment?;kotlin.Function1<0:0,kotlin.Any?>?;kotlin.Function4<androidx.compose.animation.AnimatedContentScope,0:0,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§ + 17096 
+    at 79  internconnectfrontendclient.debug.dylib 0x10be8d4d4        kfun:androidx.navigation.compose#NavHost(androidx.navigation.NavHostController;androidx.navigation.NavGraph;androidx.compose.ui.Modifier;androidx.compose.ui.Alignment;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation.NavBackStackEntry>,androidx.compose.animation.EnterTransition>;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation.NavBackStackEntry>,androidx.compose.animation.ExitTransition>;kotlin.Function1<androidx.com + 22820 
+    at 80  internconnectfrontendclient.debug.dylib 0x10be99e0c        kfun:androidx.navigation.compose.NavHost$10.invoke#internal + 444 
+    at 81  internconnectfrontendclient.debug.dylib 0x10be99ec9        kfun:androidx.navigation.compose.NavHost$10.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer?;kotlin.Int){}#internal + 153 
+    at 82  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 83  internconnectfrontendclient.debug.dylib 0x10a853aea        kfun:androidx.compose.runtime.RecomposeScopeImpl#compose(androidx.compose.runtime.Composer){} + 506 
+    at 84  internconnectfrontendclient.debug.dylib 0x10a800310        kfun:androidx.compose.runtime.ComposerImpl.recomposeToGroupEnd#internal + 1696 
+    at 85  internconnectfrontendclient.debug.dylib 0x10a803dea        kfun:androidx.compose.runtime.ComposerImpl#skipCurrentGroup(){} + 3722 
+    at 86  internconnectfrontendclient.debug.dylib 0x10a80d2ca        kfun:androidx.compose.runtime.ComposerImpl.doCompose#internal + 2570 
+    at 87  internconnectfrontendclient.debug.dylib 0x10a80bcd6        kfun:androidx.compose.runtime.ComposerImpl#recompose(androidx.compose.runtime.collection.ScopeMap<androidx.compose.runtime.RecomposeScopeImpl,kotlin.Any>;androidx.compose.runtime.ShouldPauseCallback?){}kotlin.Boolean + 662 
+    at 88  internconnectfrontendclient.debug.dylib 0x10a827155        kfun:androidx.compose.runtime.CompositionImpl#recompose(){}kotlin.Boolean + 2069 
+    at 89  internconnectfrontendclient.debug.dylib 0x10a9b68a1        kfun:androidx.compose.runtime.ControlledComposition#recompose(){}kotlin.Boolean-trampoline + 65 
+    at 90  internconnectfrontendclient.debug.dylib 0x10a864954        kfun:androidx.compose.runtime.Recomposer.performRecompose#internal + 1956 
+    at 91  internconnectfrontendclient.debug.dylib 0x10a872f72        kfun:androidx.compose.runtime.Recomposer.Recomposer$runRecomposeAndApplyChanges$2.Recomposer$runRecomposeAndApplyChanges$2$invoke$2.invoke#internal + 4946 
+    at 92  internconnectfrontendclient.debug.dylib 0x10a8752b2        kfun:androidx.compose.runtime.Recomposer.Recomposer$runRecomposeAndApplyChanges$2.Recomposer$runRecomposeAndApplyChanges$2$invoke$2.$<bridge-DNU>invoke(kotlin.Long){}#internal + 114 
+    at 93  internconnectfrontendclient.debug.dylib 0x10a665370        kfun:kotlin.Function1#invoke(1:0){}1:1-trampoline + 80 
+    at 94  internconnectfrontendclient.debug.dylib 0x10a7e0694        kfun:androidx.compose.runtime.BroadcastFrameClock.FrameAwaiter.resume#internal + 996 
+    at 95  internconnectfrontendclient.debug.dylib 0x10a7e0fdd        kfun:androidx.compose.runtime.BroadcastFrameClock.BroadcastFrameClock$sendFrame$1.invoke#internal + 93 
+    at 96  internconnectfrontendclient.debug.dylib 0x10a7e104d        kfun:androidx.compose.runtime.BroadcastFrameClock.BroadcastFrameClock$sendFrame$1.$<bridge-DNN>invoke(androidx.compose.runtime.BroadcastFrameClock.FrameAwaiter<*>){}#internal + 93 
+    at 97  internconnectfrontendclient.debug.dylib 0x10a665370        kfun:kotlin.Function1#invoke(1:0){}1:1-trampoline + 80 
+    at 98  internconnectfrontendclient.debug.dylib 0x10a9269f7        kfun:androidx.compose.runtime.internal.AwaiterQueue#flushAndDispatchAwaiters(kotlin.Function1<1:0,kotlin.Unit>){} + 1447 
+    at 99  internconnectfrontendclient.debug.dylib 0x10a7e0a98        kfun:androidx.compose.runtime.BroadcastFrameClock#sendFrame(kotlin.Long){} + 216 
+    at 100 internconnectfrontendclient.debug.dylib 0x10b6b74b0        kfun:androidx.compose.ui.scene.BaseComposeScene#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){} + 2224 
+    at 101 internconnectfrontendclient.debug.dylib 0x10b845554        kfun:androidx.compose.ui.scene.ComposeScene#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){}-trampoline + 84 
+    at 102 internconnectfrontendclient.debug.dylib 0x10b7a4b5a        kfun:androidx.compose.ui.scene.ComposeSceneMediator#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){} + 234 
+    at 103 internconnectfrontendclient.debug.dylib 0x10b78e800        kfun:androidx.compose.ui.scene.ComposeHostingViewController.ComposeHostingViewController$viewControllerDidEnterWindowHierarchy$metalView$2.invoke#internal + 288 
+    at 104 internconnectfrontendclient.debug.dylib 0x10b78e8cb        kfun:androidx.compose.ui.scene.ComposeHostingViewController.ComposeHostingViewController$viewControllerDidEnterWindowHierarchy$metalView$2.$<bridge-DNNU>invoke(org.jetbrains.skia.Canvas;kotlin.Long){}#internal + 155 
+    at 105 internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 106 internconnectfrontendclient.debug.dylib 0x10b823f23        kfun:androidx.compose.ui.window.MetalView.MetalView$1.invoke#internal + 339 
+    at 107 internconnectfrontendclient.debug.dylib 0x10b823fed        kfun:androidx.compose.ui.window.MetalView.MetalView$1.$<bridge-DNNU>invoke(org.jetbrains.skia.Canvas;kotlin.Double){}#internal + 157 
+    at 108 internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 109 internconnectfrontendclient.debug.dylib 0x10b817f28        kfun:androidx.compose.ui.window.MetalRedrawer.draw#internal + 7144 
+    at 110 internconnectfrontendclient.debug.dylib 0x10b81be95        kfun:androidx.compose.ui.window.MetalRedrawer.MetalRedrawer$2.invoke#internal + 421 
+    at 111 internconnectfrontendclient.debug.dylib 0x10b81beff        kfun:androidx.compose.ui.window.MetalRedrawer.MetalRedrawer$2.$<bridge-DN>invoke(){}#internal + 63 
+    at 112 internconnectfrontendclient.debug.dylib 0x10a664c28        kfun:kotlin.Function0#invoke(){}1:0-trampoline + 72 
+    at 113 internconnectfrontendclient.debug.dylib 0x10b81f9ad        kfun:androidx.compose.ui.window.DisplayLinkProxy.handleDisplayLinkTick#internal + 141 
+    at 114 internconnectfrontendclient.debug.dylib 0x10b81fa51        kfun:androidx.compose.ui.window.DisplayLinkProxy.$imp:handleDisplayLinkTick#internal + 129 
+    at 115 QuartzCore                          0x7ff80fe060d4     _ZN2CA7Display15DisplayLinkItem9dispatch_ERNS_8SignPost8IntervalILNS2_11CAEventCodeE835322056EEE + 44 
+    at 116 QuartzCore                          0x7ff80fe01545     _ZN2CA7Display11DisplayLink14dispatch_itemsEyyy + 1047 
+    at 117 QuartzCore                          0x7ff80fe091bf     _ZN2CA7Display11DisplayLink31dispatch_deferred_display_linksEj + 367 
+    at 118 UIKitCore                           0x7ff808299c2a     _UIUpdateSequenceRunNext + 94 
+    at 119 UIKitCore                           0x7ff80905cf50     schedulerStepScheduledMainSectionContinue + 56 
+    at 120 UpdateCycle                         0x7ffc1c2f72fd     _ZN2UC10DriverCore18continueProcessingEv + 67 
+    at 121 CoreFoundation                      0x7ff8028b840b     __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 16 
+    at 122 CoreFoundation                      0x7ff8028b834d     __CFRunLoopDoSource0 + 156 
+    at 123 CoreFoundation                      0x7ff8028b7b2a     __CFRunLoopDoSources0 + 202 
+    at 124 CoreFoundation                      0x7ff8028b6c9a     __CFRunLoopRun + 915 
+    at 125 CoreFoundation                      0x7ff8028b1be6     _CFRunLoopRunSpecificWithOptions + 495 
+
+Uncaught Kotlin exception: kotlin.internal.IrLinkageError: Property accessor 'LocalSafeArea.<get-LocalSafeArea>' can not be called: No property accessor found for symbol 'androidx.compose.ui.platform/LocalSafeArea.<get-LocalSafeArea>|<get-LocalSafeArea>(){}[0]'
+    at 0   internconnectfrontendclient.debug.dylib 0x10a50b13d        kfun:kotlin.Throwable#<init>(kotlin.String?){} + 93 
+    at 1   internconnectfrontendclient.debug.dylib 0x10a5056f9        kfun:kotlin.Error#<init>(kotlin.String?){} + 89 
+    at 2   internconnectfrontendclient.debug.dylib 0x10a54d5a9        kfun:kotlin.internal.IrLinkageError#<init>(kotlin.String?){} + 89 
+    at 3   internconnectfrontendclient.debug.dylib 0x10a54d65b        kfun:kotlin.internal#throwIrLinkageError(kotlin.String?){}kotlin.Nothing + 155 
+    at 4   internconnectfrontendclient.debug.dylib 0x10b8a0cbe        kfun:androidx.compose.foundation.layout.<get-iosSafeArea>#internal + 382 
+    at 5   internconnectfrontendclient.debug.dylib 0x10b8a105d        kfun:androidx.compose.foundation.layout#<get-statusBars>__at__androidx.compose.foundation.layout.WindowInsets.Companion(androidx.compose.runtime.Composer?;kotlin.Int){}androidx.compose.foundation.layout.WindowInsets + 509 
+    at 6   internconnectfrontendclient.debug.dylib 0x10b89ffe2        kfun:androidx.compose.foundation.layout.statusBarsPadding$$inlined$windowInsetsPadding$1.invoke#internal + 1058 
+    at 7   internconnectfrontendclient.debug.dylib 0x10b8a0242        kfun:androidx.compose.foundation.layout.statusBarsPadding$$inlined$windowInsetsPadding$1.$<bridge-NNNNU>invoke(androidx.compose.ui.Modifier;androidx.compose.runtime.Composer;kotlin.Int){}androidx.compose.ui.Modifier#internal + 226 
+    at 8   internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 9   internconnectfrontendclient.debug.dylib 0x10b4454b2        kfun:androidx.compose.ui.materializeImpl$result$1.invoke#internal + 514 
+    at 10  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 11  internconnectfrontendclient.debug.dylib 0x10b445b32        kfun:androidx.compose.ui.Modifier.Element#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 130 
+    at 12  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 13  internconnectfrontendclient.debug.dylib 0x10b447c3b        kfun:androidx.compose.ui.CombinedModifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 315 
+    at 14  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 15  internconnectfrontendclient.debug.dylib 0x10b447c13        kfun:androidx.compose.ui.CombinedModifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0 + 275 
+    at 16  internconnectfrontendclient.debug.dylib 0x10b82a779        kfun:androidx.compose.ui.Modifier#foldIn(0:0;kotlin.Function2<0:0,androidx.compose.ui.Modifier.Element,0:0>){0§<kotlin.Any?>}0:0-trampoline + 89 
+    at 17  internconnectfrontendclient.debug.dylib 0x10b44509a        kfun:androidx.compose.ui.materializeImpl#internal + 410 
+    at 18  internconnectfrontendclient.debug.dylib 0x10b444e8e        kfun:androidx.compose.ui#materialize__at__androidx.compose.runtime.Composer(androidx.compose.ui.Modifier){}androidx.compose.ui.Modifier + 174 
+    at 19  internconnectfrontendclient.debug.dylib 0x109e50b0b        kfun:com.internconnect.internconnectfrontendclient.ui.components.Header$1.invoke#internal + 5931 
+    at 20  internconnectfrontendclient.debug.dylib 0x109e528b9        kfun:com.internconnect.internconnectfrontendclient.ui.components.Header$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 21  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 22  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 23  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 24  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 25  internconnectfrontendclient.debug.dylib 0x10bfafe4c        kfun:androidx.compose.material3.Surface$1.invoke#internal + 6156 
+    at 26  internconnectfrontendclient.debug.dylib 0x10bfb01b9        kfun:androidx.compose.material3.Surface$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 27  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 28  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 29  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 30  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 31  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 32  internconnectfrontendclient.debug.dylib 0x10bfac587        kfun:androidx.compose.material3#Surface(androidx.compose.ui.Modifier?;androidx.compose.ui.graphics.Shape?;androidx.compose.ui.graphics.Color;androidx.compose.ui.graphics.Color;androidx.compose.ui.unit.Dp;androidx.compose.ui.unit.Dp;androidx.compose.foundation.BorderStroke?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 3799 
+    at 33  internconnectfrontendclient.debug.dylib 0x109e4ebd3        kfun:com.internconnect.internconnectfrontendclient.ui.components#Header(kotlin.String;kotlin.Function0<kotlin.Unit>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 2083 
+    at 34  internconnectfrontendclient.debug.dylib 0x109e78478        kfun:com.internconnect.internconnectfrontendclient.ui.components#ScreenScaffold(kotlin.String;kotlin.Function0<kotlin.Unit>?;kotlin.Function3<androidx.compose.foundation.layout.ColumnScope,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){} + 7816 
+    at 35  internconnectfrontendclient.debug.dylib 0x109d7f815        kfun:com.internconnect.internconnectfrontendclient.App$1.App$1$invoke$$inlined$cache$1.App$1$invoke$$inlined$cache$1$invoke$5.invoke#internal + 3413 
+    at 36  internconnectfrontendclient.debug.dylib 0x109d8241d        kfun:com.internconnect.internconnectfrontendclient.App$1.App$1$invoke$$inlined$cache$1.App$1$invoke$$inlined$cache$1$invoke$5.$<bridge-DNNNNU>invoke(androidx.compose.animation.AnimatedContentScope;androidx.navigation.NavBackStackEntry;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 285 
+    at 37  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 38  internconnectfrontendclient.debug.dylib 0x10a929284        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 868 
+    at 39  internconnectfrontendclient.debug.dylib 0x10a938531        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNNU>invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 289 
+    at 40  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 41  internconnectfrontendclient.debug.dylib 0x10be97de8        kfun:androidx.navigation.compose.NavHost$9.NavHost$9$invoke$1.invoke#internal + 6504 
+    at 42  internconnectfrontendclient.debug.dylib 0x10be986e9        kfun:androidx.navigation.compose.NavHost$9.NavHost$9$invoke$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 43  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 44  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 45  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 46  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 47  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 48  internconnectfrontendclient.debug.dylib 0x10a1a2a6f        kfun:androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider#internal + 4527 
+    at 49  internconnectfrontendclient.debug.dylib 0x10a1a9980        kfun:androidx.compose.runtime.saveable.SaveableStateHolder#SaveableStateProvider(kotlin.Any;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){}-trampoline + 96 
+    at 50  internconnectfrontendclient.debug.dylib 0x10be839a2        kfun:androidx.navigation.compose.SaveableStateProvider#internal + 3618 
+    at 51  internconnectfrontendclient.debug.dylib 0x10be84431        kfun:androidx.navigation.compose.LocalOwnersProvider$1.invoke#internal + 561 
+    at 52  internconnectfrontendclient.debug.dylib 0x10be84539        kfun:androidx.navigation.compose.LocalOwnersProvider$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 53  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 54  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 55  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 56  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 57  internconnectfrontendclient.debug.dylib 0x10a835f40        kfun:androidx.compose.runtime#CompositionLocalProvider(kotlin.Array<out|androidx.compose.runtime.ProvidedValue<*>>...;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 800 
+    at 58  internconnectfrontendclient.debug.dylib 0x10be82a30        kfun:androidx.navigation.compose#LocalOwnersProvider__at__androidx.navigation.NavBackStackEntry(androidx.compose.runtime.saveable.SaveableStateHolder;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int){} + 2032 
+    at 59  internconnectfrontendclient.debug.dylib 0x10be9626c        kfun:androidx.navigation.compose.NavHost$9.invoke#internal + 1964 
+    at 60  internconnectfrontendclient.debug.dylib 0x10be9884d        kfun:androidx.navigation.compose.NavHost$9.$<bridge-DNNNNU>invoke(androidx.compose.animation.AnimatedContentScope;androidx.navigation.NavBackStackEntry;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 285 
+    at 61  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 62  internconnectfrontendclient.debug.dylib 0x10a929284        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 868 
+    at 63  internconnectfrontendclient.debug.dylib 0x10a938531        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNNU>invoke(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 289 
+    at 64  internconnectfrontendclient.debug.dylib 0x10a671838        kfun:kotlin.Function4#invoke(1:0;1:1;1:2;1:3){}1:4-trampoline + 104 
+    at 65  internconnectfrontendclient.debug.dylib 0x10a250e1e        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.AnimatedContent$$inlined$fastForEach$1$invoke$4.invoke#internal + 3518 
+    at 66  internconnectfrontendclient.debug.dylib 0x10a25135e        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.AnimatedContent$$inlined$fastForEach$1$invoke$4.$<bridge-DNNNU>invoke(androidx.compose.animation.AnimatedVisibilityScope;androidx.compose.runtime.Composer;kotlin.Int){}#internal + 222 
+    at 67  internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 68  internconnectfrontendclient.debug.dylib 0x10a928e02        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 802 
+    at 69  internconnectfrontendclient.debug.dylib 0x10a9383c2        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNNU>invoke(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(kotlin.Any?;androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 226 
+    at 70  internconnectfrontendclient.debug.dylib 0x10a667260        kfun:kotlin.Function3#invoke(1:0;1:1;1:2){}1:3-trampoline + 96 
+    at 71  internconnectfrontendclient.debug.dylib 0x10a256bc6        kfun:androidx.compose.animation#AnimatedEnterExitImpl(androidx.compose.animation.core.Transition<0:0>;kotlin.Function1<0:0,kotlin.Boolean>;androidx.compose.ui.Modifier;androidx.compose.animation.EnterTransition;androidx.compose.animation.ExitTransition;kotlin.Function2<androidx.compose.animation.EnterExitState,androidx.compose.animation.EnterExitState,kotlin.Boolean>;androidx.compose.animation.OnLookaheadMeasured?;kotlin.Function3<androidx.compose.animation.AnimatedVisibilityScope,androidx.compose.runtime. + 15862 
+    at 72  internconnectfrontendclient.debug.dylib 0x10a24f3f8        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.invoke#internal + 8424 
+    at 73  internconnectfrontendclient.debug.dylib 0x10a251439        kfun:androidx.compose.animation.AnimatedContent$$inlined$fastForEach$1.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}#internal + 153 
+    at 74  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 75  internconnectfrontendclient.debug.dylib 0x10a9289cc        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any? + 732 
+    at 76  internconnectfrontendclient.debug.dylib 0x10a93829d        kfun:androidx.compose.runtime.internal.ComposableLambdaImpl#$<bridge-NNNU>invoke(androidx.compose.runtime.Composer;kotlin.Int){}kotlin.Any?(androidx.compose.runtime.Composer;kotlin.Any?){}kotlin.Any? + 157 
+    at 77  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 78  internconnectfrontendclient.debug.dylib 0x10a248fb8        kfun:androidx.compose.animation#AnimatedContent__at__androidx.compose.animation.core.Transition<0:0>(androidx.compose.ui.Modifier?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<0:0>,androidx.compose.animation.ContentTransform>?;androidx.compose.ui.Alignment?;kotlin.Function1<0:0,kotlin.Any?>?;kotlin.Function4<androidx.compose.animation.AnimatedContentScope,0:0,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){0§ + 17096 
+    at 79  internconnectfrontendclient.debug.dylib 0x10be8d4d4        kfun:androidx.navigation.compose#NavHost(androidx.navigation.NavHostController;androidx.navigation.NavGraph;androidx.compose.ui.Modifier;androidx.compose.ui.Alignment;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation.NavBackStackEntry>,androidx.compose.animation.EnterTransition>;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation.NavBackStackEntry>,androidx.compose.animation.ExitTransition>;kotlin.Function1<androidx.com + 22820 
+    at 80  internconnectfrontendclient.debug.dylib 0x10be99e0c        kfun:androidx.navigation.compose.NavHost$10.invoke#internal + 444 
+    at 81  internconnectfrontendclient.debug.dylib 0x10be99ec9        kfun:androidx.navigation.compose.NavHost$10.$<bridge-DNNU>invoke(androidx.compose.runtime.Composer?;kotlin.Int){}#internal + 153 
+    at 82  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 83  internconnectfrontendclient.debug.dylib 0x10a853aea        kfun:androidx.compose.runtime.RecomposeScopeImpl#compose(androidx.compose.runtime.Composer){} + 506 
+    at 84  internconnectfrontendclient.debug.dylib 0x10a800310        kfun:androidx.compose.runtime.ComposerImpl.recomposeToGroupEnd#internal + 1696 
+    at 85  internconnectfrontendclient.debug.dylib 0x10a803dea        kfun:androidx.compose.runtime.ComposerImpl#skipCurrentGroup(){} + 3722 
+    at 86  internconnectfrontendclient.debug.dylib 0x10a80d2ca        kfun:androidx.compose.runtime.ComposerImpl.doCompose#internal + 2570 
+    at 87  internconnectfrontendclient.debug.dylib 0x10a80bcd6        kfun:androidx.compose.runtime.ComposerImpl#recompose(androidx.compose.runtime.collection.ScopeMap<androidx.compose.runtime.RecomposeScopeImpl,kotlin.Any>;androidx.compose.runtime.ShouldPauseCallback?){}kotlin.Boolean + 662 
+    at 88  internconnectfrontendclient.debug.dylib 0x10a827155        kfun:androidx.compose.runtime.CompositionImpl#recompose(){}kotlin.Boolean + 2069 
+    at 89  internconnectfrontendclient.debug.dylib 0x10a9b68a1        kfun:androidx.compose.runtime.ControlledComposition#recompose(){}kotlin.Boolean-trampoline + 65 
+    at 90  internconnectfrontendclient.debug.dylib 0x10a864954        kfun:androidx.compose.runtime.Recomposer.performRecompose#internal + 1956 
+    at 91  internconnectfrontendclient.debug.dylib 0x10a872f72        kfun:androidx.compose.runtime.Recomposer.Recomposer$runRecomposeAndApplyChanges$2.Recomposer$runRecomposeAndApplyChanges$2$invoke$2.invoke#internal + 4946 
+    at 92  internconnectfrontendclient.debug.dylib 0x10a8752b2        kfun:androidx.compose.runtime.Recomposer.Recomposer$runRecomposeAndApplyChanges$2.Recomposer$runRecomposeAndApplyChanges$2$invoke$2.$<bridge-DNU>invoke(kotlin.Long){}#internal + 114 
+    at 93  internconnectfrontendclient.debug.dylib 0x10a665370        kfun:kotlin.Function1#invoke(1:0){}1:1-trampoline + 80 
+    at 94  internconnectfrontendclient.debug.dylib 0x10a7e0694        kfun:androidx.compose.runtime.BroadcastFrameClock.FrameAwaiter.resume#internal + 996 
+    at 95  internconnectfrontendclient.debug.dylib 0x10a7e0fdd        kfun:androidx.compose.runtime.BroadcastFrameClock.BroadcastFrameClock$sendFrame$1.invoke#internal + 93 
+    at 96  internconnectfrontendclient.debug.dylib 0x10a7e104d        kfun:androidx.compose.runtime.BroadcastFrameClock.BroadcastFrameClock$sendFrame$1.$<bridge-DNN>invoke(androidx.compose.runtime.BroadcastFrameClock.FrameAwaiter<*>){}#internal + 93 
+    at 97  internconnectfrontendclient.debug.dylib 0x10a665370        kfun:kotlin.Function1#invoke(1:0){}1:1-trampoline + 80 
+    at 98  internconnectfrontendclient.debug.dylib 0x10a9269f7        kfun:androidx.compose.runtime.internal.AwaiterQueue#flushAndDispatchAwaiters(kotlin.Function1<1:0,kotlin.Unit>){} + 1447 
+    at 99  internconnectfrontendclient.debug.dylib 0x10a7e0a98        kfun:androidx.compose.runtime.BroadcastFrameClock#sendFrame(kotlin.Long){} + 216 
+    at 100 internconnectfrontendclient.debug.dylib 0x10b6b74b0        kfun:androidx.compose.ui.scene.BaseComposeScene#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){} + 2224 
+    at 101 internconnectfrontendclient.debug.dylib 0x10b845554        kfun:androidx.compose.ui.scene.ComposeScene#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){}-trampoline + 84 
+    at 102 internconnectfrontendclient.debug.dylib 0x10b7a4b5a        kfun:androidx.compose.ui.scene.ComposeSceneMediator#render(androidx.compose.ui.graphics.Canvas;kotlin.Long){} + 234 
+    at 103 internconnectfrontendclient.debug.dylib 0x10b78e800        kfun:androidx.compose.ui.scene.ComposeHostingViewController.ComposeHostingViewController$viewControllerDidEnterWindowHierarchy$metalView$2.invoke#internal + 288 
+    at 104 internconnectfrontendclient.debug.dylib 0x10b78e8cb        kfun:androidx.compose.ui.scene.ComposeHostingViewController.ComposeHostingViewController$viewControllerDidEnterWindowHierarchy$metalView$2.$<bridge-DNNU>invoke(org.jetbrains.skia.Canvas;kotlin.Long){}#internal + 155 
+    at 105 internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 106 internconnectfrontendclient.debug.dylib 0x10b823f23        kfun:androidx.compose.ui.window.MetalView.MetalView$1.invoke#internal + 339 
+    at 107 internconnectfrontendclient.debug.dylib 0x10b823fed        kfun:androidx.compose.ui.window.MetalView.MetalView$1.$<bridge-DNNU>invoke(org.jetbrains.skia.Canvas;kotlin.Double){}#internal + 157 
+    at 108 internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+    at 109 internconnectfrontendclient.debug.dylib 0x10b817f28        kfun:androidx.compose.ui.window.MetalRedrawer.draw#internal + 7144 
+    at 110 internconnectfrontendclient.debug.dylib 0x10b81be95        kfun:androidx.compose.ui.window.MetalRedrawer.MetalRedrawer$2.invoke#internal + 421 
+    at 111 internconnectfrontendclient.debug.dylib 0x10b81beff        kfun:androidx.compose.ui.window.MetalRedrawer.MetalRedrawer$2.$<bridge-DN>invoke(){}#internal + 63 
+    at 112 internconnectfrontendclient.debug.dylib 0x10a664c28        kfun:kotlin.Function0#invoke(){}1:0-trampoline + 72 
+    at 113 internconnectfrontendclient.debug.dylib 0x10b81f9ad        kfun:androidx.compose.ui.window.DisplayLinkProxy.handleDisplayLinkTick#internal + 141 
+    at 114 internconnectfrontendclient.debug.dylib 0x10b81fa51        kfun:androidx.compose.ui.window.DisplayLinkProxy.$imp:handleDisplayLinkTick#internal + 129 
+    at 115 QuartzCore                          0x7ff80fe060d4     _ZN2CA7Display15DisplayLinkItem9dispatch_ERNS_8SignPost8IntervalILNS2_11CAEventCodeE835322056EEE + 44 
+    at 116 QuartzCore                          0x7ff80fe01545     _ZN2CA7Display11DisplayLink14dispatch_itemsEyyy + 1047 
+    at 117 QuartzCore                          0x7ff80fe091bf     _ZN2CA7Display11DisplayLink31dispatch_deferred_display_linksEj + 367 
+    at 118 UIKitCore                           0x7ff808299c2a     _UIUpdateSequenceRunNext + 94 
+    at 119 UIKitCore                           0x7ff80905cf50     schedulerStepScheduledMainSectionContinue + 56 
+    at 120 UpdateCycle                         0x7ffc1c2f72fd     _ZN2UC10DriverCore18continueProcessingEv + 67 
+    at 121 CoreFoundation                      0x7ff8028b840b     __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 16 
+    at 122 CoreFoundation                      0x7ff8028b834d     __CFRunLoopDoSource0 + 156 
+    at 123 CoreFoundation                      0x7ff8028b7b2a     __CFRunLoopDoSources0 + 202 
+    at 124 CoreFoundation                      0x7ff8028b6c9a     __CFRunLoopRun + 915 
+    at 125 CoreFoundation                      0x7ff8028b1be6     _CFRunLoopRunSpecificWithOptions + 495 
+    Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [androidx.compose.ui.platform.MotionDurationScaleImpl@47df5d0, androidx.compose.runtime.BroadcastFrameClock@4821d28, StandaloneCoroutine{Cancelling}@47c14a8, FlushCoroutineDispatcher@8b02758]
+        at 0   internconnectfrontendclient.debug.dylib 0x10a50b13d        kfun:kotlin.Throwable#<init>(kotlin.String?){} + 93 
+        at 1   internconnectfrontendclient.debug.dylib 0x10a505839        kfun:kotlin.Exception#<init>(kotlin.String?){} + 89 
+        at 2   internconnectfrontendclient.debug.dylib 0x10a5059e9        kfun:kotlin.RuntimeException#<init>(kotlin.String?){} + 89 
+        at 3   internconnectfrontendclient.debug.dylib 0x10a7d0817        kfun:kotlinx.coroutines.internal.DiagnosticCoroutineContextException#<init>(kotlin.coroutines.CoroutineContext){} + 167 
+        at 4   internconnectfrontendclient.debug.dylib 0x10a79d65a        kfun:kotlinx.coroutines.internal#handleUncaughtCoroutineException(kotlin.coroutines.CoroutineContext;kotlin.Throwable){} + 874 
+        at 5   internconnectfrontendclient.debug.dylib 0x10a71ef40        kfun:kotlinx.coroutines#handleCoroutineException(kotlin.coroutines.CoroutineContext;kotlin.Throwable){} + 944 
+        at 6   internconnectfrontendclient.debug.dylib 0x10a71121f        kfun:kotlinx.coroutines.StandaloneCoroutine.handleJobException#internal + 159 
+        at 7   internconnectfrontendclient.debug.dylib 0x10a7d7a7b        kfun:kotlinx.coroutines.JobSupport#handleJobException(kotlin.Throwable){}kotlin.Boolean-trampoline + 43 
+        at 8   internconnectfrontendclient.debug.dylib 0x10a72a9fe        kfun:kotlinx.coroutines.JobSupport.finalizeFinishingState#internal + 1582 
+        at 9   internconnectfrontendclient.debug.dylib 0x10a734f06        kfun:kotlinx.coroutines.JobSupport.tryMakeCompletingSlowPath#internal + 3062 
+        at 10  internconnectfrontendclient.debug.dylib 0x10a7342c9        kfun:kotlinx.coroutines.JobSupport.tryMakeCompleting#internal + 697 
+        at 11  internconnectfrontendclient.debug.dylib 0x10a733db0        kfun:kotlinx.coroutines.JobSupport#makeCompletingOnce(kotlin.Any?){}kotlin.Any? + 672 
+        at 12  internconnectfrontendclient.debug.dylib 0x10a70c9e4        kfun:kotlinx.coroutines.AbstractCoroutine#resumeWith(kotlin.Result<1:0>){} + 228 
+        at 13  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 14  internconnectfrontendclient.debug.dylib 0x10a51185c        kfun:kotlin.coroutines.native.internal.BaseContinuationImpl#resumeWith(kotlin.Result<kotlin.Any?>){} + 1708 
+        at 15  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 16  internconnectfrontendclient.debug.dylib 0x10a7c85f8        kfun:kotlinx.coroutines.UndispatchedCoroutine#afterResume(kotlin.Any?){} + 264 
+        at 17  internconnectfrontendclient.debug.dylib 0x10a7d429b        kfun:kotlinx.coroutines.AbstractCoroutine#afterResume(kotlin.Any?){}-trampoline + 43 
+        at 18  internconnectfrontendclient.debug.dylib 0x10a70ca44        kfun:kotlinx.coroutines.AbstractCoroutine#resumeWith(kotlin.Result<1:0>){} + 324 
+        at 19  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 20  internconnectfrontendclient.debug.dylib 0x10a51185c        kfun:kotlin.coroutines.native.internal.BaseContinuationImpl#resumeWith(kotlin.Result<kotlin.Any?>){} + 1708 
+        at 21  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 22  internconnectfrontendclient.debug.dylib 0x10a7ab358        kfun:kotlinx.coroutines.internal.ScopeCoroutine#afterResume(kotlin.Any?){} + 264 
+        at 23  internconnectfrontendclient.debug.dylib 0x10a7d429b        kfun:kotlinx.coroutines.AbstractCoroutine#afterResume(kotlin.Any?){}-trampoline + 43 
+        at 24  internconnectfrontendclient.debug.dylib 0x10a70ca44        kfun:kotlinx.coroutines.AbstractCoroutine#resumeWith(kotlin.Result<1:0>){} + 324 
+        at 25  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 26  internconnectfrontendclient.debug.dylib 0x10a51185c        kfun:kotlin.coroutines.native.internal.BaseContinuationImpl#resumeWith(kotlin.Result<kotlin.Any?>){} + 1708 
+        at 27  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 28  internconnectfrontendclient.debug.dylib 0x10a7a23ac        kfun:kotlinx.coroutines.DispatchedTask#run(){} + 2636 
+        at 29  internconnectfrontendclient.debug.dylib 0x10a7d6cd0        kfun:kotlinx.coroutines.Runnable#run(){}-trampoline + 64 
+        at 30  internconnectfrontendclient.debug.dylib 0x10b69a8c0        kfun:androidx.compose.ui.platform.FlushCoroutineDispatcher.FlushCoroutineDispatcher$dispatch$1.FlushCoroutineDispatcher$dispatch$1$invoke$2.invoke#internal + 640 
+        at 31  internconnectfrontendclient.debug.dylib 0x10b69a9af        kfun:androidx.compose.ui.platform.FlushCoroutineDispatcher.FlushCoroutineDispatcher$dispatch$1.FlushCoroutineDispatcher$dispatch$1$invoke$2.$<bridge-DN>invoke(){}#internal + 63 
+        at 32  internconnectfrontendclient.debug.dylib 0x10a664c28        kfun:kotlin.Function0#invoke(){}1:0-trampoline + 72 
+        at 33  internconnectfrontendclient.debug.dylib 0x10b699c89        kfun:androidx.compose.ui.platform.FlushCoroutineDispatcher.performRun#internal + 489 
+        at 34  internconnectfrontendclient.debug.dylib 0x10b69a544        kfun:androidx.compose.ui.platform.FlushCoroutineDispatcher.FlushCoroutineDispatcher$dispatch$1.invoke#internal + 244 
+        at 35  internconnectfrontendclient.debug.dylib 0x10a667198        kfun:kotlin.Function2#invoke(1:0;1:1){}1:2-trampoline + 88 
+        at 36  internconnectfrontendclient.debug.dylib 0x10a5165c6        kfun:kotlin.coroutines.intrinsics.createCoroutineUnintercepted$$inlined$createCoroutineFromSuspendFunction$4.invokeSuspend#internal + 1158 
+        at 37  internconnectfrontendclient.debug.dylib 0x10a666b23        kfun:kotlin.coroutines.native.internal.BaseContinuationImpl#invokeSuspend(kotlin.Result<kotlin.Any?>){}kotlin.Any?-trampoline + 51 
+        at 38  internconnectfrontendclient.debug.dylib 0x10a511573        kfun:kotlin.coroutines.native.internal.BaseContinuationImpl#resumeWith(kotlin.Result<kotlin.Any?>){} + 963 
+        at 39  internconnectfrontendclient.debug.dylib 0x10a666bc9        kfun:kotlin.coroutines.Continuation#resumeWith(kotlin.Result<1:0>){}-trampoline + 73 
+        at 40  internconnectfrontendclient.debug.dylib 0x10a7a24f9        kfun:kotlinx.coroutines.DispatchedTask#run(){} + 2969 
+        at 41  internconnectfrontendclient.debug.dylib 0x10a7d6cd0        kfun:kotlinx.coroutines.Runnable#run(){}-trampoline + 64 
+        at 42  internconnectfrontendclient.debug.dylib 0x10a7d2fdf        kfun:kotlinx.coroutines.DarwinMainDispatcher.DarwinMainDispatcher$dispatch$$inlined$autoreleasepool$1.invoke#internal + 63 
+        at 43  internconnectfrontendclient.debug.dylib 0x10a7d302f        kfun:kotlinx.coroutines.DarwinMainDispatcher.DarwinMainDispatcher$dispatch$$inlined$autoreleasepool$1.$<bridge-DN>invoke(){}#internal + 63 
+        at 44  internconnectfrontendclient.debug.dylib 0x10a664c28        kfun:kotlin.Function0#invoke(){}1:0-trampoline + 72 
+        at 45  internconnectfrontendclient.debug.dylib 0x10a7d2ee0        _6f72672e6a6574627261696e732e6b6f746c696e783a6b6f746c696e782d636f726f7574696e65732d636f72652f6f70742f6275696c644167656e742f776f726b2f343465633665383530643563363366302f6b6f746c696e782d636f726f7574696e65732d636f72652f6e617469766544617277696e2f7372632f44697370617463686572732e6b74_knbridge13 + 128 
+        at 46  libdispatch.dylib                   0x7ff80260e643     _dispatch_call_block_and_release + 11 
+        at 47  libdispatch.dylib                   0x7ff8026287cd     _dispatch_client_callout + 5 
+        at 48  libdispatch.dylib                   0x7ff802643c1a     _dispatch_main_queue_drain.cold.7 + 27 
+        at 49  libdispatch.dylib                   0x7ff80261dc89     _dispatch_main_queue_drain + 1479 
+        at 50  libdispatch.dylib                   0x7ff80261d6b3     _dispatch_main_queue_callback_4CF + 30 
+        at 51  CoreFoundation                      0x7ff8028b7f43     __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__ + 8 
+        at 52  CoreFoundation                      0x7ff8028b7258     __CFRunLoopRun + 2385 
+        at 53  CoreFoundation                      0x7ff8028b1be6     _CFRunLoopRunSpecificWithOptions + 495 
+        at 54  GraphicsServices                    0x7ff81658b917     GSEventRunModal + 93 
+        at 55  UIKitCore                           0x7ff80918ba85     -[UIApplication _run] + 841 
+        at 56  UIKitCore                           0x7ff809190a64     UIApplicationMain + 122 
+        at 57  SwiftUI                             0x7ffb043ab7e6     $s7SwiftUI17KitRendererCommon33_ACC2C5639A7D76F611E170E831FCA491LLys5NeverOyXlXpFAESpySpys4Int8VGSgGXEfU_ + 182 
+        at 58  SwiftUI                             0x7ffb043ab525     $s7SwiftUI6runAppys5NeverOxAA0D0RzlF + 165 
+        at 59  SwiftUI                             0x7ffb0412e608     $s7SwiftUI3AppPAAE4mainyyFZ + 136 
+        at 60  internconnectfrontendclient.debug.dylib 0x109d5910d        $s27internconnectfrontendclient6iOSAppV5$mainyyFZ + 29 
+        at 61  internconnectfrontendclient.debug.dylib 0x109d59198        __debug_main_executable_dylib_entry_point + 8 
+        at 62  dyld                                0x1046833db        0x0 + 4368905179 
+        at 63  ???                                 0x113c45780        0x0 + 4626601856 
+
+Process finished with exit code 0
+

@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.internconnect.internconnectfrontendclient.data.model.dto.TokenDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -17,7 +18,7 @@ class TokenDataStore(private val dataStore: DataStore<Preferences>) : ITokenData
 	private val keyAccess = stringPreferencesKey("token_access")
 	private val keyRefresh = stringPreferencesKey("token_refresh")
 
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 
 	private val tokenDtoFlow: Flow<TokenDto?> = dataStore.data.map { prefs ->
 		val access = prefs[keyAccess]

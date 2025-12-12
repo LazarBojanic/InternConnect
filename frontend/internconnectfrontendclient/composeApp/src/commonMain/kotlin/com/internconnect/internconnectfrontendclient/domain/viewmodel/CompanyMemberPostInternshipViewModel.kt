@@ -5,6 +5,7 @@ import com.internconnect.internconnectfrontendclient.data.model.dto.response.Int
 import com.internconnect.internconnectfrontendclient.http.IAppApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ class CompanyMemberPostInternshipViewModel(private val api: IAppApi) {
 		val useDummy: Boolean = true,
 	)
 
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val scope = CoroutineScope(Dispatchers.IO)
 	private val _state = MutableStateFlow(UiState())
 	val state: StateFlow<UiState> = _state
 

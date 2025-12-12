@@ -15,6 +15,7 @@ import com.internconnect.internconnectfrontendclient.data.model.raw.InternshipAp
 import com.internconnect.internconnectfrontendclient.data.model.raw.Student
 import com.internconnect.internconnectfrontendclient.data.model.raw.User
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 
 @Database(entities =
 	[User::class, Student::class, CompanyMember::class, Company::class, Internship::class, InternshipApplication::class],
@@ -39,6 +40,6 @@ fun getAppDatabase(
 ): AppDatabase {
 	return builder
 		.setDriver(BundledSQLiteDriver())
-		.setQueryCoroutineContext(Dispatchers.Default)
+		.setQueryCoroutineContext(Dispatchers.IO)
 		.build()
 }
